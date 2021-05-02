@@ -15,6 +15,10 @@ module.exports = async (client, message) => {
 
   const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.help.aliases && cmd.help.aliases.includes(commandName));
 
+//
+
+  if (!command) return message.channel.send(`This command doesn't exist`);
+
 // Cooldwons
 
   if (!client.cooldowns.has(command.help.name)) {

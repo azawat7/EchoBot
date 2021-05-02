@@ -1,11 +1,20 @@
 const MESSAGES = {
     COMMANDS: {
+        HELP: {
+            HELP : {
+              name: "help",
+              aliases: ["help"],
+              description: "Display commands.",
+              cooldown: 1,
+              usage: ""
+            }
+        },
         UTILITY: {
             GENERATE : {
               name: "generate",
               aliases: ["gen"],
-              description: "Modifier la base de données !",
-              cooldown: 2,
+              description: "Generate a troll build.",
+              cooldown: 1,
               usage: ""
             }
         }
