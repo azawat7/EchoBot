@@ -13,7 +13,7 @@ const MESSAGES = {
             GENERATE : {
               name: "generate",
               aliases: ["gen"],
-              description: "Generate a troll build.",
+              description: "Generate a troll build for league of legends.",
               cooldown: 1,
               usage: ""
             }
