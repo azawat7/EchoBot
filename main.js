@@ -1,13 +1,15 @@
 const { Client, Collection } = require("discord.js");
-const { loadCommands, loadEvents} = require("./util/loader");
 
 const client = new Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
 
-["commands", "cooldowns"].forEach(x => client[x] = new Collection());
+["commands"].forEach(x => client[x] = new Collection());
+
+/* MongoDB */
 
 client.config = require("./config")
+client.mongoose = require("./util/mongo");
 
-loadCommands(client);
-loadEvents(client);
+/* Bot login */
 
+client.mongoose.init();
 client.login(client.config.token);

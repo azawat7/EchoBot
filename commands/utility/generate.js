@@ -1,9 +1,13 @@
-const { MESSAGES } = require("../../util/constants");
 const {MessageAttachment} = require("discord.js")
 const Canvas = require('canvas')
 const fs = require('fs')
 
-module.exports.run = async (client, message, args) => {
+module.exports = {
+	commands:['gen', 'generate'],
+	expectedArgs: '0',
+	permissionError: 'You need admin permissions to run this command',
+	callback: async (message, arguments, text) => {
+
     const canvas = Canvas.createCanvas(465, 170);
 	const ctx = canvas.getContext('2d');
 
@@ -101,13 +105,6 @@ let chosenFile10 = files10[Math.floor(Math.random() * 3)]
     const attachment = new MessageAttachment(canvas.toBuffer(), 'es.png');
 
 	message.channel.send(attachment);
+	},
+	requiredRoles: [],
 }
-
-
-
-
-
-
-
-
-module.exports.help = MESSAGES.COMMANDS.UTILITY.GENERATE;

@@ -1,20 +1,23 @@
-const { readdirSync } = require ("fs");
+const { readdirSync } = require('fs')
+const path = require('path')
+const fs = require('fs')
 
-// Command Handler pour les commandes
+const baseFile = 'command-base.js'
+  const commandBase = require(`../util/${baseFile}`)
 
-const loadCommands = (client, dir = ("./commands/")) => {
-  readdirSync(dir).forEach(dirs => {
-    const commands = readdirSync(`${dir}/${dirs}/`).filter(files => files.endsWith(".js"));
- 
-    for (const file of commands) {
-      const getFileName = require(`../${dir}/${dirs}/${file}`);
-      client.commands.set(getFileName.help.name, getFileName);
-      console.log(`Command Loaded : ${getFileName.help.name}`);
-    };
-  });
-};
+  const readCommands = (dir) => {
+    const files = fs.readdirSync(path.join(__dirname, dir))
+    for (const file of files) {
+      const stat = fs.lstatSync(path.join(__dirname, dir, file))
+      if (stat.isDirectory()) {
+        readCommands(path.join(dir, file))
+      } else if (file !== baseFile) {
+        const option = require(path.join(__dirname, dir, file))
+        commandBase(client, option)
+      }
+    }
+  }
 
-// Command Handler pour les events
 
 const loadEvents = (client, dir = ("./event/")) => {
   readdirSync(dir).forEach(dirs => {
@@ -29,9 +32,5 @@ const loadEvents = (client, dir = ("./event/")) => {
   });
 };
 
-// Load les handlers
-
-module.exports = {
-  loadCommands,
-  loadEvents,
-}
+readCommands('commands')
+loadEvents(client)
