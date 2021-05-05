@@ -1,7 +1,5 @@
 const { MessageEmbed } = require('discord.js')
-const path = require('path')
-const fs = require('fs')
-
+const loadCommands = require('../../commands/command-loader')
 
 module.exports = async (client) => {
   console.log(`✅ Logged in as ${client.user.tag}!`);

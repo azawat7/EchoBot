@@ -3,7 +3,7 @@ const Canvas = require('canvas')
 const fs = require('fs')
 
 module.exports = {
-	commands:['gen', 'generate'],
+	commands:['generate', 'gen'],
 	expectedArgs: '0',
 	permissionError: 'You need admin permissions to run this command',
 	callback: async (message, arguments, text) => {
