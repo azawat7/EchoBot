@@ -17,6 +17,6 @@ module.exports = {
 
     mongoose.connect(mongoPath, mongOptions);
     mongoose.Promise = global.Promise;
-    mongoose.connection.on("connected", () => console.log("Mongoose is connected !"));
+    mongoose.connection.on("connected", () => console.log("✅ Mongoose is connected !"));
   }
 }

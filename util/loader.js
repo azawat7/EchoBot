@@ -1,22 +1,16 @@
 const { readdirSync } = require('fs')
-const path = require('path')
-const fs = require('fs')
 
-const baseFile = 'command-base.js'
-  const commandBase = require(`../util/${baseFile}`)
-
-  const readCommands = (dir) => {
-    const files = fs.readdirSync(path.join(__dirname, dir))
-    for (const file of files) {
-      const stat = fs.lstatSync(path.join(__dirname, dir, file))
-      if (stat.isDirectory()) {
-        readCommands(path.join(dir, file))
-      } else if (file !== baseFile) {
-        const option = require(path.join(__dirname, dir, file))
-        commandBase(client, option)
-      }
-    }
-  }
+const loadCommands = (client, dir = ("./commands/")) => {
+  readdirSync(dir).forEach(dirs => {
+    const commands = readdirSync(`${dir}/${dirs}/`).filter(files => files.endsWith(".js"));
+ 
+    for (const file of commands) {
+      const getFileName = require(`../${dir}/${dirs}/${file}`);
+      client.commands.set(getFileName.name, getFileName);
+      console.log(`🍪 Command Loaded : ${file}`);
+    };
+  });
+};
 
 
 const loadEvents = (client, dir = ("./event/")) => {
@@ -27,10 +21,12 @@ const loadEvents = (client, dir = ("./event/")) => {
       const evt = require(`../${dir}/${dirs}/${event}`);
       const evtName = event.split(".")[0];
       client.on(evtName, evt.bind(null, client));
-      console.log(`Event Loaded : ${evtName}`);
+      console.log(`🍩 Event Loaded : ${evtName}`);
     };
   });
 };
 
-readCommands('commands')
-loadEvents(client)
+module.exports = {
+  loadCommands,
+  loadEvents,
+}
