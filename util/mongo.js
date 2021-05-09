@@ -1,5 +1,5 @@
 const mongoose = require("mongoose")
-const { mongoPath } = require("../config")
+const { MONGOPATH } = require("../config")
 
 module.exports = {
   init: () => {
@@ -15,7 +15,7 @@ module.exports = {
       family: 4 // Use IPv4, skip trying IPv6
     }
 
-    mongoose.connect(mongoPath, mongOptions);
+    mongoose.connect(MONGOPATH, mongOptions);
     mongoose.Promise = global.Promise;
     mongoose.connection.on("connected", () => console.log("✅ Mongoose is connected !"));
   }

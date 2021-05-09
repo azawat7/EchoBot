@@ -1,22 +1,33 @@
+const { token, prefix } = require("./config")
 const { Client, Collection } = require("discord.js");
 
-const { loadEvents } = require('./util/event-loader')
-const loadCommands = require('./util/command-loader')
+///////////////////////////////////////////
 
-const client = new Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
+const client = new Client
 
-["commands"].forEach(x => client[x] = new Collection());
+///////////////////////////////////////////
 
-loadEvents(client)
-loadCommands(client)
+client.config = require ("./config")
+require("./util/functions")(client);
 
-/* MongoDB */
+///////////////////////////////////////////
 
-client.config = require("./config")
+["commands", "cooldowns"].forEach(x => client[x] = new Collection());
+
+///////////////////////////////////////////
+
 client.mongoose = require("./util/mongo");
 
-/* Bot login */
+///////////////////////////////////////////
+
+const { loadCommands } = require('./handlers/command')
+loadCommands(client)
+
+const { loadEvents } = require('./handlers/event')
+loadEvents(client)
+
+///////////////////////////////////////////
 
 console.log("----------------------------")
 client.mongoose.init();
-client.login(client.config.token);
+client.login(token);

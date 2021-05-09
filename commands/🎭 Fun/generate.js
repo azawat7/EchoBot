@@ -2,22 +2,33 @@ const {MessageAttachment} = require("discord.js")
 const Canvas = require('canvas')
 const fs = require('fs')
 
-module.exports = {
-	commands:['generate', 'gen'],
-	expectedArgs: '0',
-	permissionError: 'You need admin permissions to run this command',
-	callback: async (message, arguments, text) => {
+module.exports.help = {
+	name: "generate",
+	aliases: ["gen"],
+	category: "🎭 fun",
+	description: "Generate a LoL troll build",
+	expectedArgs: "\`without args\`",
+	minArgs: 0,
+	maxArgs: 0,
+	ownerOnly: false,
+	userPerms: [],
+	clientPerms: [],
+	nsfw: false,
+	cooldown: 3
+}
+
+module.exports.run = async (client, message) => {
 
     const canvas = Canvas.createCanvas(465, 170);
 	const ctx = canvas.getContext('2d');
 
 /////////////////////////////////////////
 
-var files1 = fs.readdirSync('./img/mythic')
-var files2 = fs.readdirSync('./img/legendary')
-var files4 = fs.readdirSync('./img/potions')
-var files5 = fs.readdirSync('./img/boots')
-var files6 = fs.readdirSync('./img/starter')
+var files1 = fs.readdirSync('./assets/img/mythic')
+var files2 = fs.readdirSync('./assets/img/legendary')
+var files4 = fs.readdirSync('./assets/img/potions')
+var files5 = fs.readdirSync('./assets/img/boots')
+var files6 = fs.readdirSync('./assets/img/starter')
 
 let chosenFile = files1[Math.floor(Math.random() * 23)]
 
@@ -35,48 +46,48 @@ let chosenFile6 = files2[Math.floor(Math.random() * 16 + 1)]
 
 let chosenFile8 = files4[Math.floor(Math.random() * 6)]
 
-var files7 = [`./img/starter/${chosenFile5}`, `./img/legendary/${chosenFile6}`, `./img/potions/${chosenFile8}`]
+var files7 = [`./assets/img/starter/${chosenFile5}`, `./assets/img/legendary/${chosenFile6}`, `./assets/img/potions/${chosenFile8}`]
 
 let chosenFile7 = files7[Math.floor(Math.random() * 3)]
 
 /////////////////////////////////////////
 
-var files11 = fs.readdirSync('./img/spells')
+var files11 = fs.readdirSync('./assets/img/spells')
 let chosenFile11 = files11[Math.floor(Math.random() * 4 + 5)]
 
-var files12 = fs.readdirSync('./img/spells')
+var files12 = fs.readdirSync('./assets/img/spells')
 let chosenFile12 = files12[Math.floor(Math.random() * 4 + 1)]
 
 /////////////////////////////////////////
 
-var files10 = fs.readdirSync('./img/trinkets')
+var files10 = fs.readdirSync('./assets/img/trinkets')
 let chosenFile10 = files10[Math.floor(Math.random() * 3)]
 
 /////////////////////////////////////////
 
-	const background = await Canvas.loadImage('./img/background/background.jpg')
+	const background = await Canvas.loadImage('./assets/img/background/background.jpg')
 	ctx.drawImage(background, 0, 0, canvas.width, canvas.height)
 	ctx.strokeStyle = "#fff"
 
 /////////////////////////////////////////
 
-    const mythic = await Canvas.loadImage(`./img/mythic/${chosenFile}`);
+    const mythic = await Canvas.loadImage(`./assets/img/mythic/${chosenFile}`);
 	ctx.drawImage(mythic, 30, 30, 40, 40); 
 	ctx.strokeRect(30, 30, 40, 40)
 
-    const legendary = await Canvas.loadImage(`./img/legendary/${chosenFile1}`);
+    const legendary = await Canvas.loadImage(`./assets/img/legendary/${chosenFile1}`);
 	ctx.drawImage(legendary, 100, 30, 40, 40);
 	ctx.strokeRect(100, 30, 40, 40)
 
-    const legendary1 = await Canvas.loadImage(`./img/legendary/${chosenFile2}`);
+    const legendary1 = await Canvas.loadImage(`./assets/img/legendary/${chosenFile2}`);
 	ctx.drawImage(legendary1, 170, 30, 40, 40);
 	ctx.strokeRect(170, 30, 40, 40)
 
-    const legendary2 = await Canvas.loadImage(`./img/legendary/${chosenFile3}`);
+    const legendary2 = await Canvas.loadImage(`./assets/img/legendary/${chosenFile3}`);
 	ctx.drawImage(legendary2, 240, 30, 40, 40);
 	ctx.strokeRect(240, 30, 40, 40)
 
-    const boots = await Canvas.loadImage(`./img/boots/${chosenFile4}`);
+    const boots = await Canvas.loadImage(`./assets/img/boots/${chosenFile4}`);
 	ctx.drawImage(boots, 310, 30, 40, 40);
 	ctx.strokeRect(310, 30, 40, 40)
 
@@ -86,17 +97,17 @@ let chosenFile10 = files10[Math.floor(Math.random() * 3)]
 
 /////////////////////////////////////////
 
-	const spell1 = await Canvas.loadImage(`./img/spells/${chosenFile11}`);
+	const spell1 = await Canvas.loadImage(`./assets/img/spells/${chosenFile11}`);
 	ctx.drawImage(spell1, 30, 100, 40, 40);
 	ctx.strokeRect(30, 100, 40, 40)
 
-	const spell2 = await Canvas.loadImage(`./img/spells/${chosenFile12}`);
+	const spell2 = await Canvas.loadImage(`./assets/img/spells/${chosenFile12}`);
 	ctx.drawImage(spell2, 100, 100, 40, 40);
 	ctx.strokeRect(100, 100, 40, 40)
 
 /////////////////////////////////////////
 
-    const trinket = await Canvas.loadImage(`./img/trinkets/${chosenFile10}`);
+    const trinket = await Canvas.loadImage(`./assets/img/trinkets/${chosenFile10}`);
 	ctx.drawImage(trinket, 380, 100, 40, 40);
 	ctx.strokeRect(380, 100, 40, 40)
 
@@ -105,6 +116,4 @@ let chosenFile10 = files10[Math.floor(Math.random() * 3)]
     const attachment = new MessageAttachment(canvas.toBuffer(), 'es.png');
 
 	message.channel.send(attachment);
-	},
-	requiredRoles: [],
 }
