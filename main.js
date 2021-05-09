@@ -4,10 +4,14 @@ const { Client, Collection } = require("discord.js");
 ///////////////////////////////////////////
 
 const client = new Client
+client.config = require ("./config")
+client.colors = client.config.colors;
 
 ///////////////////////////////////////////
 
-client.config = require ("./config")
+
+///////////////////////////////////////////
+
 require("./util/functions")(client);
 
 ///////////////////////////////////////////

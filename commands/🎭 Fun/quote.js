@@ -19,5 +19,6 @@ module.exports.run = async (client, message, args) => {
     let embed = new MessageEmbed()
         .setColor("#f50041")
         .addField(`Azawat : 01/05/2021, 17:12:36`, `\`Zrobiłem wszystko co mogę, czyli nic.\``)
+		.addField(`Maviczo : 09/05/2021, 18:20:36`, `\`Po co robić więcej kiedy można robić mniej.\``)
     message.channel.send(embed)
 }
