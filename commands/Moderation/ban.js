@@ -3,7 +3,7 @@ const { MessageEmbed } = require('discord.js')
 module.exports.help = {
 	name: "ban",
 	aliases: [],
-	category: "🔧 moderation",
+	category: "moderation",
 	description: "Ban a desired user from the server.",
 	expectedArgs: "\`<@user>\` \`<reason>\`",
 	minArgs: 2,

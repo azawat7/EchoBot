@@ -3,7 +3,7 @@ const { MessageAttachment, MessageEmbed } = require("discord.js")
 module.exports.help = {
 	name: "quote",
 	aliases: ["cytat"],
-	category: "🎭 fun",
+	category: "fun",
 	description: "Tell you iconic quote from Azawat and his friend",
 	expectedArgs: "\`without args\`",
 	minArgs: 0,

@@ -5,7 +5,7 @@ const fs = require('fs')
 module.exports.help = {
 	name: "generate",
 	aliases: ["gen"],
-	category: "🎭 fun",
+	category: "fun",
 	description: "Generate a LoL troll build",
 	expectedArgs: "\`without args\`",
 	minArgs: 0,

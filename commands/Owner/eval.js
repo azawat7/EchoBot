@@ -1,7 +1,8 @@
 module.exports.help = {
 	name: "eval",
+	hidden: true,
 	aliases: [],
-	category: "🎆 owner",
+	category: "owner",
 	description: "Evaluate a JS code",
 	expectedArgs: "\`<js_code>\`",
 	minArgs: 1,

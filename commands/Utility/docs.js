@@ -3,7 +3,7 @@ const axios = require('axios')
 module.exports.help = {
     name: "docs",
     aliases: ["discordjs", "djs"],
-    category: "🔑 utility",
+    category: "utility",
     description: "Displays information from the discord.js docs.",
     expectedArgs: "\`<query>\`",
     minArgs: 1,

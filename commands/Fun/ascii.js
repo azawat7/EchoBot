@@ -3,7 +3,7 @@ const figlet = require("figlet")
 module.exports.help = {
 	name: "ascii",
 	aliases: ["text-art"],
-	category: "🎭 fun",
+	category: "fun",
 	description: "Convert text into ascii art",
 	expectedArgs: "\`<text_to_convert>\`",
 	minArgs: 1,

@@ -3,7 +3,7 @@ const { MessageEmbed } = require('discord.js')
 module.exports.help = {
 	name: "unban",
 	aliases: [],
-	category: "🔧 moderation",
+	category: "moderation",
 	description: "Unban a desired user.",
 	expectedArgs: "\`<user_id>\`",
 	minArgs: 1,

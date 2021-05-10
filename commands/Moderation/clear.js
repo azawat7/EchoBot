@@ -3,7 +3,7 @@ const { MessageEmbed } = require('discord.js')
 module.exports.help = {
 	name: "clear",
 	aliases: ['purge'],
-	category: "🔧 moderation",
+	category: "moderation",
 	description: "Clear a desired amount of msg.",
 	expectedArgs: "\`<number_of_msg>\`",
 	minArgs: 1,

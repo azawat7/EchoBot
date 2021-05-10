@@ -2,8 +2,9 @@ const { db } = require("../../echoDB")
 
 module.exports.help = {
 	name: "set",
+	hidden: true,
 	aliases: [],
-	category: "🎆 owner",
+	category: "owner",
 	description: "recondb utility",
 	ownerOnly: true,
 	userPerms: ['ADMINISTRATOR'],

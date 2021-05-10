@@ -3,7 +3,7 @@ const { MessageEmbed } = require('discord.js')
 module.exports.help = {
     name: "ping",
     aliases: [],
-    category: "🔑 utility",
+    category: "utility",
     description: "Display the bot latency.",
     expectedArgs: "\`without args\`",
     minArgs: 0,

@@ -4,7 +4,7 @@ const db = require('../../echoDB')
 module.exports.help = {
 	name: "setlanguage",
 	aliases: ["language", "setlang", "lang"],
-	category: "👑 admin",
+	category: "admin",
 	description: "Change the current language.",
 	expectedArgs: "\`<new_language>\`",
 	minArgs: 1,

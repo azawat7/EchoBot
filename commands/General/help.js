@@ -5,7 +5,7 @@ const categoryList = readdirSync('./commands')
 module.exports.help = {
   name: "help",
   aliases: [],
-  category: "🧬 general",
+  category: "general",
   description: "List of all commands",
   expectedArgs: "\`<command_name>\`",
   minArgs: 0,
@@ -19,16 +19,57 @@ module.exports.help = {
 
 module.exports.run = async (client, message, args, settings) => {
     if (!args.length) {
+      let categories = [];
+
+      const dirEmojis = {
+        Admin: "👑",
+        Fun: "🎭",
+        Moderation: "🔧",
+        Utility: "🔑",
+        General: "🧬"
+      }
+
+      const ignoredCategories = ['Owner']
+
+      readdirSync("./commands/").forEach((dir) => {
+        if(ignoredCategories.includes(dir)) return;
+        const editedName = `${dirEmojis[dir]} ${dir}`;
+        const commands = readdirSync(`./commands/${dir}/`).filter((file) =>
+          file.endsWith(".js")
+        );
+
+        const cmds = commands.filter((command) => {
+          let file = require(`../../commands/${dir}/${command}`);
+
+          return !file.help.hidden;
+        }).map((command) => {
+          let file = require(`../../commands/${dir}/${command}`);
+
+          if (!file.help.name) return "No command name.";
+
+          let name = file.help.name.replace(".js", "");
+
+          return `\`${name}\`\, `;
+        });
+
+        let data = new Object();
+
+        data = {
+          name: editedName,
+          value: cmds.length === 0 ? "In progress." : cmds.join(" "),
+        };
+
+        categories.push(data);
+      });
+
       let embed = new MessageEmbed()
       .setTitle(`📜 Echo - Support`)
       .setColor(`#f50041`)
       .addField(`This is the list of all the commands.`, `**For more information on a command, write \`${settings.prefix}help\` \`<command_name>\`\n**`)
+      .addFields(categories)
       .setTimestamp()
       .setFooter(message.author.username, message.author.avatarURL());
-  
-      for (const category of categoryList) {
-        embed.addField(`${category}`, `\`${client.commands.filter(cat => cat.help.category === category.toLowerCase()).map(cmd => cmd.help.name).join('\`, \`')}\``)
-      };
+
       return message.channel.send(embed)
     } else {
       const command = client.commands.get(args[0]) || client.commands.find(command => command.help.aliases && command.help.aliases.includes(args[0]))

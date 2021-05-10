@@ -3,7 +3,7 @@ const { MessageEmbed } = require("discord.js")
 module.exports.help = {
 	name: "setprefix",
 	aliases: ["prefix"],
-	category: "👑 admin",
+	category: "admin",
 	description: "Change the current prefix.",
 	expectedArgs: "\`<new_prefix>\`",
 	minArgs: 0,

@@ -4,7 +4,7 @@ const { MessageEmbed } = require('discord.js');
 module.exports.help = {
 	name: "binary",
 	aliases: ["encode, decode"],
-	category: "🎭 fun",
+	category: "fun",
 	description: "Encode or decode text into binary code",
 	expectedArgs: "\`<encode/decode>\` \`<text_to_convert>\`",
 	minArgs: 1,

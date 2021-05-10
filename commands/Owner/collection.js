@@ -1,9 +1,10 @@
 const { db } = require("../../echoDB")
 
 module.exports.help = {
-	name: "get",
+	name: "collection",
+	hidden: true,
 	aliases: [],
-	category: "🎆 owner",
+	category: "owner",
 	description: "recondb utility",
 	ownerOnly: true,
 	userPerms: ['ADMINISTRATOR'],
@@ -13,6 +14,5 @@ module.exports.help = {
 }
 
 module.exports.run = async (client, message, args) => {
-    const data = await db.get(args[0])
-    return console.log(data)
+    return console.log(await db.collection())
 }
