@@ -16,7 +16,6 @@ module.exports.help = {
 }
 
 module.exports.run = async (client, message, args) => {
-    message.delete()
     figlet.text(
         args.join(" "), 
         {

@@ -16,11 +16,9 @@ module.exports.help = {
 	cooldown: 3
 }
 
-module.exports.run = async (client, message, args) => {
-    message.delete()
+module.exports.run = async(client, message, args) => {
     const query = args.shift().toLowerCase();
     let word = args.join(" ")
-
     if(query === 'encode') {
         const { data } = await axios.get(`https://some-random-api.ml/binary?text=${encodeURIComponent(word)}`)
         message.channel.send(data.binary ?? 'An error occured', {code: "",});

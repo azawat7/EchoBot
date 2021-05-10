@@ -40,7 +40,7 @@ module.exports = async (client, message) => {
 
     let incorrectSyntax = new MessageEmbed()
         .setColor("#f50041")
-        .setDescription(`${client.cross} **Incorrect syntax ! Use \`${settings.prefix}${command.help.name}\` ${command.help.expectedArgs}**`)
+        .setDescription(`${client.cross} **${await client.translate('Incorrect syntax ! Use', message)} \`${settings.prefix}${command.help.name}\` ${command.help.expectedArgs}**`)
 
     ///////////////////////////////////////////
 
