@@ -16,7 +16,7 @@ module.exports.help = {
 }
 
 module.exports.run = async (client, message, args) => {
-    const msg = await message.channel.send("**Is calculating...**");
+    const msg = await message.channel.send(`**🏓 Pinging...**`);
     msg.edit(
     new MessageEmbed()
       .setColor("#f50041")

@@ -45,6 +45,8 @@ const tlAmount = new MessageEmbed()
 const clearSuc = new MessageEmbed()
     .setColor("#f50041")
     .setDescription(`${client.check} **${amount} msg has been deleted from this channel !**`)
+    .setTimestamp()
+    .setFooter(message.author.username, message.author.avatarURL());
 
 message.channel.send(clearSuc)
 }

@@ -40,7 +40,7 @@ module.exports = async (client, message) => {
 
     let incorrectSyntax = new MessageEmbed()
         .setColor("#f50041")
-        .setDescription(`${client.cross} **${await client.translate('Incorrect syntax ! Use', message)} \`${settings.prefix}${command.help.name}\` ${command.help.expectedArgs}**`)
+        .setDescription(`${client.cross} **Incorrect syntax ! Use \`${settings.prefix}${command.help.name}\` ${command.help.expectedArgs}**`)
 
     ///////////////////////////////////////////
 
@@ -81,7 +81,7 @@ module.exports = async (client, message) => {
           timeLeft = (cdExpirationTime - timeNow) / 1000;
           const cooldownEmbed = new MessageEmbed()
             .setColor("#f50041")
-            .setDescription(`${client.cross} **Please wait **\`${timeLeft.toFixed(0)}s\`** before using this command again !**`)
+            .setDescription(`${client.cross} **Please wait **\`${timeLeft.toFixed(0)}s\`**  before using this command again !**`)
           return message.channel.send(cooldownEmbed)
         }
       }

@@ -29,6 +29,8 @@ module.exports.run = async(client, message, args) => {
         const embed = new MessageEmbed()
             .setColor(client.colors.echo)
             .setDescription(`${client.cross} **That option isn't valid !**`)
+            .setTimestamp()
+            .setFooter(message.author.username, message.author.avatarURL());
         message.channel.send(embed)
     }
 }
