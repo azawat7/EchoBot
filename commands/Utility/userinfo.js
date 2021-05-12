@@ -22,9 +22,9 @@ module.exports.help = {
     aliases: ['ui'],
     category: "utility",
     description: "Displays information from a user.",
-    expectedArgs: null,
+    expectedArgs: "\`<@user>\`",
     minArgs: 0,
-    maxArgs: 0,
+    maxArgs: 1,
     ownerOnly: false,
     userPerms: [],
     clientPerms: [],
@@ -35,6 +35,7 @@ module.exports.help = {
 module.exports.run = async (client, message, args) => {
   let user = message.mentions.users.first() || message.author;
   let member = message.guild.member(user)
+  if(args[0]) member = message.guild.member(message.mentions.users.first());
   let roles = member.roles.cache
     .sort((a, b) => b.position - a.position)
     .map(role => role.toString())
@@ -51,6 +52,7 @@ module.exports.run = async (client, message, args) => {
       `**❯ \`🙎‍♂️\` Username:** ${member.user.username}`,
       `**❯ \`🧮\` Discriminator:** ${member.user.discriminator}`,
       `**❯ \`🆔\` :** ${member.id}`,
+      `**❯ \`🤖\` :** ${member.user.bot ? 'True' : 'False'}`,
       `**❯ \`🏆\` Flags:** ${userFlags.length ? userFlags.map(flag => flags[flag]).join(', ') : 'None'}`,
       `**❯ \`🧿\` Avatar:** [Link to avatar](${member.user.displayAvatarURL({ dynamic: true })})`,
       `**❯ \`📅\` Time Created:** ${moment(member.user.createdTimestamp).format('LT')} ${moment(member.user.createdTimestamp).format('LL')} ${moment(member.user.createdTimestamp).fromNow()}`,
@@ -60,7 +62,7 @@ module.exports.run = async (client, message, args) => {
     ])
     .addField('\`👓\` Member :', [
       `**❯ \`🏆\` Highest Role:** ${member.roles.highest.id === message.guild.id ? 'None' : member.roles.highest.name}`,
-      `**❯ \`🗓️\` Server Join Date:** ${moment(member.joinedAt).format('LL LTS')}`,,
+      `**❯ \`🗓️\` Server Join Date:** ${moment(member.joinedAt).format('LL LTS')}`,
       `**❯ \`🎭\` Roles [${roles.length}]:** ${roles.length < 10 ? roles.join(', ') : roles.length > 10 ? this.client.utils.trimArray(roles) : 'None'}`,
       `\u200b`
     ]);
