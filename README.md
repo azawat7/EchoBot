@@ -1,3 +1,3 @@
 # PRIVATE
 
-# LoL Troll Build - Discord Bot
+# EchoBot - Discord Bot
