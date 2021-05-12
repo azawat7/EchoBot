@@ -4,7 +4,7 @@ module.exports.help = {
 	name: "quote",
 	aliases: ["cytat"],
 	category: "fun",
-	description: "Tell you iconic quote from Azawat and his friend",
+	description: null,
 	expectedArgs: "\`without args\`",
 	minArgs: 0,
 	maxArgs: 0,

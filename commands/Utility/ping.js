@@ -5,7 +5,7 @@ module.exports.help = {
     aliases: [],
     category: "utility",
     description: "Display the bot latency.",
-    expectedArgs: "\`without args\`",
+    expectedArgs: null,
     minArgs: 0,
     maxArgs: 0,
     ownerOnly: false,

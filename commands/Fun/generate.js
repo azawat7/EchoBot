@@ -7,7 +7,7 @@ module.exports.help = {
 	aliases: ["gen"],
 	category: "fun",
 	description: "Generate a LoL troll build",
-	expectedArgs: "\`without args\`",
+	expectedArgs: null,
 	minArgs: 0,
 	maxArgs: 0,
 	ownerOnly: false,

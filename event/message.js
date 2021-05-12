@@ -38,6 +38,10 @@ module.exports = async (client, message) => {
         .setColor("#f50041")
         .setDescription(`${client.cross} **You can only use this command in NSFW channel !**`)
 
+    let noArgs = new MessageEmbed()
+        .setColor("#f50041")
+        .setDescription(`${client.cross} **You should not use any arguments for this command !**`)
+
     let incorrectSyntax = new MessageEmbed()
         .setColor("#f50041")
         .setDescription(`${client.cross} **Incorrect syntax ! Use \`${settings.prefix}${command.help.name}\` ${command.help.expectedArgs}**`)
@@ -59,6 +63,10 @@ module.exports = async (client, message) => {
         return message.channel.send(nsfwEmbed)
 
     ///////////////////////////////////////////
+
+    if (command.help.expectedArgs === null) {
+        return message.channel.send(noArgs)
+    }
 
     if (args.length < command.help.minArgs || (command.help.maxArgs !== null && args.length > command.help.maxArgs)) {
         return message.channel.send(incorrectSyntax) 
