@@ -43,10 +43,6 @@ module.exports = async (client, message) => {
         .setColor("#f50041")
         .setDescription(`${client.cross} **You should not use any arguments for this command !**`)
 
-    let ynArgs = new MessageEmbed()
-        .setColor("#f50041")
-        .setDescription(`${client.cross} **You can use this command witout and with args ! Ex: \`${settings.prefix}${command.help.name}\` ${command.help.expectedArgs}**`)
-
     let incorrectSyntax = new MessageEmbed()
         .setColor("#f50041")
         .setDescription(`${client.cross} **Incorrect syntax ! Use \`${settings.prefix}${command.help.name}\` ${command.help.expectedArgs}**`)
@@ -71,10 +67,6 @@ module.exports = async (client, message) => {
 
     if (command.help.expectedArgs === null) {
         return message.channel.send(noArgs)
-    }
-
-    if (args.length > command.help.minArgs === 0 || command.help.maxArgs > 0) {
-        return message.channel.send(ynArgs)
     }
 
     if (args.length < command.help.minArgs || (command.help.maxArgs !== null && args.length > command.help.maxArgs)) {
