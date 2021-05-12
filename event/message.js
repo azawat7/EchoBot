@@ -1,4 +1,4 @@
-const { owners } = require("../../config")
+const { owners } = require("../config")
 const { Collection, MessageEmbed } = require('discord.js')
 
 module.exports = async (client, message) => {

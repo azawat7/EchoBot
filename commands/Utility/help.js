@@ -5,7 +5,7 @@ const categoryList = readdirSync('./commands')
 module.exports.help = {
   name: "help",
   aliases: [],
-  category: "general",
+  category: "utility",
   description: "List of all commands",
   expectedArgs: "\`<command_name>\`",
   minArgs: 0,
@@ -25,8 +25,7 @@ module.exports.run = async (client, message, args, settings) => {
         Admin: "👑",
         Fun: "🎭",
         Moderation: "🔧",
-        Utility: "🔑",
-        General: "🧬"
+        Utility: "🔨",
       }
 
       const ignoredCategories = ['Owner']
@@ -63,9 +62,9 @@ module.exports.run = async (client, message, args, settings) => {
       });
 
       let embed = new MessageEmbed()
-      .setTitle(`📜 Echo - Support`)
+      .setAuthor(`Echo | Commands`, `https://i.imgur.com/45UIEsS.png`, )
       .setColor(`#f50041`)
-      .addField(`This is the list of all the commands.`, `**For more information on a command, write \`${settings.prefix}help\` \`<command_name>\`\n**`)
+      .setDescription(`● To get help on a specific command, type \`${settings.prefix}help\` \`<command_name>\` !`)
       .addFields(categories)
       .setTimestamp()
       .setFooter(message.author.username, message.author.avatarURL());

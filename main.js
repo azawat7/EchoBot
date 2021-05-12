@@ -12,14 +12,7 @@ client.colors = client.config.colors;
 
 ///////////////////////////////////////////
 
-const translate = require('@k3rn31p4nic/google-translate-api')
 const db = require('./echoDB')
-
-client.translate = async(text, message) => {
-    const lang = await db.has(`lang-${message.guild.id}`) ? await db.get(`lang-${message.guild.id}`) : 'en';
-    const traslated = await translate(text, {from: 'en', to: lang});
-    return traslated.text;
-}
 
 ///////////////////////////////////////////
 
