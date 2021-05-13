@@ -65,10 +65,6 @@ module.exports = async (client, message) => {
 
     ///////////////////////////////////////////
 
-    if (command.help.expectedArgs === null) {
-        return message.channel.send(noArgs)
-    }
-
     if (args.length < command.help.minArgs || (command.help.maxArgs !== null && args.length > command.help.maxArgs)) {
         return message.channel.send(incorrectSyntax) 
     }

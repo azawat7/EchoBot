@@ -21,6 +21,12 @@ module.exports.run = async (client, message, args) => {
     const titled = args[0]
     const languaged = args[1]
 
+    const sembed = new MessageEmbed()
+    .setColor("#f50041")
+    .setDescription(`**${client.cross} Valid languages are \`js\`, \`html\`, \`css\` !**`)
+
+    if(!['js', 'html', 'css'].includes(languaged)) return message.channel.send(sembed)
+
     create([
         {
             name: 'random code',

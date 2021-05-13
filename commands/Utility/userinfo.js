@@ -51,8 +51,8 @@ module.exports.run = async (client, message, args) => {
     .addField('\`🥽\` User :', [
       `**❯ \`🙎‍♂️\` Username:** ${member.user.username}`,
       `**❯ \`🧮\` Discriminator:** ${member.user.discriminator}`,
-      `**❯ \`🆔\` :** ${member.id}`,
-      `**❯ \`🤖\` :** ${member.user.bot ? 'True' : 'False'}`,
+      `**❯ \`🆔\` ID :** ${member.id}`,
+      `**❯ \`🤖\` Bot :** ${member.user.bot ? 'True' : 'False'}`,
       `**❯ \`🏆\` Flags:** ${userFlags.length ? userFlags.map(flag => flags[flag]).join(', ') : 'None'}`,
       `**❯ \`🧿\` Avatar:** [Link to avatar](${member.user.displayAvatarURL({ dynamic: true })})`,
       `**❯ \`📅\` Time Created:** ${moment(member.user.createdTimestamp).format('LT')} ${moment(member.user.createdTimestamp).format('LL')} ${moment(member.user.createdTimestamp).fromNow()}`,
