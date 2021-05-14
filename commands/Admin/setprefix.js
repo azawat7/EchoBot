@@ -6,7 +6,7 @@ module.exports.help = {
 	category: "admin",
 	description: "Change the current prefix.",
 	expectedArgs: "\`<new_prefix>\`",
-	minArgs: 0,
+	minArgs: 1,
 	maxArgs: 1,
 	ownerOnly: false,
 	userPerms: ['ADMINISTRATOR'],
@@ -20,15 +20,10 @@ module.exports.run = async (client, message, args, settings) => {
 
   const actPrefix = new MessageEmbed()
     .setColor("#f50041")
-    .setDescription(`**Prefix updated :** \`${settings.prefix}\` -> \`${newSetting}\``)
+    .setDescription(`**Prefix updated !** \`${settings.prefix}\` -> \`${newSetting}\``)
 
-  const nowPrefix = new MessageEmbed()
-    .setColor("#f50041")
-    .setDescription(`**Current prefix :** \`${settings.prefix}\``)
-
-if (newSetting) {
-  await client.updateGuild(message.guild, { prefix: newSetting });
-  return message.channel.send(actPrefix);
-}
-  message.channel.send(nowPrefix)
+	if (newSetting) {
+		await client.updateGuild(message.guild, { prefix: newSetting });
+		return message.channel.send(actPrefix);
+	}
 };

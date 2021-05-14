@@ -44,6 +44,7 @@ module.exports.run = async (client, message, args) => {
   let userFlags = member.user.flags.toArray();
 
   let embed = new MessageEmbed()
+    .setAuthor(`${user.tag} :`)
     .setThumbnail(member.user.displayAvatarURL({ dynamic: true, size: 512}))
     .setColor("#f50041")
     .setTimestamp()
