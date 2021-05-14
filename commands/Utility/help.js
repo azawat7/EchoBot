@@ -26,6 +26,7 @@ module.exports.run = async (client, message, args, settings) => {
         Fun: "🎭",
         Moderation: "🔧",
         Utility: "🔨",
+        NSFW: "🔞"
       }
 
       const ignoredCategories = ['Owner']
