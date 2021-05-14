@@ -8,7 +8,7 @@ module.exports.help = {
 	minArgs: 1,
 	maxArgs: 1000,
 	ownerOnly: true,
-	userPerms: ['ADMINISTRATOR'],
+	userPerms: [],
 	clientPerms: [],
 	nsfw: false,
 	cooldown: 3

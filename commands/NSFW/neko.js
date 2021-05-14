@@ -14,7 +14,7 @@ module.exports.help = {
 	userPerms: [],
 	clientPerms: [],
 	nsfw: true,
-	cooldown: 3
+	cooldown: 1
 }
 
 module.exports.run = async (client, message, args) => {
