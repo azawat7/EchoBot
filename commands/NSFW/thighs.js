@@ -4,7 +4,6 @@ module.exports.help = {
 	name: "thighs",
 	aliases: [],
 	category: "NSFW",
-	description: "Thighs. Yes.",
 	expectedArgs: null,
 	minArgs: 0,
 	maxArgs: 0,

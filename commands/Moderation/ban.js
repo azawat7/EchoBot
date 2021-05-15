@@ -4,7 +4,6 @@ module.exports.help = {
 	name: "ban",
 	aliases: [],
 	category: "moderation",
-	description: "Ban a desired user from the server.",
 	expectedArgs: "\`<@user>\` \`<reason>\`",
 	minArgs: 2,
 	maxArgs: null,
@@ -15,10 +14,10 @@ module.exports.help = {
 	cooldown: 3
 }
  
-module.exports.run = async (client, message, args) => {
+module.exports.run = async (client, message, args, language) => {
   const heheCannot = new MessageEmbed()
     .setColor("#f50041")
-    .setDescription(`${client.cross} **You can't ban this person because you either have the same role or your role is lower !**`)
+    .setDescription(`${client.cross} **${language.ROLEHIGH}**`)
 
   const member = message.mentions.members.first();
   const reason = args.slice(1).join(" ");
@@ -29,7 +28,7 @@ module.exports.run = async (client, message, args) => {
 
   const sucess = new MessageEmbed()
     .setColor("#f50041")
-    .setDescription(`${client.check} **\`${member.username}\` has been banned from the server by \`${message.author.username}\` for \`${reason}\` !**`)
+    .setDescription(`${client.check} **\`${member.username}\` ${language.SUC1} \`${message.author.username}\` ${language.SUC2} \`${reason}\` !**`)
     .setTimestamp()
     .setFooter(message.author.username, message.author.avatarURL());
 

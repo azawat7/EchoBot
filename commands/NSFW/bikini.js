@@ -4,7 +4,6 @@ module.exports.help = {
 	name: "bikini",
 	aliases: [ 'bikinis' ],
 	category: "NSFW",
-	description: "Photos of girls in bikinis 👙.",
 	expectedArgs: null,
 	minArgs: 0,
 	maxArgs: 0,

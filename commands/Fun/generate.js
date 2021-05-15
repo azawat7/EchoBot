@@ -6,7 +6,6 @@ module.exports.help = {
 	name: "generate",
 	aliases: ["gen"],
 	category: "fun",
-	description: "Generate a LoL troll build",
 	expectedArgs: null,
 	minArgs: 0,
 	maxArgs: 0,

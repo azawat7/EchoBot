@@ -4,7 +4,6 @@ module.exports.help = {
     name: 'cum',
     aliases: [],
 	category: "NSFW",
-	description: "Uh, yes 👍.",
 	expectedArgs: null,
 	minArgs: 0,
 	maxArgs: 0,

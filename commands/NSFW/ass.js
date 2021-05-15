@@ -4,7 +4,6 @@ module.exports.help = {
 	name: "ass",
 	aliases: [ 'butt', 'butts', 'booty' ],
 	category: "NSFW",
-	description: "Sends you but Pictures 🍑.",
 	expectedArgs: null,
 	minArgs: 0,
 	maxArgs: 0,

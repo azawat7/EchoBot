@@ -4,7 +4,6 @@ module.exports.help = {
     name: 'hentai',
     aliases: [],
 	category: "NSFW",
-	description: "Returns a random hentai image/gif.",
 	expectedArgs: null,
 	minArgs: 0,
 	maxArgs: 0,

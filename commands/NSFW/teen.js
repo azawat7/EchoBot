@@ -4,7 +4,6 @@ module.exports.help = {
     name: 'teen',
     aliases: [],
 	category: "NSFW",
-	description: "Sends you random teen nude pics.",
 	expectedArgs: null,
 	minArgs: 0,
 	maxArgs: 0,

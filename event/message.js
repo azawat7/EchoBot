@@ -1,6 +1,7 @@
 const { owners } = require("../config")
 const { Collection, MessageEmbed } = require('discord.js');
 const { codePointAt } = require("ffmpeg-static");
+const { lang } = require("moment");
 
 module.exports = async (client, message) => {
     client.cross = client.emojis.cache.find(emoji => emoji.name === "echo_cross");
@@ -20,6 +21,8 @@ module.exports = async (client, message) => {
 
     if (!message.content.toLowerCase().startsWith(settings.prefix)) return;
     if (!command) return;
+
+    const language = require(`../languages/${settings.language}/${command.help.category}/${command.help.name}`)
 
     ///////////////////////////////////////////
 
@@ -96,7 +99,7 @@ module.exports = async (client, message) => {
 
     ///////////////////////////////////////////
 
-    command.run(client, message, args, settings)
+    command.run(client, message, args, language, settings)
 
 }
 

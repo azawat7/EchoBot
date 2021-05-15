@@ -1,27 +1,10 @@
 const { MessageEmbed } = require('discord.js')
 const moment = require('moment');
 
-const flags = {
-	DISCORD_EMPLOYEE: 'Discord Employee',
-	DISCORD_PARTNER: 'Discord Partner',
-	BUGHUNTER_LEVEL_1: 'Bug Hunter (Level 1)',
-	BUGHUNTER_LEVEL_2: 'Bug Hunter (Level 2)',
-	HYPESQUAD_EVENTS: 'HypeSquad Events',
-	HOUSE_BRAVERY: 'House of Bravery',
-	HOUSE_BRILLIANCE: 'House of Brilliance',
-	HOUSE_BALANCE: 'House of Balance',
-	EARLY_SUPPORTER: 'Early Supporter',
-	TEAM_USER: 'Team User',
-	SYSTEM: 'System',
-	VERIFIED_BOT: 'Verified Bot',
-	VERIFIED_DEVELOPER: 'Verified Bot Developer'
-};
-
 module.exports.help = {
     name: "userinfo",
     aliases: ['ui'],
     category: "utility",
-    description: "Displays information from a user.",
     expectedArgs: "\`<@user>\`",
     minArgs: 0,
     maxArgs: 1,
@@ -32,7 +15,23 @@ module.exports.help = {
     cooldown: 3
   }
   
-module.exports.run = async (client, message, args) => {
+module.exports.run = async (client, message, args, language) => {
+  const flags = {
+    DISCORD_EMPLOYEE: language.DISCORD_EMPLOYEE,
+    DISCORD_PARTNER: language.DISCORD_PARTNER,
+    BUGHUNTER_LEVEL_1: language.BUGHUNTER_LEVEL_1,
+    BUGHUNTER_LEVEL_2: language.BUGHUNTER_LEVEL_2,
+    HYPESQUAD_EVENTS: language.HYPESQUAD_EVENTS,
+    HOUSE_BRAVERY: language.HOUSE_BRAVERY,
+    HOUSE_BRILLIANCE: language.HOUSE_BRILLIANCE,
+    HOUSE_BALANCE: language.HOUSE_BALANCE,
+    EARLY_SUPPORTER: language.EARLY_SUPPORTER,
+    TEAM_USER: language.TEAM_USER,
+    SYSTEM: language.SYSTEM,
+    VERIFIED_BOT: language.VERIFIED_BOT,
+    VERIFIED_DEVELOPER: language.VERIFIED_DEVELOPER
+  };
+
   let user = message.mentions.users.first() || message.author;
   let member = message.guild.member(user)
   if(args[0]) member = message.guild.member(message.mentions.users.first());
@@ -49,22 +48,22 @@ module.exports.run = async (client, message, args) => {
     .setColor("#f50041")
     .setTimestamp()
     .setFooter(message.author.username, message.author.avatarURL())
-    .addField('\`🥽\` User :', [
-      `**❯ \`🙎‍♂️\` Username:** ${member.user.username}`,
-      `**❯ \`🧮\` Discriminator:** ${member.user.discriminator}`,
-      `**❯ \`🆔\` ID :** ${member.id}`,
-      `**❯ \`🤖\` Bot :** ${member.user.bot ? 'True' : 'False'}`,
-      `**❯ \`🏆\` Flags:** ${userFlags.length ? userFlags.map(flag => flags[flag]).join(', ') : 'None'}`,
-      `**❯ \`🧿\` Avatar:** [Link to avatar](${member.user.displayAvatarURL({ dynamic: true })})`,
-      `**❯ \`📅\` Time Created:** ${moment(member.user.createdTimestamp).format('LT')} ${moment(member.user.createdTimestamp).format('LL')} ${moment(member.user.createdTimestamp).fromNow()}`,
-      `**❯ \`📄\` Status:** ${member.user.presence.status}`,
-      `**❯ \`📟\` Game:** ${member.user.presence.game || 'Not playing a game.'}`,
+    .addField(`\`🥽\` ${language.USER} :`, [
+      `**❯ \`🙎‍♂️\` ${language.USERNAME}:** ${member.user.username}`,
+      `**❯ \`🧮\` ${language.TAG}:** ${member.user.discriminator}`,
+      `**❯ \`🆔\` ${language.ID} :** ${member.id}`,
+      `**❯ \`🤖\` ${language.BOT} :** ${member.user.bot ? `${language.BOTT}` : `${language.BOTF}`}`,
+      `**❯ \`🏆\` ${language.FLAGS}:** ${userFlags.length ? userFlags.map(flag => flags[flag]).join(', ') : `${language.FLAGSN}`}`,
+      `**❯ \`🧿\` ${language.AVATAR}:** [${language.AVATARLINK}](${member.user.displayAvatarURL({ dynamic: true })})`,
+      `**❯ \`📅\` ${language.TIMECREATED}:** ${moment(member.user.createdTimestamp).format('LT')} ${moment(member.user.createdTimestamp).format('LL')} ${moment(member.user.createdTimestamp).fromNow()}`,
+      `**❯ \`📄\` ${language.STATUS}:** ${member.user.presence.status}`,
+      `**❯ \`📟\` ${language.GAME}:** ${member.user.presence.game || `${language.GAMENOT}`}`,
       `\u200b`
     ])
-    .addField('\`👓\` Member :', [
-      `**❯ \`🏆\` Highest Role:** ${member.roles.highest.id === message.guild.id ? 'None' : member.roles.highest.name}`,
-      `**❯ \`🗓️\` Server Join Date:** ${moment(member.joinedAt).format('LL LTS')}`,
-      `**❯ \`🎭\` Roles [${roles.length}]:** ${roles.length < 10 ? roles.join(', ') : roles.length > 10 ? this.client.utils.trimArray(roles) : 'None'}`,
+    .addField(`\`👓\` ${language.MEMBER} :`, [
+      `**❯ \`🏆\` ${language.HIGHESTROLE}:** ${member.roles.highest.id === message.guild.id ? `${language.HIGHESTROLENONE}` : member.roles.highest.name}`,
+      `**❯ \`🗓️\` ${language.SERVERJOIN}:** ${moment(member.joinedAt).format('LL LTS')}`,
+      `**❯ \`🎭\` ${language.ROLES} [${roles.length}]:** ${roles.length < 10 ? roles.join(', ') : roles.length > 10 ? this.client.utils.trimArray(roles) : `${language.ROLENONE}`}`,
       `\u200b`
     ]);
   return message.channel.send(embed);

@@ -1,0 +1,5 @@
+{
+    "DESCRIPTION": "Reroll a giveaway.",
+    "ERRORS": "No giveaway found for",
+    "SUCS": "Winner rerolled !"
+}

@@ -1,0 +1,5 @@
+{
+    "DESCRIPTION": "Delete a giveaway.",
+    "ERRORS": "No giveaway found for",
+    "SUCS": "Giveaway deleted !"
+}

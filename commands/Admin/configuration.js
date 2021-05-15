@@ -4,7 +4,6 @@ module.exports.help = {
 	name: "configuration",
 	aliases: ["config"],
 	category: "admin",
-	description: "Show's the current server config.",
 	expectedArgs: null,
 	minArgs: 0,
 	maxArgs: 0,
@@ -15,12 +14,15 @@ module.exports.help = {
 	cooldown: 3
 }
  
-module.exports.run = async (client, message, args, settings) => {
+module.exports.run = async (client, message, args, language, settings) => {
     let guild = message.guild;
     const config = new MessageEmbed()
         .setAuthor(guild.name, guild.iconURL({ dynamic: true }))
         .setColor("#f50041")
-		.setDescription(`🥨 **Prefix :** \`${settings.prefix}\``)
+		.addFields(
+			{ name: `\`🥨\` **${language.CONFIG1}** :`, value: `\`${settings.prefix}\``},
+			{ name: `\`🏁\` **${language.CONFIG2}** :`, value: `\`${settings.language}\``},
+		)
 
     message.channel.send(config)
 };

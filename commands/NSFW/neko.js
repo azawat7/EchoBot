@@ -6,7 +6,6 @@ module.exports.help = {
 	name: "neko",
 	aliases: [],
 	category: "NSFW",
-	description: "Anal. Yes.",
 	expectedArgs: "\`<feet/pussy/tits>\`",
 	minArgs: 1,
 	maxArgs: 1,

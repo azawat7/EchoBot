@@ -4,7 +4,6 @@ module.exports.help = {
     name: 'boobs',
     aliases: ['boob', 'boobies'],
 	category: "NSFW",
-	description: "Sends you a random boob image 🍒.",
 	expectedArgs: null,
 	minArgs: 0,
 	maxArgs: 0,

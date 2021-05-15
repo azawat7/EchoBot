@@ -4,7 +4,6 @@ module.exports.help = {
     name: 'pussy',
     aliases: [],
 	category: "NSFW",
-	description: "Sends you 😺Images.",
 	expectedArgs: null,
 	minArgs: 0,
 	maxArgs: 0,

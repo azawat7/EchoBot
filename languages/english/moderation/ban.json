@@ -1,0 +1,6 @@
+{
+    "DESCRIPTION": "Ban a desired user from the server.",
+    "ROLEHIGH": "You can't ban this person because you either have the same role or your role is lower !",
+    "SUC1": "has been banned from the server by",
+    "SUC2": "for"
+}

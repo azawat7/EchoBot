@@ -4,7 +4,6 @@ module.exports.help = {
 	name: "leagueoflegends",
 	aliases: [ 'lol', 'league'],
 	category: "NSFW",
-	description: "ye ye",
 	expectedArgs: null,
 	minArgs: 0,
 	maxArgs: 0,

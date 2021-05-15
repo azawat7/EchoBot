@@ -2,10 +2,9 @@ const { MessageEmbed } = require('discord.js')
 const ms = require("ms");
 
 module.exports.help = {
-	name: "giveawayreroll",
-	aliases: ["greroll"],
+	name: "giveawaydelete",
+	aliases: ["gdelete"],
 	category: "moderation",
-	description: "Reroll a giveaway.",
 	expectedArgs: "\`<giveaway_id>\`",
 	minArgs: 1,
 	maxArgs: 1,
@@ -16,20 +15,20 @@ module.exports.help = {
 	cooldown: 3
 }
  
-module.exports.run = async (client, message, args) => {
+module.exports.run = async (client, message, args, language) => {
     let giveaway = client.giveawaysManager.giveaways.find((g) => g.guildID === message.guild.id && g.prize === args.join(' ')) || client.giveawaysManager.giveaways.find((g) => g.guildID === message.guild.id && g.messageID === args[0]);
     if (!giveaway) return message.channel.send('Unable to find a giveaway for `'+ args.join(' ') +'`.');
     const messageID = args[0];
 
     const ERROR = new MessageEmbed()
         .setColor("#f50041")
-        .setDescription(`${client.cross} **No giveaway found for ${messageID} !**`)
+        .setDescription(`${client.cross} **${language.ERRORS} ${messageID} !**`)
 
     const YES = new MessageEmbed()
         .setColor("#f50041")
-        .setDescription(`${client.check} **Giveaway rerolled !**`)
+        .setDescription(`${client.check} **${language.SUCS}**`)
 
-    client.giveawaysManager.reroll(messageID).then(() => {
+    client.giveawaysManager.delete(messageID).then(() => {
         message.channel.send(YES);
     }).catch((err) => {
         message.channel.send(ERROR);

@@ -4,7 +4,6 @@ module.exports.help = {
     name: "ping",
     aliases: [],
     category: "utility",
-    description: "Display the bot latency.",
     expectedArgs: null,
     minArgs: 0,
     maxArgs: 0,
@@ -15,8 +14,8 @@ module.exports.help = {
     cooldown: 3
 }
 
-module.exports.run = async (client, message, args) => {
-    const msg = await message.channel.send(`**🏓 Pinging...**`);
+module.exports.run = async (client, message, args, language) => {
+    const msg = await message.channel.send(`**${language.PINGING}**`);
     msg.edit(
     new MessageEmbed()
       .setColor("#f50041")

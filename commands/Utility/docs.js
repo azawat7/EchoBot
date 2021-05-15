@@ -4,7 +4,6 @@ module.exports.help = {
     name: "docs",
     aliases: ["discordjs", "djs"],
     category: "utility",
-    description: "Displays information from the discord.js docs.",
     expectedArgs: "\`<query>\`",
     minArgs: 1,
     maxArgs: 1,
@@ -15,7 +14,7 @@ module.exports.help = {
     cooldown: 3
   }
   
-module.exports.run = async (client, message, args) => {
+module.exports.run = async (client, message, args, language) => {
     const uri = `https://djsdocs.sorta.moe/v2/embed?src=stable&q=${encodeURIComponent(
         args
       )}`
@@ -28,7 +27,7 @@ module.exports.run = async (client, message, args) => {
           if (data && !data.error) {
             message.channel.send({ embed: data })
           } else {
-            message.reply('Could not find that documentation')
+            message.reply(`${client.cross} ${language.ERROR}`)
           }
         })
         .catch((err) => {

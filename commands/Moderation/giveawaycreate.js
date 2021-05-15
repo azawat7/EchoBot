@@ -1,11 +1,11 @@
-const { MessageEmbed } = require('discord.js')
+const { MessageEmbed } = require("discord.js");
+const { lang } = require("moment");
 const ms = require("ms");
 
 module.exports.help = {
 	name: "giveawaycreate",
 	aliases: ["gcreate"],
 	category: "moderation",
-	description: "Everything needed for doing giveaway.",
 	expectedArgs: "\`<time_in_m/h/d>\` \`<number_of_winner>\` \`<prize>\`",
 	minArgs: 1,
 	maxArgs: null,
@@ -16,25 +16,25 @@ module.exports.help = {
 	cooldown: 3
 }
  
-module.exports.run = async (client, message, args) => {
+module.exports.run = async (client, message, args, language) => {
 
 const status = args[0];
 
 const MAX_COUNT = new MessageEmbed()
     .setColor("#f50041")
-    .setDescription(`${client.cross} **You reached the giveaway limit at one time !**`)
+    .setDescription(`${client.cross} **${language.MAXCOUNT}**`)
 
 const INVTIME = new MessageEmbed()
     .setColor("#f50041")
-    .setDescription(`${client.cross} **Please specify a number !**`)
+    .setDescription(`${client.cross} **${language.INVTIMES}**`)
 
 const MAXTIME = new MessageEmbed()
     .setColor("#f50041")
-    .setDescription(`${client.cross} **You can't create a giveaway that last for more than 15 day !**`)
+    .setDescription(`${client.cross} **${language.MAXTIMES}**`)
 
 const TOOWINERS = new MessageEmbed()
     .setColor("#f50041")
-    .setDescription(`${client.cross} **You need to set a number of winner(s) below 10 and above 1 !**`)
+    .setDescription(`${client.cross} **${language.TOOWINER}**`)
 
     const currentGiveaways = client.giveawaysManager.giveaways.filter((g) => g.guildID === message.guild.id && !g.ended).length;
     if(currentGiveaways > 3){
@@ -64,21 +64,21 @@ const TOOWINERS = new MessageEmbed()
         prize: prize,
         winnerCount: parseInt(winnersCount),
         messages: {
-            giveaway: '@everyone\n\n🎉 **GIVEAWAY** 🎉',
-            giveawayEnded: '@everyone\n\n🎉 **GIVEAWAY ENDED** 🎉',
-            timeRemaining: 'Time remaining : **{duration}.**',
-            inviteToParticipate: 'React with 🎉 to participate !',
-            winMessage: 'Congratulations, {winners}! You won **{prize}**!\n{messageURL}',
-            embedFooter: '{echo}',
-            noWinner: 'Giveaway cancelled, no valid participations.',
-            hostedBy: 'Hosted by: {user}',
-            winners: 'winner(s)',
-            endedAt: 'Ended at',
+            giveaway: `${language.GIVEAWAY}`,
+            giveawayEnded: `${language.GIVEAWAYENDED}`,
+            timeRemaining: `${language.TIMEREMAINING}`,
+            inviteToParticipate: `${language.INVITETOPARTICIPATE}`,
+            winMessage: `${language.WINMESSAGE}`,
+            embedFooter: `${language.EMBEDFOOTER}`,
+            noWinner: `${language.NOWINNER}`,
+            hostedBy: `${language.HOSTEDBY}`,
+            winners: `${language.WINNERS}`,
+            endedAt: `${language.ENDEDAT}`,
             units: {
-                seconds: 'seconds',
-                minutes: 'minutes',
-                hours: 'hours',
-                days: 'days',
+                seconds: `${language.SECONDS}`,
+                minutes: `${language.MINUTES}`,
+                hours: `${language.HOURS}`,
+                days: `${language.DAYS}`,
                 pluralS: false // Not needed, because units end with a S so it will automatically removed if the unit value is lower than 2
             }
         }

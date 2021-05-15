@@ -4,7 +4,6 @@ module.exports.help = {
 	name: "emojis",
 	aliases: ["emojilist", "serveremojis"],
 	category: "fun",
-	description: "Shows all the emojis available in the server.",
 	expectedArgs: null,
 	minArgs: 0,
 	maxArgs: 0,

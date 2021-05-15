@@ -6,7 +6,6 @@ module.exports.help = {
 	name: "anal",
 	aliases: [],
 	category: "NSFW",
-	description: "Anal. Yes.",
 	expectedArgs: null,
 	minArgs: 0,
 	maxArgs: 0,

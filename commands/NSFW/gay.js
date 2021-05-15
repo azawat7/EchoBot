@@ -4,7 +4,6 @@ module.exports.help = {
     name: 'gay',
     aliases: ['dick', 'dicks', 'cock', 'cocks', 'penis', 'penises'],
 	category: "NSFW",
-	description: "yes 👍.",
 	expectedArgs: null,
 	minArgs: 0,
 	maxArgs: 0,

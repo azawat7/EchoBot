@@ -6,7 +6,6 @@ module.exports.help = {
   name: "help",
   aliases: [],
   category: "utility",
-  description: "List of all commands",
   expectedArgs: "\`<command_name>\`",
   minArgs: 0,
   maxArgs: 1,
@@ -17,7 +16,7 @@ module.exports.help = {
   cooldown: 3
 }
 
-module.exports.run = async (client, message, args, settings) => {
+module.exports.run = async (client, message, args, language, settings) => {
     if (!args.length) {
       let categories = [];
 
@@ -63,9 +62,9 @@ module.exports.run = async (client, message, args, settings) => {
       });
 
       let embed = new MessageEmbed()
-      .setAuthor(`Echo | Commands`, `https://i.imgur.com/45UIEsS.png`, )
+      .setAuthor(`${language.TITLE1}`, `https://i.imgur.com/45UIEsS.png`, )
       .setColor(`#f50041`)
-      .setDescription(`● To get help on a specific command, type \`${settings.prefix}help\` \`<command_name>\` !`)
+      .setDescription(`${language.EDES1}\`${settings.prefix}${language.EDES2}`)
       .addFields(categories)
       .setTimestamp()
       .setFooter(message.author.username, message.author.avatarURL());
@@ -73,17 +72,18 @@ module.exports.run = async (client, message, args, settings) => {
       return message.channel.send(embed)
     } else {
       const command = client.commands.get(args[0]) || client.commands.find(command => command.help.aliases && command.help.aliases.includes(args[0]))
+      const lang = require(`../../languages/${settings.language}/${command.help.category}/${command.help.name}`)
       const embed = new MessageEmbed()
         .setColor(`#f50041`)
-        .setAuthor(`Here are the ${command.help.name} information :`)
-        .addField(`📃 Description`, `\`${command.help.description}\``)
-        .addField(`⏱ Cooldown`, `\`${command.help.cooldown} second(s)\``)
-        .addField(`🧿 Usage`, command.help.expectedArgs ? `\`${settings.prefix}${command.help.name}\` ${command.help.expectedArgs}` : `${settings.prefix}${command.help.name}`)
+        .setAuthor(`${language.TITLE2}\`${command.help.name}\` ${language.TITLE2P2}`)
+        .addField(`📃 ${language.DES}`, `\`${lang.DESCRIPTION}\``)
+        .addField(`⏱ ${language.COOLDOWN}`, `\`${command.help.cooldown} ${language.SECOND}\``)
+        .addField(`🧿 ${language.USAGE}`, command.help.expectedArgs ? `\`${settings.prefix}${command.help.name}\` \`${command.help.expectedArgs}\`` : `\`${settings.prefix}${command.help.name}\``)
         .setTimestamp()
         .setFooter(message.author.username, message.author.avatarURL());
         if (command.help.aliases.length > 0) embed.addField(`🔖 Alias`, `\`${command.help.aliases.join('\`, \`')}\``)
-        if (command.help.nsfw) embed.addField(`🔞 NSFW`, `\`You can only use this command in NSFW channel !\``)
-        if (command.help.ownerOnly) embed.addField(`❌ Owner Only`, `\`This command is only available for the owner of this bot !\``)
+        if (command.help.nsfw) embed.addField(`🔞 ${language.NSFW}`, `\`${language.NSFW1}\``)
+        if (command.help.ownerOnly) embed.addField(`❌ ${language.OWNERONLY}`, `\`${language.OWNERONLY1}\``)
       return message.channel.send(embed)
     }
   };

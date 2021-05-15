@@ -16,6 +16,11 @@ const guildSchema = mongoose.Schema({
     'required': true,
     'default': defaults.prefix
   },
+  language: {
+    'type': String,
+    'required': true,
+    'default': defaults.language
+  },
   welcomeChannel: {
     'type': String,
   },

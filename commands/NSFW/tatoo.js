@@ -4,7 +4,6 @@ module.exports.help = {
     name: 'tatoo',
     aliases: [],
 	category: "NSFW",
-	description: "Sends a random nsfw tattoo\'d female.",
 	expectedArgs: null,
 	minArgs: 0,
 	maxArgs: 0,

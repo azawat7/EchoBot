@@ -3,7 +3,6 @@ module.exports.help = {
 	hidden: true,
 	aliases: [],
 	category: "owner",
-	description: "Evaluate a JS code",
 	expectedArgs: "\`<js_code>\`",
 	minArgs: 1,
 	maxArgs: 1000,

@@ -4,7 +4,6 @@ module.exports.help = {
 	name: "clear",
 	aliases: ['purge'],
 	category: "moderation",
-	description: "Clear a desired amount of msg.",
 	expectedArgs: "\`<number_of_msg>\`",
 	minArgs: 1,
 	maxArgs: 1,
@@ -15,21 +14,21 @@ module.exports.help = {
 	cooldown: 3
 }
  
-module.exports.run = async (client, message, args) => {
+module.exports.run = async (client, message, args, language) => {
   
 const amount = args.join(' ');
 
 const invAmount = new MessageEmbed()
     .setColor("#f50041")
-    .setDescription(`${client.cross} **You did not provided a number !**`)
+    .setDescription(`${client.cross} **${language.NANNUMBER}**`)
 
 const thAmount = new MessageEmbed()
     .setColor("#f50041")
-    .setDescription(`${client.cross} **You can only delete a maximum of 100 msg !**`)
+    .setDescription(`${client.cross} **${language.TH}**`)
 
 const tlAmount = new MessageEmbed()
     .setColor("#f50041")
-    .setDescription(`${client.cross} **You need to delete at least 1 msg !**`)
+    .setDescription(`${client.cross} **${language.TL}**`)
 
 // Condition
 
@@ -44,7 +43,7 @@ const tlAmount = new MessageEmbed()
 
 const clearSuc = new MessageEmbed()
     .setColor("#f50041")
-    .setDescription(`${client.check} **${amount} msg has been deleted from this channel !**`)
+    .setDescription(`${client.check} **${amount} ${language.SUC}**`)
     .setTimestamp()
     .setFooter(message.author.username, message.author.avatarURL());
 

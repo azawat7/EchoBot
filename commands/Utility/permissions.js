@@ -5,7 +5,6 @@ module.exports.help = {
   name: "permissions",
   aliases: ['permission', 'perms'],
   category: "utility",
-  description: "List your permission in a channel",
   expectedArgs: "\`<@user>\`",
   minArgs: 0,
   maxArgs: 1,
