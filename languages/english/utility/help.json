@@ -3,7 +3,7 @@
     "TITLE1": "Echo | Commands",
     "TITLE2": "Here are the ",
     "TITLE2P2": "information :",
-    "EDES1": "● To get help on a specific command, type ",
+    "EDES1": "● The prefix of the server is :",
     "EDES2": "help` `<command_name>` !",
     "DES": "Description",
     "COOLDOWN": "Cooldown",
@@ -12,5 +12,6 @@
     "NSFW": "NSFW",
     "NSFW1": "You can only use this command in NSFW channel !",
     "OWNERONLY": "Owner Only",
-    "OWNERONLY1": "This command is only available for the owner of this bot !"
+    "OWNERONLY1": "This command is only available for the owner of this bot !",
+    "ERROR": "Please provide a category or command name !"
 }
