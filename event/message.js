@@ -1,12 +1,14 @@
 const { owners } = require("../config")
 const { Collection, MessageEmbed } = require('discord.js');
-const { codePointAt } = require("ffmpeg-static");
-const { lang } = require("moment");
 
 module.exports = async (client, message) => {
     client.cross = client.emojis.cache.find(emoji => emoji.name === "echo_cross");
     client.check = client.emojis.cache.find(emoji => emoji.name === "echo_check");
-    const settings = await client.getGuild(message.guild);
+
+
+    const settings = await client.getGuild(message.guild);   
+        
+    ///////////////////////////////////////////
 
     if (message.author.bot) return;
 
@@ -20,40 +22,47 @@ module.exports = async (client, message) => {
     ///////////////////////////////////////////
 
     if (!message.content.toLowerCase().startsWith(settings.prefix)) return;
-    if (!command) return;
 
-    const language = require(`../languages/${settings.language}/${command.help.category}/${command.help.name}`)
+    const lan = require(`../languages/${settings.language}/message`)
+
+    const noCommand = new MessageEmbed()
+    .setColor("#f50041")
+    .setDescription(`${client.cross} **${lan.NOCOMMAND}**`)
+
+    if (!command) return message.channel.send(noCommand)
+
 
     ///////////////////////////////////////////
 
     let ownerOnlyEmbed = new MessageEmbed()
         .setColor("#f50041")
-        .setDescription(`${client.cross} **Only Azawat can use this command !**`)
+        .setDescription(`${client.cross} **${lan.OWNERONLY}**`)
 
     let userPerms = new MessageEmbed()
         .setColor("#f50041")
-        .setDescription(`${client.cross} **You must have the following permissions : ${missingPerms(message.member, command.help.userPerms)} !**`)
+        .setDescription(`${client.cross} **${lan.USERPERMS} ${missingPerms(message.member, command.help.userPerms)} !**`)
 
     let clientPerms = new MessageEmbed()
         .setColor("#f50041")
-        .setDescription(`${client.cross} **I am missing the following permissions : ${missingPerms(message.guild.me, command.help.clientPerms)} !**`)
+        .setDescription(`${client.cross} **${lan.CLIENTPERMS} ${missingPerms(message.guild.me, command.help.clientPerms)} !**`)
 
     let nsfwEmbed = new MessageEmbed()
         .setColor("#f50041")
-        .setDescription(`${client.cross} **You can only use this command in NSFW channel !**`)
+        .setDescription(`${client.cross} **${lan.NSFW}**`)
 
     let noArgs = new MessageEmbed()
         .setColor("#f50041")
-        .setDescription(`${client.cross} **You should not use any arguments for this command !**`)
+        .setDescription(`${client.cross} **${lan.NOARGS}**`)
 
     let incorrectSyntax = new MessageEmbed()
         .setColor("#f50041")
-        .setDescription(`${client.cross} **Incorrect syntax ! Use \`${settings.prefix}${command.help.name}\` ${command.help.expectedArgs}**`)
+        .setDescription(`${client.cross} **${lan.INCSYNTAX} \`${settings.prefix}${command.help.name}\` ${command.help.expectedArgs}**`)
 
     ///////////////////////////////////////////
 
     if (command.help.ownerOnly && !owners.includes(message.author.id)) 
         return message.channel.send(ownerOnlyEmbed);
+
 
     if (command.help.userPerms && !message.member.permissions.has(command.help.userPerms))
         return message.channel.send(userPerms);
@@ -67,6 +76,10 @@ module.exports = async (client, message) => {
         return message.channel.send(nsfwEmbed)
 
     ///////////////////////////////////////////
+
+    if (command.help.maxArgs === 0 && args.length > 0) {
+        return message.channel.send(noArgs)
+    }
 
     if (args.length < command.help.minArgs || (command.help.maxArgs !== null && args.length > command.help.maxArgs)) {
         return message.channel.send(incorrectSyntax) 
@@ -89,13 +102,15 @@ module.exports = async (client, message) => {
           timeLeft = (cdExpirationTime - timeNow) / 1000;
           const cooldownEmbed = new MessageEmbed()
             .setColor("#f50041")
-            .setDescription(`${client.cross} **Please wait **\`${timeLeft.toFixed(0)}s\`**  before using this command again !**`)
+            .setDescription(`${client.cross} **${lan.COOLDOWN1} **\`${timeLeft.toFixed(0)}s\`**  ${lan.COOLDOWN2}**`)
           return message.channel.send(cooldownEmbed)
         }
       }
     
       tStamps.set(message.author.id, timeNow);
-      setTimeout(() => tStamps.delete(message.author.id), cdAmount);       
+      setTimeout(() => tStamps.delete(message.author.id), cdAmount);      
+      
+      const language = require(`../languages/${settings.language}/${command.help.category}/${command.help.name}`)
 
     ///////////////////////////////////////////
 
