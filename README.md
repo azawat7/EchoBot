@@ -1,1 +1,0 @@
-# EchoBot - Discord Bot
