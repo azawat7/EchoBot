@@ -1,0 +1,17 @@
+{
+    "DESCRIPTION": "Wyświetla liste wszystkich komend.",
+    "TITLE1": "Echo | Komendy",
+    "TITLE2": "Tu są informacje komendy ",
+    "TITLE2P2": ":",
+    "EDES1": "● Prefix tego serwera jest :",
+    "EDES2": "help` `<nazwa_komendy>` !",
+    "DES": "Opis",
+    "COOLDOWN": "Cooldown",
+    "SECOND": "sekund(s)",
+    "USAGE": "Użycie",
+    "NSFW": "NSFW",
+    "NSFW1": "Możesz tylko używać tą komende w kanałach NSFW !",
+    "OWNERONLY": "Własciciel tylko",
+    "OWNERONLY1": "Tylko Azawat może używać tą komende !",
+    "ERROR": "Prosze podać nazwe komendy albo kategori !"
+}

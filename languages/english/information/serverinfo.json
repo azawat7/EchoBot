@@ -1,0 +1,9 @@
+{
+    "PERMISSIONS": "Displays information from the server.",
+    "NAME": "Name",
+    "CREATIONDATE": "Creation Date",
+    "TOTALMEMBERS": "Total Members",
+    "ID": "ID",
+    "OWNER": "Owner",
+    "VERIFLVL": "Verif. Level"
+}

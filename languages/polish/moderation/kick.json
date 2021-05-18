@@ -1,0 +1,6 @@
+{
+    "DESCRIPTION": "Kickuje użytkownika na serwerze.",
+    "ROLEHIGH": "Nie możesz zkickować tego użytkownika bo on ma wyższą range niż ty albo macie tą samą range !",
+    "SUC1": "został zkickowany przez",
+    "SUC2": "dla"
+}

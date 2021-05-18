@@ -1,0 +1,6 @@
+{
+    "DESCRIPTION": "Banuje użytkownika na serwerze.",
+    "ROLEHIGH": "Nie możesz zbanować tego użytkownika bo on ma wyższą range niż ty albo macie tą samą range !",
+    "SUC1": "został zbanowany przez",
+    "SUC2": "dla"
+}
