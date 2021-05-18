@@ -6,5 +6,16 @@
     "moderation": "<:moderation_category:843869235180601344> ",
     "information": "<:information_category:843869235469484072>",
     "fun": "<:fun_category:843869235700957196>",
-    "administration": "<:administration_category:843869235432128533>"
+    "administration": "<:administration_category:843869235432128533>",
+
+    "hypesquad": "<:hype_squad:844247105878622258>",
+    "bughunterlv1": "<:bug_hunter_lv1:844247105802731560>",
+    "bughunterlv2": "<:bug_hunter_lv2:844247105832353852>",
+    "earlysupporter": "<:early_supporter:844247105790017606>",
+    "partner": "<:partner:844247105782022205>",
+    "bravery": "<:bravery:844247105777958942>",
+    "balance": "<:balance:844247105761706044>",
+    "brillance": "<:brillance:844247105719631932>",
+    "devbadge": "<:developer_badge:844247105634697306>",
+    "employee": "<:employee:844247105539407873>"
 }

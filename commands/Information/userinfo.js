@@ -17,19 +17,16 @@ module.exports.help = {
   
 module.exports.run = async (client, message, args, language) => {
   const flags = {
-    DISCORD_EMPLOYEE: language.DISCORD_EMPLOYEE,
-    DISCORD_PARTNER: language.DISCORD_PARTNER,
-    BUGHUNTER_LEVEL_1: language.BUGHUNTER_LEVEL_1,
-    BUGHUNTER_LEVEL_2: language.BUGHUNTER_LEVEL_2,
-    HYPESQUAD_EVENTS: language.HYPESQUAD_EVENTS,
-    HOUSE_BRAVERY: language.HOUSE_BRAVERY,
-    HOUSE_BRILLIANCE: language.HOUSE_BRILLIANCE,
-    HOUSE_BALANCE: language.HOUSE_BALANCE,
-    EARLY_SUPPORTER: language.EARLY_SUPPORTER,
-    TEAM_USER: language.TEAM_USER,
-    SYSTEM: language.SYSTEM,
-    VERIFIED_BOT: language.VERIFIED_BOT,
-    VERIFIED_DEVELOPER: language.VERIFIED_DEVELOPER
+    DISCORD_EMPLOYEE: client.emoji.employee,
+    DISCORD_PARTNER: client.emoji.partner,
+    BUGHUNTER_LEVEL_1: client.emoji.bughunterlv1,
+    BUGHUNTER_LEVEL_2: client.emoji.bughunterlv2,
+    HYPESQUAD_EVENTS: client.emoji.hypesquad,
+    HOUSE_BRAVERY: client.emoji.bravery,
+    HOUSE_BRILLIANCE: client.emoji.brilliance,
+    HOUSE_BALANCE: client.emoji.balance,
+    EARLY_SUPPORTER: client.emoji.earlysupporter,
+    VERIFIED_DEVELOPER: client.emoji.devbadge
   };
 
   let user = message.mentions.users.first() || message.author;
