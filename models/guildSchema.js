@@ -10,11 +10,7 @@ const guildSchema = mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
   guildID: reqString,
   guildName: reqString,
-  /////////////////
-  disabledCommands: {
-    type: mongoose.SchemaTypes.Array,
-    default: []
-  },
+
   prefix: {
     'type': String,
     'required': true,
@@ -24,12 +20,6 @@ const guildSchema = mongoose.Schema({
     'type': String,
     'required': true,
     'default': defaults.language
-  },
-  welcomeChannel: {
-    'type': String,
-  },
-  logChannel: {
-    'type': String,
   }
 });
 

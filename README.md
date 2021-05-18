@@ -1,3 +1,1 @@
-# PRIVATE
-
 # EchoBot - Discord Bot
