@@ -22,11 +22,11 @@ module.exports.run = async (client, message, args, language) => {
 
     const ERROR = new MessageEmbed()
         .setColor("#f50041")
-        .setDescription(`${client.cross} **${language.ERRORS} ${messageID} !**`)
+        .setDescription(`${client.emoji.cross} **${language.ERRORS} ${messageID} !**`)
 
     const YES = new MessageEmbed()
         .setColor("#f50041")
-        .setDescription(`${client.check} **${language.SUCS}**`)
+        .setDescription(`${client.emoji.check} **${language.SUCS}**`)
 
     client.giveawaysManager.reroll(messageID).then(() => {
         message.channel.send(YES);

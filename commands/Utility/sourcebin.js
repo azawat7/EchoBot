@@ -22,7 +22,7 @@ module.exports.run = async (client, message, args, language) => {
 
     const sembed = new MessageEmbed()
     .setColor("#f50041")
-    .setDescription(`**${client.cross} ${language.ERROR} \`js\`, \`html\`, \`css\` !**`)
+    .setDescription(`**${client.emoji.cross} ${language.ERROR} \`js\`, \`html\`, \`css\` !**`)
 
     if(!['js', 'html', 'css'].includes(languaged)) return message.channel.send(sembed)
 
@@ -39,7 +39,7 @@ module.exports.run = async (client, message, args, language) => {
     }).then((value) => {
         const embed = new MessageEmbed()
             .setColor("#f50041")
-            .setDescription(`**${client.check} ${language.SUC} \`${value.url}\`**`)
+            .setDescription(`**${client.emoji.check} ${language.SUC} \`${value.url}\`**`)
         message.channel.send(embed)
     })
 }

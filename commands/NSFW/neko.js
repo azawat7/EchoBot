@@ -21,7 +21,7 @@ module.exports.run = async (client, message, args) => {
 
     const sembed = new MessageEmbed()
     .setColor("#f50041")
-    .setDescription(`**${client.cross} Valid args are \`feet\`, \`pussy\`, \`tits\` !**`)
+    .setDescription(`**${client.emoji.cross} Valid args are \`feet\`, \`pussy\`, \`tits\` !**`)
 
     if(!['feet', 'pussy', 'tits'].includes(status)) return message.channel.send(sembed)
 

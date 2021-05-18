@@ -17,7 +17,7 @@ module.exports.help = {
 module.exports.run = async (client, message, args, language) => {
   const heheCannot = new MessageEmbed()
     .setColor("#f50041")
-    .setDescription(`${client.cross} **${language.ROLEHIGH}**`)
+    .setDescription(`${client.emoji.cross} **${language.ROLEHIGH}**`)
 
   const member = message.mentions.members.first();
   const reason = args.slice(1).join(" ");
@@ -28,7 +28,7 @@ module.exports.run = async (client, message, args, language) => {
 
   const sucess = new MessageEmbed()
     .setColor("#f50041")
-    .setDescription(`${client.check} **\`${member.username}\` ${language.SUC1} \`${message.author.username}\` ${language.SUC2} \`${reason}\` !**`)
+    .setDescription(`${client.emoji.check} **\`${member.username}\` ${language.SUC1} \`${message.author.username}\` ${language.SUC2} \`${reason}\` !**`)
     .setTimestamp()
     .setFooter(message.author.username, message.author.avatarURL());
 

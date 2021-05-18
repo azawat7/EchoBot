@@ -4,7 +4,7 @@ const permissions = Object.keys(Permissions.FLAGS);
 module.exports.help = {
   name: "permissions",
   aliases: ['permission', 'perms'],
-  category: "utility",
+  category: "information",
   expectedArgs: "\`<@user>\`",
   minArgs: 0,
   maxArgs: 1,

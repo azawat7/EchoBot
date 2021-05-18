@@ -11,6 +11,10 @@ const guildSchema = mongoose.Schema({
   guildID: reqString,
   guildName: reqString,
   /////////////////
+  disabledCommands: {
+    type: mongoose.SchemaTypes.Array,
+    default: []
+  },
   prefix: {
     'type': String,
     'required': true,

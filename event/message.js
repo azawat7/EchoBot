@@ -2,10 +2,6 @@ const { owners } = require("../config")
 const { Collection, MessageEmbed } = require('discord.js');
 
 module.exports = async (client, message) => {
-    client.cross = client.emojis.cache.find(emoji => emoji.name === "echo_cross");
-    client.check = client.emojis.cache.find(emoji => emoji.name === "echo_check");
-
-
     const settings = await client.getGuild(message.guild);   
         
     ///////////////////////////////////////////
@@ -27,7 +23,7 @@ module.exports = async (client, message) => {
 
     const noCommand = new MessageEmbed()
     .setColor("#f50041")
-    .setDescription(`${client.cross} **${lan.NOCOMMAND}**`)
+    .setDescription(`${client.emoji.cross} **${lan.NOCOMMAND}**`)
 
     if (!command) return message.channel.send(noCommand)
 
@@ -36,27 +32,27 @@ module.exports = async (client, message) => {
 
     let ownerOnlyEmbed = new MessageEmbed()
         .setColor("#f50041")
-        .setDescription(`${client.cross} **${lan.OWNERONLY}**`)
+        .setDescription(`${client.emoji.cross} **${lan.OWNERONLY}**`)
 
     let userPerms = new MessageEmbed()
         .setColor("#f50041")
-        .setDescription(`${client.cross} **${lan.USERPERMS} ${missingPerms(message.member, command.help.userPerms)} !**`)
+        .setDescription(`${client.emoji.cross} **${lan.USERPERMS} ${missingPerms(message.member, command.help.userPerms)} !**`)
 
     let clientPerms = new MessageEmbed()
         .setColor("#f50041")
-        .setDescription(`${client.cross} **${lan.CLIENTPERMS} ${missingPerms(message.guild.me, command.help.clientPerms)} !**`)
+        .setDescription(`${client.emoji.cross} **${lan.CLIENTPERMS} ${missingPerms(message.guild.me, command.help.clientPerms)} !**`)
 
     let nsfwEmbed = new MessageEmbed()
         .setColor("#f50041")
-        .setDescription(`${client.cross} **${lan.NSFW}**`)
+        .setDescription(`${client.emoji.cross} **${lan.NSFW}**`)
 
     let noArgs = new MessageEmbed()
         .setColor("#f50041")
-        .setDescription(`${client.cross} **${lan.NOARGS}**`)
+        .setDescription(`${client.emoji.cross} **${lan.NOARGS}**`)
 
     let incorrectSyntax = new MessageEmbed()
         .setColor("#f50041")
-        .setDescription(`${client.cross} **${lan.INCSYNTAX} \`${settings.prefix}${command.help.name}\` ${command.help.expectedArgs}**`)
+        .setDescription(`${client.emoji.cross} **${lan.INCSYNTAX} \`${settings.prefix}${command.help.name}\` ${command.help.expectedArgs}**`)
 
     ///////////////////////////////////////////
 
@@ -102,7 +98,7 @@ module.exports = async (client, message) => {
           timeLeft = (cdExpirationTime - timeNow) / 1000;
           const cooldownEmbed = new MessageEmbed()
             .setColor("#f50041")
-            .setDescription(`${client.cross} **${lan.COOLDOWN1} **\`${timeLeft.toFixed(0)}s\`**  ${lan.COOLDOWN2}**`)
+            .setDescription(`${client.emoji.cross} **${lan.COOLDOWN1} **\`${timeLeft.toFixed(0)}s\`**  ${lan.COOLDOWN2}**`)
           return message.channel.send(cooldownEmbed)
         }
       }

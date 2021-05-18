@@ -22,19 +22,19 @@ const status = args[0];
 
 const MAX_COUNT = new MessageEmbed()
     .setColor("#f50041")
-    .setDescription(`${client.cross} **${language.MAXCOUNT}**`)
+    .setDescription(`${client.emoji.cross} **${language.MAXCOUNT}**`)
 
 const INVTIME = new MessageEmbed()
     .setColor("#f50041")
-    .setDescription(`${client.cross} **${language.INVTIMES}**`)
+    .setDescription(`${client.emoji.cross} **${language.INVTIMES}**`)
 
 const MAXTIME = new MessageEmbed()
     .setColor("#f50041")
-    .setDescription(`${client.cross} **${language.MAXTIMES}**`)
+    .setDescription(`${client.emoji.cross} **${language.MAXTIMES}**`)
 
 const TOOWINERS = new MessageEmbed()
     .setColor("#f50041")
-    .setDescription(`${client.cross} **${language.TOOWINER}**`)
+    .setDescription(`${client.emoji.cross} **${language.TOOWINER}**`)
 
     const currentGiveaways = client.giveawaysManager.giveaways.filter((g) => g.guildID === message.guild.id && !g.ended).length;
     if(currentGiveaways > 3){

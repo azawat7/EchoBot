@@ -27,7 +27,7 @@ module.exports.run = async(client, message, args, language) => {
     } else {
         const embed = new MessageEmbed()
             .setColor(client.colors.echo)
-            .setDescription(`${client.cross} **${language.NONVALID} !**`)
+            .setDescription(`${client.emoji.cross} **${language.NONVALID} !**`)
             .setTimestamp()
             .setFooter(message.author.username, message.author.avatarURL());
         message.channel.send(embed)

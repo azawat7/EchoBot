@@ -20,11 +20,11 @@ module.exports.run = async (client, message, args, language, settings) => {
 
   const sembed = new MessageEmbed()
   .setColor("#f50041")
-  .setDescription(`**${client.cross} ${language.SETLANGUAGE1} \`english\` & \`polish\`!**`)
+  .setDescription(`**${client.emoji.cross} ${language.SETLANGUAGE1} \`english\` & \`polish\`!**`)
 
   const aembed = new MessageEmbed()
   .setColor("#f50041")
-  .setDescription(`**${client.cross} ${language.SETLANGUAGE2} !**`)
+  .setDescription(`**${client.emoji.cross} ${language.SETLANGUAGE2} !**`)
 
   const newSetting = args.slice(0).join(" ");
 

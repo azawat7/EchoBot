@@ -5,7 +5,7 @@ const categoryList = readdirSync('./commands')
 module.exports.help = {
   name: "help",
   aliases: [],
-  category: "utility",
+  category: "information",
   expectedArgs: "\`<command_name>\`",
   minArgs: 0,
   maxArgs: 1,
@@ -24,11 +24,12 @@ module.exports.run = (client, message, args, language, settings) => {
       let categories = [];
 
       const dirEmojis = {
-        Admin: "👑",
-        Fun: "🎭",
-        Moderation: "🔧",
-        Utility: "🔨",
-        NSFW: "🔞"
+        Admin: `${client.emoji.administration}`,
+        Moderation: `${client.emoji.moderation}`,
+        Fun: `${client.emoji.fun}`,
+        Information: `${client.emoji.information}`,
+        Utility: `${client.emoji.utility}`,
+        NSFW: `${client.emoji.nsfw}`
       }
 
       const ignoredCategories = ['Owner']
@@ -61,14 +62,14 @@ module.exports.run = (client, message, args, language, settings) => {
 
         const cmds = (client.commands.filter(
           cmd => cmd.help.category.toLowerCase() === "admin")
-          .map(cmd => `\`${cmd.help.name}\``
+          .map(cmd => `\`${cmd.help.name} ${" ".repeat(13 - Number(cmd.help.name.length))} :\``
           ))
 
 
         let embed = new MessageEmbed()
           .setColor(`#f50041`)
           .setFooter(message.author.username, message.author.avatarURL())
-          .setTitle(`👑  | Admin`)
+          .setTitle(`${client.emoji.administration}  | Admin`)
           .setDescription(`● ${cmds.join('\n● ')}`)
           .setTimestamp()
 
@@ -78,14 +79,14 @@ module.exports.run = (client, message, args, language, settings) => {
 
       const cmds = (client.commands.filter(
         cmd => cmd.help.category.toLowerCase() === "fun")
-        .map(cmd => `\`${cmd.help.name}\``
+        .map(cmd => `\`${cmd.help.name} ${" ".repeat(11 - Number(cmd.help.name.length))} :\``
         ))
 
 
       let embed = new MessageEmbed()
         .setColor(`#f50041`)
         .setFooter(message.author.username, message.author.avatarURL())
-        .setTitle(`🎭  |  Fun`)
+        .setTitle(`${client.emoji.fun}  |  Fun`)
         .setDescription(`● ${cmds.join('\n● ')}`)
         .setTimestamp()
 
@@ -95,14 +96,14 @@ module.exports.run = (client, message, args, language, settings) => {
 
     const cmds = (client.commands.filter(
       cmd => cmd.help.category.toLowerCase() === "moderation")
-      .map(cmd => `\`${cmd.help.name}\``
+      .map(cmd => `\`${cmd.help.name} ${" ".repeat(14 - Number(cmd.help.name.length))} :\``
       ))
 
 
     let embed = new MessageEmbed()
       .setColor(`#f50041`)
       .setFooter(message.author.username, message.author.avatarURL())
-      .setTitle(`🔧  |  Moderation`)
+      .setTitle(`${client.emoji.moderation}  |  Moderation`)
       .setDescription(`● ${cmds.join('\n● ')}`)
       .setTimestamp()
 
@@ -112,14 +113,14 @@ module.exports.run = (client, message, args, language, settings) => {
 
   const cmds = (client.commands.filter(
     cmd => cmd.help.category.toLowerCase() === "nsfw")
-    .map(cmd => `\`${cmd.help.name}\``
+    .map(cmd => `\`${cmd.help.name} ${" ".repeat(7 - Number(cmd.help.name.length))} :\``
     ))
 
 
   let embed = new MessageEmbed()
     .setColor(`#f50041`)
     .setFooter(message.author.username, message.author.avatarURL())
-    .setTitle(`🔞  |  NSFW`)
+    .setTitle(`${client.emoji.nsfw}  |  NSFW`)
     .setDescription(`● ${cmds.join('\n● ')}`)
     .setTimestamp()
 
@@ -129,14 +130,14 @@ module.exports.run = (client, message, args, language, settings) => {
 
   const cmds = (client.commands.filter(
     cmd => cmd.help.category.toLowerCase() === "utility")
-    .map(cmd => `\`${cmd.help.name}\``
+    .map(cmd => `\`${cmd.help.name} ${" ".repeat(11 - Number(cmd.help.name.length))} :\``
     ))
 
 
   let embed = new MessageEmbed()
     .setColor(`#f50041`)
     .setFooter(message.author.username, message.author.avatarURL())
-    .setTitle(`🔨  |  Utility`)
+    .setTitle(`${client.emoji.utility}  |  Utility`)
     .setDescription(`● ${cmds.join('\n● ')}`)
     .setTimestamp()
 
@@ -146,7 +147,7 @@ module.exports.run = (client, message, args, language, settings) => {
 
       const sembed = new MessageEmbed()
         .setColor(`#f50041`)
-        .setDescription(`${client.cross} **${language.ERROR} !**`)
+        .setDescription(`${client.emoji.cross} **${language.ERROR}**`)
 
       if(!command) return message.channel.send(sembed)
 

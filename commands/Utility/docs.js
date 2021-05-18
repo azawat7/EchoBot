@@ -27,7 +27,7 @@ module.exports.run = async (client, message, args, language) => {
           if (data && !data.error) {
             message.channel.send({ embed: data })
           } else {
-            message.reply(`${client.cross} ${language.ERROR}`)
+            message.reply(`${client.emoji.cross} ${language.ERROR}`)
           }
         })
         .catch((err) => {

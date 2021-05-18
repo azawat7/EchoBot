@@ -21,7 +21,7 @@ module.exports.run = async (client, message, args, language) => {
 
   const noUser = new MessageEmbed()
   .setColor("#f50041")
-  .setDescription(`${client.cross} **${language.NOTBANNED}**`)
+  .setDescription(`${client.emoji.cross} **${language.NOTBANNED}**`)
 
   if (!bannedMembers.find((user) => user.user.id === member)) return message.channel.send(noUser);
 
@@ -29,7 +29,7 @@ module.exports.run = async (client, message, args, language) => {
 
   const sucess = new MessageEmbed()
     .setColor("#f50041")
-    .setDescription(`${client.check} **${language.SUC}**`)
+    .setDescription(`${client.emoji.check} **${language.SUC}**`)
     .setTimestamp()
     .setFooter(message.author.username, message.author.avatarURL());
 

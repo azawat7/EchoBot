@@ -20,15 +20,15 @@ const amount = args.join(' ');
 
 const invAmount = new MessageEmbed()
     .setColor("#f50041")
-    .setDescription(`${client.cross} **${language.NANNUMBER}**`)
+    .setDescription(`${client.emoji.cross} **${language.NANNUMBER}**`)
 
 const thAmount = new MessageEmbed()
     .setColor("#f50041")
-    .setDescription(`${client.cross} **${language.TH}**`)
+    .setDescription(`${client.emoji.cross} **${language.TH}**`)
 
 const tlAmount = new MessageEmbed()
     .setColor("#f50041")
-    .setDescription(`${client.cross} **${language.TL}**`)
+    .setDescription(`${client.emoji.cross} **${language.TL}**`)
 
 // Condition
 
@@ -43,7 +43,7 @@ const tlAmount = new MessageEmbed()
 
 const clearSuc = new MessageEmbed()
     .setColor("#f50041")
-    .setDescription(`${client.check} **${amount} ${language.SUC}**`)
+    .setDescription(`${client.emoji.check} **${amount} ${language.SUC}**`)
     .setTimestamp()
     .setFooter(message.author.username, message.author.avatarURL());
 

@@ -4,7 +4,7 @@ const moment = require('moment');
 module.exports.help = {
     name: "userinfo",
     aliases: ['ui'],
-    category: "utility",
+    category: "information",
     expectedArgs: "\`<@user>\`",
     minArgs: 0,
     maxArgs: 1,

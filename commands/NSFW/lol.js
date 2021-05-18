@@ -1,8 +1,8 @@
 const fetch = require('node-fetch');
 
 module.exports.help = {
-	name: "leagueoflegends",
-	aliases: [ 'lol', 'league'],
+	name: "lol",
+	aliases: ['league'],
 	category: "NSFW",
 	expectedArgs: null,
 	minArgs: 0,

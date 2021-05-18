@@ -3,7 +3,7 @@ const { MessageEmbed } = require('discord.js')
 module.exports.help = {
     name: "serverinfo",
     aliases: ['si'],
-    category: "utility",
+    category: "information",
     expectedArgs: null,
     minArgs: 0,
     maxArgs: 0,

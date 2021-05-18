@@ -10,6 +10,7 @@ module.exports = client;
 
 client.config = require ("./config")
 client.colors = client.config.colors;
+client.emoji = require ("./assets/emojis.json")
 
 ///////////////////////////////////////////
 
