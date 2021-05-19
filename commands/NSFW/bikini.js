@@ -3,7 +3,7 @@ const fetch = require('node-fetch');
 module.exports.help = {
 	name: "bikini",
 	aliases: [ 'bikinis' ],
-	category: "NSFW",
+	category: "nsfw",
 	expectedArgs: null,
 	minArgs: 0,
 	maxArgs: 0,

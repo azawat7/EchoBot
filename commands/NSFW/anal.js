@@ -1,11 +1,11 @@
-const NSFW = require("discord-nsfw");
-const nsfw = new NSFW();
+const nsfw = require("discord-nsfw");
+const nsfw = new nsfw();
 const {MessageEmbed} = require('discord.js')
 
 module.exports.help = {
 	name: "anal",
 	aliases: [],
-	category: "NSFW",
+	category: "nsfw",
 	expectedArgs: null,
 	minArgs: 0,
 	maxArgs: 0,

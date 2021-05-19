@@ -29,7 +29,7 @@ module.exports.run = (client, message, args, language, settings) => {
         Fun: `${client.emoji.fun}`,
         Information: `${client.emoji.information}`,
         Utility: `${client.emoji.utility}`,
-        NSFW: `${client.emoji.nsfw}`
+        nsfw: `${client.emoji.nsfw}`
       }
 
       const ignoredCategories = ['Owner']
@@ -122,7 +122,7 @@ module.exports.run = (client, message, args, language, settings) => {
   let embed = new MessageEmbed()
     .setColor(`#f50041`)
     .setFooter(message.author.username, message.author.avatarURL())
-    .setTitle(`${client.emoji.nsfw}  |  NSFW`)
+    .setTitle(`${client.emoji.nsfw}  |  nsfw`)
     .setDescription(`● ${cmds.join('\n● ')}`)
     .setTimestamp()
 
@@ -164,7 +164,7 @@ module.exports.run = (client, message, args, language, settings) => {
           .setTimestamp()
           .setFooter(message.author.username, message.author.avatarURL());
         if (command.help.aliases.length > 0) embed.addField(`🔖 Alias`, `\`${command.help.aliases.join('\`, \`')}\``)
-        if (command.help.nsfw) embed.addField(`🔞 ${language.NSFW}`, `\`${language.NSFW1}\``)
+        if (command.help.nsfw) embed.addField(`🔞 ${language.nsfw}`, `\`${language.nsfw1}\``)
         if (command.help.ownerOnly) embed.addField(`❌ ${language.OWNERONLY}`, `\`${language.OWNERONLY1}\``)
 
       return message.channel.send(embed)

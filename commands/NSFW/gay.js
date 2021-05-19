@@ -3,7 +3,7 @@ const fetch = require('node-fetch');
 module.exports.help = {
     name: 'gay',
     aliases: ['dick', 'dicks', 'cock', 'cocks', 'penis', 'penises'],
-	category: "NSFW",
+	category: "nsfw",
 	expectedArgs: null,
 	minArgs: 0,
 	maxArgs: 0,
@@ -23,7 +23,7 @@ module.exports.run = async (client, message, args) => {
           'MassiveCock',
           'ratemycock',
           'RedditorCum',
-          'NSFW_DICK_and_Cock',
+          'nsfw_DICK_and_Cock',
           'TotallyStraight',
           'CockOutline',
           'lovegaymale'
