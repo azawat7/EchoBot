@@ -17,5 +17,10 @@
     "balance": "<:balance:844247105761706044>",
     "brillance": "<:brillance:844247105719631932>",
     "devbadge": "<:developer_badge:844247105634697306>",
-    "employee": "<:employee:844247105539407873>"
+    "employee": "<:employee:844247105539407873>",
+
+    "dnd": "<:dnd:844607835542519868>",
+    "online": "<:online:844607835508703284>",
+    "idle": "<:idle:844607835525349386>",
+    "offline": "<:offline:844607835547369472>"
 }

@@ -1,5 +1,5 @@
 {
-    "PERMISSIONS": "Convert JS code into a sourcebin link.",
+    "DESCRIPTION": "Convert JS code into a sourcebin link.",
     "ERROR": "Valid languages are",
     "SUC": "Your code has been converted :"
 }

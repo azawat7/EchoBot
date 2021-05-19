@@ -1,5 +1,5 @@
 {
-    "PERMISSIONS": "Displays information from the server.",
+    "DESCRIPTION": "Displays information from the server.",
     "NAME": "Name",
     "CREATIONDATE": "Creation Date",
     "TOTALMEMBERS": "Total Members",
