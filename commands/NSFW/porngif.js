@@ -1,5 +1,5 @@
-const nsfw = require("discord-nsfw");
-const nsfw = new nsfw();
+const nsfW = require("discord-nsfw");
+const nsfw = new nsfW();
 const {MessageEmbed} = require('discord.js')
 
 module.exports.help = {
