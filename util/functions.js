@@ -25,4 +25,9 @@ module.exports = async client => {
     }
     return data.updateOne(settings);
   };
+
+  client.deleteGuild = async (guild, settings) => {
+    const data = await Guild.findOneAndDelete({ guildID: guild.id, guildName: guild.name})
+    return data;
+  }
 }

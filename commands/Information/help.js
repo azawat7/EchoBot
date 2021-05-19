@@ -62,8 +62,8 @@ module.exports.run = (client, message, args, language, settings) => {
 
         const cmds = (client.commands.filter(
           cmd => cmd.help.category.toLowerCase() === "admin")
-          .map(cmd => `\`${cmd.help.name} ${" ".repeat(13 - Number(cmd.help.name.length))} :\``
-          ))
+          .map((cmd => `\`${cmd.help.name} ${" ".repeat(13 - Number(cmd.help.name.length))} :\``
+          )))
 
 
         let embed = new MessageEmbed()
@@ -93,10 +93,12 @@ module.exports.run = (client, message, args, language, settings) => {
       message.channel.send(embed)
 
   } else if (args && args.join(" ").toLowerCase() == "moderation"  || args && args[0].toLowerCase() == "moderation") {
+    const command = client.commands.filter(cmd => cmd.help.category.toLowerCase() === "moderation")
+    const lang = require(`../../languages/${settings.language}/${command.help.category}/${command.help.name}`)
 
     const cmds = (client.commands.filter(
       cmd => cmd.help.category.toLowerCase() === "moderation")
-      .map(cmd => `\`${cmd.help.name} ${" ".repeat(14 - Number(cmd.help.name.length))} :\``
+      .map(cmd => `\`${cmd.help.name} ${" ".repeat(14 - Number(cmd.help.name.length))} :\` ${lang.DESCRIPTION}`
       ))
 
 

@@ -9,7 +9,8 @@ const client = new Client
 module.exports = client;
 
 client.config = require ("./config")
-client.colors = client.config.colors;
+
+client.colors = require ("./assets/colors.json")
 client.emoji = require ("./assets/emojis.json")
 
 ///////////////////////////////////////////
