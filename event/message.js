@@ -44,7 +44,7 @@ module.exports = async (client, message) => {
 
     let nsfwEmbed = new MessageEmbed()
         .setColor("#f50041")
-        .setDescription(`${client.emoji.cross} **${lan.nsfw}**`)
+        .setDescription(`${client.emoji.cross} **${lan.NSFW}**`)
 
     let noArgs = new MessageEmbed()
         .setColor("#f50041")
