@@ -9,7 +9,6 @@ const reqString = {
 const guildSchema = mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
   guildID: reqString,
-  guildName: reqString,
 
   prefix: {
     'type': String,
