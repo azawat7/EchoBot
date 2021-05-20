@@ -7,6 +7,12 @@ exports.colors = {
 }
 exports.DEFAULTSETTINGS = {
     prefix: "$",
-    language: "english"
+    language: "english",
+
+    moderationlogs: "null",
+    messagelogs: "null",
+    channellogs: "null",
+    rolelogs: "null",
+    memberlogs: "null",
 };
             

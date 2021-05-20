@@ -1,13 +1,8 @@
 const { MessageEmbed } = require('discord.js')
 
 module.exports = async (client, guild) => {
-    const newGuild = {
-      guildID: guild.id,
-      guildName: guild.name
-    };
-  
-    await client.createGuild(newGuild)
-    await client.createLogs(newGuild)
+    await client.deleteLogs(guild)
+    await client.deleteGuild(guild)
 
     const botJoinEmbed = new MessageEmbed()
       .setTitle(`${client.emoji.check} New Server`)
