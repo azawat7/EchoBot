@@ -2,7 +2,7 @@ const { owners } = require("../config")
 const { Collection, MessageEmbed } = require('discord.js');
 
 module.exports = async (client, message) => {
-    const settings = await client.getGuild(message.guild);   
+    const settings = await client.getGuild(message.guild);
         
     ///////////////////////////////////////////
 

@@ -29,7 +29,7 @@ module.exports.run = (client, message, args, language, settings) => {
         Fun: `${client.emoji.fun}`,
         Information: `${client.emoji.information}`,
         Utility: `${client.emoji.utility}`,
-        nsfw: `${client.emoji.nsfw}`
+        NSFW: `${client.emoji.nsfw}`,
       }
 
       const ignoredCategories = ['Owner']
@@ -62,7 +62,7 @@ module.exports.run = (client, message, args, language, settings) => {
 
         const cmds = (client.commands.filter(
           cmd => cmd.help.category.toLowerCase() === "admin")
-          .map((cmd => `\`${cmd.help.name} ${" ".repeat(13 - Number(cmd.help.name.length))} :\``
+          .map((cmd => `\`${cmd.help.name} ${" ".repeat(13 - Number(cmd.help.name.length))} :\` ${language.DESCRIPTION}`
           )))
 
 
