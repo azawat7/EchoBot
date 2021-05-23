@@ -1,0 +1,11 @@
+{
+    "NOCOMMAND": "Cette commande n'existe pas !",
+    "OWNERONLY": "Seulement im_a_panda_guy peut utiliser cette commande !",
+    "USERPERMS": "Tu dois avoir ces permissions pour utiliser cette commande :",
+    "CLIENTPERMS": "Je dois avoir ces permissions pour utiliser cette commande :",
+    "NSFW": "Tu peux utiliser cette commande seulement dans des canaux NSFW !",
+    "NOARGS": "Tu devrais utiliser aucun argument pour cette commande !",
+    "INCSYNTAX": "Syntax incorrecte ! Utilise",
+    "COOLDOWN1": "Attends",
+    "COOLDOWN2": "avant d'utiliser cette commande !"
+}

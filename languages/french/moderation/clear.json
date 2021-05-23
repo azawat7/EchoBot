@@ -1,0 +1,7 @@
+{
+    "DESCRIPTION": "Effacer une quantité souhaitée de message.",
+    "NANNUMBER": "Vous n'avez pas fourni un numéro valide !",
+    "TH": "Vous ne pouvez supprimer que 100 message maximum !",
+    "TL": "Vous devez supprimer au moins 1 message !",
+    "SUC": "messages ont été supprimés de ce canal !"
+}

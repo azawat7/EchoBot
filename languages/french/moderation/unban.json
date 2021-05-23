@@ -1,0 +1,5 @@
+{
+    "DESCRIPTION": "Unban un utilisateur du serveur.",
+    "NOTBANNED": "L'utilisateur n'est pas banni !",
+    "SUC": "Utilisateur unbanned !"
+}

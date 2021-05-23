@@ -1,0 +1,9 @@
+{
+    "DESCRIPTION": "Affiche les informations du serveur.",
+    "NAME": "Nom",
+    "CREATIONDATE": "Date de création",
+    "TOTALMEMBERS": "Nombre total de membres",
+    "ID": "ID",
+    "OWNER": "Propriétaire",
+    "VERIFLVL": "Level de Verif."
+}

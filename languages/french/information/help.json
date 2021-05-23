@@ -1,0 +1,17 @@
+{
+    "DESCRIPTION": "List de toute les commandes",
+    "TITLE1": "Echo | Commandes",
+    "TITLE2": "Voici les informations de la commande :",
+    "TITLE2P2": "",
+    "EDES1": "● Le prefix du bot est :",
+    "EDES2": "help` `<nom_commande>` !",
+    "DES": "Description",
+    "COOLDOWN": "Cooldown",
+    "SECOND": "seconde(s)",
+    "USAGE": "Usage",
+    "NSFW": "NSFW",
+    "NSFW1": "u peux utiliser cette commande seulement dans des canaux NSFW !",
+    "OWNERONLY": "Créateur seulement",
+    "OWNERONLY1": "Cette commande est acessible seulement par le dev. de ce bot !",
+    "ERROR": "Veuillez fournir un nom de catégorie ou de commande !"
+}

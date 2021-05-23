@@ -1,0 +1,22 @@
+{
+    "DESCRIPTION": "Crée un giveaway.",
+    "MAXCOUNT": "Vous avez atteint la limite des giveaway à la fois !",
+    "INVTIMES": "Veuillez indiquer un nombre valide !",
+    "MAXTIMES": "Vous ne pouvez pas créer un giveaway qui dure plus de 14 jours!",
+    "TOOWINER": "Vous devez définir un nombre de gagnant(s) inférieur à 10 et supérieur à 1!",
+
+    "GIVEAWAY": "@ tout le monde 🎉 **GIVEAWAY** 🎉",
+    "GIVEAWAYENDED": "@everyone 🎉 **GIVEAWAY FINI** 🎉",
+    "TIMEREMAINING": "Temps restant: **{duration}.**",
+    "INVITETOPARTICIPATE": "Réagissez avec 🎉 pour participer!",
+    "WINMESSAGE": "Félicitations, {winners}! Vous avez gagné **{prize}**! \n{messageURL}",
+    "EMBEDFOOTER": "{echo}",
+    "NOWINNER": "Giveaway annulé, aucune participation valide.",
+    "HOSTEDBY": "Hébergé par: {user}",
+    "WINNERS": "gagnant(s)",
+    "ENDEDAT": "Terminé à",
+    "SECONDS": "secondes",
+    "MINUTES": "minutes",
+    "HOURS": "heures",
+    "DAYS": "jours" 
+}

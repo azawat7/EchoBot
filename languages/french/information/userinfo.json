@@ -1,0 +1,11 @@
+{
+    "DESCRIPTION": "Affiche les informations d'un utilisateur.",
+
+    "USER": "Utilisateur",
+    "JOINEDDISCORD": "Discord Joint Le",
+    "JOINEDSERVER": "Serveur Joint Le",
+    "ROLE": "Rôles",
+    "BADGES": "Badges",
+
+    "NONE": "Aucun"
+}
