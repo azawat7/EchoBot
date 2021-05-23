@@ -2,6 +2,7 @@ const { token } = require("./config")
 const { Client, Collection } = require("discord.js");
 const { Player } = require('discord-player');
 const mongoose = require('mongoose')
+const { DiscordTogether } = require('discord-together');
 
 ///////////////////////////////////////////
 
@@ -17,6 +18,7 @@ client.emoji = require ("./assets/emojis.json")
 ///////////////////////////////////////////
 
 client.player = new Player(client);
+client.discordTogether = new DiscordTogether(client);
 
 ///////////////////////////////////////////
 

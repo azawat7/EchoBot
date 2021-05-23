@@ -30,6 +30,7 @@ module.exports.run = (client, message, args, language, settings) => {
         Information: `${client.emoji.information}`,
         Utility: `${client.emoji.utility}`,
         NSFW: `${client.emoji.nsfw}`,
+        MusicYt: `${client.emoji.music}`
       }
 
       const ignoredCategories = ['Owner']
@@ -91,6 +92,23 @@ module.exports.run = (client, message, args, language, settings) => {
         .setTimestamp()
 
       message.channel.send(embed)
+
+  } else if (args && args.join(" ").toLowerCase() == "musicyt"  || args && args[0].toLowerCase() == "musicyt") {
+
+    const cmds = (client.commands.filter(
+      cmd => cmd.help.category.toLowerCase() === "music")
+      .map(cmd => `\`${cmd.help.name} ${" ".repeat(6 - Number(cmd.help.name.length))} :\``
+      ))
+
+
+    let embed = new MessageEmbed()
+      .setColor(`#f50041`)
+      .setFooter(message.author.username, message.author.avatarURL())
+      .setTitle(`${client.emoji.music}  |  Music__Video`)
+      .setDescription(`● ${cmds.join('\n● ')}`)
+      .setTimestamp()
+
+    message.channel.send(embed)
 
   } else if (args && args.join(" ").toLowerCase() == "moderation"  || args && args[0].toLowerCase() == "moderation") {
     const command = client.commands.filter(cmd => cmd.help.category.toLowerCase() === "moderation")
