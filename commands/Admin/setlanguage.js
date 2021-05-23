@@ -16,11 +16,11 @@ module.exports.help = {
  
 module.exports.run = async (client, message, args, language, settings) => {
 
-  let languages = ["english", "polish"]
+  let languages = ["english", "polish", "french"]
 
   const sembed = new MessageEmbed()
   .setColor("#f50041")
-  .setDescription(`**${client.emoji.cross} ${language.SETLANGUAGE1} \`english\` & \`polish\`!**`)
+  .setDescription(`**${client.emoji.cross} ${language.SETLANGUAGE1} \`english\` & \`polish\` & \`french\`!**`)
 
   const aembed = new MessageEmbed()
   .setColor("#f50041")
