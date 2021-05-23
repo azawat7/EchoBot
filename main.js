@@ -3,6 +3,7 @@ const { Client, Collection } = require("discord.js");
 const { Player } = require("discord-player");
 const mongoose = require("mongoose");
 const { DiscordTogether } = require("discord-together");
+require("dotenv").config();
 
 ///////////////////////////////////////////
 
@@ -147,4 +148,4 @@ loadEvents(client);
 console.log("----------------------------");
 client.mongoose.init();
 
-client.login(token);
+client.login(process.env.TOKEN);
