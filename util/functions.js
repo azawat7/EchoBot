@@ -1,24 +1,23 @@
 const mongoose = require("mongoose");
 const { Guild, Logs } = require("../models/index");
 
-module.exports = async client => {
+module.exports = async (client) => {
+  // Guild Function
 
-// Guild Function
-
-  client.createGuild = async guild => {
+  client.createGuild = async (guild) => {
     const merged = Object.assign({ _id: mongoose.Types.ObjectId() }, guild);
     const createGuild = await new Guild(merged);
-    createGuild.save()
+    createGuild.save();
   };
 
-  client.deleteGuild = async guild => {
+  client.deleteGuild = async (guild) => {
     const data = await Guild.findOne({ guildID: guild.id });
     if (data) {
-      await data.delete()
+      await data.delete();
     }
-  }
+  };
 
-  client.getGuild = async guild => {
+  client.getGuild = async (guild) => {
     const data = await Guild.findOne({ guildID: guild.id });
     if (data) return data;
     return client.config.DEFAULTSETTINGS;
@@ -28,41 +27,40 @@ module.exports = async client => {
     let data = await client.getGuild(guild);
     if (typeof data !== "object") data = {};
     for (const key in settings) {
-      if(data[key] !== settings[key]) data[key] = settings[key];
+      if (data[key] !== settings[key]) data[key] = settings[key];
     }
     return data.updateOne(settings);
   };
 
-//////////////////////////////////////
-////                  Logs Function
-//////////////////////////////////////
+  //////////////////////////////////////
+  ////                  Logs Function
+  //////////////////////////////////////
 
-  client.createLogs = async guild => {
+  client.createLogs = async (guild) => {
     const merged = Object.assign({ _id: mongoose.Types.ObjectId() }, guild);
     const createLogs = await new Logs(merged);
-    createLogs.save()
+    createLogs.save();
   };
 
-  client.deleteLogs = async guild => {
+  client.deleteLogs = async (guild) => {
     const data = await Logs.findOne({ guildID: guild.id });
     if (data) {
-      await data.delete()
+      await data.delete();
     }
-  }
+  };
 
-  client.getLogs = async guild => {
+  client.getLogs = async (guild) => {
     const data = await Logs.findOne({ guildID: guild.id });
     if (data) return data;
     return client.config.DEFAULTSETTINGS;
-  }
+  };
 
   client.updateLogs = async (guild, settings) => {
     let data = await client.getLogs(guild);
     if (typeof data !== "object") data = {};
     for (const key in settings) {
-      if(data[key] !== settings[key]) data[key] = settings[key];
+      if (data[key] !== settings[key]) data[key] = settings[key];
     }
     return data.updateOne(settings);
   };
-
-}
+};

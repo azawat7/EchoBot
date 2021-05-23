@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
 
 const reqString = {
-    'type': String,
-    'required': true
-}
+  type: String,
+  required: true,
+};
 
 const userSchema = mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
@@ -12,12 +12,12 @@ const userSchema = mongoose.Schema({
   userID: reqString,
   username: reqString,
   experience: {
-    "type": Number,
-    "default": 0
+    type: Number,
+    default: 0,
   },
   level: {
-    "type": Number,
-    "default": 0
+    type: Number,
+    default: 0,
   },
 });
 

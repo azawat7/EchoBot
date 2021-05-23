@@ -2,23 +2,22 @@ const mongoose = require("mongoose");
 const { DEFAULTSETTINGS: defaults } = require("../config");
 
 const reqString = {
-    'type': String,
-    'required': true
-}
+  type: String,
+  required: true,
+};
 
 const falseString = {
-  'type': String,
-  'required': true,
-  'default': defaults.false
-}
+  type: String,
+  required: true,
+  default: defaults.false,
+};
 
 const nullString = {
-  'type': String,
-  'required': true,
-  'enabled': false,
-  'default': null
-}
-
+  type: String,
+  required: true,
+  enabled: false,
+  default: null,
+};
 
 const logsSchema = mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
@@ -26,15 +25,15 @@ const logsSchema = mongoose.Schema({
 
   enabled: falseString,
 
-// Logs Channels
-  moderationChannel: nullString, 
-  channelsChannel: nullString, 
-  guildsChannel: nullString, 
-  messageChannel: nullString, 
-  membersChannel: nullString, 
-  voiceChannel: nullString, 
+  // Logs Channels
+  moderationChannel: nullString,
+  channelsChannel: nullString,
+  guildsChannel: nullString,
+  messageChannel: nullString,
+  membersChannel: nullString,
+  voiceChannel: nullString,
 
-// Moderation
+  // Moderation
   ban: falseString,
   kick: falseString,
   unban: falseString,
@@ -44,11 +43,11 @@ const logsSchema = mongoose.Schema({
   gdelete: falseString,
   gend: falseString,
   greroll: falseString,
-// Channels
+  // Channels
   channelCreate: falseString,
   channelUpdate: falseString,
   channelDelete: falseString,
-// Guilds
+  // Guilds
   guildBanAdd: falseString,
   guildBanRemove: falseString,
   guildEmojisUpdate: falseString,
@@ -56,17 +55,17 @@ const logsSchema = mongoose.Schema({
   guildRoleDelete: falseString,
   guildRoleUpdate: falseString,
   guildUpdate: falseString,
-// Message
+  // Message
   messageDelete: falseString,
   messageDeleteBulk: falseString,
   messageUpdate: falseString,
-// Members
+  // Members
   guildMemberAdd: falseString,
   guildMemberKick: falseString,
   guildMemberRemove: falseString,
   guildMemberUpdate: falseString,
   guildMemberNickUpdate: falseString,
-// Voice
+  // Voice
   voiceChannelLeave: falseString,
   voiceChannelJoin: falseString,
   voiceStateUpdate: falseString,
