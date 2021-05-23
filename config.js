@@ -9,12 +9,6 @@ exports.DEFAULTSETTINGS = {
     prefix: "$",
     language: "english",
 
-    logsenabled: false,
-    moderationlogs: "null",
-    messagelogs: "null",
-    channellogs: "null",
-    rolelogs: "null",
-    memberlogs: "null",
-    boostlogs: "null"
+    false: false,
 };
             
