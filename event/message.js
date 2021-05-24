@@ -1,12 +1,30 @@
 const { owners } = require("../config");
 const { Collection, MessageEmbed } = require("discord.js");
+const { Guild } = require("../models/index");
 
 module.exports = async (client, message) => {
-  const settings = await client.getGuild(message.guild);
+  if (message.channel.type === "dm") return;
+  if (message.author.bot) return;
 
   ///////////////////////////////////////////
 
-  if (message.author.bot) return;
+  const settings = await client.getGuild(message.guild);
+  const position = settings.users.map((e) => e.id).indexOf(message.member.id);
+
+  if (message.guild && position == -1) {
+    Guild.updateOne(
+      { guildID: message.guild.id },
+      {
+        $push: {
+          users: {
+            id: message.member.id,
+            lvlexperience: 0,
+            lvllevel: 1,
+          },
+        },
+      }
+    );
+  }
 
   ///////////////////////////////////////////
 
