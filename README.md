@@ -15,7 +15,7 @@
     <img src="https://img.shields.io/badge/discord.js-v12.5.3-blue.svg?logo=npm" alt="discordjs" />
   </a>
 
-  <a href="https://github.com/Tawaza/Echo-Bot/blob/main/LICENSE">
+  <a href="https://github.com/im-a-panda-guy/EchoBot/blob/master/LICENSE">
     <img src="https://img.shields.io/badge/license-Apache%202-blue" alt="license" />
   </a>
  </div>
@@ -52,7 +52,7 @@ If you liked this repository, feel free to leave a star ⭐ and follow me, it ac
 First clone the repo:
 
 ```
-git clone https://github.com/Tawaza/Echo-Bot.git
+git clone https://github.com/im-a-panda-guy/Echo-Bot.git
 ```
 
 After cloning, run an
@@ -83,6 +83,6 @@ Released under the [Apache-2.0 License](http://www.apache.org/licenses/LICENSE-2
 
 ## Credits
 
-- **Tawaza** - _head developer_ - [github](https://github.com/Tawaza)
+- **im-a-panda-guy** - _head developer_ - [github](https://github.com/im-a-panda-guy)
 
 `Template for README taken from https://github.com/peterhanania/Pogy`
