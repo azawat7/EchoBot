@@ -22,8 +22,7 @@ module.exports = async (client, message) => {
     if (data) {
       return data;
     } else {
-      client.createGuild(guild.id);
-      message.channel.send(`This guild do not exist in the DB`);
+      return client.createGuild(guild.id);
     }
   };
 
