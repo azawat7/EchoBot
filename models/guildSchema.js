@@ -19,7 +19,11 @@ const nullString = {
 
 const guildSchema = mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
-  guildID: reqString,
+  guildID: {
+    type: String,
+    required: true,
+    unique: true,
+  },
   prefix: {
     type: String,
     required: true,
