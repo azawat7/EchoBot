@@ -3,7 +3,6 @@ const { Collection, MessageEmbed } = require("discord.js");
 const { Guild } = require("../models/index");
 
 module.exports = async (client, message) => {
-  if (message.channel.type === "dm") return;
   if (message.author.bot) return;
 
   ///////////////////////////////////////////

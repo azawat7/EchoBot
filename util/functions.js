@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const { Guild, Logs } = require("../models/index");
+const { Guild } = require("../models/index");
 
 module.exports = async (client) => {
   // Guild Function
@@ -19,8 +19,11 @@ module.exports = async (client) => {
 
   client.getGuild = async (guild) => {
     const data = await Guild.findOne({ guildID: guild.id });
-    if (data) return data;
-    return client.config.DEFAULTSETTINGS;
+    if (data) {
+      return data;
+    } else {
+      return;
+    }
   };
 
   client.updateGuild = async (guild, settings) => {
