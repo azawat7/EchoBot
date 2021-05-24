@@ -9,7 +9,6 @@ require("dotenv").config();
 
 const client = new Client({
   partials: ["MESSAGE", "CHANNEL", "REACTION", "GUILD_MEMBER", "USER"],
-  disableMentions: "everyone",
   shardCount: 1,
   ws: {
     intents: [
