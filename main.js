@@ -7,7 +7,21 @@ require("dotenv").config();
 
 ///////////////////////////////////////////
 
-const client = new Client();
+const client = new Client({
+  partials: ["MESSAGE", "CHANNEL", "REACTION", "GUILD_MEMBER", "USER"],
+  disableMentions: "everyone",
+  shardCount: 1,
+  ws: {
+    intents: [
+      "GUILDS",
+      "GUILD_MEMBERS",
+      "GUILD_MESSAGES",
+      "GUILD_EMOJIS",
+      "GUILD_MESSAGE_REACTIONS",
+      "GUILD_VOICE_STATES",
+    ],
+  },
+});
 
 module.exports = client;
 
