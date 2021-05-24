@@ -2,7 +2,15 @@ const { owners } = require("../config");
 const { Collection, MessageEmbed } = require("discord.js");
 
 module.exports = async (client, message) => {
+  const newGuild = {
+    guildID: message.guild.id,
+  };
+  const createAGuild = await client.createGuild(newGuild);
+  const noDB = new MessageEmbed()
+    .setColor("#f50041")
+    .setDescription(`${client.emoji.cross} **DB**`);
   const settings = await client.getGuild(message.guild);
+  if (!settings) return createAGuild && message.channel.send(noDB);
 
   ///////////////////////////////////////////
 
