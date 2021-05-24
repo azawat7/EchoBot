@@ -22,7 +22,6 @@ const guildSchema = mongoose.Schema({
   guildID: {
     type: String,
     required: true,
-    unique: true,
   },
   prefix: {
     type: String,
