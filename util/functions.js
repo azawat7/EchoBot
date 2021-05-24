@@ -34,4 +34,8 @@ module.exports = async (client, message) => {
     }
     return data.updateOne(settings);
   };
+
+  client.updateUserInfo = (member, options = {}) => {
+    Guild.updateOne({ "users.id": member.id }, { $set: options });
+  };
 };

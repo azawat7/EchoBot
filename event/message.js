@@ -1,6 +1,7 @@
 const { owners } = require("../config");
 const { Collection, MessageEmbed } = require("discord.js");
 const { Guild } = require("../models/index");
+const { use } = require("passport");
 
 module.exports = async (client, message) => {
   if (message.author.bot) return;
@@ -9,6 +10,7 @@ module.exports = async (client, message) => {
 
   const settings = await client.getGuild(message.guild);
   const position = settings.users.map((e) => e.id).indexOf(message.member.id);
+  const userInfo = settings.users[position];
 
   if (message.guild && position == -1) {
     Guild.updateOne(
@@ -22,8 +24,20 @@ module.exports = async (client, message) => {
           },
         },
       }
-    ).then((d) => console.log("ok"));
+    );
   }
+
+  const expCd = Math.floor(Math.random() * 19) + 1;
+  const expToAdd = Math.floor(Math.random() * 25) + 10;
+
+  const newExp = userInfo.lvlexperience + expToAdd;
+
+  message.channel.send(`cd ; ${expCd}`);
+
+  if (expCd >= 8 && expCd <= 11)
+    await client.updateUserInfo(message.member, {
+      "users.$.lvlexperience": newExp,
+    });
 
   ///////////////////////////////////////////
 
@@ -154,7 +168,7 @@ module.exports = async (client, message) => {
 
   ///////////////////////////////////////////
 
-  command.run(client, message, args, language, settings);
+  command.run(client, message, args, language, settings, userInfo);
 };
 
 const missingPerms = (member, perms) => {
