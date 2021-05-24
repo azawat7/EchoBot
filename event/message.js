@@ -22,7 +22,7 @@ module.exports = async (client, message) => {
           },
         },
       }
-    );
+    ).then((d) => console.log("ok"));
   }
 
   ///////////////////////////////////////////

@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const { Guild } = require("../models/index");
 
-module.exports = async (client) => {
+module.exports = async (client, message) => {
   // Guild Function
 
   client.createGuild = async (guild) => {
@@ -22,7 +22,8 @@ module.exports = async (client) => {
     if (data) {
       return data;
     } else {
-      return;
+      client.createGuild(guild.id);
+      message.channel.send(`This guild do not exist in the DB`);
     }
   };
 
