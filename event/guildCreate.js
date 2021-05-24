@@ -6,7 +6,6 @@ module.exports = async (client, guild) => {
   };
 
   await client.createGuild(newGuild);
-  await client.createLogs(newGuild);
 
   const botJoinEmbed = new MessageEmbed()
     .setTitle(`${client.emoji.check} New Server`)

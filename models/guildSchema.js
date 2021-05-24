@@ -9,7 +9,6 @@ const reqString = {
 const guildSchema = mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
   guildID: reqString,
-
   prefix: {
     type: String,
     required: true,
@@ -20,6 +19,8 @@ const guildSchema = mongoose.Schema({
     required: true,
     default: defaults.language,
   },
+  users: [],
+  logs: {},
 });
 
 module.exports = mongoose.model("Guild", guildSchema);

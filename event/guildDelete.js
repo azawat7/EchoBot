@@ -1,7 +1,6 @@
 const { MessageEmbed } = require("discord.js");
 
 module.exports = async (client, guild) => {
-  await client.deleteLogs(guild);
   await client.deleteGuild(guild);
 
   const botJoinEmbed = new MessageEmbed()

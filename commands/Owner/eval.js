@@ -1,3 +1,5 @@
+const { owners } = require("../../config");
+
 module.exports.help = {
   name: "eval",
   hidden: true,
@@ -22,7 +24,6 @@ module.exports.run = async (client, message, args) => {
     return text;
   }
 
-  if (message.author.id !== "406108846575058944") return;
   const code = args.join(" ");
   const evaled = eval(code);
   const cleanCode = await clean(evaled);
