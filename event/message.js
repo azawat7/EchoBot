@@ -168,7 +168,7 @@ module.exports = async (client, message) => {
 
   ///////////////////////////////////////////
 
-  command.run(client, message, args, language, settings, userInfo);
+  command.run(client, message, args, language, settings);
 };
 
 const missingPerms = (member, perms) => {
