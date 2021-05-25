@@ -22,7 +22,7 @@ module.exports = async (client, message) => {
     if (data) {
       return data;
     } else {
-      return client.createGuild(guild.id);
+      return;
     }
   };
 
@@ -33,6 +33,12 @@ module.exports = async (client, message) => {
       if (data[key] !== settings[key]) data[key] = settings[key];
     }
     return data.updateOne(settings);
+  };
+
+  client.getUser = async (member, message) => {
+    const data = await client.getGuild(member.guild);
+    const position = data.users.map((e) => e.id).indexOf(message.member.id);
+    return data.users[position];
   };
 
   client.updateUserInfo = (member, options = {}) => {

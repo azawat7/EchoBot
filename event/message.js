@@ -10,34 +10,34 @@ module.exports = async (client, message) => {
 
   const settings = await client.getGuild(message.guild);
   const position = settings.users.map((e) => e.id).indexOf(message.member.id);
-  const userInfo = settings.users[position];
+  // const userInfo = settings.users[position];
 
-  if (message.guild && position == -1) {
-    Guild.updateOne(
-      { guildID: message.guild.id },
-      {
-        $push: {
-          users: {
-            id: message.member.id,
-            lvlexperience: 0,
-            lvllevel: 1,
-          },
-        },
-      }
-    );
-  }
+  // if (message.guild && position == -1) {
+  //   Guild.updateOne(
+  //     { guildID: message.guild.id },
+  //     {
+  //       $push: {
+  //         users: {
+  //           id: message.member.id,
+  //           lvlexperience: 0,
+  //           lvllevel: 1,
+  //         },
+  //       },
+  //     }
+  //   );
+  // }
 
-  const expCd = Math.floor(Math.random() * 19) + 1;
-  const expToAdd = Math.floor(Math.random() * 25) + 10;
+  // const expCd = Math.floor(Math.random() * 19) + 1;
+  // const expToAdd = Math.floor(Math.random() * 25) + 10;
+  // const userF = message.guild.member(message.author);
+  // const userToUpdate = await client.getUser(userF);
 
-  const newExp = userInfo.lvlexperience + expToAdd;
+  // const newExp = userToUpdate.lvlexperience + expToAdd;
 
-  message.channel.send(`cd ; ${expCd}`);
-
-  if (expCd >= 8 && expCd <= 11)
-    await client.updateUserInfo(message.member, {
-      "users.$.lvlexperience": newExp,
-    });
+  // if (expCd >= 8 && expCd <= 11)
+  //   await client.updateUserInfo(userF, {
+  //     "users.$.lvlexperience": newExp,
+  //   });
 
   ///////////////////////////////////////////
 
