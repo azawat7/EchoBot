@@ -1,43 +1,44 @@
 const { owners } = require("../config");
 const { Collection, MessageEmbed } = require("discord.js");
 const { Guild } = require("../models/index");
-const { use } = require("passport");
 
 module.exports = async (client, message) => {
+  if (message.channel.type === "dm") return;
   if (message.author.bot) return;
 
   ///////////////////////////////////////////
 
   const settings = await client.getGuild(message.guild);
   const position = settings.users.map((e) => e.id).indexOf(message.member.id);
-  // const userInfo = settings.users[position];
 
-  // if (message.guild && position == -1) {
-  //   Guild.updateOne(
-  //     { guildID: message.guild.id },
-  //     {
-  //       $push: {
-  //         users: {
-  //           id: message.member.id,
-  //           lvlexperience: 0,
-  //           lvllevel: 1,
-  //         },
-  //       },
-  //     }
-  //   );
-  // }
+  if (message.guild && position == -1) {
+    Guild.updateOne(
+      { guildID: message.guild.id },
+      {
+        $push: {
+          users: {
+            id: message.member.id,
+            lvlexperience: 0,
+            lvllevel: 1,
+          },
+        },
+      }
+    ).then((d) => console.log("Ok"));
+  }
 
-  // const expCd = Math.floor(Math.random() * 19) + 1;
-  // const expToAdd = Math.floor(Math.random() * 25) + 10;
-  // const userF = message.guild.member(message.author);
-  // const userToUpdate = await client.getUser(userF);
+  const expCd = Math.floor(Math.random() * 19) + 1;
+  const expToAdd = Math.floor(Math.random() * 25) + 10;
 
-  // const newExp = userToUpdate.lvlexperience + expToAdd;
+  const targetuser = message.guild.member(message.author);
+  const userToUpdate = await client.getUser(targetuser);
 
-  // if (expCd >= 8 && expCd <= 11)
-  //   await client.updateUserInfo(userF, {
-  //     "users.$.lvlexperience": newExp,
-  //   });
+  const newExp = userToUpdate.lvlexperience + expToAdd;
+
+  if (expCd >= 8 && expCd <= 11) {
+    client.updateUserInfo(targetuser, {
+      "users.$.lvlexperience": newExp,
+    });
+  }
 
   ///////////////////////////////////////////
 

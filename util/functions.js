@@ -35,9 +35,9 @@ module.exports = async (client, message) => {
     return data.updateOne(settings);
   };
 
-  client.getUser = async (member, message) => {
+  client.getUser = async (member) => {
     const data = await client.getGuild(member.guild);
-    const position = data.users.map((e) => e.id).indexOf(message.member.id);
+    const position = data.users.map((e) => e.id).indexOf(member.id);
     return data.users[position];
   };
 
