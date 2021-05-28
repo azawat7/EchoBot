@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const { Guild } = require("../models/index");
 
-module.exports = async (client, message) => {
+module.exports = (client, message) => {
   // Guild Function
 
   client.createGuild = async (guild) => {
@@ -19,11 +19,16 @@ module.exports = async (client, message) => {
 
   client.getGuild = async (guild) => {
     const data = await Guild.findOne({ guildID: guild.id });
-    if (data) {
-      return data;
-    } else {
-      return;
+    if (!data) {
+      const newGuild = {
+        guildID: guild.id,
+        guildName: guild.name,
+      };
+
+      await client.createGuild(newGuild);
     }
+    if (data) return data;
+    return client.config.DEFAULTSETTINGS;
   };
 
   client.updateGuild = async (guild, settings) => {
@@ -41,9 +46,10 @@ module.exports = async (client, message) => {
     return data.users[position];
   };
 
-  client.updateUserInfo = (member, options = {}) => {
-    Guild.updateOne({ "users.id": member.id }, { $set: options }).then((_) =>
-      console.log(`Guild updated`)
-    );
+  client.updateUserInfo = (guild, member, options = {}) => {
+    Guild.updateOne(
+      { guildID: guild.id, "users.id": member.id },
+      { $set: options }
+    ).then();
   };
 };

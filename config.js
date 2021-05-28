@@ -7,6 +7,4 @@ exports.musicQueueLimit = 10;
 exports.DEFAULTSETTINGS = {
   prefix: "$",
   language: "english",
-
-  false: false,
 };

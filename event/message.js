@@ -23,7 +23,7 @@ module.exports = async (client, message) => {
           },
         },
       }
-    ).then((d) => console.log("Ok"));
+    ).then((d) => console.log(`New user !`));
   }
 
   const expCd = Math.floor(Math.random() * 19) + 1;
@@ -34,8 +34,8 @@ module.exports = async (client, message) => {
 
   const newExp = userToUpdate.lvlexperience + expToAdd;
 
-  if (expCd >= 8 && expCd <= 11) {
-    await client.updateUserInfo(targetuser, {
+  if (expCd >= 8 && expCd <= 10) {
+    await client.updateUserInfo(message.guild, targetuser, {
       "users.$.lvlexperience": newExp,
     });
   }
