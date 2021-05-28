@@ -1,3 +1,4 @@
 module.exports = {
-  Guild: require("./guildSchema"),
+  Guild: require("./Guild"),
+  Giveaways: require("./Giveaways"),
 };

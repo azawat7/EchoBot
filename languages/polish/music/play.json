@@ -1,0 +1,12 @@
+{
+  "DESCRIPTION": "Play a music in your voice channel.",
+  "NOCHANNEL": "You need to be in a voice channel :/",
+  "NOPLAYLIST": "I am unable to play a playlist for now...",
+  "COPYRIGHT": "There is `copyright` content in this video -_-",
+  "API": "API Error.",
+  "QUEUEERROR": "You can not add more than {queueLimit} songs...",
+  "NEWSONG": "Added new song to the queue !",
+  "LIKES": "Likes",
+  "DISLIKES": "Dislikes",
+  "CHANNELERROR": "Could not join the channel."
+}

@@ -1,8 +1,8 @@
-const { token } = require("./config");
 const { Client, Collection } = require("discord.js");
-const { Player } = require("discord-player");
-const mongoose = require("mongoose");
+
 const { DiscordTogether } = require("discord-together");
+const { GiveawaysManager } = require("discord-giveaways");
+const { Giveaways } = require("./models/index");
 require("dotenv").config();
 
 ///////////////////////////////////////////
@@ -24,103 +24,42 @@ const client = new Client({
 
 module.exports = client;
 
+// Music
+client.queue = new Map();
+client.vote = new Map();
+// Config
 client.config = require("./config");
-
 client.colors = require("./assets/colors.json");
 client.emoji = require("./assets/emojis.json");
-
-///////////////////////////////////////////
-
-client.player = new Player(client);
+// Clients
 client.discordTogether = new DiscordTogether(client);
 
 ///////////////////////////////////////////
 
-const giveawaySchema = new mongoose.Schema({
-  messageID: String,
-  channelID: String,
-  guildID: String,
-  startAt: Number,
-  endAt: Number,
-  ended: Boolean,
-  winnerCount: Number,
-  prize: String,
-  messages: {
-    giveaway: String,
-    giveawayEnded: String,
-    inviteToParticipate: String,
-    timeRemaining: String,
-    winMessage: String,
-    embedFooter: String,
-    noWinner: String,
-    winners: String,
-    endedAt: String,
-    hostedBy: String,
-    units: {
-      seconds: String,
-      minutes: String,
-      hours: String,
-      days: String,
-      pluralS: Boolean,
-    },
-  },
-  hostedBy: String,
-  winnerIDs: [String],
-  reaction: mongoose.Mixed,
-  botsCanWin: Boolean,
-  embedColor: mongoose.Mixed,
-  embedColorEnd: mongoose.Mixed,
-  exemptPermissions: [],
-  exemptMembers: String,
-  bonusEntries: String,
-  extraData: mongoose.Mixed,
-  lastChance: {
-    enabled: Boolean,
-    content: String,
-    threshold: Number,
-    embedColor: mongoose.Mixed,
-  },
-});
-
-// Create the model
-const giveawayModel = mongoose.model("giveaways", giveawaySchema);
-
-const { GiveawaysManager } = require("discord-giveaways");
 const GiveawayManagerWithOwnDatabase = class extends GiveawaysManager {
-  // This function is called when the manager needs to get all giveaways which are stored in the database.
   async getAllGiveaways() {
-    // Get all giveaways from the database. We fetch all documents by passing an empty condition.
-    return await giveawayModel.find({});
+    return await Giveaways.find({});
   }
 
-  // This function is called when a giveaway needs to be saved in the database.
   async saveGiveaway(messageID, giveawayData) {
-    // Add the new giveaway to the database
-    await giveawayModel.create(giveawayData);
-    // Don't forget to return something!
+    await Giveaways.create(giveawayData);
     return true;
   }
 
-  // This function is called when a giveaway needs to be edited in the database.
   async editGiveaway(messageID, giveawayData) {
-    // Find by messageID and update it
-    await giveawayModel
-      .findOneAndUpdate({ messageID: messageID }, giveawayData)
-      .exec();
-    // Don't forget to return something!
+    await Giveaways.findOneAndUpdate(
+      { messageID: messageID },
+      giveawayData
+    ).exec();
     return true;
   }
 
-  // This function is called when a giveaway needs to be deleted from the database.
   async deleteGiveaway(messageID) {
-    // Find by messageID and delete it
-    await giveawayModel.findOneAndDelete({ messageID: messageID }).exec();
-    // Don't forget to return something!
+    await Giveaways.findOneAndDelete({ messageID: messageID }).exec();
     return true;
   }
 };
 
-// Create a new instance of your new class
 const manager = new GiveawayManagerWithOwnDatabase(client, {
   updateCountdownEvery: 10000,
   default: {
@@ -131,7 +70,7 @@ const manager = new GiveawayManagerWithOwnDatabase(client, {
     reaction: "🎉",
   },
 });
-// We now have a giveawaysManager property to access the manager everywhere!
+
 client.giveawaysManager = manager;
 
 ///////////////////////////////////////////
@@ -148,10 +87,8 @@ client.mongoose = require("./util/mongo");
 
 ///////////////////////////////////////////
 
-const { loadCommands } = require("./handlers/command");
+const { loadCommands, loadEvents } = require("./util/loaders");
 loadCommands(client);
-
-const { loadEvents } = require("./handlers/event");
 loadEvents(client);
 
 ///////////////////////////////////////////

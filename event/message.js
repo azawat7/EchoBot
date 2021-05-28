@@ -35,7 +35,7 @@ module.exports = async (client, message) => {
   const newExp = userToUpdate.lvlexperience + expToAdd;
 
   if (expCd >= 8 && expCd <= 11) {
-    client.updateUserInfo(targetuser, {
+    await client.updateUserInfo(targetuser, {
       "users.$.lvlexperience": newExp,
     });
   }

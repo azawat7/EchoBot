@@ -42,6 +42,8 @@ module.exports = async (client, message) => {
   };
 
   client.updateUserInfo = (member, options = {}) => {
-    Guild.updateOne({ "users.id": member.id }, { $set: options });
+    Guild.updateOne({ "users.id": member.id }, { $set: options }).then((_) =>
+      console.log(`Guild updated`)
+    );
   };
 };
