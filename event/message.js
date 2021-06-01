@@ -60,16 +60,16 @@ module.exports = async (client, message) => {
 
   if (userToUpdate.lvllevel < userLevel) {
     embed.setDescription(`😀 **${LEVELU}**`);
-    message.channel.send(embed);
     await client.updateUserInfo(message.guild, targetuser, {
       "users.$.lvllevel": userLevel,
     });
+    message.channel.send(embed);
   } else if (userToUpdate.lvllevel > userLevel) {
     embed.setDescription(`😂 **${LEVELP}**`);
-    message.channel.send(embed);
     await client.updateUserInfo(message.guild, targetuser, {
       "users.$.lvllevel": userLevel,
     });
+    message.channel.send(embed);
   }
 
   ///////////////////////////////////////////
@@ -109,21 +109,21 @@ module.exports = async (client, message) => {
     .setColor("#f50041")
     .setDescription(`${client.emoji.cross} **${lan.OWNERONLY}**`);
 
-  let userPerms = new MessageEmbed()
-    .setColor("#f50041")
-    .setDescription(
-      `${client.emoji.cross} **${lan.USERPERMS} ${missingPerms(
-        message.member,
-        command.help.userPerms
-      )} !**`
-    );
-
   let clientPerms = new MessageEmbed()
     .setColor("#f50041")
     .setDescription(
       `${client.emoji.cross} **${lan.CLIENTPERMS} ${missingPerms(
         message.guild.me,
         command.help.clientPerms
+      )} !**`
+    );
+
+  let userPerms = new MessageEmbed()
+    .setColor("#f50041")
+    .setDescription(
+      `${client.emoji.cross} **${lan.USERPERMS} ${missingPerms(
+        message.member,
+        command.help.userPerms
       )} !**`
     );
 
@@ -149,6 +149,12 @@ module.exports = async (client, message) => {
   //   );
   // }
 
+  // if (
+  //   command.help.clientPerms &&
+  //   !message.guild.me.hasPermission(command.help.clientPerms)
+  // )
+  //   return message.channel.send(clientPerms);
+
   if (command.help.ownerOnly && !owners.includes(message.author.id))
     return message.channel.send(ownerOnlyEmbed);
 
@@ -162,7 +168,7 @@ module.exports = async (client, message) => {
     command.help.clientPerms &&
     !message.guild.me.permissions.has(command.help.clientPerms)
   )
-    return message.channel.send(clientPerms);
+    return message.user.send(clientPerms);
 
   ///////////////////////////////////////////
 

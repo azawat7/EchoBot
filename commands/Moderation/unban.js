@@ -10,7 +10,7 @@ module.exports.help = {
   maxArgs: 1,
   ownerOnly: false,
   userPerms: ["BAN_MEMBERS"],
-  clientPerms: [],
+  clientPerms: ["SEND_MESSAGES", "BAN_MEMBERS"],
   nsfw: false,
   cooldown: 3,
 };

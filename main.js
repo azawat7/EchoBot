@@ -23,17 +23,6 @@ client.discordTogether = new DiscordTogether(client);
 
 ///////////////////////////////////////////
 
-client.on("message", (message) => {
-  insulte.forEach((insulte) => {
-    if (message.content.includes(insulte.toLowerCase)) {
-      message.delete();
-      message.channel.send(
-        `<@${message.author.id}> this word is forbidden on this server.`
-      );
-    }
-  });
-});
-
 const GiveawayManagerWithOwnDatabase = class extends GiveawaysManager {
   async getAllGiveaways() {
     return await Giveaways.find({});

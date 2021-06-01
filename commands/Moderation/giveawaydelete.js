@@ -9,8 +9,8 @@ module.exports.help = {
   minArgs: 1,
   maxArgs: 1,
   ownerOnly: false,
-  userPerms: [],
-  clientPerms: [],
+  userPerms: ["MENTION_EVERYONE"],
+  clientPerms: ["SEND_MESSAGES"],
   nsfw: false,
   cooldown: 3,
 };

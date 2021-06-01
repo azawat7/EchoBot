@@ -12,7 +12,7 @@ module.exports.help = {
   maxArgs: 1,
   ownerOnly: false,
   userPerms: [],
-  clientPerms: [],
+  clientPerms: ["SEND_MESSAGES"],
   nsfw: false,
   cooldown: 3,
 };
@@ -126,8 +126,8 @@ module.exports.run = (client, message, args, language, settings) => {
 
     message.channel.send(embed);
   } else if (
-    (args && args.join(" ").toLowerCase() == "musicyt") ||
-    (args && args[0].toLowerCase() == "musicyt")
+    (args && args.join(" ").toLowerCase() == "music") ||
+    (args && args[0].toLowerCase() == "music")
   ) {
     const cmds = client.commands
       .filter((cmd) => cmd.help.category.toLowerCase() === "music")
