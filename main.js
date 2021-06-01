@@ -1,26 +1,13 @@
-const { Client, Collection } = require("discord.js");
-
+const { Collection } = require("discord.js");
+const { Client } = require("discord.js");
 const { DiscordTogether } = require("discord-together");
 const { GiveawaysManager } = require("discord-giveaways");
 const { Giveaways } = require("./models/index");
+const config = require("./config");
 require("dotenv").config();
 
 ///////////////////////////////////////////
-
-const client = new Client({
-  partials: ["MESSAGE", "CHANNEL", "REACTION", "GUILD_MEMBER", "USER"],
-  shardCount: 1,
-  ws: {
-    intents: [
-      "GUILDS",
-      "GUILD_MEMBERS",
-      "GUILD_MESSAGES",
-      "GUILD_EMOJIS",
-      "GUILD_MESSAGE_REACTIONS",
-      "GUILD_VOICE_STATES",
-    ],
-  },
-});
+const client = new Client();
 
 module.exports = client;
 
@@ -35,6 +22,17 @@ client.emoji = require("./assets/emojis.json");
 client.discordTogether = new DiscordTogether(client);
 
 ///////////////////////////////////////////
+
+client.on("message", (message) => {
+  insulte.forEach((insulte) => {
+    if (message.content.includes(insulte.toLowerCase)) {
+      message.delete();
+      message.channel.send(
+        `<@${message.author.id}> this word is forbidden on this server.`
+      );
+    }
+  });
+});
 
 const GiveawayManagerWithOwnDatabase = class extends GiveawaysManager {
   async getAllGiveaways() {
@@ -74,8 +72,9 @@ const manager = new GiveawayManagerWithOwnDatabase(client, {
 client.giveawaysManager = manager;
 
 ///////////////////////////////////////////
+require("./util/functions.js")(client);
 
-require("./util/functions")(client);
+require("./util/dbFunctions")(client);
 
 ///////////////////////////////////////////
 

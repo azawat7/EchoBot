@@ -1,6 +1,7 @@
 const { MessageEmbed } = require("discord.js");
-const { readdirSync, forEach } = require("fs");
-const categoryList = readdirSync("./commands");
+const { readdirSync } = require("fs");
+const iapg = require("iapg");
+const ReactionPages = iapg.ReactionPages;
 
 module.exports.help = {
   name: "help",
@@ -21,25 +22,25 @@ module.exports.run = (client, message, args, language, settings) => {
     let categories = [];
 
     const dirEmojis = {
-      Admin: `${client.emoji.administration}`,
-      Moderation: `${client.emoji.moderation}`,
-      Fun: `${client.emoji.fun}`,
-      Information: `${client.emoji.information}`,
-      Utility: `${client.emoji.utility}`,
-      NSFW: `${client.emoji.nsfw}`,
-      MusicYt: `${client.emoji.music}`,
+      admin: client.emoji.administration,
+      moderation: client.emoji.moderation,
+      fun: client.emoji.fun,
+      information: client.emoji.information,
+      utility: client.emoji.utility,
+      nsfw: client.emoji.nsfw,
+      music: client.emoji.music,
     };
 
-    const ignoredCategories = ["Owner"];
+    const ignoredCategories = ["owner"];
 
     readdirSync("./commands/").forEach((dir) => {
       if (ignoredCategories.includes(dir)) return;
-      const editedName = `${dirEmojis[dir]} ${dir}`;
+      const editedName = `${dirEmojis[dir]} ${client.capitalize(`${dir}`)}`;
 
       let data = new Object();
 
       data = {
-        name: `${editedName}`,
+        name: editedName,
         value: `\`${settings.prefix}help ${dir.toLowerCase()}\``,
         inline: true,
       };
@@ -48,14 +49,40 @@ module.exports.run = (client, message, args, language, settings) => {
     });
 
     let embed = new MessageEmbed()
-      .setAuthor(`${language.TITLE1}`, `https://i.imgur.com/45UIEsS.png`)
+      .setAuthor(
+        `${language.TITLE1} (Page 1/2)`,
+        `https://i.imgur.com/45UIEsS.png`
+      )
       .setColor(`#f50041`)
       .setDescription(`${language.EDES1} \`${settings.prefix}\``)
       .addFields(categories)
       .setTimestamp()
       .setFooter(message.author.username, message.author.avatarURL());
 
-    return message.channel.send(embed);
+    let secondembed = new MessageEmbed()
+      .setAuthor(
+        `Information per command (Page 2/2)`,
+        `https://i.imgur.com/45UIEsS.png`
+      )
+      .setColor(`#f50041`)
+      .setDescription(
+        `Run command \`${settings.prefix}help\` followed by the command name you want to get more information on !\nExample :\n\`\`\`${settings.prefix}help eval\`\`\``
+      )
+      .setImage(
+        `https://cdn.discordapp.com/attachments/838062587051507795/848309507007971348/unknown.png`
+      )
+      .setTimestamp()
+      .setFooter(message.author.username, message.author.avatarURL());
+
+    const pages = [embed, secondembed];
+    const textPageChange = false;
+    const emojis = ["⏪", "⏩"];
+    const time = 60000;
+
+    return ReactionPages(message, pages, textPageChange, emojis, time);
+
+    // message.channel.send(secondembed);
+    // return message.channel.send(embed);
   } else if (
     (args && args.join(" ").toLowerCase() == "admin") ||
     (args && args[0].toLowerCase() == "admin")
@@ -66,7 +93,7 @@ module.exports.run = (client, message, args, language, settings) => {
         (cmd) =>
           `\`${cmd.help.name} ${" ".repeat(
             13 - Number(cmd.help.name.length)
-          )} :\` ${language.DESCRIPTION}`
+          )} :\``
       );
 
     let embed = new MessageEmbed()
@@ -126,7 +153,6 @@ module.exports.run = (client, message, args, language, settings) => {
     const command = client.commands.filter(
       (cmd) => cmd.help.category.toLowerCase() === "moderation"
     );
-    const lang = require(`../../languages/${settings.language}/${command.help.category}/${command.help.name}`);
 
     const cmds = client.commands
       .filter((cmd) => cmd.help.category.toLowerCase() === "moderation")
@@ -134,7 +160,7 @@ module.exports.run = (client, message, args, language, settings) => {
         (cmd) =>
           `\`${cmd.help.name} ${" ".repeat(
             14 - Number(cmd.help.name.length)
-          )} :\` ${lang.DESCRIPTION}`
+          )} :\``
       );
 
     let embed = new MessageEmbed()

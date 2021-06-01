@@ -1,6 +1,0 @@
-{
-    "DESCRIPTION": "Kick un utilisateur du serveur.",
-    "ROLEHIGH": "Vous ne pouvez pas kick cette personne parce que vous avez le même rôle ou que votre rôle est inférieur !",
-    "SUC1": "a été kick du serveur par",
-    "SUC2": "pour"
-}

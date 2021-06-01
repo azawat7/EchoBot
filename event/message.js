@@ -1,14 +1,27 @@
 const { owners } = require("../config");
 const { Collection, MessageEmbed } = require("discord.js");
-const { Guild } = require("../models/index");
+const { Guild, BlacklistServer } = require("../models/index");
 
 module.exports = async (client, message) => {
-  if (message.channel.type === "dm") return;
+  if (message.channel.type === "dm" || !message.guild) {
+    return;
+  }
+
   if (message.author.bot) return;
+
+  const embed = new MessageEmbed().setColor(client.colors.echo);
 
   ///////////////////////////////////////////
 
   const settings = await client.getGuild(message.guild);
+  if (!settings) {
+    embed.setDescription(
+      `${client.emoji.cross} **This guild was not found in the DB, please try again !**`
+    );
+    message.channel.send(embed);
+    return;
+  }
+  const lan = require(`../languages/${settings.language}/message`);
   const position = settings.users.map((e) => e.id).indexOf(message.member.id);
 
   if (message.guild && position == -1) {
@@ -19,7 +32,7 @@ module.exports = async (client, message) => {
           users: {
             id: message.member.id,
             lvlexperience: 0,
-            lvllevel: 1,
+            lvllevel: 0,
           },
         },
       }
@@ -40,6 +53,25 @@ module.exports = async (client, message) => {
     });
   }
 
+  const userLevel = Math.floor(0.06 * Math.sqrt(userToUpdate.lvlexperience));
+
+  const LEVELU = lan.LEVELUP.replace("{userlevel}", userLevel);
+  const LEVELP = lan.LEVELDOWN.replace("{userlevel}", userLevel);
+
+  if (userToUpdate.lvllevel < userLevel) {
+    embed.setDescription(`😀 **${LEVELU}**`);
+    message.channel.send(embed);
+    await client.updateUserInfo(message.guild, targetuser, {
+      "users.$.lvllevel": userLevel,
+    });
+  } else if (userToUpdate.lvllevel > userLevel) {
+    embed.setDescription(`😂 **${LEVELP}**`);
+    message.channel.send(embed);
+    await client.updateUserInfo(message.guild, targetuser, {
+      "users.$.lvllevel": userLevel,
+    });
+  }
+
   ///////////////////////////////////////////
 
   const args = message.content.slice(settings.prefix.length).split(/ +/);
@@ -55,13 +87,21 @@ module.exports = async (client, message) => {
 
   if (!message.content.toLowerCase().startsWith(settings.prefix)) return;
 
-  const lan = require(`../languages/${settings.language}/message`);
-
   const noCommand = new MessageEmbed()
     .setColor("#f50041")
     .setDescription(`${client.emoji.cross} **${lan.NOCOMMAND}**`);
 
-  if (!command) return message.channel.send(noCommand);
+  if (!command) {
+    return message.channel.send(noCommand);
+  } else {
+    const blacklisted = await BlacklistServer.findOne({
+      blacklistedServer: message.guild.id,
+    });
+    if (blacklisted) {
+      embed.setDescription(`${client.emoji.cross} ${lan.BLACKLIST}`);
+      return message.channel.send(embed);
+    }
+  }
 
   ///////////////////////////////////////////
 
@@ -102,6 +142,12 @@ module.exports = async (client, message) => {
     );
 
   ///////////////////////////////////////////
+
+  // if (command.help.guildOnly && !message.guild) {
+  //   return message.user.send(
+  //     `Cette commande est disponible uniquement sur les serveurs !`
+  //   );
+  // }
 
   if (command.help.ownerOnly && !owners.includes(message.author.id))
     return message.channel.send(ownerOnlyEmbed);

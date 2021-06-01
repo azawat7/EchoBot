@@ -1,6 +1,0 @@
-{
-    "DESCRIPTION": "Ban un utilisateur du serveur.",
-    "ROLEHIGH": "Vous ne pouvez pas bannir cette personne parce que vous avez le même rôle ou que votre rôle est inférieur !",
-    "SUC1": "a été ban du serveur par",
-    "SUC2": "pour"
-}

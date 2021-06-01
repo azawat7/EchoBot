@@ -1,6 +1,6 @@
 {
-    "DESCRIPTION": "Kick a desired user from the server.",
-    "ROLEHIGH": "You can't ban this person because you either have the same role or your role is lower !",
-    "SUC1": "has been kicked from the server by",
-    "SUC2": "for"
+  "DESCRIPTION": "Kick a desired user from the server.",
+  "BOT": "You can't ban this user because he is a bot !",
+  "ROLEHIGH": "You can't ban this person because you either have the same role or your role is lower !",
+  "SUC": "`{user}` has been kicked from the server by `{moderator}` for `{reason}`"
 }

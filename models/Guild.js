@@ -7,7 +7,7 @@ const reqString = {
 };
 
 const falseString = {
-  type: String,
+  type: Boolean,
   default: false,
 };
 

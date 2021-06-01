@@ -1,5 +1,0 @@
-{
-  "DESCRIPTION": "Play a music in your voice channel.",
-  "NOCHANNEL": "You need to be in a voice channel :/",
-  "NOSONGS": "There is nothing playing that i could stop..."
-}

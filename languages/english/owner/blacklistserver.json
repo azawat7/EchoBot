@@ -1,0 +1,8 @@
+{
+  "DESCRIPTION": "Un/blacklist a server from the bot.",
+  "NOSERVER": "I am not in that server :",
+  "SERVERBL": "This server has already been blacklisted",
+  "SUCCESS": "Blacklisted a new server/guild !",
+  "SERVERBLL": "This server doesn't exist in the DB !",
+  "SUCCESS1": "Unblacklisted a new server/guild !"
+}
