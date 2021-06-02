@@ -1,5 +1,5 @@
 {
-    "DESCRIPTION": "Show's the current server config.",
-    "CONFIG1": "Prefix",
-    "CONFIG2": "Language"
+  "DESCRIPTION": "Show's the current server config.",
+  "CONFIG1": "Prefix :",
+  "CONFIG2": "Language :"
 }

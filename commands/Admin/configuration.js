@@ -8,8 +8,8 @@ module.exports.help = {
   minArgs: 0,
   maxArgs: 0,
   ownerOnly: false,
-  userPerms: ["ADMINISTRATOR"],
-  clientPerms: ["SEND_MESSAGES"],
+  userPerms: ["MANAGE_GUILD"],
+  clientPerms: ["MANAGE_GUILD"],
   nsfw: false,
   cooldown: 3,
 };
@@ -21,11 +21,11 @@ module.exports.run = async (client, message, args, language, settings) => {
     .setColor("#f50041")
     .addFields(
       {
-        name: `\`🥨\` **${language.CONFIG1}** :`,
+        name: `\`🥨\` **${language.CONFIG1}**`,
         value: `\`${settings.prefix}\``,
       },
       {
-        name: `\`🏁\` **${language.CONFIG2}** :`,
+        name: `\`🏁\` **${language.CONFIG2}**`,
         value: `\`${settings.language}\``,
       }
     );

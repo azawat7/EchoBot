@@ -1,12 +1,18 @@
-const { MessageEmbed } = require("discord.js");
-
 module.exports = async (client) => {
   console.log(`✅ Logged in as ${client.user.tag}!`);
-  client.user.setPresence({
-    activity: {
-      name: `$help on ${client.guilds.cache.size} guilds`,
-      type: "WATCHING",
-      status: "dnd",
-    },
-  });
+  let activities = [
+    `$help on ${client.guilds.cache.size} guilds`,
+    `$help on ${client.users.cache.size} users`,
+  ];
+  setInterval(function () {
+    let activity = activities[Math.floor(Math.random() * activities.length)];
+
+    client.user.setPresence({
+      activity: {
+        name: activity,
+        type: "WATCHING",
+        status: "dnd",
+      },
+    });
+  }, 10000);
 };

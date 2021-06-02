@@ -8,8 +8,8 @@ module.exports.help = {
   minArgs: 1,
   maxArgs: 1,
   ownerOnly: false,
-  userPerms: ["ADMINISTRATOR"],
-  clientPerms: ["SEND_MESSAGES"],
+  userPerms: ["MANAGE_GUILD"],
+  clientPerms: ["MANAGE_GUILD"],
   nsfw: false,
   cooldown: 3,
 };
@@ -20,7 +20,7 @@ module.exports.run = async (client, message, args, language, settings) => {
   const actPrefix = new MessageEmbed()
     .setColor("#f50041")
     .setDescription(
-      `**${language.SETPREFIX1} !** \`${settings.prefix}\` -> \`${newSetting}\``
+      `**${language.SETPREFIX1}** \`${settings.prefix}\` -> \`${newSetting}\``
     );
 
   if (newSetting) {

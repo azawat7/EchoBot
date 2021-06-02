@@ -1,4 +1,5 @@
 const { MessageEmbed } = require("discord.js");
+const replace = require("replacer-js");
 
 module.exports.help = {
   name: "clear",
@@ -9,7 +10,7 @@ module.exports.help = {
   maxArgs: 1,
   ownerOnly: false,
   userPerms: ["MANAGE_MESSAGES"],
-  clientPerms: ["SEND_MESSAGES", "MANAGE_MESSAGES"],
+  clientPerms: ["MANAGE_MESSAGES"],
   nsfw: false,
   cooldown: 3,
 };
@@ -44,7 +45,11 @@ module.exports.run = async (client, message, args, language) => {
 
   const clearSuc = new MessageEmbed()
     .setColor("#f50041")
-    .setDescription(`${client.emoji.check} **${amount} ${language.SUC}**`)
+    .setDescription(
+      `${client.emoji.check} **${replace(language.SUC, {
+        "{nmb_of_msg}": amount,
+      })}**`
+    )
     .setTimestamp()
     .setFooter(message.author.username, message.author.avatarURL());
 

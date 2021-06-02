@@ -1,13 +1,12 @@
 const { owners } = require("../config");
 const { Collection, MessageEmbed } = require("discord.js");
 const { Guild, BlacklistServer } = require("../models/index");
+const replace = require("replacer-js");
 
 module.exports = async (client, message) => {
-  if (message.channel.type === "dm" || !message.guild) {
-    return;
-  }
-
+  if (message.channel.type === "dm") return;
   if (message.author.bot) return;
+  if (!message.guild.me.hasPermission("SEND_MESSAGES")) return;
 
   const embed = new MessageEmbed().setColor(client.colors.echo);
 
@@ -39,44 +38,10 @@ module.exports = async (client, message) => {
     ).then((d) => console.log(`New user !`));
   }
 
-  const expCd = Math.floor(Math.random() * 19) + 1;
-  const expToAdd = Math.floor(Math.random() * 25) + 10;
-
-  const targetuser = message.guild.member(message.author);
-  const userToUpdate = await client.getUser(targetuser);
-
-  const newExp = userToUpdate.lvlexperience + expToAdd;
-
-  if (expCd >= 8 && expCd <= 10) {
-    await client.updateUserInfo(message.guild, targetuser, {
-      "users.$.lvlexperience": newExp,
-    });
-  }
-
-  const userLevel = Math.floor(0.06 * Math.sqrt(userToUpdate.lvlexperience));
-
-  const LEVELU = lan.LEVELUP.replace("{userlevel}", userLevel);
-  const LEVELP = lan.LEVELDOWN.replace("{userlevel}", userLevel);
-
-  if (userToUpdate.lvllevel < userLevel) {
-    embed.setDescription(`😀 **${LEVELU}**`);
-    await client.updateUserInfo(message.guild, targetuser, {
-      "users.$.lvllevel": userLevel,
-    });
-    message.channel.send(embed);
-  } else if (userToUpdate.lvllevel > userLevel) {
-    embed.setDescription(`😂 **${LEVELP}**`);
-    await client.updateUserInfo(message.guild, targetuser, {
-      "users.$.lvllevel": userLevel,
-    });
-    message.channel.send(embed);
-  }
-
   ///////////////////////////////////////////
 
   const args = message.content.slice(settings.prefix.length).split(/ +/);
   const commandName = args.shift().slice(settings.prefix.lenght).toLowerCase();
-
   const command =
     client.commands.get(commandName) ||
     client.commands.find(
@@ -105,87 +70,61 @@ module.exports = async (client, message) => {
 
   ///////////////////////////////////////////
 
-  let ownerOnlyEmbed = new MessageEmbed()
-    .setColor("#f50041")
-    .setDescription(`${client.emoji.cross} **${lan.OWNERONLY}**`);
+  if (command.help.ownerOnly && !owners.includes(message.author.id)) {
+    embed.setDescription(`${client.emoji.cross} **${lan.OWNERONLY}**`);
+    return message.channel.send(embed);
+  }
 
-  let clientPerms = new MessageEmbed()
-    .setColor("#f50041")
-    .setDescription(
-      `${client.emoji.cross} **${lan.CLIENTPERMS} ${missingPerms(
-        message.guild.me,
-        command.help.clientPerms
-      )} !**`
-    );
-
-  let userPerms = new MessageEmbed()
-    .setColor("#f50041")
-    .setDescription(
+  if (
+    command.help.userPerms &&
+    !message.member.permissions.has(command.help.userPerms)
+  ) {
+    embed.setDescription(
       `${client.emoji.cross} **${lan.USERPERMS} ${missingPerms(
         message.member,
         command.help.userPerms
       )} !**`
     );
-
-  let nsfwEmbed = new MessageEmbed()
-    .setColor("#f50041")
-    .setDescription(`${client.emoji.cross} **${lan.NSFW}**`);
-
-  let noArgs = new MessageEmbed()
-    .setColor("#f50041")
-    .setDescription(`${client.emoji.cross} **${lan.NOARGS}**`);
-
-  let incorrectSyntax = new MessageEmbed()
-    .setColor("#f50041")
-    .setDescription(
-      `${client.emoji.cross} **${lan.INCSYNTAX} \`${settings.prefix}${command.help.name}\` ${command.help.expectedArgs}**`
-    );
-
-  ///////////////////////////////////////////
-
-  // if (command.help.guildOnly && !message.guild) {
-  //   return message.user.send(
-  //     `Cette commande est disponible uniquement sur les serveurs !`
-  //   );
-  // }
-
-  // if (
-  //   command.help.clientPerms &&
-  //   !message.guild.me.hasPermission(command.help.clientPerms)
-  // )
-  //   return message.channel.send(clientPerms);
-
-  if (command.help.ownerOnly && !owners.includes(message.author.id))
-    return message.channel.send(ownerOnlyEmbed);
-
-  if (
-    command.help.userPerms &&
-    !message.member.permissions.has(command.help.userPerms)
-  )
-    return message.channel.send(userPerms);
+    return message.channel.send(embed);
+  }
 
   if (
     command.help.clientPerms &&
     !message.guild.me.permissions.has(command.help.clientPerms)
-  )
-    return message.user.send(clientPerms);
+  ) {
+    embed.setDescription(
+      `${client.emoji.cross} **${lan.CLIENTPERMS} ${missingPerms(
+        message.guild.me,
+        command.help.clientPerms
+      )} !**`
+    );
+    return message.channel.send(embed);
+  }
 
   ///////////////////////////////////////////
 
-  if (command.help.nsfw && !message.channel.nsfw)
-    return message.channel.send(nsfwEmbed);
+  if (command.help.nsfw && !message.channel.nsfw) {
+    embed.setDescription(`${client.emoji.cross} **${lan.NSFW}**`);
+    return message.channel.send(embed);
+  }
 
   ///////////////////////////////////////////
 
   if (command.help.maxArgs === 0 && args.length > 0) {
-    return message.channel.send(noArgs);
+    embed.setDescription(`${client.emoji.cross} **${lan.NOARGS}**`);
+    return message.channel.send(embed);
   }
 
   if (
     args.length < command.help.minArgs ||
     (command.help.maxArgs !== null && args.length > command.help.maxArgs)
   ) {
-    return message.channel.send(incorrectSyntax);
+    embed.setDescription(
+      `${client.emoji.cross} **${replace(lan.INCSYNTAX, {
+        "{usage}": `\n>>> \`${settings.prefix}${command.help.name}\` ${command.help.expectedArgs}`,
+      })}**`
+    );
+    return message.channel.send(embed);
   }
 
   ///////////////////////////////////////////
@@ -206,9 +145,9 @@ module.exports = async (client, message) => {
       const cooldownEmbed = new MessageEmbed()
         .setColor("#f50041")
         .setDescription(
-          `${client.emoji.cross} **${lan.COOLDOWN1} **\`${timeLeft.toFixed(
-            0
-          )}s\`**  ${lan.COOLDOWN2}**`
+          `${client.emoji.cross} ${replace(lan.COOLDOWN, {
+            "{time}": timeLeft.toFixed(0),
+          })}`
         );
       return message.channel.send(cooldownEmbed);
     }

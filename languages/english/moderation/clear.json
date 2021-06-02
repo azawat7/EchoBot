@@ -1,7 +1,7 @@
 {
-    "DESCRIPTION": "Clear a desired amount of msg.",
-    "NANNUMBER": "You did not provided a number !",
-    "TH": "You can only delete a maximum of 100 msg !",
-    "TL": "You need to delete at least 1 msg !",
-    "SUC": "messages has been deleted from this channel !"
+  "DESCRIPTION": "Clear a desired amount of msg.",
+  "NANNUMBER": "You did not provided a number !",
+  "TH": "You can only delete a maximum of 100 msg !",
+  "TL": "You need to delete at least 1 msg !",
+  "SUC": "{nmb_of_msg} messages has been deleted from this channel !"
 }

@@ -1,4 +1,5 @@
 const { MessageEmbed } = require("discord.js");
+const replace = require("replacer-js");
 
 module.exports.help = {
   name: "setlanguage",
@@ -8,8 +9,8 @@ module.exports.help = {
   minArgs: 1,
   maxArgs: 1,
   ownerOnly: false,
-  userPerms: ["ADMINISTRATOR"],
-  clientPerms: ["SEND_MESSAGES"],
+  userPerms: ["MANAGE_GUILD"],
+  clientPerms: ["MANAGE_GUILD"],
   nsfw: false,
   cooldown: 3,
 };
@@ -17,15 +18,15 @@ module.exports.help = {
 module.exports.run = async (client, message, args, language, settings) => {
   let languages = ["english"];
 
-  const sembed = new MessageEmbed()
-    .setColor("#f50041")
-    .setDescription(
-      `**${client.emoji.cross} ${language.SETLANGUAGE1} \`english (available)\` & \`polish & french (not available)\`!**`
-    );
+  const sembed = new MessageEmbed().setColor("#f50041").setDescription(
+    `**${client.emoji.cross}  ${replace(language.SETLANGUAGE1, {
+      "{languages}": ">>> :flag_us: `english`",
+    })}**`
+  );
 
   const aembed = new MessageEmbed()
     .setColor("#f50041")
-    .setDescription(`**${client.emoji.cross} ${language.SETLANGUAGE2} !**`);
+    .setDescription(`**${client.emoji.cross} ${language.SETLANGUAGE2}**`);
 
   const newSetting = args.slice(0).join(" ");
 
@@ -37,7 +38,7 @@ module.exports.run = async (client, message, args, language, settings) => {
   const actLang = new MessageEmbed()
     .setColor("#f50041")
     .setDescription(
-      `**${language.SETLANGUAGE3} !** \`${
+      `**${language.SETLANGUAGE3}** \`${
         settings.language
       }\` -> \`${newSetting.toLowerCase()}\``
     );

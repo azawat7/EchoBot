@@ -1,5 +1,18 @@
 {
   "DESCRIPTION": "Displays information from {echo}.",
   "STATS": "Stats :",
-  "GENERAL": "General info :"
+  "GENERAL": "General Info :",
+  "BOT": "Bot Info :",
+
+  "UPTIME": "Uptime",
+  "LIBRARY": "Library",
+  "ENV": "Environment",
+  "VERSION": "Version",
+  "GUILDS": "Guilds",
+  "USERS": "Users",
+  "CHANNELS": "Channels",
+  "COMMANDS": "Commands",
+  "OS": "OS",
+  "CPUCORES": "CPU Cores",
+  "RAMUSAGE": "Ram Usage"
 }

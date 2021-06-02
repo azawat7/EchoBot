@@ -13,7 +13,7 @@ module.exports.help = {
   maxArgs: 0,
   ownerOnly: false,
   userPerms: [],
-  clientPerms: ["SEND_MESSAGES"],
+  clientPerms: [],
   nsfw: false,
   cooldown: 3,
 };
@@ -24,21 +24,29 @@ module.exports.run = (client, message, args, language, settings) => {
     .setColor(client.colors.echo)
     .setAuthor(`🔰 | {echo}`)
     .addField(
-      `${language.GENERAL}`,
+      `\:trident: - ${language.GENERAL}`,
       `\`\`\`autohotkey
-Uptime -- ${ms(os.uptime() * 1000, { long: true })}
-Library -- Discord.js v${djsversion}
-Env -- Node.js ${process.version}
-Version -- v${version}\`\`\`` // prettier-ignore
+${language.UPTIME} -- ${ms(os.uptime() * 1000, { long: true })}
+${language.LIBRARY} -- Discord.js v${djsversion}
+${language.ENV} -- Node.js ${process.version}
+${language.VERSION} -- v${version}\`\`\`` // prettier-ignore
     )
     .addField(
-      `${language.STATS}`,
+      `\:robot: - ${language.BOT}`,
       `\`\`\`autohotkey
-OS -- ${process.platform} 
+${language.GUILDS} -- ${client.guilds.cache.size}
+${language.USERS} -- ${client.users.cache.size}
+${language.CHANNELS} -- ${client.channels.cache.size}
+${language.COMMANDS} -- ${client.commands.size}\`\`\`` // prettier-ignore
+    )
+    .addField(
+      `\:books: - ${language.STATS}`,
+      `\`\`\`autohotkey
+${language.OS} -- ${os.type()} ${os.release()}
 CPU -- ${core.model}
-CPU Cores -- ${os.cpus().length}
+${language.CPUCORES} -- ${os.cpus().length}
 RAM -- ${client.formatBytes(process.memoryUsage().heapTotal)}
-RAM Usage -- ${client.formatBytes(process.memoryUsage().heapUsed)}\`\`\`` // prettier-ignore
+${language.RAMUSAGE} -- ${client.formatBytes(process.memoryUsage().heapUsed)}\`\`\`` // prettier-ignore
     )
     .setTimestamp();
 

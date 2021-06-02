@@ -7,8 +7,7 @@
   "CLIENTPERMS": "I am missing the following permissions :",
   "NSFW": "You can only use this command in NSFW channel !",
   "NOARGS": "You should not use any arguments for this command !",
-  "INCSYNTAX": "Incorrect syntax ! Use",
-  "COOLDOWN1": "Please wait",
-  "COOLDOWN2": "before using this command again !",
+  "INCSYNTAX": "Incorrect syntax ! Use : {usage}",
+  "COOLDOWN": "Please wait {time}s before using this command again !",
   "BLACKLIST": "This server has been blacklisted by the owner of this bot, please contact the owner to solve this problem !"
 }

@@ -10,7 +10,7 @@ module.exports.help = {
   maxArgs: null,
   ownerOnly: false,
   userPerms: ["BAN_MEMBERS"],
-  clientPerms: ["SEND_MESSAGES", "BAN_MEMBERS"],
+  clientPerms: ["BAN_MEMBERS"],
   nsfw: false,
   cooldown: 3,
 };
@@ -22,30 +22,34 @@ module.exports.run = async (client, message, args, language) => {
   const heheCannotBot = new MessageEmbed()
     .setColor("#f50041")
     .setDescription(`${client.emoji.cross} **${language.BOT}**`);
+  const noPerms = new MessageEmbed()
+    .setColor("#f50041")
+    .setDescription(
+      `${client.emoji.cross} **I can't ban this user because my role is not as high as his !**`
+    );
 
   const member = message.mentions.members.first();
   const reason = args.slice(1).join(" ");
 
   if (!member) return message.channel.send(heheCannotBot);
 
-  // if (member.roles.highest.position <= member.member.roles.highest.position)
-  //   return message.channel.send(heheCannot);
+  if (message.member.roles.highest.position <= member.roles.highest.position)
+    return message.channel.send(heheCannot);
 
-  if (!member.bannable) return message.channel.send(heheCannot);
+  if (message.guild.me.roles.highest.position <= member.roles.highest.position)
+    return message.channel.send(noPerms);
 
   member.ban({ days: 7, reason: reason });
 
-  const data = `${language.SUC}`;
-
-  const replaced = {
-    "{user}": member.user.username,
-    "{moderator}": message.author.username,
-    "{reason}": reason,
-  };
-
   const sucess = new MessageEmbed()
     .setColor("#f50041")
-    .setDescription(`${client.emoji.check} **${replace(data, replaced)}**`)
+    .setDescription(
+      `${client.emoji.check} **${replace(language.SUC, {
+        "{user}": member.user.username,
+        "{moderator}": message.author.username,
+        "{reason}": reason,
+      })}**`
+    )
     .setTimestamp()
     .setFooter(message.author.username, message.author.avatarURL());
 
