@@ -127,6 +127,10 @@ module.exports = async (client, message) => {
     return message.channel.send(embed);
   }
 
+  if (command.help.voice && !message.member.voice.channel) {
+    embed.setDescription(`${client.emoji.cross} ${lan.VOICE}`);
+  }
+
   ///////////////////////////////////////////
 
   if (!client.cooldowns.has(command.help.name)) {
@@ -145,9 +149,9 @@ module.exports = async (client, message) => {
       const cooldownEmbed = new MessageEmbed()
         .setColor("#f50041")
         .setDescription(
-          `${client.emoji.cross} ${replace(lan.COOLDOWN, {
+          `**${client.emoji.cross} ${replace(lan.COOLDOWN, {
             "{time}": timeLeft.toFixed(0),
-          })}`
+          })}**`
         );
       return message.channel.send(cooldownEmbed);
     }

@@ -1,3 +1,5 @@
+const app = require("express")();
+
 module.exports = async (client) => {
   console.log(`✅ Logged in as ${client.user.tag}!`);
   let activities = [

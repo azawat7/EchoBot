@@ -1,0 +1,4 @@
+{
+  "DESCRIPTION": "Disconnect the bot from the channel (stop the music).",
+  "SUC": "Disconnected from the channel !"
+}

@@ -1,0 +1,8 @@
+{
+  "DESCRIPTION": "Tell you information about a specific color.",
+  "ERROR": "An error occured !",
+  "INVALID": "Invalid color !",
+  "RGB": "RGB",
+  "BRIGHT": "Brightness",
+  "HEX": "Hex"
+}

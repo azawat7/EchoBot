@@ -214,6 +214,27 @@ module.exports.run = (client, message, args, language, settings) => {
 
     message.channel.send(embed);
   } else if (
+    (args && args.join(" ").toLowerCase() == "information") ||
+    (args && args[0].toLowerCase() == "information")
+  ) {
+    const cmds = client.commands
+      .filter((cmd) => cmd.help.category.toLowerCase() === "information")
+      .map(
+        (cmd) =>
+          `\`${cmd.help.name} ${" ".repeat(
+            13 - Number(cmd.help.name.length)
+          )} :\``
+      );
+
+    let embed = new MessageEmbed()
+      .setColor(`#f50041`)
+      .setFooter(message.author.username, message.author.avatarURL())
+      .setTitle(`${client.emoji.administration}  | Information`)
+      .setDescription(`● ${cmds.join("\n● ")}`)
+      .setTimestamp();
+
+    message.channel.send(embed);
+  } else if (
     args[0] !== "utility" ||
     "nsfw" ||
     "moderation" ||
