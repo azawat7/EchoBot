@@ -28,6 +28,11 @@ const guildSchema = mongoose.Schema({
     required: true,
     default: defaults.prefix,
   },
+  isPremium: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
   language: {
     type: String,
     required: true,

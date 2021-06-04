@@ -1,4 +1,5 @@
 {
-    "DESCRIPTION": "Displays information from the discord.js docs.",
-    "ERROR": "Could not find that documentation"
+  "DESCRIPTION": "Displays information from the discord.js docs.",
+  "EXAMPLE1": "`{cmd_name}` `<query>`",
+  "ERROR": "Could not find that documentation"
 }

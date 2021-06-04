@@ -13,6 +13,7 @@ module.exports.help = {
   clientPerms: ["MANAGE_MESSAGES"],
   nsfw: false,
   cooldown: 3,
+  example: 1,
 };
 
 module.exports.run = async (client, message, args, language) => {

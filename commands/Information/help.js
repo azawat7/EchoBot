@@ -15,6 +15,7 @@ module.exports.help = {
   clientPerms: [],
   nsfw: false,
   cooldown: 3,
+  example: 2,
 };
 
 module.exports.run = (client, message, args, language, settings) => {
@@ -28,7 +29,6 @@ module.exports.run = (client, message, args, language, settings) => {
       information: client.emoji.information,
       utility: client.emoji.utility,
       nsfw: client.emoji.nsfw,
-      music: client.emoji.music,
     };
 
     const ignoredCategories = ["owner"];
@@ -121,27 +121,6 @@ module.exports.run = (client, message, args, language, settings) => {
       .setColor(`#f50041`)
       .setFooter(message.author.username, message.author.avatarURL())
       .setTitle(`${client.emoji.fun}  |  Fun`)
-      .setDescription(`● ${cmds.join("\n● ")}`)
-      .setTimestamp();
-
-    message.channel.send(embed);
-  } else if (
-    (args && args.join(" ").toLowerCase() == "music") ||
-    (args && args[0].toLowerCase() == "music")
-  ) {
-    const cmds = client.commands
-      .filter((cmd) => cmd.help.category.toLowerCase() === "music")
-      .map(
-        (cmd) =>
-          `\`${cmd.help.name} ${" ".repeat(
-            6 - Number(cmd.help.name.length)
-          )} :\``
-      );
-
-    let embed = new MessageEmbed()
-      .setColor(`#f50041`)
-      .setFooter(message.author.username, message.author.avatarURL())
-      .setTitle(`${client.emoji.music}  |  Music__Video`)
       .setDescription(`● ${cmds.join("\n● ")}`)
       .setTimestamp();
 

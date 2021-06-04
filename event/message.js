@@ -48,44 +48,45 @@ module.exports = async (client, message) => {
       (cmd) => cmd.help.aliases && cmd.help.aliases.includes(commandName)
     );
 
+  const language = require(`../languages/${settings.language}/${command.help.category}/${command.help.name}`);
+
   ///////////////////////////////////////////
 
   if (!message.content.toLowerCase().startsWith(settings.prefix)) return;
 
-  const noCommand = new MessageEmbed()
-    .setColor("#f50041")
-    .setDescription(`${client.emoji.cross} **${lan.NOCOMMAND}**`);
-
   if (!command) {
-    return message.channel.send(noCommand);
+    return message.channel.sendErrorMessage(`${lan.NOCOMMAND}`);
   } else {
     const blacklisted = await BlacklistServer.findOne({
       blacklistedServer: message.guild.id,
     });
     if (blacklisted) {
-      embed.setDescription(`${client.emoji.cross} ${lan.BLACKLIST}`);
-      return message.channel.send(embed);
+      return message.channel.sendErrorMessage(`${lan.BLACKLIST}`);
+    }
+
+    if (message.guild.me.permissions.has(["USE_EXTERNAL_EMOJIS"])) {
+      message.react(client.emoji.check);
+    } else {
+      message.react("✅");
     }
   }
 
   ///////////////////////////////////////////
 
   if (command.help.ownerOnly && !owners.includes(message.author.id)) {
-    embed.setDescription(`${client.emoji.cross} **${lan.OWNERONLY}**`);
-    return message.channel.send(embed);
+    return message.channel.sendErrorMessage(`${lan.OWNERONLY}`);
   }
 
   if (
     command.help.userPerms &&
     !message.member.permissions.has(command.help.userPerms)
   ) {
-    embed.setDescription(
-      `${client.emoji.cross} **${lan.USERPERMS} ${missingPerms(
+    return message.channel.sendErrorMessage(
+      `${lan.USERPERMS} ${missingPerms(
         message.member,
         command.help.userPerms
-      )} !**`
+      )} !`
     );
-    return message.channel.send(embed);
   }
 
   if (
@@ -98,10 +99,20 @@ module.exports = async (client, message) => {
         command.help.clientPerms
       )} !**`
     );
-    return message.channel.send(embed);
+    return message.channel.sendErrorMessage(
+      `${lan.CLIENTPERMS} ${missingPerms(
+        message.guild.me,
+        command.help.clientPerms
+      )} !`
+    );
   }
 
   ///////////////////////////////////////////
+
+  if (command.help.premium && settings.isPremium === false) {
+    embed.setDescription(`${client.emoji.cross} **${lan.PREMIUM}**`);
+    return message.channel.send(embed);
+  }
 
   if (command.help.nsfw && !message.channel.nsfw) {
     embed.setDescription(`${client.emoji.cross} **${lan.NSFW}**`);
@@ -119,16 +130,67 @@ module.exports = async (client, message) => {
     args.length < command.help.minArgs ||
     (command.help.maxArgs !== null && args.length > command.help.maxArgs)
   ) {
-    embed.setDescription(
-      `${client.emoji.cross} **${replace(lan.INCSYNTAX, {
-        "{usage}": `\n>>> \`${settings.prefix}${command.help.name}\` ${command.help.expectedArgs}`,
-      })}**`
-    );
-    return message.channel.send(embed);
-  }
-
-  if (command.help.voice && !message.member.voice.channel) {
-    embed.setDescription(`${client.emoji.cross} ${lan.VOICE}`);
+    if (command.help.example === 1) {
+      const example1 = replace(language.EXAMPLE1, {
+        "{cmd_name}": `${settings.prefix}${command.help.name}`,
+      });
+      return message.channel.sendErrorMessage(
+        `${replace(lan.INCSYNTAX, {
+          "{usage}": `\n>>> ● ${example1}`,
+        })}`
+      );
+    } else if (command.help.example === 2) {
+      const example1 = replace(language.EXAMPLE1, {
+        "{cmd_name}": `${settings.prefix}${command.help.name}`,
+      });
+      const example2 = replace(language.EXAMPLE2, {
+        "{cmd_name}": `${settings.prefix}${command.help.name}`,
+      });
+      return message.channel.sendErrorMessage(
+        `${replace(lan.INCSYNTAX, {
+          "{usage}": `\n>>> ● ${example1}\n ● ${example2}`,
+        })}`
+      );
+    } else if (command.help.example === 3) {
+      const example1 = replace(language.EXAMPLE1, {
+        "{cmd_name}": `${settings.prefix}${command.help.name}`,
+      });
+      const example2 = replace(language.EXAMPLE2, {
+        "{cmd_name}": `${settings.prefix}${command.help.name}`,
+      });
+      const example3 = replace(language.EXAMPLE3, {
+        "{cmd_name}": `${settings.prefix}${command.help.name}`,
+      });
+      return message.channel.sendErrorMessage(
+        `${replace(lan.INCSYNTAX, {
+          "{usage}": `\n>>> ● ${example1}\n ● ${example2}\n ● ${example3}`,
+        })}`
+      );
+    } else if (command.help.example === 4) {
+      const example1 = replace(language.EXAMPLE1, {
+        "{cmd_name}": `${settings.prefix}${command.help.name}`,
+      });
+      const example2 = replace(language.EXAMPLE2, {
+        "{cmd_name}": `${settings.prefix}${command.help.name}`,
+      });
+      const example3 = replace(language.EXAMPLE3, {
+        "{cmd_name}": `${settings.prefix}${command.help.name}`,
+      });
+      const example4 = replace(language.EXAMPLE4, {
+        "{cmd_name}": `${settings.prefix}${command.help.name}`,
+      });
+      return message.channel.sendErrorMessage(
+        `${replace(lan.INCSYNTAX, {
+          "{usage}": `\n>>> ● ${example1}\n ● ${example2}\n ● ${example3}\n ● ${example4}`,
+        })}`
+      );
+    } else {
+      return message.channel.sendErrorMessage(
+        `${replace(lan.INCSYNTAX, {
+          "{usage}": `\n>>> \`${settings.prefix}${command.help.name}\` ${command.help.expectedArgs}`,
+        })}`
+      );
+    }
   }
 
   ///////////////////////////////////////////
@@ -146,21 +208,16 @@ module.exports = async (client, message) => {
 
     if (timeNow < cdExpirationTime) {
       timeLeft = (cdExpirationTime - timeNow) / 1000;
-      const cooldownEmbed = new MessageEmbed()
-        .setColor("#f50041")
-        .setDescription(
-          `**${client.emoji.cross} ${replace(lan.COOLDOWN, {
-            "{time}": timeLeft.toFixed(0),
-          })}**`
-        );
-      return message.channel.send(cooldownEmbed);
+      return message.channel.sendErrorMessage(
+        `${replace(lan.COOLDOWN, {
+          "{time}": timeLeft.toFixed(0),
+        })}`
+      );
     }
   }
 
   tStamps.set(message.author.id, timeNow);
   setTimeout(() => tStamps.delete(message.author.id), cdAmount);
-
-  const language = require(`../languages/${settings.language}/${command.help.category}/${command.help.name}`);
 
   ///////////////////////////////////////////
 

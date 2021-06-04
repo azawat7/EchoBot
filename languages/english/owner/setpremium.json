@@ -1,0 +1,9 @@
+{
+  "DESCRIPTION": "Add/remove a guild premium status.",
+  "EXAMPLE1": "`{cmd_name}` `<add>` `<server_id>`",
+  "EXAMPLE2": "`{cmd_name}` `<remove>` `<server_id>`",
+  "SUCCESS": "Premium status was added to this guild !",
+  "SUCCESS1": "Premium status was removed from this guild !",
+  "ERROR": "This guild has already premium status !",
+  "ERROR1": "This guild already don't have premium status !"
+}

@@ -1,5 +1,6 @@
 {
-    "DESCRIPTION": "Delete a giveaway.",
-    "ERRORS": "No giveaway found for",
-    "SUCS": "Giveaway deleted !"
+  "DESCRIPTION": "Delete a giveaway.",
+  "EXAMPLE1": "`{cmd_name}` `<giveaway_id>`",
+  "ERRORS": "No giveaway found for",
+  "SUCS": "Giveaway deleted !"
 }

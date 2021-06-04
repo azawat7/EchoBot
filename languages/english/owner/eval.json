@@ -1,3 +1,5 @@
 {
-    "DESCRIPTION": "Evaluate a JS code."
+  "DESCRIPTION": "Evaluate a JS code.",
+  "EXAMPLE1": "`{cmd_name}` `<js_code>`",
+  "DANG": "You spelled a dangerous word !"
 }

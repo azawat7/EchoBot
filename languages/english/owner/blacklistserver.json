@@ -1,8 +1,10 @@
 {
-  "DESCRIPTION": "Un/blacklist a server from the bot.",
-  "NOSERVER": "I am not in that server :",
-  "SERVERBL": "This server has already been blacklisted",
-  "SUCCESS": "Blacklisted a new server/guild !",
-  "SERVERBLL": "This server doesn't exist in the DB !",
-  "SUCCESS1": "Unblacklisted a new server/guild !"
+  "DESCRIPTION": "Un/blacklist a guild from the bot.",
+  "EXAMPLE1": "`{cmd_name}` `<add>` `<server_id>`",
+  "EXAMPLE2": "`{cmd_name}` `<remove>` `<server_id>`",
+  "NOSERVER": "I am not in that guild :",
+  "SERVERBL": "This guild has already been blacklisted",
+  "SUCCESS": "Blacklisted a new guild !",
+  "SERVERBLL": "This guild doesn't exist in the DB !",
+  "SUCCESS1": "Unblacklisted a new guild !"
 }

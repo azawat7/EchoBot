@@ -1,3 +1,5 @@
 {
-    "DESCRIPTION": "Pokazuje kogoś avatara."
+  "DESCRIPTION": "Displays someone avatar.",
+  "EXAMPLE1": "`{cmd_name}`",
+  "EXAMPLE2": "`{cmd_name}` `<@user>`"
 }

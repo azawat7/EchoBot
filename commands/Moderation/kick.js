@@ -13,6 +13,7 @@ module.exports.help = {
   clientPerms: ["KICK_MEMBERS"],
   nsfw: false,
   cooldown: 3,
+  example: 2,
 };
 
 module.exports.run = async (client, message, args, language) => {

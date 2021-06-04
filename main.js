@@ -1,5 +1,5 @@
 const { Collection, Message } = require("discord.js");
-const { MessageEmbed } = require("discord.js");
+const { MessageEmbed, TextChannel } = require("discord.js");
 const { Client } = require("discord.js");
 const DisTube = require("distube");
 const { DiscordTogether } = require("discord-together");
@@ -15,6 +15,13 @@ module.exports = client;
 require("./util/functions.js")(client);
 require("./util/dbFunctions")(client);
 ///////////////////////////////////////////
+
+TextChannel.prototype.sendErrorMessage = function (content, file) {
+  const embed = new MessageEmbed()
+    .setColor(client.colors.echo)
+    .setDescription(`${client.emoji.cross} **${content}**`);
+  return this.send(embed, file);
+};
 
 // Config
 client.config = require("./config");

@@ -1,5 +1,6 @@
 {
-    "DESCRIPTION": "Unban a desired user.",
-    "NOTBANNED": "User is not banned !",
-    "SUC": "Unbanned user !"
+  "DESCRIPTION": "Unban a desired user.",
+  "EXAMPLE1": "`{cmd_name}` `<user_id>`",
+  "NOTBANNED": "User is not banned !",
+  "SUC": "Unbanned user !"
 }

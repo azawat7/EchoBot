@@ -1,5 +1,6 @@
 {
-    "DESCRIPTION": "Reroll a giveaway.",
-    "ERRORS": "No giveaway found for",
-    "SUCS": "Winner rerolled !"
+  "DESCRIPTION": "Reroll a giveaway.",
+  "EXAMPLE1": "`{cmd_name}` `<giveaway_id>`",
+  "ERRORS": "No giveaway found for",
+  "SUCS": "Winner rerolled !"
 }

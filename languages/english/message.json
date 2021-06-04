@@ -10,5 +10,6 @@
   "INCSYNTAX": "Incorrect syntax ! Use : {usage}",
   "COOLDOWN": "Please wait {time}s before using this command again !",
   "BLACKLIST": "This server has been blacklisted by the owner of this bot, please contact the owner to solve this problem !",
-  "VOICE": "You need to be in a voice channel to use this command !"
+  "VOICE": "You need to be in a voice channel to use this command !",
+  "PREMIUM": "This command is only available for premium guilds !"
 }

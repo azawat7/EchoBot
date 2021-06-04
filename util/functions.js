@@ -1,3 +1,5 @@
+const { MessageEmbed } = require("discord.js");
+
 module.exports = (client) => {
   client.formatBytes = (bytes) => {
     if (bytes === 0) return "0 -_- 0";
@@ -7,5 +9,12 @@ module.exports = (client) => {
   };
   client.capitalize = (string) => {
     return string.charAt(0).toUpperCase() + string.substring(1);
+  };
+
+  client.embedError = (string) => {
+    const embed = new MessageEmbed()
+      .setColor(client.colors.echo)
+      .setDescription(`${client.emoji.cross} ${string}`);
+    return channel.send(embed);
   };
 };

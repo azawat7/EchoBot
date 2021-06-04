@@ -6,13 +6,14 @@ module.exports.help = {
   aliases: [],
   category: "moderation",
   expectedArgs: "`<@user>` `<reason>`",
-  minArgs: 2,
+  minArgs: 1,
   maxArgs: null,
   ownerOnly: false,
   userPerms: ["BAN_MEMBERS"],
   clientPerms: ["BAN_MEMBERS"],
   nsfw: false,
   cooldown: 3,
+  example: 2,
 };
 
 module.exports.run = async (client, message, args, language) => {

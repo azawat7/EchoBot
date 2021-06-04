@@ -3,7 +3,7 @@ const { owners } = require("../../config");
 module.exports.help = {
   name: "eval",
   hidden: true,
-  aliases: [],
+  aliases: ["e"],
   category: "owner",
   expectedArgs: "`<js_code>`",
   minArgs: 1,
@@ -13,19 +13,28 @@ module.exports.help = {
   clientPerms: [],
   nsfw: false,
   cooldown: 3,
+  example: 1,
 };
 
-module.exports.run = async (client, message, args) => {
-  function clean(text) {
-    if (typeof text === "string")
-      return text
-        .replace(/`/g, "`" + String.fromCharCode(8203))
-        .replace(/@/g, "@" + String.fromCharCode(8203));
-    return text;
-  }
+module.exports.run = async (client, message, args, language, settings) => {
+  const content = message.content.split(" ").slice(1).join(" ");
+  const result = new Promise((resolve, reject) => resolve(eval(content)));
 
-  const code = args.join(" ");
-  const evaled = eval(code);
-  const cleanCode = await clean(evaled);
-  message.channel.send(cleanCode, { code: "js" });
+  return result
+    .then((output) => {
+      if (typeof output !== "string")
+        output = require("util").inspect(output, { depth: 0 });
+      if (output.includes(process.env.TOKEN))
+        output = output.replace(
+          process.env.TOKEN,
+          "hehe there is no token for u"
+        );
+      return message.channel.send(output, { code: "js" });
+    })
+    .catch((err) => {
+      err = err.toString();
+      if (err.includes(process.env.TOKEN))
+        err = err.replace(process.env.TOKEN, "`hehe there is no token for u`");
+      return message.channel.send(err, { code: "js" });
+    });
 };

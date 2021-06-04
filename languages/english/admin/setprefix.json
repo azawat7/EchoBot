@@ -1,4 +1,5 @@
 {
   "DESCRIPTION": "Change the current prefix.",
+  "EXAMPLE1": "`{cmd_name}` `<new_prefix>`",
   "SETPREFIX1": "Prefix updated !"
 }

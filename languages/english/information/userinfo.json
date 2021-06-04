@@ -1,11 +1,13 @@
 {
-    "DESCRIPTION": "Displays information from a user.",
+  "DESCRIPTION": "Displays information from a user.",
+  "EXAMPLE1": "`{cmd_name}`",
+  "EXAMPLE2": "`{cmd_name}` `<@user>`",
 
-    "USER": "User",
-    "JOINEDDISCORD": "Joined Discord At",
-    "JOINEDSERVER": "Joined Server On",
-    "ROLE": "Roles",
-    "BADGES": "Badges",
+  "USER": "User",
+  "JOINEDDISCORD": "Joined Discord At",
+  "JOINEDSERVER": "Joined Server On",
+  "ROLE": "Roles",
+  "BADGES": "Badges",
 
-    "NONE": "None"
+  "NONE": "None"
 }

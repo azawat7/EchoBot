@@ -1,5 +1,6 @@
 {
   "DESCRIPTION": "Tell you information about a specific color.",
+  "EXAMPLE1": "`{cmd_name}` `<hex_code>`",
   "ERROR": "An error occured !",
   "INVALID": "Invalid color !",
   "RGB": "RGB",
