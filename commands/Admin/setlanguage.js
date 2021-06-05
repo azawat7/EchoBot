@@ -17,35 +17,36 @@ module.exports.help = {
 };
 
 module.exports.run = async (client, message, args, language, settings) => {
-  let languages = ["english"];
+  message.channel.send("Command is not available right now !");
+  // let languages = ["english"];
 
-  const sembed = new MessageEmbed().setColor("#f50041").setDescription(
-    `**${client.emoji.cross}  ${replace(language.SETLANGUAGE1, {
-      "{languages}": ">>> :flag_us: `english`",
-    })}**`
-  );
+  // const sembed = new MessageEmbed().setColor("#f50041").setDescription(
+  //   `**${client.emoji.cross}  ${replace(language.SETLANGUAGE1, {
+  //     "{languages}": ">>> :flag_us: `english`",
+  //   })}**`
+  // );
 
-  const aembed = new MessageEmbed()
-    .setColor("#f50041")
-    .setDescription(`**${client.emoji.cross} ${language.SETLANGUAGE2}**`);
+  // const aembed = new MessageEmbed()
+  //   .setColor("#f50041")
+  //   .setDescription(`**${client.emoji.cross} ${language.SETLANGUAGE2}**`);
 
-  const newSetting = args.slice(0).join(" ");
+  // const newSetting = args.slice(0).join(" ");
 
-  if (!languages.includes(args[0].toLowerCase()))
-    return message.channel.send(sembed);
+  // if (!languages.includes(args[0].toLowerCase()))
+  //   return message.channel.send(sembed);
 
-  if (args[0] === settings.language) return message.channel.send(aembed);
+  // if (args[0] === settings.language) return message.channel.send(aembed);
 
-  const actLang = new MessageEmbed()
-    .setColor("#f50041")
-    .setDescription(
-      `**${language.SETLANGUAGE3}** \`${
-        settings.language
-      }\` -> \`${newSetting.toLowerCase()}\``
-    );
+  // const actLang = new MessageEmbed()
+  //   .setColor("#f50041")
+  //   .setDescription(
+  //     `**${language.SETLANGUAGE3}** \`${
+  //       settings.language
+  //     }\` -> \`${newSetting.toLowerCase()}\``
+  //   );
 
-  if (args.length) {
-    await client.updateGuild(message.guild, { language: args[0] });
-    return message.channel.send(actLang);
-  }
+  // if (args.length) {
+  //   await client.updateGuild(message.guild, { language: args[0] });
+  //   return message.channel.send(actLang);
+  // }
 };
