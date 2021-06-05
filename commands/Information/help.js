@@ -2,6 +2,7 @@ const { MessageEmbed } = require("discord.js");
 const { readdirSync } = require("fs");
 const iapg = require("iapg");
 const ReactionPages = iapg.ReactionPages;
+const replace = require("replacer-js");
 
 module.exports.help = {
   name: "help",
@@ -54,7 +55,13 @@ module.exports.run = (client, message, args, language, settings) => {
         `https://i.imgur.com/45UIEsS.png`
       )
       .setColor(`#f50041`)
-      .setDescription(`${language.EDES1} \`${settings.prefix}\``)
+      .setDescription(
+        `>>> ${replace(language.EDES, {
+          "{n_commands}": client.commands.size,
+        })}\n${replace(language.EDES1, {
+          "{prefix}": settings.prefix,
+        })}`
+      )
       .addFields(categories)
       .setTimestamp()
       .setFooter(message.author.username, message.author.avatarURL());
@@ -66,7 +73,10 @@ module.exports.run = (client, message, args, language, settings) => {
       )
       .setColor(`#f50041`)
       .setDescription(
-        `Run command \`${settings.prefix}help\` followed by the command name you want to get more information on !\nExample :\n\`\`\`${settings.prefix}help eval\`\`\``
+        `${replace(language.PAGE2, {
+          "{prefix}": settings.prefix,
+          "{prefix1}": settings.prefix,
+        })}`
       )
       .setImage(
         `https://cdn.discordapp.com/attachments/838062587051507795/848309507007971348/unknown.png`
@@ -256,7 +266,7 @@ module.exports.run = (client, message, args, language, settings) => {
     if (command.help.aliases.length > 0)
       embed.addField(`🔖 Alias`, `\`${command.help.aliases.join("`, `")}\``);
     if (command.help.nsfw)
-      embed.addField(`🔞 ${language.nsfw}`, `\`${language.nsfw1}\``);
+      embed.addField(`🔞 ${language.NSFW}`, `\`${language.NSFW1}\``);
     if (command.help.ownerOnly)
       embed.addField(`❌ ${language.OWNERONLY}`, `\`${language.OWNERONLY1}\``);
 

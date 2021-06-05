@@ -8,6 +8,7 @@ module.exports = async (client, message) => {
   if (message.author.bot) return;
   if (!message.guild.me.hasPermission("SEND_MESSAGES")) return;
 
+  const mentionRegex = RegExp(`^<@!?${client.user.id}>$`);
   const embed = new MessageEmbed().setColor(client.colors.echo);
 
   ///////////////////////////////////////////
@@ -21,6 +22,23 @@ module.exports = async (client, message) => {
     return;
   }
   const lan = require(`../languages/${settings.language}/message`);
+
+  if (message.content.match(mentionRegex)) {
+    embed.setTimestamp;
+    embed.setTitle(`📓 ${lan.MENTION1}`);
+    embed.setDescription(
+      `${replace(lan.MENTION2, {
+        "{prefix}": settings.prefix,
+        "{prefix1}": settings.prefix,
+      })}`
+    );
+    embed.addField(`📌 ${lan.MENTIONLINK}`, [
+      `**${lan.MENTIONSUPPORT} :** [${lan.CLICKHERE}](https://discord.gg/5eaZdWygQf)`,
+      `**${lan.MENTIONINVITE} :** [${lan.CLICKHERE}](https://discord.com/oauth2/authorize?client_id=838061935039610921&scope=bot&permissions=8589934591)`,
+    ]);
+    message.channel.send(embed);
+  }
+
   const position = settings.users.map((e) => e.id).indexOf(message.member.id);
 
   if (message.guild && position == -1) {
@@ -40,6 +58,8 @@ module.exports = async (client, message) => {
 
   ///////////////////////////////////////////
 
+  ///////////////////////////////////////////
+
   const args = message.content.slice(settings.prefix.length).split(/ +/);
   const commandName = args.shift().slice(settings.prefix.lenght).toLowerCase();
   const command =
@@ -47,9 +67,6 @@ module.exports = async (client, message) => {
     client.commands.find(
       (cmd) => cmd.help.aliases && cmd.help.aliases.includes(commandName)
     );
-
-  const language = require(`../languages/${settings.language}/${command.help.category}/${command.help.name}`);
-
   ///////////////////////////////////////////
 
   if (!message.content.toLowerCase().startsWith(settings.prefix)) return;
@@ -221,6 +238,7 @@ module.exports = async (client, message) => {
 
   ///////////////////////////////////////////
 
+  const language = require(`../languages/${settings.language}/${command.help.category}/${command.help.name}`);
   command.run(client, message, args, language, settings);
 };
 

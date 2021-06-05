@@ -1,5 +1,6 @@
 {
   "DESCRIPTION": "Change the current prefix.",
   "EXAMPLE1": "`{cmd_name}` `<new_prefix>`",
-  "SETPREFIX1": "Prefix updated !"
+  "SETPREFIX1": "Prefix updated !",
+  "ERROR": "Your new prefix must not be 3 characters long !"
 }

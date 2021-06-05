@@ -1,15 +1,24 @@
-const { MessageEmbed } = require("discord.js");
+const { MessageEmbed, WebhookClient } = require("discord.js");
+const webhookClient = new WebhookClient(
+  process.env.WEBHOOKID,
+  process.env.WEBHOOKURL
+);
 
 module.exports = async (client, guild) => {
   await client.deleteGuild(guild);
 
-  const botJoinEmbed = new MessageEmbed()
-    .setTitle(`${client.emoji.check} New Server`)
-    .setColor(client.colors.echo)
+  const botLeaveEmbed = new MessageEmbed()
+    .setTitle(`${client.emoji.cross} {echo} left a server !`)
+    .setColor(client.colors.red)
     .setTimestamp()
-    .addField(`Server Name`, `\`${guild.name}\``, true)
-    .addField(`Server ID`, `\`${guild.id}\``, true)
-    .setFooter(`${client.guilds.cache.size} guilds`);
+    .addField(`\📟 Server :`, `\`${guild.name}\` *(${guild.id})*`)
+    .addField(
+      `\🆔 Owner :`,
+      `\`${guild.owner.user.username}\` *(${guild.owner.id})*`
+    )
+    .setFooter(`{echo} is now in ${client.guilds.cache.size} guilds`);
 
-  client.channels.cache.get("844457082065649676").send(botJoinEmbed);
+  webhookClient.send({
+    embeds: [botLeaveEmbed],
+  });
 };
