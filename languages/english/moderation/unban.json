@@ -1,6 +1,6 @@
 {
   "DESCRIPTION": "Unban a desired user.",
-  "EXAMPLE1": "`{cmd_name}` `<user_id>`",
+  "EXAMPLE1": "`{cmd_name}` `838061935039610921`",
   "NOTBANNED": "User is not banned !",
   "SUC": "Unbanned user !"
 }

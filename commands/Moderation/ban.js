@@ -5,7 +5,7 @@ module.exports.help = {
   name: "ban",
   aliases: [],
   category: "moderation",
-  expectedArgs: "`<@user>` `<reason>`",
+  expectedArgs: "`<@user>` `[reason]`",
   minArgs: 1,
   maxArgs: null,
   ownerOnly: false,

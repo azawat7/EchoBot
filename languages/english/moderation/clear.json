@@ -1,6 +1,6 @@
 {
   "DESCRIPTION": "Clear a desired amount of msg.",
-  "EXAMPLE1": "`{cmd_name}` `<number_of_msg>`",
+  "EXAMPLE1": "`{cmd_name}` `69`",
   "NANNUMBER": "You did not provided a number !",
   "TH": "You can only delete a maximum of 100 msg !",
   "TL": "You need to delete at least 1 msg !",

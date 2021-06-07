@@ -1,5 +1,6 @@
 {
   "DESCRIPTION": "Displays information from {echo}.",
+  "EXAMPLE1": "`{cmd_name}`",
   "STATS": "Stats :",
   "GENERAL": "General Info :",
   "BOT": "Bot Info :",

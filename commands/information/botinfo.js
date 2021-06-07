@@ -16,6 +16,7 @@ module.exports.help = {
   clientPerms: [],
   nsfw: false,
   cooldown: 3,
+  example: 1,
 };
 
 module.exports.run = (client, message, args, language, settings) => {

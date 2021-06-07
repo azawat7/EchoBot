@@ -1,3 +1,4 @@
 {
-    "DESCRIPTION": "yes"
+  "DESCRIPTION": "yes",
+  "EXAMPLE1": "{cmd_name}"
 }

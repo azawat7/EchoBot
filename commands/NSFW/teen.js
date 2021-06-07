@@ -1,7 +1,7 @@
 const fetch = require("node-fetch");
 
 module.exports.help = {
-  name: "teen",
+  name: "somename",
   aliases: [],
   category: "nsfw",
   expectedArgs: null,

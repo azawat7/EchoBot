@@ -1,3 +1,4 @@
 {
-  "DESCRIPTION": "Shows all the emojis available in the server."
+  "DESCRIPTION": "Shows all the emojis available in the server.",
+  "EXAMPLE1": "`{cmd_name}`"
 }

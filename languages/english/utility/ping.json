@@ -1,4 +1,5 @@
 {
-    "DESCRIPTION": "Display the bot latency.",
-    "PINGING": "🏓 Pinging..."
+  "DESCRIPTION": "Display the bot latency.",
+  "EXAMPLE1": "`{cmd_name}`",
+  "PINGING": "🏓 Pinging..."
 }

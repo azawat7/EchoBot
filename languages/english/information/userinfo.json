@@ -1,7 +1,7 @@
 {
   "DESCRIPTION": "Displays information from a user.",
   "EXAMPLE1": "`{cmd_name}`",
-  "EXAMPLE2": "`{cmd_name}` `<@user>`",
+  "EXAMPLE2": "`{cmd_name}` `@im_a_panda_guy`",
 
   "USER": "User",
   "JOINEDDISCORD": "Joined Discord At",

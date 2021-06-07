@@ -4,7 +4,7 @@ module.exports.help = {
   name: "avatar",
   aliases: ["profilepic", "pic", "ava", "av"],
   category: "information",
-  expectedArgs: "`<@user>`",
+  expectedArgs: "`[@user]`",
   minArgs: 0,
   maxArgs: 1,
   ownerOnly: false,

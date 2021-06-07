@@ -5,7 +5,7 @@ module.exports.help = {
   name: "permissions",
   aliases: ["permission", "perms"],
   category: "information",
-  expectedArgs: "`<@user>`",
+  expectedArgs: "`[@user]`",
   minArgs: 0,
   maxArgs: 1,
   ownerOnly: false,
@@ -13,6 +13,7 @@ module.exports.help = {
   clientPerms: [],
   nsfw: false,
   cooldown: 3,
+  example: 2,
 };
 
 module.exports.run = async (client, message, args) => {

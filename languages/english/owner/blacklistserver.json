@@ -1,7 +1,7 @@
 {
   "DESCRIPTION": "Un/blacklist a guild from the bot.",
-  "EXAMPLE1": "`{cmd_name}` `<add>` `<server_id>`",
-  "EXAMPLE2": "`{cmd_name}` `<remove>` `<server_id>`",
+  "EXAMPLE1": "`{cmd_name}` `add` `838062586615955466`",
+  "EXAMPLE2": "`{cmd_name}` `remove` `838062586615955466`",
   "NOSERVER": "I am not in that guild :",
   "SERVERBL": "This guild has already been blacklisted",
   "SUCCESS": "Blacklisted a new guild !",

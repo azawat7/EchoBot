@@ -5,7 +5,7 @@ module.exports.help = {
   name: "userinfo",
   aliases: ["ui"],
   category: "information",
-  expectedArgs: "`<@user>`",
+  expectedArgs: "`[@user]`",
   minArgs: 0,
   maxArgs: 1,
   ownerOnly: false,

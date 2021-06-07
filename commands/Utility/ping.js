@@ -12,6 +12,7 @@ module.exports.help = {
   clientPerms: [],
   nsfw: false,
   cooldown: 3,
+  example: 1,
 };
 
 module.exports.run = async (client, message, args, language) => {
@@ -24,7 +25,7 @@ module.exports.run = async (client, message, args, language) => {
         `>>> \`${msg.createdTimestamp - message.createdTimestamp}ms\``
       )
       .addField(
-        "📟 **API Discord.js :**",
+        "**📟 API Discord.js :**",
         `>>> \`${Math.round(client.ws.ping)}ms\``
       )
   );

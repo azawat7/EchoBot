@@ -1,7 +1,7 @@
 {
   "DESCRIPTION": "Kick a desired user from the server.",
-  "EXAMPLE1": "`{cmd_name}` `<@user>`",
-  "EXAMPLE2": "`{cmd_name}` `<@user>` `<reason>`",
+  "EXAMPLE1": "`{cmd_name}` `@im_a_panda_guy`",
+  "EXAMPLE2": "`{cmd_name}` `@im_a_panda_guy` `Breaking the rules.`",
   "BOT": "You can't ban this user because he is a bot !",
   "ROLEHIGH": "You can't ban this person because you either have the same role or your role is lower !",
   "SUC": "`{user}` has been kicked from the server by `{moderator}` for `{reason}`"

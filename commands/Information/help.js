@@ -8,7 +8,7 @@ module.exports.help = {
   name: "help",
   aliases: [],
   category: "information",
-  expectedArgs: "`<command_name>`",
+  expectedArgs: "`[command_name]`",
   minArgs: 0,
   maxArgs: 1,
   ownerOnly: false,
@@ -169,7 +169,7 @@ module.exports.run = (client, message, args, language, settings) => {
       .map(
         (cmd) =>
           `\`${cmd.help.name} ${" ".repeat(
-            7 - Number(cmd.help.name.length)
+            8 - Number(cmd.help.name.length)
           )} :\``
       );
 
@@ -237,38 +237,94 @@ module.exports.run = (client, message, args, language, settings) => {
           command.help.aliases && command.help.aliases.includes(args[0])
       );
 
-    const sembed = new MessageEmbed()
+    const errembed = new MessageEmbed()
       .setColor(`#f50041`)
       .setDescription(`${client.emoji.cross} **${language.ERROR}**`);
 
-    if (!command) return message.channel.send(sembed);
+    if (!command) return message.channel.send(errembed);
 
     const lang = require(`../../languages/${settings.language}/${command.help.category}/${command.help.name}`);
 
     const embed = new MessageEmbed()
       .setColor(`#f50041`)
       .setAuthor(
-        `${language.TITLE2}\`${command.help.name}\` ${language.TITLE2P2}`
+        `${replace(language.TITLE2, {
+          "{cmd}": command.help.name,
+        })}`
       )
       .addField(`📃 ${language.DES}`, `\`${lang.DESCRIPTION}\``)
       .addField(
         `⏱ ${language.COOLDOWN}`,
-        `\`${command.help.cooldown} ${language.SECOND}\``
+        `\`${command.help.cooldown} ${language.SECOND}\``,
+        true
       )
       .addField(
         `🧿 ${language.USAGE}`,
         command.help.expectedArgs
-          ? `\`${settings.prefix}${command.help.name}\` \`${command.help.expectedArgs}\``
-          : `\`${settings.prefix}${command.help.name}\``
+          ? `\`${settings.prefix}${command.help.name}\` ${command.help.expectedArgs}`
+          : `\`${settings.prefix}${command.help.name}\``,
+        true
       )
       .setTimestamp()
       .setFooter(message.author.username, message.author.avatarURL());
+
     if (command.help.aliases.length > 0)
-      embed.addField(`🔖 Alias`, `\`${command.help.aliases.join("`, `")}\``);
+      embed.addField(
+        `🔖 ${language.ALIA}`,
+        `\`${command.help.aliases.join("`, `")}\``
+      );
     if (command.help.nsfw)
       embed.addField(`🔞 ${language.NSFW}`, `\`${language.NSFW1}\``);
     if (command.help.ownerOnly)
       embed.addField(`❌ ${language.OWNERONLY}`, `\`${language.OWNERONLY1}\``);
+    if (command.help.example === 1) {
+      const example1 = replace(lang.EXAMPLE1, {
+        "{cmd_name}": `${settings.prefix}${command.help.name}`,
+      });
+      embed.addField(`🔮 ${language.EXAM}`, `● ${example1}`);
+    }
+    if (command.help.example === 2) {
+      const example1 = replace(lang.EXAMPLE1, {
+        "{cmd_name}": `${settings.prefix}${command.help.name}`,
+      });
+      const example2 = replace(lang.EXAMPLE2, {
+        "{cmd_name}": `${settings.prefix}${command.help.name}`,
+      });
+      embed.addField(`🔮 ${language.EXAMPD}`, `● ${example1}\n● ${example2}`);
+    }
+    if (command.help.example === 3) {
+      const example1 = replace(lang.EXAMPLE1, {
+        "{cmd_name}": `${settings.prefix}${command.help.name}`,
+      });
+      const example2 = replace(lang.EXAMPLE2, {
+        "{cmd_name}": `${settings.prefix}${command.help.name}`,
+      });
+      const example3 = replace(lang.EXAMPLE3, {
+        "{cmd_name}": `${settings.prefix}${command.help.name}`,
+      });
+      embed.addField(
+        `🔮 ${language.EXAMPD}`,
+        `● ${example1}\n● ${example2}\n● ${example3}`
+      );
+    }
+    if (command.help.example === 4) {
+      const example1 = replace(lang.EXAMPLE1, {
+        "{cmd_name}": `${settings.prefix}${command.help.name}`,
+      });
+      const example2 = replace(lang.EXAMPLE2, {
+        "{cmd_name}": `${settings.prefix}${command.help.name}`,
+      });
+      const example3 = replace(lang.EXAMPLE3, {
+        "{cmd_name}": `${settings.prefix}${command.help.name}`,
+      });
+      const example4 = replace(lang.EXAMPLE4, {
+        "{cmd_name}": `${settings.prefix}${command.help.name}`,
+      });
+      embed.addField(
+        `🔮 ${language.EXAMPD}`,
+        `● ${example1}\n● ${example2}\n● ${example3}\n● ${example4}`
+      );
+    }
 
     return message.channel.send(embed);
   }

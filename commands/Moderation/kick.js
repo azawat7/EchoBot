@@ -5,7 +5,7 @@ module.exports.help = {
   name: "kick",
   aliases: [],
   category: "moderation",
-  expectedArgs: "`<@user>` `<reason>`",
+  expectedArgs: "`<@user>` `[reason]`",
   minArgs: 2,
   maxArgs: null,
   ownerOnly: false,

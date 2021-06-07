@@ -126,7 +126,7 @@ module.exports = async (client, message) => {
 
   ///////////////////////////////////////////
 
-  if (command.help.premium && settings.isPremium === false) {
+  if (command.help.premium && settings.premium.isPremium === false) {
     embed.setDescription(`${client.emoji.cross} **${lan.PREMIUM}**`);
     return message.channel.send(embed);
   }
@@ -142,6 +142,8 @@ module.exports = async (client, message) => {
     embed.setDescription(`${client.emoji.cross} **${lan.NOARGS}**`);
     return message.channel.send(embed);
   }
+
+  const language = require(`../languages/${settings.language}/${command.help.category}/${command.help.name}`);
 
   if (
     args.length < command.help.minArgs ||
@@ -238,7 +240,6 @@ module.exports = async (client, message) => {
 
   ///////////////////////////////////////////
 
-  const language = require(`../languages/${settings.language}/${command.help.category}/${command.help.name}`);
   command.run(client, message, args, language, settings);
 };
 
