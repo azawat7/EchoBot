@@ -35,12 +35,12 @@ module.exports.run = async (client, message, args, language) => {
       {
         name: "random code",
         content,
-        language: languaged,
+        language: languaged.toLowerCase(),
       },
     ],
     {
       title: titled,
-      description: `${languaged} code.`,
+      description: `${languaged.toLowerCase()} code.`,
     }
   ).then((value) => {
     const embed = new MessageEmbed()

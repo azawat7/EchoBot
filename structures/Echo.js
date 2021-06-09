@@ -1,4 +1,4 @@
-const { Client, Collection } = require("discord.js");
+const { Client, Collection, MessageEmbed, TextChannel } = require("discord.js");
 const GiveawayManagerWithOwnDatabase = require("../util/giveaways");
 const { loadCommands, loadEvents } = require("../util/loaders");
 const { DiscordTogether } = require("discord-together");
@@ -41,14 +41,23 @@ module.exports = class EchoClient extends Client {
     this.commands = new Collection();
     this.cooldowns = new Collection();
     this.config = require("../config");
-    this.colors = require("../assets/colors.json");
-    this.emoji = require("../assets/emojis.json");
+    this.colors = require("../assets/json/colors.json");
+    this.emoji = require("../assets/json/emojis.json");
   }
 
   async start(token = process.env.TOKEN) {
+    TextChannel.prototype.sendErrorMessage = function (content, file) {
+      const embed = new MessageEmbed()
+        .setColor(this.client.colors.echo)
+        .setDescription(`${this.client.emoji.cross} **${content}**`);
+      return this.send(embed, file);
+    };
     // Creates functions
     require("../util/functions/functions.js")(this);
     require("../util/functions/dbFunctions.js")(this);
+    // Discord Buttons
+    require("discord-buttons")(this);
+    require("discord-slider")(this);
     // Creates discordTogether client
     this.discordTogether = new DiscordTogether(this);
     // Creates the giveaway manager

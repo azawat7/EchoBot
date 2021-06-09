@@ -1,5 +1,8 @@
-exports.owners = ["406108846575058944"];
-exports.DEFAULTSETTINGS = {
-  prefix: "$",
-  language: "english",
+module.exports = {
+  owners: ["406108846575058944"],
+  DEFAULTSETTINGS: {
+    prefix: "$",
+    language: "english",
+  },
+  dashboard: true,
 };

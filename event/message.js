@@ -81,11 +81,9 @@ module.exports = async (client, message) => {
       return message.channel.sendErrorMessage(`${lan.BLACKLIST}`);
     }
 
-    if (message.guild.me.permissions.has(["USE_EXTERNAL_EMOJIS"])) {
-      message.react(client.emoji.check);
-    } else {
-      message.react("✅");
-    }
+    // if (message.guild.me.permissions.has(["USE_EXTERNAL_EMOJIS"])) {
+    //   message.react(client.emoji.check);
+    // }
   }
 
   ///////////////////////////////////////////
@@ -239,6 +237,8 @@ module.exports = async (client, message) => {
   setTimeout(() => tStamps.delete(message.author.id), cdAmount);
 
   ///////////////////////////////////////////
+
+  command.help.description = language.DESCRIPTION;
 
   command.run(client, message, args, language, settings);
 };

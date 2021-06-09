@@ -1,7 +1,5 @@
 const { MessageEmbed } = require("discord.js");
 const { readdirSync } = require("fs");
-const iapg = require("iapg");
-const ReactionPages = iapg.ReactionPages;
 const replace = require("replacer-js");
 
 module.exports.help = {
@@ -30,6 +28,7 @@ module.exports.run = (client, message, args, language, settings) => {
       information: client.emoji.information,
       utility: client.emoji.utility,
       nsfw: client.emoji.nsfw,
+      image: client.emoji.image,
     };
 
     const ignoredCategories = ["owner"];
@@ -85,11 +84,16 @@ module.exports.run = (client, message, args, language, settings) => {
       .setFooter(message.author.username, message.author.avatarURL());
 
     const pages = [embed, secondembed];
-    const textPageChange = false;
-    const emojis = ["⏪", "⏩"];
-    const time = 60000;
+    const emojis = ["◀️", "▶️", "❌"];
 
-    return ReactionPages(message, pages, textPageChange, emojis, time);
+    return message.channel.createSlider(
+      message.author.id,
+      pages,
+      emojis,
+      60000
+    );
+
+    // return ReactionPages(message, pages, textPageChange, emojis, time);
 
     // message.channel.send(secondembed);
     // return message.channel.send(embed);
@@ -139,10 +143,6 @@ module.exports.run = (client, message, args, language, settings) => {
     (args && args.join(" ").toLowerCase() == "moderation") ||
     (args && args[0].toLowerCase() == "moderation")
   ) {
-    const command = client.commands.filter(
-      (cmd) => cmd.help.category.toLowerCase() === "moderation"
-    );
-
     const cmds = client.commands
       .filter((cmd) => cmd.help.category.toLowerCase() === "moderation")
       .map(
@@ -252,7 +252,10 @@ module.exports.run = (client, message, args, language, settings) => {
           "{cmd}": command.help.name,
         })}`
       )
-      .addField(`📃 ${language.DES}`, `\`${lang.DESCRIPTION}\``)
+      .addField(
+        `📃 ${language.DES}`,
+        lang.DESCRIPTION ? `\`${lang.DESCRIPTION}\`` : `\`${language.NODES}\``
+      )
       .addField(
         `⏱ ${language.COOLDOWN}`,
         `\`${command.help.cooldown} ${language.SECOND}\``,

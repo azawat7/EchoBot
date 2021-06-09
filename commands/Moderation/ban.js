@@ -25,9 +25,7 @@ module.exports.run = async (client, message, args, language) => {
     .setDescription(`${client.emoji.cross} **${language.BOT}**`);
   const noPerms = new MessageEmbed()
     .setColor("#f50041")
-    .setDescription(
-      `${client.emoji.cross} **I can't ban this user because my role is not as high as his !**`
-    );
+    .setDescription(`${client.emoji.cross} **${language.ERR}}**`);
 
   const member = message.mentions.members.first();
   const reason = args.slice(1).join(" ");
