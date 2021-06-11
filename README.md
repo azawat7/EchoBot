@@ -49,33 +49,25 @@ If you liked this repository, feel free to leave a star ⭐ and follow me, it ac
 
 ## Installation
 
-First clone the repo:
+1. First clone [this repository](https://github.com/im-a-panda-guy/EchoBot) `git clone https://github.com/im-a-panda-guy/Echo-Bot.git`
+2. Run `npm install` in your terminal to install all dependencies
+3. Fill the `config.js` with your informations (some info are refering to a .env file, continue reading).
+4. Rename the `.env.sample` file to `.env` (DON'T SHARE THIS FILE TO ANYONE)
+5. In the `.env` file file set the values that are required (✅) and if you want optionals value (❌) refering to this board :
+   | `.env` varriable | Description | Required |
+   |---|---|---|
+   | TOKEN | The bot token`*` | ✅ |
+   | MONGOPATH | Your MongoDB URI`*` | ✅ |
+   | WEBHOOKID | Your Discord webhook ID`*` | ✅ |
+   | WEBHOOKURL | Your Discord webhook URL`*` | ✅ |
+   | PORT | The port that you want to use for the dashboard`**` | ✅/❌ |
 
-```
-git clone https://github.com/im-a-panda-guy/Echo-Bot.git
-```
+   > - `*` = Required to run the bot !
+   > - `**` = Required to run the dashboard !
 
-After cloning, run an
-
-```
-npm install
-```
-
-- After doing that, make sure to create a .env file with :
-
-```
-TOKEN:bot token
-MONGOPATH:mongodb url
-```
-
-Please make sure you have enabled `Privileged Intents` on your Discord [developer portal](https://discordapp.com/developers/applications/). You can find these intents under the "Bot" section, and there are two ticks you have to switch on. For more information on Gateway Intents, check out [this](https://discordjs.guide/popular-topics/intents.html#the-intents-bit-field-wrapper) link.
-
-You can launch the bot with `node main.js`
-
-### Emojis
-
-- You can change the emojis in: <br>
-- `assets/emojis.json` <br>
+6. You can change the emojis that the bot will use in `assets/emojis.json`.
+7. You can change the colors that the bot will use in `assets/colors.json`.
+8. Lastly run the bot using `node main.js`
 
 ## License
 
