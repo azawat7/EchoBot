@@ -45,7 +45,7 @@ module.exports = class EchoClient extends Client {
     this.emoji = require("../assets/json/emojis.json");
   }
 
-  async start(token = this.config.token) {
+  async start(token = process.env.TOKEN) {
     TextChannel.prototype.sendErrorMessage = function (content, file) {
       const embed = new MessageEmbed()
         .setColor(this.client.colors.echo)
