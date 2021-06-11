@@ -26,4 +26,16 @@ module.exports = async (client, guild) => {
   webhookClient.send({
     embeds: [botJoinEmbed],
   });
+
+  // Send a message to the guild owner
+  const guildOwnerEmbed = new MessageEmbed()
+    .setTitle(`${client.emoji.fun} Thank you for adding me to ${guild.name} !`)
+    .setColor(client.colors.echo)
+    .setTimestamp()
+    .setDescription(
+      `My default prefix is \`$\` and you can get help by typing \`$help\`.`
+    )
+    .setFooter(`{echo} - Open Source`);
+
+  guild.owner.send(guildOwnerEmbed);
 };

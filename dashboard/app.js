@@ -34,6 +34,23 @@ module.exports = async (client) => {
     renderTemplate(res, req, "index.ejs");
   });
 
+  app.get("/api", function (req, res) {
+    res.header("Content-Type", "application/json");
+    res.send(
+      `{
+     "guilds": "` +
+        client.guilds.cache.size +
+        `",
+     "members": "` +
+        client.guilds.cache.reduce((a, g) => a + g.memberCount, 0) +
+        `",
+     "channels": "` +
+        client.channels.cache.size +
+        `"
+    }`
+    );
+  });
+
   app.get("*", (req, res) => {
     renderTemplate(res, req, "404.ejs");
   });
