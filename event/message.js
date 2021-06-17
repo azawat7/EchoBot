@@ -2,18 +2,21 @@ const { owners } = require("../config");
 const { Collection, MessageEmbed } = require("discord.js");
 const { Guild, BlacklistServer } = require("../models/index");
 const replace = require("replacer-js");
-
 module.exports = async (client, message) => {
   if (message.channel.type === "dm") return;
   if (message.author.bot) return;
   if (!message.guild.me.hasPermission("SEND_MESSAGES")) return;
 
+  let prefix;
   const mentionRegex = RegExp(`^<@!?${client.user.id}>$`);
   const embed = new MessageEmbed().setColor(client.colors.echo);
 
   ///////////////////////////////////////////
+  //            No Guild In DB             //
+  ///////////////////////////////////////////
 
   const settings = await client.getGuild(message.guild);
+  const lan = require(`../languages/${settings.language}/message`);
   if (!settings) {
     embed.setDescription(
       `${client.emoji.cross} **This guild was not found in the DB, please try again !**`
@@ -21,7 +24,16 @@ module.exports = async (client, message) => {
     message.channel.send(embed);
     return;
   }
-  const lan = require(`../languages/${settings.language}/message`);
+
+  ///////////////////////////////////////////
+  //             Bot Mention               //
+  ///////////////////////////////////////////
+
+  // if (mentionRegex) {
+  //   prefix = `${mentionRegex[0]}`
+  // } else {
+  //   prefix = settings.prefix
+  // }
 
   if (message.content.match(mentionRegex)) {
     embed.setTimestamp;
@@ -39,8 +51,13 @@ module.exports = async (client, message) => {
     message.channel.send(embed);
   }
 
+  ///////////////////////////////////////////
+  //            User Database              //
+  ///////////////////////////////////////////
+
   const position = settings.users.map((e) => e.id).indexOf(message.member.id);
 
+  // Creates a new user in the DB
   if (message.guild && position == -1) {
     Guild.updateOne(
       { guildID: message.guild.id },
@@ -57,7 +74,7 @@ module.exports = async (client, message) => {
   }
 
   ///////////////////////////////////////////
-
+  //         Command Requirements          //
   ///////////////////////////////////////////
 
   const args = message.content.slice(settings.prefix.length).split(/ +/);
@@ -67,13 +84,19 @@ module.exports = async (client, message) => {
     client.commands.find(
       (cmd) => cmd.help.aliases && cmd.help.aliases.includes(commandName)
     );
+
+  ///////////////////////////////////////////
+  //           Some Verification           //
   ///////////////////////////////////////////
 
+  // If there is no prefix
   if (!message.content.toLowerCase().startsWith(settings.prefix)) return;
 
   if (!command) {
+    // No Command
     return message.channel.sendErrorMessage(`${lan.NOCOMMAND}`);
   } else {
+    // Blacklist Verification
     const blacklisted = await BlacklistServer.findOne({
       blacklistedServer: message.guild.id,
     });
@@ -81,30 +104,48 @@ module.exports = async (client, message) => {
       return message.channel.sendErrorMessage(`${lan.BLACKLIST}`);
     }
 
-    // if (message.guild.me.permissions.has(["USE_EXTERNAL_EMOJIS"])) {
-    //   message.react(client.emoji.check);
-    // }
+    // Enabled Verification
+    if (command.help.enabled === false) {
+      return message.channel.sendErrorMessage(
+        `${replace(lan.DISABLED, {
+          "{inviteLink}": "https://discord.gg/gDf3zG3e",
+        })}`
+      );
+    }
   }
 
   ///////////////////////////////////////////
+  //           Command Structure           //
+  ///////////////////////////////////////////
 
+  // Owner Only
   if (command.help.ownerOnly && !owners.includes(message.author.id)) {
     return message.channel.sendErrorMessage(`${lan.OWNERONLY}`);
   }
 
+  // Premium Verification
   if (
-    command.help.userPerms &&
-    !message.member.permissions.has(command.help.userPerms)
+    !owners.includes(message.author.id) &&
+    command.help.premium &&
+    settings.premium.isPremium === false
   ) {
-    return message.channel.sendErrorMessage(
-      `${lan.USERPERMS} ${missingPerms(
-        message.member,
-        command.help.userPerms
-      )} !`
-    );
+    embed.setDescription(`${client.emoji.cross} **${lan.PREMIUM}**`);
+    return message.channel.send(embed);
   }
 
+  // NSFW Check
   if (
+    !owners.includes(message.author.id) &&
+    command.help.nsfw &&
+    !message.channel.nsfw
+  ) {
+    embed.setDescription(`${client.emoji.cross} **${lan.NSFW}**`);
+    return message.channel.send(embed);
+  }
+
+  // Bot Permissions
+  if (
+    !owners.includes(message.author.id) &&
     command.help.clientPerms &&
     !message.guild.me.permissions.has(command.help.clientPerms)
   ) {
@@ -122,18 +163,22 @@ module.exports = async (client, message) => {
     );
   }
 
+  // User Permissions
+  if (
+    !owners.includes(message.author.id) &&
+    command.help.userPerms &&
+    !message.member.permissions.has(command.help.userPerms)
+  ) {
+    return message.channel.sendErrorMessage(
+      `${lan.USERPERMS} ${missingPerms(
+        message.member,
+        command.help.userPerms
+      )} !`
+    );
+  }
+
   ///////////////////////////////////////////
-
-  if (command.help.premium && settings.premium.isPremium === false) {
-    embed.setDescription(`${client.emoji.cross} **${lan.PREMIUM}**`);
-    return message.channel.send(embed);
-  }
-
-  if (command.help.nsfw && !message.channel.nsfw) {
-    embed.setDescription(`${client.emoji.cross} **${lan.NSFW}**`);
-    return message.channel.send(embed);
-  }
-
+  //          Command Args Error           //
   ///////////////////////////////////////////
 
   if (command.help.maxArgs === 0 && args.length > 0) {
@@ -211,6 +256,8 @@ module.exports = async (client, message) => {
   }
 
   ///////////////////////////////////////////
+  //               Cooldown                //
+  ///////////////////////////////////////////
 
   if (!client.cooldowns.has(command.help.name)) {
     client.cooldowns.set(command.help.name, new Collection());
@@ -237,8 +284,8 @@ module.exports = async (client, message) => {
   setTimeout(() => tStamps.delete(message.author.id), cdAmount);
 
   ///////////////////////////////////////////
-
-  command.help.description = language.DESCRIPTION;
+  //            Run The Command            //
+  ///////////////////////////////////////////
 
   command.run(client, message, args, language, settings);
 };

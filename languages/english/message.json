@@ -12,6 +12,7 @@
   "BLACKLIST": "This server has been blacklisted by the owner of this bot, please contact the owner to solve this problem !",
   "VOICE": "You need to be in a voice channel to use this command !",
   "PREMIUM": "This command is only available for premium guilds !",
+  "DISABLED": "This command has been disabled by the owner of this bot. Try again later !\n>>> For updates on this bot check out {inviteLink}",
 
   "MENTION1": "Hello, I'm {echo}, what's up ?",
   "MENTION2": "My prefix on this server is `{prefix}`, if you need help type `{prefix1}help` !\nI hope you enjoy this bot !",

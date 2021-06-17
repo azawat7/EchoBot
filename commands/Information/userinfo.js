@@ -1,5 +1,6 @@
 const { MessageEmbed } = require("discord.js");
 const moment = require("moment");
+const d = require("replacer-js");
 
 module.exports.help = {
   name: "userinfo",
@@ -18,10 +19,10 @@ module.exports.help = {
 
 module.exports.run = async (client, message, args, language) => {
   const statuses = {
-    online: `${client.emoji.online} \`Online\``,
-    idle: `${client.emoji.idle} \`AFK\``,
-    offline: `${client.emoji.offline} \`Offline\``,
-    dnd: `${client.emoji.dnd} \`Do Not Disturb\``,
+    dnd: `${client.emoji.dnd} \`${language.DND}\``,
+    online: `${client.emoji.online} \`${language.ONLINE}\``,
+    idle: `${client.emoji.idle} \`${language.IDLE}\``,
+    offline: `${client.emoji.offline} \`${language.OFFLINE}\``,
   };
   const flags = {
     DISCORD_EMPLOYEE: client.emoji.employee,
@@ -41,7 +42,7 @@ module.exports.run = async (client, message, args, language) => {
   let user = message.mentions.users.first() || message.author;
   let member = message.guild.member(user);
   if (args[0]) member = message.guild.member(message.mentions.users.first());
-
+  const devices = member.presence?.clientStatus || {};
   let userFlags = member.user.flags.toArray();
 
   let rolesNoob;
@@ -56,27 +57,33 @@ module.exports.run = async (client, message, args, language) => {
     roles = `\`${language.NONE}\``;
 
   let embed = new MessageEmbed()
-    .setAuthor(`${user.tag} :`)
+    .setAuthor(
+      `${d(language.TITLE, {
+        "{user}": member.user.username,
+      })}`
+    )
     .setThumbnail(member.user.displayAvatarURL({ dynamic: true, size: 512 }))
     .setColor("#f50041")
     .setTimestamp()
     .setFooter(member.id).setDescription(`
-    >>> **• ${language.USER} :** \`${member.user.username}\` | \`#${
+    >>> __**${language.USERID}**__
+    **• ${language.USER} :** \`${member.user.username}\` | \`#${
     member.user.discriminator
   }\`
     **• ID :** \`${member.id}\`
     **• ${language.JOINEDDISCORD} :** \`${moment(member.user.createdAt).format(
     "MMMM Do YYYY, h:mm:ss a"
   )}\`
+    **• ${language.BADGES} [${userFlags.length}] :** ${
+    userFlags.map((flag) => flags[flag]).join(" ") || `\`${language.NONE}\``
+  }
+
+  __**${language.MEMBERID}**__
     **• ${language.JOINEDSERVER} :** \`${moment(member.joinedAt).format(
     "MMMM Do YYYY, h:mm:ss a"
   )}\`
     **• ${language.ROLE} [${roles.length || "0"}] : ** ${
     rolesNoob || `\`${language.NONE}\``
-  }
-    **• ${language.BADGES} [${userFlags.length}] :** ${
-    userFlags.map((flag) => flags[flag]).join(" ") || `\`${language.NONE}\``
-  }
-    `);
+  }`);
   return message.channel.send(embed);
 };

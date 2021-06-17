@@ -50,6 +50,11 @@ const guildSchema = mongoose.Schema({
       default: false,
     },
   },
+  autoRole: {
+    type: String,
+    required: true,
+    default: null,
+  },
 });
 
 module.exports = mongoose.model("Guild", guildSchema);

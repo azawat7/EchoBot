@@ -1,5 +1,6 @@
 {
   "DESCRIPTION": "List your permission in a channel.",
   "EXAMPLE1": "`{cmd_name}`",
-  "EXAMPLE2": "`{cmd_name}` `@im_a_panda_guy`"
+  "EXAMPLE2": "`{cmd_name}` `@im_a_panda_guy`",
+  "TEXT": "{user}'s permissions in {channel} :"
 }

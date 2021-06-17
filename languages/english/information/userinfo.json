@@ -3,11 +3,23 @@
   "EXAMPLE1": "`{cmd_name}`",
   "EXAMPLE2": "`{cmd_name}` `@im_a_panda_guy`",
 
+  "TITLE": "Information about : {user}",
+  "USERID": "User Identity",
+  "MEMBERID": "Member Identity",
+  "PRESENCE": "Presence",
   "USER": "User",
   "JOINEDDISCORD": "Joined Discord At",
   "JOINEDSERVER": "Joined Server On",
   "ROLE": "Roles",
   "BADGES": "Badges",
 
-  "NONE": "None"
+  "NONE": "None",
+
+  "STATUS": "Status",
+  "ONLINE": "Online",
+  "IDLE": "Idle",
+  "OFFLINE": "Offline",
+  "DND": "Do Not Disturb",
+
+  "DEVICEN": "Devices Logged In On"
 }

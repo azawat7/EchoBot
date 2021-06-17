@@ -1,5 +1,6 @@
 const { Permissions } = require("discord.js");
 const permissions = Object.keys(Permissions.FLAGS);
+const r = require("replacer-js");
 
 module.exports.help = {
   name: "permissions",
@@ -16,9 +17,12 @@ module.exports.help = {
   example: 2,
 };
 
-module.exports.run = async (client, message, args) => {
+module.exports.run = async (client, message, args, language) => {
   const member = message.mentions.members.first() || message.member;
-  let text = `\`\`\`${member.user.username}\'s permissions in ${message.channel.name} :\n\n`;
+  let text = `\`\`\`${r(language.TEXT, {
+    "{user}": member.user.username,
+    "{channel}": message.channel.name,
+  })}\n\n`;
   const mPermissions = message.channel.permissionsFor(member);
   const total = {
     denied: 0,
