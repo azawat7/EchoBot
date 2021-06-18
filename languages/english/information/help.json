@@ -1,9 +1,8 @@
 {
-  "DESCRIPTION": "List of all commands",
+  "DESCRIPTION": "A list of all available commands.",
   "EXAMPLE1": "`{cmd_name}`",
   "EXAMPLE2": "`{cmd_name}` `avatar`",
-  "BASE": "🟥 : One Page\n🟩 : Pages w/ Buttons\n🟦 : One Page in DM's\n\n>>> Buttons are available for 60s !",
-  "BASEEXP": "🟥 : One Page\n🟩 : Pages w/ Buttons\n🟦 : One Page in DM's\n\n>>> Buttons are expired !",
+  "BASE": "Please chose how you want to get the commands displayed :\n\n>>> 🟥 : One Page\n🟩 : Pages w/ Buttons\n🟦 : One Page in DM's",
   "TITLE1": "Echo | Commands",
   "TITLE2": "Here are the {cmd} command information ",
   "EDES": "● **{echo}** have **{n_commands}** commands",
@@ -24,7 +23,6 @@
   "REQUIRED": "<> required",
   "OPTIONAL": "[] optional",
   "ERROR": "Please provide a category or command name !",
-  "PAGE2": "Run the command `{prefix}help` followed by the command name you want to get more information on !\n\nExample: \n```{prefix1}help eval```",
 
   "DMS": "Check your DM's !",
   "DMDES": "Hey ! Here is my list of commands :",
@@ -33,7 +31,7 @@
   "ADMIN": "Administration",
   "FUN": "Fun",
   "IMAGE": "Image",
-  "INFO": "Info",
+  "INFO": "Information",
   "MODERATION": "Moderation",
   "UTILITY": "Utility"
 }
