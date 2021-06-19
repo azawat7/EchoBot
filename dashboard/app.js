@@ -34,10 +34,6 @@ module.exports = async (client) => {
     renderTemplate(res, req, "index.ejs");
   });
 
-  app.get("*", (req, res) => {
-    renderTemplate(res, req, "404.ejs");
-  });
-
   app.listen(port, () =>
     console.log(`Dashboard running on https://localhost:${port}`)
   );

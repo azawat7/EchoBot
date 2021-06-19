@@ -56,8 +56,7 @@ module.exports = class EchoClient extends Client {
     require("../util/functions/functions.js")(this);
     require("../util/functions/dbFunctions.js")(this);
     // Discord Buttons
-    require("discord-buttons")(this);
-    require("discord-slider")(this);
+    require("discord-buttons")(this); // !!! must be below your Discord.this()
     // Creates discordTogether client
     this.discordTogether = new DiscordTogether(this);
     // Creates the giveaway manager

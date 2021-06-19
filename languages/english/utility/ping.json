@@ -1,5 +1,6 @@
 {
   "DESCRIPTION": "Display the bot latency.",
   "EXAMPLE1": "`{cmd_name}`",
-  "PINGING": "🏓 Pinging..."
+  "PINGING": "🏓 Pinging...",
+  "WS": "Not available in djs v13 !"
 }

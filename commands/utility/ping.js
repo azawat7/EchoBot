@@ -17,16 +17,12 @@ module.exports.help = {
 
 module.exports.run = async (client, message, args, language) => {
   const msg = await message.channel.send(`**${language.PINGING}**`);
-  msg.edit(
-    new MessageEmbed()
-      .setColor("#f50041")
-      .addField(
-        "**🔴 Echo :**",
-        `>>> \`${msg.createdTimestamp - message.createdTimestamp}ms\``
-      )
-      .addField(
-        "**📟 API Discord.js :**",
-        `>>> \`${Math.round(client.ws.ping)}ms\``
-      )
-  );
+  const embed = new MessageEmbed()
+    .setColor("#f50041")
+    .addField(
+      "**🔴 {echo} :**",
+      `>>> \`${msg.createdTimestamp - message.createdTimestamp}ms\``
+    )
+    .addField("**🔵 WS :**", `>>> \`${language.WS}\``);
+  msg.edit({ embed: embed });
 };
