@@ -11,10 +11,9 @@ module.exports = (client) => {
     return string.charAt(0).toUpperCase() + string.substring(1);
   };
 
-  client.embedError = (string) => {
-    const embed = new MessageEmbed()
-      .setColor(client.colors.echo)
-      .setDescription(`${client.emoji.cross} ${string}`);
-    return channel.send(embed);
+  client.randomInteger = (min, max) => {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
   };
 };

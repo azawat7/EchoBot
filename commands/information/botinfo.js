@@ -17,6 +17,7 @@ module.exports.help = {
   nsfw: false,
   cooldown: 3,
   example: 1,
+  emoji: "🤖",
 };
 
 module.exports.run = (client, message, args, language, settings) => {
@@ -51,5 +52,5 @@ ${language.RAMUSAGE} -- ${client.formatBytes(process.memoryUsage().heapUsed)}\`\
     )
     .setTimestamp();
 
-  message.channel.send(embed);
+  message.channel.send({ embed });
 };

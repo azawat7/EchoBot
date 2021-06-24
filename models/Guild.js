@@ -55,6 +55,11 @@ const guildSchema = mongoose.Schema({
     required: true,
     default: null,
   },
+  antiLink: {
+    type: Boolean,
+    require: true,
+    default: false,
+  },
 });
 
 module.exports = mongoose.model("Guild", guildSchema);

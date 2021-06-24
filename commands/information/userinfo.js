@@ -15,6 +15,7 @@ module.exports.help = {
   nsfw: false,
   cooldown: 3,
   example: 2,
+  emoji: "🧑",
 };
 
 module.exports.run = async (client, message, args, language) => {
@@ -85,5 +86,5 @@ module.exports.run = async (client, message, args, language) => {
     **• ${language.ROLE} [${roles.length || "0"}] : ** ${
     rolesNoob || `\`${language.NONE}\``
   }`);
-  return message.channel.send(embed);
+  return message.channel.send({ embed });
 };

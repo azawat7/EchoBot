@@ -1,0 +1,7 @@
+{
+  "DESCRIPTION": "Locks a channel (current/mentioned).",
+  "EXAMPLE1": "`{cmd_name}`",
+  "EXAMPLE2": "`{cmd_name}` `#general`",
+  "ALLOCKED": "{channel} is already locked !",
+  "SUCCESS": "Succesfully locked {channel} !"
+}

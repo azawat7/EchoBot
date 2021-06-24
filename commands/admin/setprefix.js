@@ -13,14 +13,12 @@ module.exports.help = {
   nsfw: false,
   cooldown: 3,
   example: 1,
+  emoji: "🗜",
 };
 
 module.exports.run = async (client, message, args, language, settings) => {
   if (args[0].length > 3) {
-    const embed = new MessageEmbed()
-      .setColor("#f50041")
-      .setDescription(`**${client.emoji.cross} ${language.ERROR}**`);
-    return message.channel.send(embed);
+    return message.channel.sendErrorMessage(`**${language.ERROR}**`);
   }
   const newSetting = args.slice(0).join(" ");
 
@@ -32,6 +30,6 @@ module.exports.run = async (client, message, args, language, settings) => {
 
   if (newSetting) {
     await client.updateGuild(message.guild, { prefix: newSetting });
-    return message.channel.send(actPrefix);
+    return message.channel.send({ embed: actPrefix });
   }
 };

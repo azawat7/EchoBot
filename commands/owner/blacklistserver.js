@@ -26,31 +26,27 @@ module.exports.run = async (client, message, args, language, settings) => {
     embed.setDescription(
       `**${client.emoji.cross} ${language.NOSERVER} ${id} !**`
     );
-    return message.channel.send(embed);
+    return message.channel.sendErrorMessage(`**${language.NOSERVER} ${id} !**`);
   }
 
   if (state === "add") {
     BlacklistServer.findOne({ blacklistedServer: id }, async (err, data) => {
       if (data) {
-        embed.setDescription(`**${client.emoji.cross} ${language.SERVERBL}**`);
-        return message.channel.send(embed);
+        return message.channel.sendErrorMessage(`**${language.SERVERBL}**`);
       }
 
       new BlacklistServer({
         blacklistedServer: id,
       }).save();
-      embed.setDescription(`**${client.emoji.check} ${language.SUCCESS}**`);
-      message.channel.send(embed);
+      message.channel.sendSuccessMessage(`**${language.SUCCESS}**`);
     });
   } else if (state === "remove") {
     BlacklistServer.findOne({ blacklistedServer: id }, async (err, data) => {
       if (!data) {
-        embed.setDescription(`**${client.emoji.cross} ${language.SERVERBLL}**`);
-        return message.channel.send(embed);
+        return message.channel.sendErrorMessage(`**${language.SERVERBLL}**`);
       }
       data.delete();
-      embed.setDescription(`**${client.emoji.check} ${language.SUCCESS1}**`);
-      message.channel.send(embed);
+      message.channel.sendSuccessMessage(`**${language.SUCCESS1}**`);
     });
   } else {
     return;

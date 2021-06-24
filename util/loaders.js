@@ -1,5 +1,4 @@
 const { readdirSync } = require("fs");
-const { Error } = require("mongoose");
 
 const loadCommands = (client, dir = "./commands/") => {
   readdirSync(dir).forEach((dirs) => {

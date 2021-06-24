@@ -14,6 +14,7 @@ module.exports.help = {
   nsfw: false,
   cooldown: 3,
   example: 2,
+  emoji: "🔟",
 };
 
 module.exports.run = async (client, message, args, language) => {
@@ -23,18 +24,24 @@ module.exports.run = async (client, message, args, language) => {
     const { data } = await axios.get(
       `https://some-random-api.ml/binary?text=${encodeURIComponent(word)}`
     );
-    message.channel.send(data.binary ?? `${language.ERROR}`, { code: "" });
+    message.channel.send({
+      content: data.binary ?? `${language.ERROR}`,
+      code: "",
+    });
   } else if (query.toLowerCase() === "decode") {
     const { data } = await axios.get(
       `https://some-random-api.ml/binary?decode=${encodeURIComponent(word)}`
     );
-    message.channel.send(data.text ?? `${language.ERROR}`, { code: "" });
+    message.channel.send({
+      content: data.text ?? `${language.ERROR}`,
+      code: "",
+    });
   } else {
     const embed = new MessageEmbed()
       .setColor(client.colors.echo)
       .setDescription(`${client.emoji.cross} **${language.NONVALID} !**`)
       .setTimestamp()
       .setFooter(message.author.username, message.author.avatarURL());
-    message.channel.send(embed);
+    message.channel.send({ embed });
   }
 };

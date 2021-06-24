@@ -1,7 +1,14 @@
-const { Client, Collection, MessageEmbed, TextChannel } = require("discord.js");
+const {
+  Client,
+  Collection,
+  MessageEmbed,
+  TextChannel,
+  Intents,
+} = require("discord.js");
 const GiveawayManagerWithOwnDatabase = require("../util/giveaways");
 const { loadCommands, loadEvents } = require("../util/loaders");
 const { DiscordTogether } = require("discord-together");
+const antiInvite = require("../util/anti-invite");
 
 module.exports = class EchoClient extends Client {
   constructor(options = {}, sentry) {
@@ -14,20 +21,11 @@ module.exports = class EchoClient extends Client {
       cacheEmojis: true,
       cachePresences: false,
       fetchAllMembers: true,
-      disableMentions: "everyone",
+      // allowedMentions: { parse: ['users', 'roles'], repliedUser: true},
       messageCacheMaxSize: 25,
       messageCacheLifetime: 10000,
       messageSweepInterval: 12000,
-      ws: {
-        intents: [
-          "GUILDS",
-          "GUILD_MEMBERS",
-          "GUILD_MESSAGES",
-          "GUILD_EMOJIS",
-          "GUILD_MESSAGE_REACTIONS",
-          "GUILD_VOICE_STATES",
-        ],
-      },
+      // intents: [Intent.FLAGS.GUIK],
     });
 
     (this.partials = [
@@ -46,11 +44,17 @@ module.exports = class EchoClient extends Client {
   }
 
   async start(token = process.env.TOKEN) {
-    TextChannel.prototype.sendErrorMessage = function (content, file) {
+    TextChannel.prototype.sendErrorMessage = function (content) {
       const embed = new MessageEmbed()
         .setColor(this.client.colors.echo)
         .setDescription(`${this.client.emoji.cross} **${content}**`);
-      return this.send(embed, file);
+      return this.send({ embed: embed });
+    };
+    TextChannel.prototype.sendSuccessMessage = function (content) {
+      const embed = new MessageEmbed()
+        .setColor(this.client.colors.echo)
+        .setDescription(`${this.client.emoji.check} **${content}**`);
+      return this.send({ embed: embed });
     };
     // Creates functions
     require("../util/functions/functions.js")(this);
@@ -64,19 +68,19 @@ module.exports = class EchoClient extends Client {
       updateCountdownEvery: 10000,
       default: {
         botsCanWin: false,
-        exemptPermissions: ["MANAGE_MESSAGES", "ADMINISTRATOR"],
-        embedColor: "#FF0000",
-        embedColorEnd: "#000000",
+        embedColor: `${this.colors.echo}`,
+        embedColorEnd: "#424242",
         reaction: "🎉",
       },
     });
-
+    //////////////
+    // antiInvite(this);
+    //////////////
     this.giveawaysManager = manager;
     //////////////
 
     loadCommands(this);
     loadEvents(this);
-    console.log("----------------------------");
     this.mongoose.init();
     this.login(token);
   }

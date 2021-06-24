@@ -1,0 +1,7 @@
+{
+  "DESCRIPTION": "Unlocks a channel (current/mentioned).",
+  "EXAMPLE1": "`{cmd_name}`",
+  "EXAMPLE2": "`{cmd_name}` `#general`",
+  "ALLOCKED": "{channel} is already unlocked !",
+  "SUCCESS": "Succesfully unlocked {channel} !"
+}

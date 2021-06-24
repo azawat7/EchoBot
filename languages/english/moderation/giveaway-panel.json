@@ -1,0 +1,9 @@
+{
+  "DESCRIPTION": "Send a panel for a specific giveaway to make some actions.",
+  "EXAMPLE1": "`{cmd_name}` `<855835455014961183>`",
+  "NOGIVEAWAY": "Unable to find this giveaway ( {id} )",
+  "TITLE": "Giveaway Panel",
+  "DES": "Please choose one of the action below.",
+  "CONGRATREROLL": "**🎉 New winner(s) : {winners} ! Congratulations, you won __{prize}__ !\n{messageURL}**",
+  "ERRORREROLL": "No valid participations, no new winner(s) can be chosen !"
+}

@@ -13,6 +13,7 @@ module.exports.help = {
   nsfw: false,
   cooldown: 3,
   example: 1,
+  emoji: "🤭",
 };
 
 module.exports.run = async (client, message, args) => {
@@ -35,18 +36,18 @@ module.exports.run = async (client, message, args) => {
       Emojis += Emoji(emoji.id);
     }
   });
-  let Embed = new MessageEmbed()
+  let embed = new MessageEmbed()
     .setTitle(`Emojis in ${message.guild.name} | Emojis [${OverallEmojis}] `)
     .setDescription(
       `**Animated [${Animated}]**:\n${EmojisAnimated}\n\n**Standard [${EmojiCount}]**:\n${Emojis}`
     )
     .setColor("#f50041");
 
-  if (Embed.length > 2000) {
+  if (embed.length > 2000) {
     return message.channel.send(
       `I'm sorry but, my limit is 2000 characters only!`
     );
   } else {
-    message.channel.send(Embed);
+    message.channel.send({ embed });
   }
 };

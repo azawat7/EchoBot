@@ -1,6 +1,0 @@
-{
-  "DESCRIPTION": "End a giveaway.",
-  "EXAMPLE1": "`{cmd_name}` `851003466537107476`",
-  "ERRORS": "No giveaway found for",
-  "SUCS": "Giveaway ended !"
-}

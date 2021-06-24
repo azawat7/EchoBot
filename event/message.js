@@ -7,7 +7,7 @@ module.exports = async (client, message) => {
   if (message.author.bot) return;
   if (!message.guild.me.hasPermission("SEND_MESSAGES")) return;
 
-  let prefix;
+  // let prefix;
   const mentionRegex = RegExp(`^<@!?${client.user.id}>$`);
   const embed = new MessageEmbed().setColor(client.colors.echo);
 
@@ -18,11 +18,9 @@ module.exports = async (client, message) => {
   const settings = await client.getGuild(message.guild);
   const lan = require(`../languages/${settings.language}/message`);
   if (!settings) {
-    embed.setDescription(
-      `${client.emoji.cross} **This guild was not found in the DB, please try again !**`
+    return message.channel.sendErrorMessage(
+      `**This guild was not found in the DB, please try again !**`
     );
-    message.channel.send(embed);
-    return;
   }
 
   ///////////////////////////////////////////
@@ -48,7 +46,7 @@ module.exports = async (client, message) => {
       `**${lan.MENTIONSUPPORT} :** [${lan.CLICKHERE}](https://discord.gg/5eaZdWygQf)`,
       `**${lan.MENTIONINVITE} :** [${lan.CLICKHERE}](https://discord.com/oauth2/authorize?client_id=838061935039610921&scope=bot&permissions=8589934591)`,
     ]);
-    message.channel.send(embed);
+    message.channel.send({ embed: embed });
   }
 
   ///////////////////////////////////////////
@@ -129,8 +127,7 @@ module.exports = async (client, message) => {
     command.help.premium &&
     settings.premium.isPremium === false
   ) {
-    embed.setDescription(`${client.emoji.cross} **${lan.PREMIUM}**`);
-    return message.channel.send(embed);
+    return message.channel.sendErrorMessage(`**${lan.PREMIUM}**`);
   }
 
   // NSFW Check
@@ -139,8 +136,7 @@ module.exports = async (client, message) => {
     command.help.nsfw &&
     !message.channel.nsfw
   ) {
-    embed.setDescription(`${client.emoji.cross} **${lan.NSFW}**`);
-    return message.channel.send(embed);
+    return message.channel.sendErrorMessage(`**${lan.PREMIUM}**`);
   }
 
   // Bot Permissions
@@ -182,8 +178,7 @@ module.exports = async (client, message) => {
   ///////////////////////////////////////////
 
   if (command.help.maxArgs === 0 && args.length > 0) {
-    embed.setDescription(`${client.emoji.cross} **${lan.NOARGS}**`);
-    return message.channel.send(embed);
+    return message.channel.sendErrorMessage(`**${lan.NOARGS}**`);
   }
 
   const language = require(`../languages/${settings.language}/${command.help.category}/${command.help.name}`);

@@ -1,8 +1,8 @@
 const { MessageEmbed } = require("discord.js");
+const { json } = require("express");
 const { readdirSync } = require("fs");
 const replace = require("replacer-js");
-const { MessageActionRow, MessageButton } = require("discord-buttons");
-const e = require("express");
+
 module.exports.help = {
   name: "help",
   aliases: [],
@@ -16,420 +16,131 @@ module.exports.help = {
   nsfw: false,
   cooldown: 3,
   example: 2,
+  emoji: "❓",
 };
 
 module.exports.run = async (client, message, args, language, settings) => {
   function jsondes(lan, cat, name) {
     const file = require(`../../languages/${lan}/${cat}/${name}`);
     if (file) {
-      const des = file.DESCRIPTION;
+      const des = file.DESCRIPTION || language.NODES;
       return des;
     }
   }
 
+  const category = [
+    "admin",
+    "fun",
+    "image",
+    "information",
+    "moderation",
+    "utility",
+  ];
+
+  ///////////////////////////////////////////
+  //        Main Embed Categories          //
+  ///////////////////////////////////////////
+
   if (!args[0]) {
-    const bbadmin = new MessageButton()
-      .setStyle("grey")
-      .setID("bbadmin")
-      .setEmoji("843869235432128533");
-    const bbmoderation = new MessageButton()
-      .setStyle("grey")
-      .setID("bbmoderation")
-      .setEmoji("843869235180601344");
-    const bbutility = new MessageButton()
-      .setStyle("grey")
-      .setID("bbutility")
-      .setEmoji("843869235322814464");
-    const bbfun = new MessageButton()
-      .setStyle("grey")
-      .setID("bbfun")
-      .setEmoji("843869235700957196");
-    const bbinformation = new MessageButton()
-      .setStyle("grey")
-      .setID("bbinformation")
-      .setEmoji("843869235469484072");
-    const bbimage = new MessageButton()
-      .setStyle("grey")
-      .setID("bbimage")
-      .setEmoji("851918269593813014");
+    let categories = [];
 
-    const bbback = new MessageButton()
-      .setStyle("grey")
-      .setID("bbback")
-      .setEmoji("↩");
+    const dirEmojis = {
+      admin: `${client.emoji.administration} - ${language.ADMIN}`,
+      moderation: `${client.emoji.moderation} - ${language.MODERATION}`,
+      fun: `${client.emoji.fun} - ${language.FUN}`,
+      information: `${client.emoji.information} - ${language.INFO}`,
+      utility: `${client.emoji.utility} - ${language.UTILITY}`,
+      image: `${client.emoji.image} - ${language.IMAGE}`,
+    };
 
-    const firstButtonsRow = new MessageActionRow().addComponents([
-      bbadmin,
-      bbmoderation,
-      bbutility,
-      bbfun,
-      bbinformation,
-    ]);
-    const secondButtonsRow = new MessageActionRow().addComponents([
-      bbimage,
-      bbback,
-    ]);
-    const secondButtonsRowWithoutBack = new MessageActionRow().addComponents([
-      bbimage,
-    ]);
+    const ignoredCategories = ["owner"];
 
-    const b_page_enabled = new MessageButton()
-      .setStyle("red")
-      .setID("baseb_pages")
-      .setLabel(" ");
-    const b_buttons_enabled = new MessageButton()
-      .setStyle("green")
-      .setID("baseb_buttons")
-      .setLabel(" ");
-    const b_dm_enabled = new MessageButton()
-      .setStyle("blurple")
-      .setID("baseb_dm")
-      .setLabel(" ");
+    readdirSync("./commands/").forEach((dir) => {
+      if (ignoredCategories.includes(dir)) return;
+      const editedName = `**${dirEmojis[dir]}**`;
 
-    const base_embed = new MessageEmbed()
+      let data = new Object();
+
+      data = {
+        name: editedName,
+        value: `\`${settings.prefix}help ${dir.toLowerCase()}\``,
+        inline: true,
+      };
+
+      categories.push(data);
+    });
+
+    let embed = new MessageEmbed()
+      .setAuthor(`${language.TITLE1}`)
       .setColor(client.colors.echo)
-      .setDescription(`**${language.BASE}**`);
+      .setDescription(
+        `>>> ${replace(language.EDES, {
+          "{n_commands}": client.commands.size,
+        })}\n${replace(language.EDES1, {
+          "{prefix}": settings.prefix,
+        })}`
+      )
+      .addFields(categories)
+      .setTimestamp()
+      .setFooter(message.author.username, message.author.avatarURL());
 
-    const base_buttons_enabled = new MessageActionRow().addComponents([
-      b_page_enabled,
-      b_buttons_enabled,
-      b_dm_enabled,
-    ]);
+    return message.channel.send({ embed });
+  }
 
-    message.channel.send({
-      embed: base_embed,
-      component: base_buttons_enabled,
+  if (category.includes(args[0].toLowerCase())) {
+    let catwcmd = [];
+
+    readdirSync("./commands/").forEach((dir) => {
+      if (dir.toLowerCase() !== args[0].toLowerCase()) return;
+      const commands = readdirSync(`./commands/${dir}/`).filter((file) =>
+        file.endsWith(".js")
+      );
+
+      const cmds = commands.map((command) => {
+        let file = require(`../../commands/${dir}/${command}`);
+
+        if (!file.help.name) return "No command name.";
+
+        let name = file.help.name.replace(".js", "");
+        let category = file.help.category;
+
+        let emo = file.help.emoji || "";
+
+        let obj = {
+          cname: `${emo ? `${emo} - \`${name}\`` : `\`${name}\``}`,
+          cdes: jsondes(settings.language, file.help.category, file.help.name),
+        };
+
+        return obj;
+      });
+
+      let dota = new Object();
+
+      cmds.map((co) => {
+        data = {
+          name: `${cmds.length === 0 ? "In progress." : co.cname}`,
+          value: `${co.cdes}`,
+          inline: true,
+        };
+        catwcmd.push(data);
+      });
     });
 
-    client.on("clickButton", async (button) => {
-      if (message.author.id !== button.clicker.user.id) {
-        return;
-      } else {
-        // }
-        if (button.id === "baseb_pages") {
-          await button.defer(true);
-          let categories = [];
+    let embed = new MessageEmbed()
+      .setColor(`#f50041`)
+      .setFooter(message.author.username, message.author.avatarURL())
+      .setTitle(`${client.capitalize(args[0])} ${language.CMD} :`)
+      .addFields(catwcmd)
+      .setTimestamp();
 
-          const dirEmojis = {
-            admin: `${client.emoji.administration} ${language.ADMIN}`,
-            moderation: `${client.emoji.moderation} ${language.MODERATION}`,
-            fun: `${client.emoji.fun} ${language.FUN}`,
-            information: `${client.emoji.information} ${language.INFO}`,
-            utility: `${client.emoji.utility} ${language.UTILITY}`,
-            nsfw: `${client.emoji.nsfw} ${language.NSFW}`,
-            image: `${client.emoji.image} ${language.IMAGE}`,
-          };
+    return message.channel.send(embed);
+  }
 
-          const ignoredCategories = ["owner"];
+  ///////////////////////////////////////////
+  //       Individual Command Help         //
+  ///////////////////////////////////////////
 
-          readdirSync("./commands/").forEach((dir) => {
-            if (ignoredCategories.includes(dir)) return;
-            const editedName = `${dirEmojis[dir]}`;
-            const commands = readdirSync(`./commands/${dir}/`).filter((file) =>
-              file.endsWith(".js")
-            );
-
-            const cmds = commands
-              .filter((command) => {
-                let file = require(`../../commands/${dir}/${command}`);
-
-                return !file.help.hidden;
-              })
-              .map((command) => {
-                let file = require(`../../commands/${dir}/${command}`);
-
-                if (!file.help.name) return "No command name.";
-
-                let name = file.help.name.replace(".js", "");
-
-                return `\`${name}\`\, `;
-              });
-
-            let data = new Object();
-
-            data = {
-              name: editedName,
-              value: cmds.length === 0 ? "In progress." : cmds.join(" "),
-            };
-
-            categories.push(data);
-          });
-
-          let embed = new MessageEmbed()
-            .setAuthor(`${language.TITLE1}`, `https://i.imgur.com/45UIEsS.png`)
-            .setColor(client.colors.echo)
-            .setDescription(
-              `>>> ${replace(language.EDES1, {
-                "{prefix}": settings.prefix,
-              })}`
-            )
-            .addFields(categories)
-            .setTimestamp();
-
-          return button.message.edit({ embed: embed });
-        }
-        if (button.id === "baseb_buttons") {
-          let embed = new MessageEmbed()
-            .setColor(client.colors.echo)
-            .setTitle(language.BT)
-            .setDescription(`>>> ${client.emoji.administration} \`${language.ADMIN}\`
-              ${client.emoji.moderation} \`${language.MODERATION}\`
-              ${client.emoji.utility} \`${language.UTILITY}\`
-              ${client.emoji.fun} \`${language.FUN}\`
-              ${client.emoji.information} \`${language.INFO}\`
-              ${client.emoji.image} \`${language.IMAGE}\``);
-          button.message.edit({
-            embed: embed,
-            components: [firstButtonsRow, secondButtonsRowWithoutBack],
-          });
-          await button.defer(true);
-        }
-        if (button.id === "baseb_dm") {
-          const embedss = new MessageEmbed()
-            .setColor(client.colors.echo)
-            .setDescription(`📨 **${language.DMS}**`);
-          button.message.edit({ embed: embedss });
-          ///
-          let categories = [];
-
-          const dirEmojis = {
-            admin: `${client.emoji.administration} ${language.ADMIN}`,
-            moderation: `${client.emoji.moderation} ${language.MODERATION}`,
-            fun: `${client.emoji.fun} ${language.FUN}`,
-            information: `${client.emoji.information} ${language.INFO}`,
-            utility: `${client.emoji.utility} ${language.UTILITY}`,
-            nsfw: `${client.emoji.nsfw} ${language.NSFW}`,
-            image: `${client.emoji.image} ${language.IMAGE}`,
-          };
-
-          const ignoredCategories = ["owner"];
-
-          readdirSync("./commands/").forEach((dir) => {
-            if (ignoredCategories.includes(dir)) return;
-            const editedName = `${dirEmojis[dir]}`;
-            const commands = readdirSync(`./commands/${dir}/`).filter((file) =>
-              file.endsWith(".js")
-            );
-
-            const cmds = commands
-              .filter((command) => {
-                let file = require(`../../commands/${dir}/${command}`);
-
-                return !file.help.hidden;
-              })
-              .map((command) => {
-                let file = require(`../../commands/${dir}/${command}`);
-
-                if (!file.help.name) return "No command name.";
-
-                let name = file.help.name.replace(".js", "");
-
-                return `\`${name}\`\, `;
-              });
-
-            let data = new Object();
-
-            data = {
-              name: editedName,
-              value: cmds.length === 0 ? "In progress." : cmds.join(" "),
-            };
-
-            categories.push(data);
-          });
-
-          let embed = new MessageEmbed()
-            .setAuthor(`${language.TITLE1}`, `https://i.imgur.com/45UIEsS.png`)
-            .setColor(client.colors.echo)
-            .setDescription(`>>> ${language.DMDES}`)
-            .addFields(categories)
-            .setTimestamp()
-            .setFooter(message.author.username, message.author.avatarURL());
-
-          return message.author.send(embed);
-        }
-        // Buttons Categories
-        if (button.id === "bbadmin") {
-          await button.defer(true);
-          const cmds = client.commands
-            .filter((cmd) => cmd.help.category.toLowerCase() === "admin")
-            .map(
-              (cmd) =>
-                `\`${cmd.help.name} ${" ".repeat(
-                  13 - Number(cmd.help.name.length)
-                )} :\` ${jsondes(
-                  settings.language,
-                  cmd.help.category,
-                  cmd.help.name
-                )}`
-            );
-
-          let adminembed = new MessageEmbed()
-            .setColor(`#f50041`)
-            .setFooter(message.author.username, message.author.avatarURL())
-            .setTitle(`${client.emoji.administration}  |  ${language.ADMIN}`)
-            .setDescription(`● ${cmds.join("\n● ")}`)
-            .setTimestamp();
-
-          button.message.edit({
-            embed: adminembed,
-            components: [firstButtonsRow, secondButtonsRow],
-          });
-        }
-        if (button.id === "bbmoderation") {
-          await button.defer(true);
-          const cmds = client.commands
-            .filter((cmd) => cmd.help.category.toLowerCase() === "moderation")
-            .map(
-              (cmd) =>
-                `\`${cmd.help.name} ${" ".repeat(
-                  14 - Number(cmd.help.name.length)
-                )} :\` ${jsondes(
-                  settings.language,
-                  cmd.help.category,
-                  cmd.help.name
-                )}`
-            );
-
-          let modembed = new MessageEmbed()
-            .setColor(`#f50041`)
-            .setFooter(message.author.username, message.author.avatarURL())
-            .setTitle(`${client.emoji.moderation}  |  ${language.MODERATION}`)
-            .setDescription(`● ${cmds.join("\n● ")}`)
-            .setTimestamp();
-
-          button.message.edit({
-            embed: modembed,
-            components: [firstButtonsRow, secondButtonsRow],
-          });
-        }
-        if (button.id === "bbutility") {
-          await button.defer(true);
-          const cmds = client.commands
-            .filter((cmd) => cmd.help.category.toLowerCase() === "utility")
-            .map(
-              (cmd) =>
-                `\`${cmd.help.name} ${" ".repeat(
-                  11 - Number(cmd.help.name.length)
-                )} :\` ${jsondes(
-                  settings.language,
-                  cmd.help.category,
-                  cmd.help.name
-                )}`
-            );
-
-          let utilityembed = new MessageEmbed()
-            .setColor(`#f50041`)
-            .setFooter(message.author.username, message.author.avatarURL())
-            .setTitle(`${client.emoji.utility}  |  ${language.UTILITY}`)
-            .setDescription(`● ${cmds.join("\n● ")}`)
-            .setTimestamp();
-
-          button.message.edit({
-            embed: utilityembed,
-            components: [firstButtonsRow, secondButtonsRow],
-          });
-        }
-        if (button.id === "bbfun") {
-          await button.defer(true);
-          const cmds = client.commands
-            .filter((cmd) => cmd.help.category.toLowerCase() === "fun")
-            .map(
-              (cmd) =>
-                `\`${cmd.help.name} ${" ".repeat(
-                  11 - Number(cmd.help.name.length)
-                )} :\` ${jsondes(
-                  settings.language,
-                  cmd.help.category,
-                  cmd.help.name
-                )}`
-            );
-
-          let funembed = new MessageEmbed()
-            .setColor(`#f50041`)
-            .setFooter(message.author.username, message.author.avatarURL())
-            .setTitle(`${client.emoji.fun}  |  ${language.FUN}`)
-            .setDescription(`● ${cmds.join("\n● ")}`)
-            .setTimestamp();
-
-          button.message.edit({
-            embed: funembed,
-            components: [firstButtonsRow, secondButtonsRow],
-          });
-        }
-        if (button.id === "bbinformation") {
-          await button.defer(true);
-          const cmds = client.commands
-            .filter((cmd) => cmd.help.category.toLowerCase() === "information")
-            .map(
-              (cmd) =>
-                `\`${cmd.help.name} ${" ".repeat(
-                  13 - Number(cmd.help.name.length)
-                )} :\` ${jsondes(
-                  settings.language,
-                  cmd.help.category,
-                  cmd.help.name
-                )}`
-            );
-
-          let infoembed = new MessageEmbed()
-            .setColor(`#f50041`)
-            .setFooter(message.author.username, message.author.avatarURL())
-            .setTitle(`${client.emoji.administration}  | ${language.INFO}`)
-            .setDescription(`● ${cmds.join("\n● ")}`)
-            .setTimestamp();
-
-          button.message.edit({
-            embed: infoembed,
-            components: [firstButtonsRow, secondButtonsRow],
-          });
-        }
-        if (button.id === "bbimage") {
-          await button.defer(true);
-          const cmds = client.commands
-            .filter((cmd) => cmd.help.category.toLowerCase() === "image")
-            .map(
-              (cmd) =>
-                `\`${cmd.help.name} ${" ".repeat(
-                  5 - Number(cmd.help.name.length)
-                )} :\` ${jsondes(
-                  settings.language,
-                  cmd.help.category,
-                  cmd.help.name
-                )}`
-            );
-
-          let imgembed = new MessageEmbed()
-            .setColor(`#f50041`)
-            .setFooter(message.author.username, message.author.avatarURL())
-            .setTitle(`${client.emoji.image}  | ${language.IMAGE}`)
-            .setDescription(`● ${cmds.join(`\n● `)}`)
-            .setTimestamp();
-
-          button.message.edit({
-            embed: imgembed,
-            components: [firstButtonsRow, secondButtonsRow],
-          });
-        }
-        // Back Button
-        if (button.id === "bbback") {
-          await button.defer(true);
-          let backembed = new MessageEmbed()
-            .setColor(client.colors.echo)
-            .setTitle(language.BT)
-            .setDescription(`>>> ${client.emoji.administration} \`${language.ADMIN}\`
-              ${client.emoji.moderation} \`${language.MODERATION}\`
-              ${client.emoji.utility} \`${language.UTILITY}\`
-              ${client.emoji.fun} \`${language.FUN}\`
-              ${client.emoji.information} \`${language.INFO}\`
-              ${client.emoji.image} \`${language.IMAGE}\``);
-          button.message.edit({
-            embed: backembed,
-            components: [firstButtonsRow, secondButtonsRowWithoutBack],
-          });
-        }
-      }
-    });
-  } else if (args[0]) {
+  if (args[0]) {
     const command =
       client.commands.get(args[0]) ||
       client.commands.find(
@@ -529,6 +240,6 @@ module.exports.run = async (client, message, args, language, settings) => {
       );
     }
 
-    return message.channel.send(embed);
+    return message.channel.send({ embed });
   }
 };

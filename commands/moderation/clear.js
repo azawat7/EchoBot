@@ -14,6 +14,7 @@ module.exports.help = {
   nsfw: false,
   cooldown: 3,
   example: 1,
+  emoji: "✖",
 };
 
 module.exports.run = async (client, message, args, language) => {
@@ -54,5 +55,5 @@ module.exports.run = async (client, message, args, language) => {
     .setTimestamp()
     .setFooter(message.author.username, message.author.avatarURL());
 
-  message.channel.send(clearSuc);
+  message.channel.send({ embed: clearSuc });
 };

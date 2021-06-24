@@ -13,10 +13,11 @@ module.exports.help = {
   nsfw: false,
   cooldown: 3,
   example: 1,
+  emoji: "🏗",
 };
 
 module.exports.run = async (client, message, args, language, settings) => {
-  return message.reply("**In DEV !**");
+  return message.channel.send({ content: "**In DEV !**" });
   const { MessageEmbed } = require("discord.js");
   const { MessageButton, MessageActionRow } = require("discord-buttons");
 

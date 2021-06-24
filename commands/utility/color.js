@@ -14,6 +14,7 @@ module.exports.help = {
   nsfw: false,
   cooldown: 3,
   example: 1,
+  emoji: "🎨",
 };
 
 module.exports.run = async (client, message, args, language) => {
@@ -29,12 +30,12 @@ module.exports.run = async (client, message, args, language) => {
   } catch (e) {
     embed.setDescription(`${client.emoji.cross} **${language.ERROR}**`);
     embed.setColor(client.colors.echo);
-    return message.channel.send(embed);
+    return message.channel.send({ embed: embed });
   }
   if (json.description) {
     embed.setDescription(`${client.emoji.cross} **${language.INVALID}**`);
     embed.setColor(client.colors.echo);
-    return message.channel.send(embed);
+    return message.channel.send({ embed: embed });
   }
 
   embed.setTitle(json.name);
@@ -44,5 +45,5 @@ module.exports.run = async (client, message, args, language) => {
   embed.setThumbnail(json.image);
   embed.setImage(json.image_gradient, true);
   embed.setColor(json.hex);
-  message.channel.send(embed);
+  message.channel.send({ embed: embed });
 };

@@ -2,7 +2,7 @@ const { MessageEmbed } = require("discord.js");
 
 module.exports.help = {
   name: "configuration",
-  aliases: ["config"],
+  aliases: ["config", "modules", "module"],
   category: "admin",
   expectedArgs: null,
   minArgs: 0,
@@ -13,6 +13,7 @@ module.exports.help = {
   nsfw: false,
   cooldown: 3,
   example: 1,
+  emoji: "🛂",
 };
 
 module.exports.run = async (client, message, args, language, settings) => {
@@ -31,5 +32,5 @@ module.exports.run = async (client, message, args, language, settings) => {
       }
     );
 
-  message.channel.send(config);
+  message.channel.send({ embed: config });
 };

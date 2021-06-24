@@ -15,6 +15,7 @@ module.exports.help = {
   nsfw: false,
   cooldown: 3,
   example: 1,
+  emoji: "🎁",
 };
 
 module.exports.run = async (client, message, args, language) => {
@@ -68,8 +69,8 @@ module.exports.run = async (client, message, args, language) => {
     messages: {
       giveaway: `${language.GIVEAWAY}`,
       giveawayEnded: `${language.GIVEAWAYENDED}`,
-      timeRemaining: `${language.TIMEREMAINING}`,
-      inviteToParticipate: `${language.INVITETOPARTICIPATE}`,
+      timeRemaining: `${client.emoji.clock} ● ${language.TIMEREMAINING}`,
+      inviteToParticipate: `${client.emoji.gift} ● ${language.INVITETOPARTICIPATE}`,
       winMessage: `${language.WINMESSAGE}`,
       embedFooter: `${language.EMBEDFOOTER}`,
       noWinner: `${language.NOWINNER}`,
@@ -81,7 +82,7 @@ module.exports.run = async (client, message, args, language) => {
         minutes: `${language.MINUTES}`,
         hours: `${language.HOURS}`,
         days: `${language.DAYS}`,
-        pluralS: false, // Not needed, because units end with a S so it will automatically removed if the unit value is lower than 2
+        pluralS: false,
       },
     },
   });

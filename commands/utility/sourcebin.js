@@ -14,6 +14,7 @@ module.exports.help = {
   nsfw: false,
   cooldown: 3,
   example: 3,
+  emoji: "🎇",
 };
 
 module.exports.run = async (client, message, args, language) => {
@@ -21,14 +22,10 @@ module.exports.run = async (client, message, args, language) => {
   const titled = args[0];
   const languaged = args[1];
 
-  const sembed = new MessageEmbed()
-    .setColor("#f50041")
-    .setDescription(
-      `**${client.emoji.cross} ${language.ERROR} \`js\`, \`html\`, \`css\` !**`
-    );
-
   if (!["js", "html", "css"].includes(languaged))
-    return message.channel.send(sembed);
+    return message.channel.sendErrorMessage(
+      `**${language.ERROR} \`js\`, \`html\`, \`css\` !**`
+    );
 
   create(
     [
@@ -43,11 +40,6 @@ module.exports.run = async (client, message, args, language) => {
       description: `${languaged.toLowerCase()} code.`,
     }
   ).then((value) => {
-    const embed = new MessageEmbed()
-      .setColor("#f50041")
-      .setDescription(
-        `**${client.emoji.check} ${language.SUC} \`${value.url}\`**`
-      );
-    message.channel.send(embed);
+    message.channel.sendSuccessMessage(`**${language.SUC} \`${value.url}\`**`);
   });
 };

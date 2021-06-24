@@ -15,10 +15,11 @@ module.exports.help = {
   cooldown: 3,
   example: 1,
   enabled: false,
+  emoji: "🏴",
 };
 
 module.exports.run = async (client, message, args, language, settings) => {
-  message.channel.send("Command is not available right now !");
+  message.channel.send({ content: "Command is not available right now !" });
   // let languages = ["english"];
 
   // const sembed = new MessageEmbed().setColor("#f50041").setDescription(

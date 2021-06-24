@@ -15,6 +15,7 @@ module.exports.help = {
   nsfw: false,
   cooldown: 3,
   example: 2,
+  emoji: "📜",
 };
 
 module.exports.run = async (client, message, args, language) => {
@@ -38,5 +39,5 @@ module.exports.run = async (client, message, args, language) => {
     }
   });
   text += `\n${total.allowed} ✅ | ${total.denied} ❌` + "\n```";
-  message.channel.send(text);
+  message.channel.send({ content: text });
 };

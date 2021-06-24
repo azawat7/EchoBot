@@ -29,12 +29,12 @@ module.exports.run = async (client, message, args, language, settings) => {
           process.env.TOKEN,
           "hehe there is no token for u"
         );
-      return message.channel.send(output, { code: "js" });
+      return message.channel.send({ content: output, code: "js" });
     })
     .catch((err) => {
       err = err.toString();
       if (err.includes(process.env.TOKEN))
         err = err.replace(process.env.TOKEN, "`hehe there is no token for u`");
-      return message.channel.send(err, { code: "js" });
+      return message.channel.send({ content: err, code: "js" });
     });
 };

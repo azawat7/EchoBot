@@ -13,6 +13,7 @@ module.exports.help = {
   nsfw: false,
   cooldown: 3,
   example: 1,
+  emoji: "🈁",
 };
 
 module.exports.run = async (client, message, args) => {
@@ -22,7 +23,7 @@ module.exports.run = async (client, message, args) => {
       font: "",
     },
     async (err, data) => {
-      message.channel.send(`\`\`\`${data}\`\`\``);
+      message.channel.send({ content: `\`\`\`${data}\`\`\`` });
     }
   );
 };
