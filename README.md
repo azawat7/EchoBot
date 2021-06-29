@@ -45,7 +45,6 @@ If you liked this repository, feel free to leave a star ⭐ and follow me, it ac
 - **fun:** A ton of commands to keep your server active
 - **information:** Information Commands
 - **moderation:** Moderation commands to moderate your discord server
-- **nsfw:** 👀
 
 ## Installation
 
