@@ -2,5 +2,10 @@
   "DESCRIPTION": "Show's the current server config.",
   "EXAMPLE1": "`{cmd_name}`",
   "CONFIG1": "Prefix :",
-  "CONFIG2": "Language :"
+  "CONFIG2": "Language :",
+  "ANTIALT": "Anti-Alt :",
+  "AUTOROLE": "Auto-Role :",
+
+  "DAYS": "day",
+  "DISABLED": "Disabled"
 }

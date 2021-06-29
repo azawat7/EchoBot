@@ -18,7 +18,11 @@ module.exports = async (client, member) => {
           `**${client.emoji.information} You can't join this server because this server has anti-alt activated.\nYour account must be atleast ${settings.antiAlt.time} days old to join this server**`
         );
       member.send({ embed }).catch(() => {});
-      member.kick(language.ANTIALTREASON);
+      return member.kick(language.ANTIALTREASON);
     }
+  }
+
+  if (settings.autoRole.enabled === true) {
+    member.roles.add(settings.autoRole.role);
   }
 };

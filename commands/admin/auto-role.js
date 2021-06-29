@@ -2,10 +2,10 @@ const { MessageEmbed } = require("discord.js");
 const r = require("replacer-js");
 
 module.exports.help = {
-  name: "anti-alt",
-  aliases: ["antialt"],
+  name: "auto-role",
+  aliases: ["autorole"],
   category: "admin",
-  expectedArgs: "`<disable/number(days)_to_be_kicked>`",
+  expectedArgs: "`<role/disable>`",
   minArgs: 1,
   maxArgs: 1,
   ownerOnly: false,
@@ -14,28 +14,31 @@ module.exports.help = {
   nsfw: false,
   cooldown: 3,
   example: 2,
-  emoji: "🏉",
+  emoji: "🎭",
 };
 
 module.exports.run = async (client, message, args, language, settings) => {
-  const time = parseInt(args[0]);
-  if (time) {
-    if (settings.antiAlt.enabled === true) {
+  const role = message.mentions.roles.first();
+  if (role) {
+    if (settings.autoRole.enabled === true) {
       return message.channel.sendErrorMessage(`${language.ALENABLED}`);
     }
+    const time = parseInt(args[1]);
     await client.updateGuild(message.guild, {
-      antiAlt: { enabled: true, time: time },
+      autoRole: { enabled: true, role: role },
     });
     return message.channel.sendSuccessMessage(
       `${r(language.ENABLED, {
-        "{nday}": time,
+        "{role}": `${role}`,
       })}`
     );
   } else if (args[0].toLowerCase() === "disable") {
-    if (settings.antiAlt.enabled === false) {
+    if (settings.autoRole.enabled === false) {
       return message.channel.sendErrorMessage(`${language.ALDISABLED}`);
     }
-    await client.updateGuild(message.guild, { antiAlt: { enabled: false } });
+    await client.updateGuild(message.guild, {
+      autoRole: { enabled: false, role: "undefined" },
+    });
     return message.channel.sendSuccessMessage(`${language.DISABLED}`);
   } else {
     return message.channel.sendErrorMessage(`${language.INVALIDARGS}`);

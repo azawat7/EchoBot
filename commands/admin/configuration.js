@@ -17,18 +17,33 @@ module.exports.help = {
 };
 
 module.exports.run = async (client, message, args, language, settings) => {
-  let guild = message.guild;
   const config = new MessageEmbed()
-    .setAuthor(guild.name, guild.iconURL({ dynamic: true }))
-    .setColor("#f50041")
+    .setAuthor(message.guild.name, message.guild.iconURL({ dynamic: true }))
+    .setColor(client.colors.echo)
     .addFields(
       {
-        name: `\`🥨\` **${language.CONFIG1}**`,
+        name: `**🥨 ${language.CONFIG1}**`,
         value: `\`${settings.prefix}\``,
       },
       {
-        name: `\`🏁\` **${language.CONFIG2}**`,
-        value: `\`${settings.language}\``,
+        name: `**🏁 ${language.CONFIG2}**`,
+        value: `\`${client.capitalize(settings.language)}\``,
+      },
+      {
+        name: `${language.ANTIALT}`,
+        value: `${
+          settings.antiAlt.enabled
+            ? `${client.emoji.on} \`${settings.antiAlt.time} ${language.DAYS}\``
+            : `${client.emoji.off} \`${language.DISABLED}\``
+        }`,
+      },
+      {
+        name: `${language.AUTOROLE}`,
+        value: `${
+          settings.autoRole.enabled
+            ? `${client.emoji.on} <@&${settings.autoRole.role}>`
+            : `${client.emoji.off} \`${language.DISABLED}\``
+        }`,
       }
     );
 
