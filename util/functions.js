@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
-const { Guild } = require("../../models/index");
+const { Guild } = require("../models/index");
 
-module.exports = (client, message) => {
+module.exports = (client) => {
   // Guild Function
 
   client.createGuild = async (guild) => {
@@ -25,8 +25,7 @@ module.exports = (client, message) => {
         guildName: guild.name,
       };
 
-      await client.createGuild(newGuild);
-      return;
+      return await client.createGuild(newGuild);
     }
     if (data) return data;
     return client.config.DEFAULTSETTINGS;
@@ -52,5 +51,21 @@ module.exports = (client, message) => {
       { guildID: guild.id, "users.id": member.id },
       { $set: options }
     ).then();
+  };
+
+  client.formatBytes = (bytes) => {
+    if (bytes === 0) return "0 -_- 0";
+    const sizes = ["Bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
+    const i = Math.floor(Math.log(bytes) / Math.log(1024));
+    return `${parseFloat((bytes / Math.pow(1024, i)).toFixed(2))} ${sizes[i]}`;
+  };
+  client.capitalize = (string) => {
+    return string.charAt(0).toUpperCase() + string.substring(1);
+  };
+
+  client.randomInteger = (min, max) => {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
   };
 };

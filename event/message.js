@@ -1,7 +1,9 @@
 const { owners } = require("../config");
 const { Collection, MessageEmbed } = require("discord.js");
 const { Guild, BlacklistServer } = require("../models/index");
+const { isInvite } = require("../util/anti-invite");
 const replace = require("replacer-js");
+
 module.exports = async (client, message) => {
   if (message.channel.type === "dm") return;
   if (message.author.bot) return;
@@ -16,22 +18,16 @@ module.exports = async (client, message) => {
   ///////////////////////////////////////////
 
   const settings = await client.getGuild(message.guild);
-  const lan = require(`../languages/${settings.language}/message`);
   if (!settings) {
     return message.channel.sendErrorMessage(
       `**This guild was not found in the DB, please try again !**`
     );
   }
+  const lan = require(`../languages/${settings.language}/message`);
 
   ///////////////////////////////////////////
   //             Bot Mention               //
   ///////////////////////////////////////////
-
-  // if (mentionRegex) {
-  //   prefix = `${mentionRegex[0]}`
-  // } else {
-  //   prefix = settings.prefix
-  // }
 
   if (message.content.match(mentionRegex)) {
     embed.setTimestamp;
@@ -63,13 +59,32 @@ module.exports = async (client, message) => {
         $push: {
           users: {
             id: message.member.id,
-            lvlexperience: 0,
-            lvllevel: 0,
+            level: {
+              experience: 0,
+              level: 0,
+            },
+            money: {
+              wallet: 0,
+              bank: 0,
+            },
           },
         },
       }
     ).then((d) => console.log(`New user !`));
   }
+
+  ///////////////////////////////////////////
+  //             Anti Invite               //
+  ///////////////////////////////////////////
+
+  // if (message.content.includes("discord.gg/")) {
+  //   const code = message.content.split("discord.gg/")[1];
+  //   const isOurInvite = await isInvite(message.guild, code);
+  //   if (!isOurInvite) {
+  //     message.delete();
+  //     return message.channel.sendErrorMessage("no advertising");
+  //   }
+  // }
 
   ///////////////////////////////////////////
   //         Command Requirements          //

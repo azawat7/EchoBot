@@ -1,7 +1,7 @@
 const app = require("express")();
 
 module.exports = async (client) => {
-  console.log(`✅ Logged in as ${client.user.tag}!`);
+  console.log(`\x1b[31m[Client] \x1b[37mLogged in as ${client.user.tag}!`);
   let activities = [
     `@{echo} on ${client.guilds.cache.size} guilds`,
     `@{echo} on ${client.users.cache.size} users`,

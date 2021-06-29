@@ -11,7 +11,9 @@ const loadCommands = (client, dir = "./commands/") => {
       client.commands.set(pull.help.name, pull);
     }
   });
-  console.log(`✅ Loaded ${client.commands.size} commands !`);
+  console.log(
+    `\x1b[35m[Commands] \x1b[37mLoaded ${client.commands.size} commands !`
+  );
 };
 
 const loadEvents = (client, dir = "./event/") => {
@@ -24,7 +26,7 @@ const loadEvents = (client, dir = "./event/") => {
     const evtName = eventFile.split(".")[0];
     client.on(evtName, evt.bind(null, client));
   }
-  console.log(`✅ Loaded ${eventFiles.length} events !`);
+  console.log(`\x1b[35m[Events] \x1b[37mLoaded ${eventFiles.length} events !`);
 };
 
 module.exports = {

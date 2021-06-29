@@ -50,15 +50,22 @@ const guildSchema = mongoose.Schema({
       default: false,
     },
   },
-  autoRole: {
-    type: String,
-    required: true,
-    default: null,
-  },
   antiLink: {
     type: Boolean,
-    require: true,
+    required: true,
     default: false,
+  },
+  antiAlt: {
+    enabled: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
+    time: {
+      type: Number,
+      required: true,
+      default: 5,
+    },
   },
 });
 

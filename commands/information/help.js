@@ -1,5 +1,4 @@
 const { MessageEmbed } = require("discord.js");
-const { json } = require("express");
 const { readdirSync } = require("fs");
 const replace = require("replacer-js");
 
@@ -7,7 +6,7 @@ module.exports.help = {
   name: "help",
   aliases: [],
   category: "information",
-  expectedArgs: "`[command_name]`",
+  expectedArgs: "`[command/category_name]`",
   minArgs: 0,
   maxArgs: 1,
   ownerOnly: false,
@@ -71,14 +70,14 @@ module.exports.run = async (client, message, args, language, settings) => {
     });
 
     let embed = new MessageEmbed()
-      .setAuthor(`${language.TITLE1}`)
+      .setAuthor(`📬 ${language.TITLE1}`)
       .setColor(client.colors.echo)
       .setDescription(
-        `>>> ${replace(language.EDES, {
-          "{n_commands}": client.commands.size,
-        })}\n${replace(language.EDES1, {
+        `${replace(language.EDES1, {
           "{prefix}": settings.prefix,
-        })}`
+        })}\n${replace(language.EDES3, {
+          "{prefix}": settings.prefix,
+        })}\n\n __**${language.CAT}**__`
       )
       .addFields(categories)
       .setTimestamp()
@@ -88,6 +87,9 @@ module.exports.run = async (client, message, args, language, settings) => {
   }
 
   if (category.includes(args[0].toLowerCase())) {
+    // if (args[0].toLowerCase() == "nsfw" || !message.channel.nsfw) {
+    //   return message.channel.sendErrorMessage(`👀 ${language.NONSFW}`);
+    // }
     let catwcmd = [];
 
     readdirSync("./commands/").forEach((dir) => {
@@ -127,7 +129,7 @@ module.exports.run = async (client, message, args, language, settings) => {
     });
 
     let embed = new MessageEmbed()
-      .setColor(`#f50041`)
+      .setColor(client.colors.echo)
       .setFooter(message.author.username, message.author.avatarURL())
       .setTitle(`${client.capitalize(args[0])} ${language.CMD} :`)
       .addFields(catwcmd)
