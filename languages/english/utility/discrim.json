@@ -1,0 +1,10 @@
+{
+  "DESCRIPTION": "Shows a list of members with the same discriminator ON THE BOT not your SERVER.",
+  "EXAMPLE1": "`{cmd_name}` `0001`",
+  "NODISCRIM": "Please provide a valid user discriminator !",
+  "TITLE": "Discriminator Search :",
+  "DES": "Found {total} user with the {tag} discriminator :",
+  "FIELD": "Users :",
+  "MORETEN": "{members} and {number} more.",
+  "NONE": "No user found with the {discrim} discriminator !"
+}

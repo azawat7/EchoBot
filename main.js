@@ -1,4 +1,4 @@
-const EchoClient = require("./structures/Echo.ts");
+const EchoClient = require("./structures/Echo.js");
 require("dotenv").config();
 
 const Echo = new EchoClient();

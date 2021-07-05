@@ -29,5 +29,5 @@ module.exports.run = async (client, message, args, language, settings) => {
     });
   });
   embed.setDescription(`${client.emoji.check} **${language.SUCCESS}**`);
-  message.channel.send({ embed: embed });
+  message.channel.send({ embed: [embed] });
 };

@@ -2,7 +2,9 @@ const mongoose = require("mongoose");
 const { Guild } = require("../models/index");
 
 module.exports = (client) => {
-  // Guild Function
+  //////////////////////////
+  // Guild DB Function
+  //////////////////////////
 
   client.createGuild = async (guild) => {
     const merged = Object.assign({ _id: mongoose.Types.ObjectId() }, guild);
@@ -40,6 +42,10 @@ module.exports = (client) => {
     return data.updateOne(settings);
   };
 
+  //////////////////////////
+  // User DB Function
+  //////////////////////////
+
   client.getUser = async (member) => {
     const data = await client.getGuild(member.guild);
     const position = data.users.map((e) => e.id).indexOf(member.id);
@@ -52,6 +58,40 @@ module.exports = (client) => {
       { $set: options }
     ).then();
   };
+
+  client.createUserWarn = async (guild, member, options = {}) => {
+    await Guild.updateOne(
+      { guildID: guild.id, "users.id": member.id },
+      {
+        $push: {
+          warns: {
+            id: options.id,
+            date: options.date,
+            moderator: options.mod,
+            reason: options.reason,
+          },
+        },
+      }
+    ).then((d) => console.log(`Warn : ${d}`));
+    console.log(options);
+  };
+
+  client.deleteUserWarn = async (guild, member, id) => {
+    Guild.updateOne(
+      { guildID: guild.id, "users.id": member.id },
+      {
+        $pull: {
+          warns: {
+            id: id,
+          },
+        },
+      }
+    );
+  };
+
+  //////////////////////////
+  // String Function
+  //////////////////////////
 
   client.formatBytes = (bytes) => {
     if (bytes === 0) return "0 -_- 0";

@@ -55,5 +55,7 @@ module.exports.run = async (client, message, args, language) => {
     .setTimestamp()
     .setFooter(message.author.username, message.author.avatarURL());
 
-  message.channel.send({ embed: clearSuc });
+  message.channel
+    .send({ embeds: [clearSuc] })
+    .then((m) => m.delete({ timeout: 4000 }));
 };

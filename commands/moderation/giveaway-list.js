@@ -29,12 +29,12 @@ module.exports.run = async (client, message, args, language) => {
       .setColor(client.colors.echo)
       .setDescription(`**${language.noGiveaway}**`);
 
-    message.channel.send({ embed });
+    message.channel.send({ embeds: [embed] });
   } else {
     const embed = new MessageEmbed()
       .setColor(client.colors.echo)
       .setDescription(`${giveaways.join("\n\n")}`);
 
-    message.channel.send({ embed });
+    message.channel.send({ embeds: [embed] });
   }
 };

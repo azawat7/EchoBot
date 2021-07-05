@@ -5,9 +5,9 @@ module.exports.help = {
   name: "auto-role",
   aliases: ["autorole"],
   category: "admin",
-  expectedArgs: "`<role/disable>`",
+  expectedArgs: "`<on/off> <@role>`",
   minArgs: 1,
-  maxArgs: 1,
+  maxArgs: 2,
   ownerOnly: false,
   userPerms: ["MANAGE_GUILD"],
   clientPerms: ["MANAGE_GUILD"],
@@ -19,11 +19,13 @@ module.exports.help = {
 
 module.exports.run = async (client, message, args, language, settings) => {
   const role = message.mentions.roles.first();
-  if (role) {
+  if (args[0].toLowerCase() === "on") {
     if (settings.autoRole.enabled === true) {
       return message.channel.sendErrorMessage(`${language.ALENABLED}`);
     }
-    const time = parseInt(args[1]);
+    if (!args[1]) {
+      return message.channel.sendErrorMessage(`${language.ROLE}`);
+    }
     await client.updateGuild(message.guild, {
       autoRole: { enabled: true, role: role },
     });
@@ -32,7 +34,7 @@ module.exports.run = async (client, message, args, language, settings) => {
         "{role}": `${role}`,
       })}`
     );
-  } else if (args[0].toLowerCase() === "disable") {
+  } else if (args[0].toLowerCase() === "off") {
     if (settings.autoRole.enabled === false) {
       return message.channel.sendErrorMessage(`${language.ALDISABLED}`);
     }

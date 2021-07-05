@@ -21,6 +21,7 @@ module.exports.help = {
 module.exports.run = async (client, message, args, language, settings) => {
   function jsondes(lan, cat, name) {
     const file = require(`../../languages/${lan}/${cat}/${name}`);
+    if (!file.endsWith(".json")) throw TypeError("This is not a JSON file !");
     if (file) {
       const des = file.DESCRIPTION || language.NODES;
       return des;
@@ -83,7 +84,7 @@ module.exports.run = async (client, message, args, language, settings) => {
       .setTimestamp()
       .setFooter(message.author.username, message.author.avatarURL());
 
-    return message.channel.send({ embed });
+    return message.channel.send({ embeds: [embed] });
   }
 
   if (category.includes(args[0].toLowerCase())) {
@@ -100,6 +101,8 @@ module.exports.run = async (client, message, args, language, settings) => {
 
       const cmds = commands.map((command) => {
         let file = require(`../../commands/${dir}/${command}`);
+
+        if (file.help.hidden) return;
 
         if (!file.help.name) return "No command name.";
 
@@ -135,7 +138,7 @@ module.exports.run = async (client, message, args, language, settings) => {
       .addFields(catwcmd)
       .setTimestamp();
 
-    return message.channel.send(embed);
+    return message.channel.send({ embeds: [embed] });
   }
 
   ///////////////////////////////////////////

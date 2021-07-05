@@ -1,5 +1,7 @@
-const { MessageEmbed } = require("discord.js");
+const { MessageEmbed, MessageAttachment } = require("discord.js");
 const { createAdvancedSlider } = require("discord-epagination");
+const { Guild } = require("../../models/index");
+const Captcha = require("@haileybot/captcha-generator");
 
 module.exports.help = {
   name: "test",
@@ -14,18 +16,19 @@ module.exports.help = {
   nsfw: false,
   cooldown: 3,
   example: 3,
-  hidden: true,
+  // hidden: true,
 };
 
 module.exports.run = async (client, message, args, language, settings) => {
-  // const embed1 = new MessageEmbed().setDescription(1);
-  // const embed2 = new MessageEmbed().setDescription(2);
+  // let captcha = new Captcha();
+  // let Capt = new MessageAttachment(captcha.JPEGStream, "captcha.jpeg");
 
-  // createAdvancedSlider(
-  //   message.author.id,
-  //   message.channel,
-  //   [embed1, embed2],
-  //   true
-  // );
-  return;
+  // message.channel.send(`Value : ${captcha.value}`, Capt);
+  const memberR = message.mentions.users.first();
+  client.createUserWarn(message.guild, memberR, {
+    id: "12345",
+    date: Date.now(),
+    moderator: message.author.id,
+    reason: "Test",
+  });
 };

@@ -17,7 +17,7 @@ module.exports = async (client, member) => {
         .setDescription(
           `**${client.emoji.information} You can't join this server because this server has anti-alt activated.\nYour account must be atleast ${settings.antiAlt.time} days old to join this server**`
         );
-      member.send({ embed }).catch(() => {});
+      member.send({ embeds: [embed] }).catch(() => {});
       return member.kick(language.ANTIALTREASON);
     }
   }

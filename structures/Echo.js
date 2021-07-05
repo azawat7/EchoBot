@@ -25,7 +25,7 @@ module.exports = class EchoClient extends Client {
       messageCacheMaxSize: 25,
       messageCacheLifetime: 10000,
       messageSweepInterval: 12000,
-      // intents: [Intent.FLAGS.GUIK],
+      // intents: Intents.ALL,
     });
 
     (this.partials = [
@@ -48,13 +48,13 @@ module.exports = class EchoClient extends Client {
       const embed = new MessageEmbed()
         .setColor(this.client.colors.echo)
         .setDescription(`${this.client.emoji.cross} **${content}**`);
-      return this.send({ embed: embed });
+      return this.send({ embed });
     };
     TextChannel.prototype.sendSuccessMessage = function (content) {
       const embed = new MessageEmbed()
         .setColor(this.client.colors.echo)
         .setDescription(`${this.client.emoji.check} **${content}**`);
-      return this.send({ embed: embed });
+      return this.send({ embed });
     };
     // Creates functions
     require("../util/functions.js")(this);

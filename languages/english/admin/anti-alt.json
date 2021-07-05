@@ -1,7 +1,7 @@
 {
-  "DESCRIPTION": "Di/Enable the anti-alt.",
-  "EXAMPLE1": "`{cmd_name}` `10`",
-  "EXAMPLE2": "`{cmd_name}` `disable",
+  "DESCRIPTION": "Toggle the anti-alt module.",
+  "EXAMPLE1": "`{cmd_name}` `on` `10`",
+  "EXAMPLE2": "`{cmd_name}` `off`",
 
   "ALENABLED": "Anti-alt is already enabled on this server !",
   "ALDISABLED": "Anti-alt is already disabled on this server !",
@@ -9,5 +9,7 @@
   "ENABLED": "Anti-alt has been successfully enabled on this server !\n\n Now, the minimum age of a account to join the server is {nday} days !",
   "DISABLED": "Anti-alt has been successfully disabled on this server !",
 
-  "INVALIDARGS": "Please specify the first argument as a number (number of days) or `disable` !"
+  "INVALIDARGS": "Please specify the first argument as `on` or `off` !",
+  "NOTIME": "Please specify time (in day) as the second argument !",
+  "NUMBER": "This is not a number !"
 }

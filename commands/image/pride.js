@@ -4,7 +4,7 @@ module.exports.help = {
   name: "pride",
   aliases: ["lgbtq+"],
   category: "image",
-  expectedArgs: "",
+  expectedArgs: null,
   minArgs: 0,
   maxArgs: 0,
   ownerOnly: false,

@@ -18,26 +18,17 @@ module.exports.help = {
 };
 
 module.exports.run = async (client, message, args, language) => {
-  const heheCannot = new MessageEmbed()
-    .setColor("#f50041")
-    .setDescription(`${client.emoji.cross} **${language.ROLEHIGH}**`);
-  const heheCannotBot = new MessageEmbed()
-    .setColor("#f50041")
-    .setDescription(`${client.emoji.cross} **${language.BOT}**`);
-  const noPerms = new MessageEmbed()
-    .setColor("#f50041")
-    .setDescription(`${client.emoji.cross} **${language.ERR}}**`);
-
   const member = message.mentions.members.first();
-  const reason = args.slice(1).join(" ");
+  const reason = args.slice(1).join(" ") || `${language.NOREASON}`;
 
-  if (!member) return message.channel.send(heheCannotBot);
+  if (!member)
+    return message.channel.sendErrorMessage(`${language.INVALIDMEMBER}`);
 
   if (message.member.roles.highest.position <= member.roles.highest.position)
-    return message.channel.send(heheCannot);
+    return message.channel.sendErrorMessage(`${language.INSUFICIENTROLE}`);
 
   if (message.guild.me.roles.highest.position <= member.roles.highest.position)
-    return message.channel.send(noPerms);
+    return message.channel.sendErrorMessage(`${language.BOTINSUFICIENTROLE}`);
 
   member.ban({ days: 7, reason: reason });
 
@@ -53,5 +44,5 @@ module.exports.run = async (client, message, args, language) => {
     .setTimestamp()
     .setFooter(message.author.username, message.author.avatarURL());
 
-  message.channel.send({ embed: sucess });
+  message.channel.send({ embeds: [sucess] });
 };

@@ -1,7 +1,0 @@
-{
-  "DESCRIPTION": "Change the current language.",
-  "EXAMPLE1": "`{cmd_name}` `french`",
-  "SETLANGUAGE1": "Supported languages are : \n{languages}",
-  "SETLANGUAGE2": "You are already using this language !",
-  "SETLANGUAGE3": "Language updated !"
-}

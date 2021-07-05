@@ -52,7 +52,7 @@ module.exports.run = async (client, message, args, language) => {
     .map((role) => role.toString())
     .slice(0, -1);
 
-  rolesNoob = roles.join(" ");
+  rolesNoob = roles.join(" `|` ");
   if (member.roles.cache.size < 1) rolesNoob = `${language.NONE}`;
   if (!member.roles.cache.size || member.roles.cache.size - 1 < 1)
     roles = `\`${language.NONE}\``;
@@ -85,6 +85,10 @@ module.exports.run = async (client, message, args, language) => {
   )}\`
     **• ${language.ROLE} [${roles.length || "0"}] : ** ${
     rolesNoob || `\`${language.NONE}\``
-  }`);
+  }
+
+  __**${language.PRESENCE}**__
+    **• ${language.STATUS} :** ${statuses[member.user.presence.status]}
+      `);
   return message.channel.send({ embed });
 };

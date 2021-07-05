@@ -2,8 +2,10 @@
   "DESCRIPTION": "Ban a desired user from the server.",
   "EXAMPLE1": "`{cmd_name}` `@im_a_panda_guy`",
   "EXAMPLE2": "`{cmd_name}` `@im_a_panda_guy` `Spamming in general.`",
-  "BOT": "You can't ban this user because he is a bot !",
-  "ROLEHIGH": "You can't ban this person because you either have the same role or your role is lower !",
+  "INVALIDMEMBER": "Please mention a valid member !",
   "SUC": "`{user}` has been banned from the server by `{moderator}` for `{reason}` !",
-  "ERR": "I can't ban this user because my highest role (with perms) is not as high as his !"
+  "BOTINSUFICIENTROLE": "I can't ban this user because my highest role (with perms) is not as high as his !",
+  "INSUFICIENTROLE": "You can't ban this person because you either have the same role or your role highest role is lower than his !",
+
+  "NOREASON": "No reason provided."
 }

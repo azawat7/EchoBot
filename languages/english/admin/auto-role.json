@@ -1,7 +1,7 @@
 {
-  "DESCRIPTION": "Di/Enable the autorole module.",
-  "EXAMPLE1": "`{cmd_name}` `@Member`",
-  "EXAMPLE2": "`{cmd_name}` `disable`",
+  "DESCRIPTION": "Toggle the autorole module.",
+  "EXAMPLE1": "`{cmd_name}` `on` `@role`",
+  "EXAMPLE2": "`{cmd_name}` `off`",
 
   "ALENABLED": "Auto-role is already enabled on this server !",
   "ALDISABLED": "Auto-role is already disabled on this server !",
@@ -9,5 +9,6 @@
   "ENABLED": "Auto-role has been successfully enabled on this server !\n\n Now, the auto-role is set to {role} !",
   "DISABLED": "Auto-role has been successfully disabled on this server !",
 
-  "INVALIDARGS": "Please specify the first argument as a role mention/id or `disable` !"
+  "INVALIDARGS": "Please specify the first argument as a `on` or `off` !",
+  "ROLE": "Please MENTION the role that you want to set for the autorole !"
 }

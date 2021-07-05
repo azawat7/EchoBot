@@ -6,7 +6,7 @@ module.exports.help = {
   aliases: [],
   category: "moderation",
   expectedArgs: "`<@user>` `[reason]`",
-  minArgs: 2,
+  minArgs: 1,
   maxArgs: null,
   ownerOnly: false,
   userPerms: ["KICK_MEMBERS"],
@@ -18,28 +18,23 @@ module.exports.help = {
 };
 
 module.exports.run = async (client, message, args, language) => {
-  const heheCannot = new MessageEmbed()
-    .setColor("#f50041")
-    .setDescription(`${client.emoji.cross} **${language.ROLEHIGH}**`);
-  const heheCannotBot = new MessageEmbed()
-    .setColor("#f50041")
-    .setDescription(`${client.emoji.cross} **${language.BOT}**`);
-  const noPerms = new MessageEmbed()
-    .setColor("#f50041")
-    .setDescription(`${client.emoji.cross} **${language.ERR}**`);
-
   let member = message.mentions.members.first();
-  const reason = args.slice(1).join(" ");
+  const reason = args.slice(1).join(" ") || `${language.NOREASON}`;
 
-  if (!member) return message.channel.send(heheCannotBot);
+  if (!member) {
+    return message.channel.sendErrorMessage(`${language.INVALIDMEMBER}`);
+  }
+  if (message.member.roles.highest.position <= member.roles.highest.position) {
+    return message.channel.sendErrorMessage(`${language.INSUFICIENTROLE}`);
+  }
 
-  if (message.member.roles.highest.position <= member.roles.highest.position)
-    return message.channel.send(heheCannot);
+  if (
+    message.guild.me.roles.highest.position <= member.roles.highest.position
+  ) {
+    return message.channel.sendErrorMessage(`${language.BOTINSUFICIENTROLE}`);
+  }
 
-  if (message.guild.me.roles.highest.position <= member.roles.highest.position)
-    return message.channel.send(noPerms);
-
-  member.kick({ days: 7, reason: reason });
+  member.kick(reason);
 
   const sucess = new MessageEmbed()
     .setColor("#f50041")
@@ -53,5 +48,5 @@ module.exports.run = async (client, message, args, language) => {
     .setTimestamp()
     .setFooter(message.author.username, message.author.avatarURL());
 
-  message.channel.send({ embed: sucess });
+  message.channel.send({ embeds: [sucess] });
 };

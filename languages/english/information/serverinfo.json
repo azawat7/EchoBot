@@ -3,8 +3,51 @@
   "EXAMPLE1": "`{cmd_name}`",
   "NAME": "Name",
   "CREATIONDATE": "Creation Date",
-  "TOTALMEMBERS": "Total Members",
+  "MEMBERS": "Total Members Count",
+  "TOTALMEMBERS": "Members",
   "ID": "ID",
   "OWNER": "Owner",
-  "VERIFLVL": "Verif. Level"
+  "VERIFLVL": "Verif. Level",
+  "REGION": "Region",
+  "BOOST": "Boost Tier",
+  "BOOSTS": "Boost Count",
+  "FILTER": "Explicit Filter",
+  "VANITY": "Vanity Link",
+  "OTHER": "Other Informations",
+
+  "USER": "Users",
+  "BOT": "Bots",
+
+  "OFF": "Off",
+  "NOROLE": "No Role",
+  "EVERY": "Everyone",
+
+  "NONE": "None",
+  "LOW": "Low",
+  "MEDIUM": "Medium",
+
+  "TIER": "Tier",
+  "EMOJIS": "Emojis & Channels",
+
+  "TEXT": "Text Channels :",
+  "VOICE": "Voice Channels :",
+  "EMOJI": "Emoji :",
+  "ANIME": "Animated Emoji :",
+
+  "PRESENCE": "Presence",
+
+  "ONLINE": "Online :",
+  "DND": "Do Not Disturb :",
+  "IDLE": "Idle :",
+  "OFFLINE": "Offline :",
+
+  "DAYSAGO": "ago",
+  "NOURL": "No Custom URL",
+
+  "INTEGRATION": "Integrations :",
+  "WEBHOOK": "Webhooks :",
+
+  "NOINTEGRATION": "No Integrations",
+
+  "REQUESTED": "Requested by {user}"
 }

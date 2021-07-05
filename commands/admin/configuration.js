@@ -22,13 +22,23 @@ module.exports.run = async (client, message, args, language, settings) => {
     .setColor(client.colors.echo)
     .addFields(
       {
-        name: `**🥨 ${language.CONFIG1}**`,
-        value: `\`${settings.prefix}\``,
+        name: `**${language.CONFIG1}**`,
+        value: `${client.emoji.echo} \`${
+          settings.prefix == "$"
+            ? `${settings.prefix} (${language.DEFAULT})`
+            : `${settings.prefix}`
+        }\``,
+        inline: true,
       },
-      {
-        name: `**🏁 ${language.CONFIG2}**`,
-        value: `\`${client.capitalize(settings.language)}\``,
-      },
+      // {
+      //   name: `**${language.CONFIG2}**`,
+      //   value: `${client.emoji.echo} \`${
+      //     settings.language == "english"
+      //       ? client.capitalize(`${settings.language} (${language.DEFAULT})`)
+      //       : `${settings.language}`
+      //   }\``,
+      //   inline: true,
+      // },
       {
         name: `${language.ANTIALT}`,
         value: `${
@@ -36,6 +46,7 @@ module.exports.run = async (client, message, args, language, settings) => {
             ? `${client.emoji.on} \`${settings.antiAlt.time} ${language.DAYS}\``
             : `${client.emoji.off} \`${language.DISABLED}\``
         }`,
+        inline: true,
       },
       {
         name: `${language.AUTOROLE}`,
@@ -44,6 +55,7 @@ module.exports.run = async (client, message, args, language, settings) => {
             ? `${client.emoji.on} <@&${settings.autoRole.role}>`
             : `${client.emoji.off} \`${language.DISABLED}\``
         }`,
+        inline: true,
       }
     );
 

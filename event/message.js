@@ -42,7 +42,7 @@ module.exports = async (client, message) => {
       `**${lan.MENTIONSUPPORT} :** [${lan.CLICKHERE}](https://discord.gg/5eaZdWygQf)`,
       `**${lan.MENTIONINVITE} :** [${lan.CLICKHERE}](https://discord.com/oauth2/authorize?client_id=838061935039610921&scope=bot&permissions=8589934591)`,
     ]);
-    message.channel.send({ embed: embed });
+    message.channel.send({ embed });
   }
 
   ///////////////////////////////////////////
@@ -67,6 +67,7 @@ module.exports = async (client, message) => {
               wallet: 0,
               bank: 0,
             },
+            warns: [],
           },
         },
       }

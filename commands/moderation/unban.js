@@ -36,5 +36,5 @@ module.exports.run = async (client, message, args, language) => {
     .setTimestamp()
     .setFooter(message.author.username, message.author.avatarURL());
 
-  message.channel.send({ embed: sucess });
+  message.channel.send({ embeds: [sucess] });
 };

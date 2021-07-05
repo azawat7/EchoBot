@@ -18,18 +18,15 @@ module.exports.help = {
 
 module.exports.run = async (client, message, args, language, settings) => {
   if (args[0].length > 3) {
-    return message.channel.sendErrorMessage(`**${language.ERROR}**`);
+    return message.channel.sendErrorMessage(`${language.ERROR}`);
   }
-  const newSetting = args.slice(0).join(" ");
 
-  const actPrefix = new MessageEmbed()
-    .setColor("#f50041")
-    .setDescription(
-      `**${language.SETPREFIX1}** \`${settings.prefix}\` -> \`${newSetting}\``
+  const newPrefix = args.slice(0).join(" ");
+
+  if (newPrefix) {
+    await client.updateGuild(message.guild, { prefix: newPrefix });
+    return message.channel.sendSuccessMessage(
+      `${language.UPDATEDPREFIX} \`${settings.prefix}\` -> \`${newPrefix}\``
     );
-
-  if (newSetting) {
-    await client.updateGuild(message.guild, { prefix: newSetting });
-    return message.channel.send({ embed: actPrefix });
   }
 };
