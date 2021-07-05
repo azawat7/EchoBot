@@ -7,8 +7,8 @@ module.exports.help = {
   name: "test",
   aliases: [],
   category: "utility",
-  expectedArgs: null,
-  minArgs: 0,
+  expectedArgs: "`<id>`",
+  minArgs: 1,
   maxArgs: 1,
   ownerOnly: true,
   userPerms: [],
@@ -20,15 +20,13 @@ module.exports.help = {
 };
 
 module.exports.run = async (client, message, args, language, settings) => {
-  // let captcha = new Captcha();
-  // let Capt = new MessageAttachment(captcha.JPEGStream, "captcha.jpeg");
+  const id = args[0];
 
-  // message.channel.send(`Value : ${captcha.value}`, Capt);
-  const memberR = message.mentions.users.first();
-  client.createUserWarn(message.guild, memberR, {
-    id: "12345",
-    date: Date.now(),
-    moderator: message.author.id,
-    reason: "Test",
-  });
+  const gd = await Guild.findOne({ guildID: message.guild.id });
+
+  if (!gd.warnings.includes(id)) {
+    return message.channel.send("test");
+  }
+
+  client.deleteUserWarn(message, id);
 };

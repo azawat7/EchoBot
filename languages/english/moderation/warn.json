@@ -1,0 +1,8 @@
+{
+  "DESCRIPTION": "Warns a user.",
+  "EXAMPLE1": "`{cmd_name}` `@someone` `Zalgo in general`",
+  "NOREASON": "No reason provided.",
+
+  "SUCCESS": "Successfully warned {user} for `{reason}` by {mod}\nWarn ID : `{id}`",
+  "INVWARN": "There is no warn with the id of `{id}` !"
+}

@@ -67,7 +67,6 @@ module.exports = async (client, message) => {
               wallet: 0,
               bank: 0,
             },
-            warns: [],
           },
         },
       }

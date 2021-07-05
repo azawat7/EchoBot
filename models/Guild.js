@@ -18,6 +18,7 @@ const guildSchema = mongoose.Schema({
     required: true,
     default: defaults.language,
   },
+  warnings: [],
   users: [],
   premium: {
     isPremium: {

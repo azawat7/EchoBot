@@ -54,24 +54,24 @@ module.exports.run = async (client, message, args, language) => {
     .addFields(
       {
         name: `🎫 ${language.NAME}`,
-        value: `\`${message.guild.name}\``,
+        value: `>>> \`${message.guild.name}\``,
         inline: true,
       },
       {
         name: `📅 ${language.CREATIONDATE}`,
-        value: `\`${message.channel.guild.createdAt
+        value: `>>> \`${message.channel.guild.createdAt
           .toUTCString()
           .substr(0, 16)} (${checkDays(message.channel.guild.createdAt)})\``,
         inline: true,
       },
       {
         name: `👥 ${language.MEMBERS}`,
-        value: `\`${message.guild.members.cache.size}\``,
+        value: `>>> \`${message.guild.members.cache.size}\``,
         inline: true,
       },
       {
         name: `💯 ${language.TOTALMEMBERS}`,
-        value: `\`${
+        value: `>>> \`${
           message.guild.members.cache.filter((member) => !member.user.bot).size
         } ${language.USER} | ${
           message.guild.members.cache.filter((member) => member.user.bot).size
@@ -80,27 +80,27 @@ module.exports.run = async (client, message, args, language) => {
       },
       {
         name: `🆔 ${language.ID}`,
-        value: `\`${message.guild.id}\``,
+        value: `>>> \`${message.guild.id}\``,
         inline: true,
       },
       {
         name: `👑 ${language.OWNER}`,
-        value: `\`${message.guild.owner.user.username}#${message.guild.owner.user.discriminator}\``,
+        value: `>>> \`${message.guild.owner.user.username}#${message.guild.owner.user.discriminator}\``,
         inline: true,
       },
       {
         name: `✔️ ${language.VERIFLVL}`,
-        value: `\`${verificationLevels[message.guild.verificationLevel]}\``,
+        value: `>>> \`${verificationLevels[message.guild.verificationLevel]}\``,
         inline: true,
       },
       {
         name: `🌎 ${language.REGION}`,
-        value: `\`${client.capitalize(message.guild.region)}\``,
+        value: `>>> \`${client.capitalize(message.guild.region)}\``,
         inline: true,
       },
       {
         name: `🚀 ${language.BOOST}`,
-        value: `\`${
+        value: `>>> \`${
           message.guild.premiemTier
             ? `${language.TIER} ${message.guild.premiumTier}`
             : language.NONE
@@ -109,24 +109,24 @@ module.exports.run = async (client, message, args, language) => {
       },
       {
         name: `💨 ${language.BOOSTS}`,
-        value: `\`${message.guild.premiumSubscriptionCount || "0"}\``,
+        value: `>>> \`${message.guild.premiumSubscriptionCount || "0"}\``,
         inline: true,
       },
       {
         name: `💨 ${language.FILTER}`,
-        value: `\`${filterLevels[message.guild.explicitContentFilter]}\``,
+        value: `>>> \`${filterLevels[message.guild.explicitContentFilter]}\``,
         inline: true,
       },
       {
         name: `💨 ${language.VANITY}`,
-        value: `\`${vanityInvite}\``,
+        value: `>>> \`${vanityInvite}\``,
         inline: true,
       }
     )
     .addField(
       `💫 ${language.EMOJIS}`,
       [
-        `💬 ${language.TEXT} \`${
+        `>>> 💬 ${language.TEXT} \`${
           message.guild.channels.cache.filter(
             (channel) => channel.type === "text"
           ).size
@@ -146,7 +146,7 @@ module.exports.run = async (client, message, args, language) => {
     .addField(
       `👨‍🎓 ${language.PRESENCE}`,
       [
-        `${client.emoji.online} ${language.ONLINE} \`${
+        `>>> ${client.emoji.online} ${language.ONLINE} \`${
           message.guild.members.cache.filter(
             (member) => member.presence.status === "online"
           ).size

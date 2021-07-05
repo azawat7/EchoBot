@@ -59,12 +59,13 @@ module.exports = (client) => {
     ).then();
   };
 
-  client.createUserWarn = async (guild, member, options = {}) => {
+  client.createUserWarn = async (guild, options = {}) => {
     await Guild.updateOne(
-      { guildID: guild.id, "users.id": member.id },
+      { guildID: guild.id },
       {
         $push: {
-          warns: {
+          warnings: {
+            target: options.target,
             id: options.id,
             date: options.date,
             moderator: options.mod,
@@ -72,16 +73,15 @@ module.exports = (client) => {
           },
         },
       }
-    ).then((d) => console.log(`Warn : ${d}`));
-    console.log(options);
+    ).then();
   };
 
-  client.deleteUserWarn = async (guild, member, id) => {
-    Guild.updateOne(
-      { guildID: guild.id, "users.id": member.id },
+  client.deleteUserWarn = async (message, id) => {
+    await Guild.updateOne(
+      { guildID: message.guild.id },
       {
         $pull: {
-          warns: {
+          warnings: {
             id: id,
           },
         },

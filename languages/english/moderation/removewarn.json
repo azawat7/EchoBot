@@ -1,0 +1,7 @@
+{
+  "DESCRIPTION": "Remove a warn with a certain id.",
+  "EXAMPLE1": "`{cmd_name}` `W_f86e220a-8ed6-8ecc`",
+
+  "SUCCESS": "Successfully removed the warn of {user} with the id of `{id}`",
+  "INVWARN": "There is no warn with the id of `{id}` !"
+}
