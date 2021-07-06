@@ -29,6 +29,10 @@ module.exports.run = async (client, message, args, language, settings) => {
 
   const gd = await Guild.findOne({ guildID: message.guild.id });
 
+  if (gd.warnings.length === 0) {
+    return message.channel.sendErrorMessage(language.GUILD);
+  }
+
   i = 0;
 
   gd.warnings.forEach((warn) => {
