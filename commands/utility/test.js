@@ -8,8 +8,8 @@ module.exports.help = {
   aliases: [],
   category: "utility",
   expectedArgs: "`<id>`",
-  minArgs: 1,
-  maxArgs: 1,
+  minArgs: 0,
+  maxArgs: null,
   ownerOnly: true,
   userPerms: [],
   clientPerms: [],
@@ -21,12 +21,6 @@ module.exports.help = {
 
 module.exports.run = async (client, message, args, language, settings) => {
   const id = args[0];
-
-  const gd = await Guild.findOne({ guildID: message.guild.id });
-
-  if (!gd.warnings.includes(id)) {
-    return message.channel.send("test");
-  }
-
-  client.deleteUserWarn(message, id);
+  let member = client.users.cache.get(id);
+  return message.channel.send(`**Tag :** \`${member.tag}\``);
 };

@@ -69,8 +69,8 @@ module.exports.run = async (client, message, args, language) => {
     messages: {
       giveaway: `${language.GIVEAWAY}`,
       giveawayEnded: `${language.GIVEAWAYENDED}`,
-      timeRemaining: `${client.emoji.clock} ● ${language.TIMEREMAINING}`,
-      inviteToParticipate: `${client.emoji.gift} ● ${language.INVITETOPARTICIPATE}`,
+      timeRemaining: `${language.TIMEREMAINING}`,
+      inviteToParticipate: `${language.INVITETOPARTICIPATE}`,
       winMessage: `${language.WINMESSAGE}`,
       embedFooter: `${language.EMBEDFOOTER}`,
       noWinner: `${language.NOWINNER}`,

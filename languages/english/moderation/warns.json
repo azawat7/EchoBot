@@ -1,6 +1,7 @@
 {
   "DESCRIPTION": "List you all warn of a certain user or of the server.",
   "EXAMPLE1": "`{cmd_name}` `@someone`",
+  "EXAMPLE2": "`{cmd_name}`",
 
   "SUCCESS": "Successfully removed the warn of {user} with the id of `{id}`",
   "NOWARN": "This user has no warns !",
@@ -8,7 +9,11 @@
   "MODERATOR": "Moderator",
   "DATE": "Date",
   "REASON": "Reason",
+  "MEMBER": "Member",
 
   "WARNS": "{user}'s warn(s) :",
-  "NOWARNS": "{user} has no warns !"
+  "NOWARNS": "{user} has no warns !",
+
+  "SERVERW": "All warns of the guild :",
+  "NOSERVERW": "This guild has no warn !"
 }
