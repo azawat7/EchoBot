@@ -125,6 +125,14 @@ module.exports = async (client, message) => {
         })}`
       );
     }
+    // Guild Enabled Verification
+    if (settings.commands.includes(command.help.name)) {
+      return message.channel.sendErrorMessage(
+        replace(lan.GUILDDISABLED, {
+          "{owner}": message.guild.owner.user.tag,
+        })
+      );
+    }
   }
 
   ///////////////////////////////////////////

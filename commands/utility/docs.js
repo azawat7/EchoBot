@@ -9,7 +9,7 @@ module.exports.help = {
   maxArgs: 1,
   ownerOnly: false,
   userPerms: [],
-  clientPerms: [],
+  clientPerms: ["EMBED_LINKS"],
   nsfw: false,
   cooldown: 3,
   example: 1,

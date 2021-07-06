@@ -21,6 +21,7 @@ module.exports.help = {
   nsfw: false,
   cooldown: 3,
   example: 1,
+  emoji: "❗❌",
   // hidden: true,
 };
 

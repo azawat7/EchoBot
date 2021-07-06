@@ -10,7 +10,7 @@ module.exports.help = {
   maxArgs: 2,
   ownerOnly: false,
   userPerms: ["MANAGE_GUILD"],
-  clientPerms: ["MANAGE_GUILD"],
+  clientPerms: [],
   nsfw: false,
   cooldown: 3,
   example: 2,

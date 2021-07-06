@@ -11,7 +11,7 @@ module.exports.help = {
   maxArgs: 0,
   ownerOnly: false,
   userPerms: [],
-  clientPerms: [],
+  clientPerms: ["ATTACH_FILES"],
   nsfw: false,
   cooldown: 3,
   example: 1,

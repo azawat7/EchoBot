@@ -20,6 +20,7 @@ const guildSchema = mongoose.Schema({
   },
   warnings: [],
   users: [],
+  commands: [],
   premium: {
     isPremium: {
       type: Boolean,
