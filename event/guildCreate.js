@@ -37,5 +37,5 @@ module.exports = async (client, guild) => {
     )
     .setFooter(`{echo} - Open Source`);
 
-  guild.owner.send({ embeds: [guildOwnerEmbed] });
+  guild.owner.send({ embed: guildOwnerEmbed });
 };

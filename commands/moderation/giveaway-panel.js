@@ -126,7 +126,7 @@ module.exports.run = async (client, message, args, language) => {
 
     message.channel
       .send({
-        embeds: [embeds],
+        embed: embeds,
         components: buttons_enabled_ened,
       })
       .then((msg) => {
@@ -142,13 +142,13 @@ module.exports.run = async (client, message, args, language) => {
               .delete(messageID)
               .then(() => {
                 button.message.edit({
-                  embeds: [embeds],
+                  embed: embeds,
                   components: buttons_disabled_ened,
                 });
               })
               .catch((err) => {
                 button.message.edit({
-                  embeds: [embeds],
+                  embed: embeds,
                   components: buttons_disabled_ened,
                 });
               });
@@ -169,13 +169,13 @@ module.exports.run = async (client, message, args, language) => {
               })
               .then(() => {
                 button.message.edit({
-                  embeds: [embeds],
+                  embed: embeds,
                   components: buttons_enabled_ened,
                 });
               })
               .catch((err) => {
                 button.message.edit({
-                  embeds: [embeds],
+                  embed: embeds,
                   components: buttons_enabled_ened,
                 });
               });
@@ -215,7 +215,7 @@ module.exports.run = async (client, message, args, language) => {
 
     message.channel
       .send({
-        embeds: [embeds],
+        embed: embeds,
         components: buttons_enabled_ened_reror,
       })
       .then((msg) => {
@@ -231,13 +231,13 @@ module.exports.run = async (client, message, args, language) => {
               .delete(messageID)
               .then(() => {
                 button.message.edit({
-                  embeds: [embeds],
+                  embed: embeds,
                   components: buttons_disabled_ened,
                 });
               })
               .catch((err) => {
                 button.message.edit({
-                  embeds: [embeds],
+                  embed: embeds,
                   components: buttons_disabled_ened,
                 });
               });
@@ -258,13 +258,13 @@ module.exports.run = async (client, message, args, language) => {
               })
               .then(() => {
                 button.message.edit({
-                  embeds: [embeds],
+                  embed: embeds,
                   components: buttons_enabled_ened_rerorr,
                 });
               })
               .catch((err) => {
                 button.message.edit({
-                  embeds: [embeds],
+                  embed: embeds,
                   components: buttons_enabled_ened_rerorr,
                 });
               });
@@ -275,20 +275,20 @@ module.exports.run = async (client, message, args, language) => {
               .end(messageID)
               .then(() => {
                 button.message.edit({
-                  embeds: [embeds],
+                  embed: embeds,
                   components: buttons_enabled_ened_rerorr,
                 });
               })
               .catch((err) => {
                 button.message.edit({
-                  embeds: [embeds],
+                  embed: embeds,
                   components: buttons_enabled_ened_rerorr,
                 });
               });
           }
         });
         collector.on("end", (collected) => {
-          msg.edit({ embeds: [embeds], component: buttons_disabled_ened });
+          msg.edit({ embed: embeds, component: buttons_disabled_ened });
         });
       });
   }

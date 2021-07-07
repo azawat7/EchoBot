@@ -15,6 +15,7 @@ module.exports.help = {
   cooldown: 3,
   example: 2,
   emoji: "🎭",
+  admin: true,
 };
 
 module.exports.run = async (client, message, args, language, settings) => {

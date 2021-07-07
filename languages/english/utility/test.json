@@ -1,1 +1,4 @@
-{}
+{
+  "DESCRIPTION": "Test command for IAPG",
+  "EXAMPLE1": "`{cmd_name}`"
+}

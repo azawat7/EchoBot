@@ -15,11 +15,12 @@ module.exports.help = {
   cooldown: 3,
   example: 1,
   emoji: "🔘",
+  admin: true,
   // enabled: false,
 };
 
 module.exports.run = async (client, message, args, language, settings) => {
-  const non = ["help", "configuration", "toggle-command", "test"];
+  const non = ["help", "configuration", "toggle-command", "test", "setprefix"];
 
   non.forEach((n) => {
     if (args[0].includes(n)) {

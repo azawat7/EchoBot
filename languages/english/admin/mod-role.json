@@ -1,0 +1,13 @@
+{
+  "DESCRIPTION": "Add a role to the moderator role list.",
+  "EXAMPLE1": "`{cmd_name}` `@Moderator`",
+  "EXAMPLE2": "`{cmd_name}`",
+
+  "SUCCESS": "Successfully added {role} to the moderator roles.\n🎭 Now the moderators roles are : {roles}",
+  "SUCCESS2": "Successfully removed {role} from the moderator roles.\n🎭 Now the moderators roles are : {roles}",
+  "SUCCESS3": "Successfully removed {role} from the moderator roles.\n🎭 Now there is no moderator role.",
+
+  "EMBED1": "Mod-roles are role that can use any moderation commands of the bot (except giveaways and even if the role don't have perms to do something).",
+  "EMBED2": "At this moment, this server has no mod-roles.",
+  "EMBED3": "Mod-roles are : {roles}"
+}

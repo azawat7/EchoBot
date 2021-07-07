@@ -6,10 +6,9 @@ const replace = require("replacer-js");
 
 module.exports = async (client, message) => {
   if (message.channel.type === "dm") return;
-  if (message.author.bot) return;
-  if (!message.guild.me.hasPermission("SEND_MESSAGES")) return;
+  if (!message.guild.me.permissions.has(["SEND_MESSAGES"]))
+    if (message.author.bot) return;
 
-  // let prefix;
   const mentionRegex = RegExp(`^<@!?${client.user.id}>$`);
   const embed = new MessageEmbed().setColor(client.colors.echo);
 
@@ -18,11 +17,8 @@ module.exports = async (client, message) => {
   ///////////////////////////////////////////
 
   const settings = await client.getGuild(message.guild);
-  if (!settings) {
-    return message.channel.sendErrorMessage(
-      `**This guild was not found in the DB, please try again !**`
-    );
-  }
+  if (!settings) return;
+
   const lan = require(`../languages/${settings.language}/message`);
 
   ///////////////////////////////////////////
@@ -43,6 +39,7 @@ module.exports = async (client, message) => {
       `**${lan.MENTIONINVITE} :** [${lan.CLICKHERE}](https://discord.com/oauth2/authorize?client_id=838061935039610921&scope=bot&permissions=8589934591)`,
     ]);
     message.channel.send({ embed });
+    prefix = mentionRegex;
   }
 
   ///////////////////////////////////////////
@@ -118,7 +115,7 @@ module.exports = async (client, message) => {
     }
 
     // Enabled Verification
-    if (command.help.enabled === false) {
+    if (!owners.includes(message.author.id) && command.help.enabled === false) {
       return message.channel.sendErrorMessage(
         `${replace(lan.DISABLED, {
           "{inviteLink}": "https://discord.gg/gDf3zG3e",
@@ -168,32 +165,54 @@ module.exports = async (client, message) => {
     command.help.clientPerms &&
     !message.guild.me.permissions.has(command.help.clientPerms)
   ) {
-    embed.setDescription(
-      `${client.emoji.cross} **${lan.CLIENTPERMS} ${missingPerms(
-        message.guild.me,
-        command.help.clientPerms
-      )} !**`
-    );
     return message.channel.sendErrorMessage(
       `${lan.CLIENTPERMS} ${missingPerms(
         message.guild.me,
         command.help.clientPerms
-      )} !`
+      )} !\nhttps://discord.com/developers/docs/topics/permissions`
     );
   }
 
   // User Permissions
-  if (
-    !owners.includes(message.author.id) &&
-    command.help.userPerms &&
-    !message.member.permissions.has(command.help.userPerms)
-  ) {
-    return message.channel.sendErrorMessage(
-      `${lan.USERPERMS} ${missingPerms(
-        message.member,
-        command.help.userPerms
-      )} !`
-    );
+  if (settings.roles.modRoles.length) {
+    if (
+      !owners.includes(message.author.id) &&
+      command.help.moderator &&
+      client.checkMod(message.member, settings.roles.modRoles) === false
+    ) {
+      return message.channel.sendErrorMessage(
+        `${lan.USERPERMS} ${missingPerms(
+          message.member,
+          command.help.userPerms
+        )} !\nhttps://discord.com/developers/docs/topics/permissions`
+      );
+    }
+  } else if (settings.roles.adminRoles.length) {
+    if (
+      !owners.includes(message.author.id) &&
+      command.help.admin &&
+      client.checkAdmin(message.member, settings.roles.adminRoles) === false
+    ) {
+      return message.channel.sendErrorMessage(
+        `${lan.USERPERMS} ${missingPerms(
+          message.member,
+          command.help.userPerms
+        )} !\nhttps://discord.com/developers/docs/topics/permissions`
+      );
+    }
+  } else {
+    if (
+      !owners.includes(message.author.id) &&
+      command.help.userPerms &&
+      !message.member.permissions.has(command.help.userPerms)
+    ) {
+      return message.channel.sendErrorMessage(
+        `${lan.USERPERMS} ${missingPerms(
+          message.member,
+          command.help.userPerms
+        )} !\nhttps://discord.com/developers/docs/topics/permissions`
+      );
+    }
   }
 
   ///////////////////////////////////////////

@@ -1,0 +1,13 @@
+{
+  "DESCRIPTION": "Add a role to the admin role list.",
+  "EXAMPLE1": "`{cmd_name}` `@Admin`",
+  "EXAMPLE2": "`{cmd_name}`",
+
+  "SUCCESS": "Successfully added {role} to the admin roles.\n🎭 Now the admin roles are : {roles}",
+  "SUCCESS2": "Successfully removed {role} from the admin roles.\n🎭 Now the admin roles are : {roles}",
+  "SUCCESS3": "Successfully removed {role} from the admin roles.\n🎭 Now there is no admin role.",
+
+  "EMBED1": "Admin-roles are role that can use any administration/configuration commands of the bot (even if the role don't have perms to do something).",
+  "EMBED2": "At this moment, this server has no admin-roles.",
+  "EMBED3": "Admin-roles are : {roles}"
+}

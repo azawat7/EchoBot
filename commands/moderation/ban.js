@@ -15,10 +15,12 @@ module.exports.help = {
   cooldown: 3,
   example: 2,
   emoji: "🔨",
+  moderator: true,
 };
 
 module.exports.run = async (client, message, args, language) => {
-  const member = message.mentions.members.first();
+  const member =
+    message.mentions.members.first() || client.users.cache.get(args[0]);
   const reason = args.slice(1).join(" ") || `${language.NOREASON}`;
 
   if (!member)
@@ -44,5 +46,5 @@ module.exports.run = async (client, message, args, language) => {
     .setTimestamp()
     .setFooter(message.author.username, message.author.avatarURL());
 
-  message.channel.send({ embeds: [sucess] });
+  message.channel.send({ embed: sucess });
 };

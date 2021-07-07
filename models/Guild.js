@@ -60,6 +60,12 @@ const guildSchema = mongoose.Schema({
       default: "undefined",
     },
   },
+  roles: {
+    inviteReward: [],
+    levelReward: [],
+    modRoles: [String],
+    adminRoles: [String],
+  },
 });
 
 module.exports = mongoose.model("Guild", guildSchema);

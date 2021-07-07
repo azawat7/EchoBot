@@ -16,6 +16,7 @@ module.exports.help = {
   cooldown: 3,
   example: 2,
   emoji: "❗📃",
+  moderator: true,
   // hidden: true,
 };
 

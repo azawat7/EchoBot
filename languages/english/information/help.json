@@ -25,6 +25,7 @@
   "ERROR": "Please provide a valid category or command name !",
   "CMD": "Commands",
   "CAT": "Categories",
+  "PERMISSION": "Permission(s)",
 
   "ADMIN": "Administration",
   "FUN": "Fun",

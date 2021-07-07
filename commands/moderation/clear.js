@@ -15,9 +15,11 @@ module.exports.help = {
   cooldown: 3,
   example: 1,
   emoji: "✖",
+  moderator: true,
 };
 
 module.exports.run = async (client, message, args, language) => {
+  message.delete;
   const amount = args.join(" ");
 
   const invAmount = new MessageEmbed()
@@ -56,6 +58,6 @@ module.exports.run = async (client, message, args, language) => {
     .setFooter(message.author.username, message.author.avatarURL());
 
   message.channel
-    .send({ embeds: [clearSuc] })
+    .send({ embed: clearSuc })
     .then((m) => m.delete({ timeout: 4000 }));
 };

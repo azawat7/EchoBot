@@ -108,4 +108,22 @@ module.exports = (client) => {
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1)) + min;
   };
+
+  client.checkMod = (member, modRoles) => {
+    for (const role of modRoles) {
+      if (member.roles.cache.has(role)) {
+        return true;
+      }
+    }
+    return false;
+  };
+
+  client.checkAdmin = (member, adminRoles) => {
+    for (const role of adminRoles) {
+      if (member.roles.cache.has(role)) {
+        return true;
+      }
+    }
+    return false;
+  };
 };
