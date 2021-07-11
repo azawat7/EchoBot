@@ -48,6 +48,6 @@ module.exports.run = async (client, message, args) => {
       `I'm sorry but, my limit is 2000 characters only!`
     );
   } else {
-    message.channel.send({ embed });
+    message.channel.send({ embeds: [embed] });
   }
 };

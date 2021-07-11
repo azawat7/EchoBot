@@ -1,6 +1,7 @@
 const { MessageEmbed } = require("discord.js");
 const moment = require("moment");
 const d = require("replacer-js");
+//
 
 module.exports.help = {
   name: "userinfo",
@@ -16,6 +17,7 @@ module.exports.help = {
   cooldown: 3,
   example: 2,
   emoji: "🧑",
+  enabled: false,
 };
 
 module.exports.run = async (client, message, args, language) => {
@@ -41,21 +43,13 @@ module.exports.run = async (client, message, args, language) => {
   };
 
   let user = message.mentions.users.first() || message.author;
-  let member = message.guild.member(user);
-  if (args[0]) member = message.guild.member(message.mentions.users.first());
-  const devices = member.presence?.clientStatus || {};
-  let userFlags = member.user.flags.toArray();
+  let member = message.guild.members.cache.get(user);
 
-  let rolesNoob;
-  let roles = member.roles.cache
-    .sort((a, b) => b.position - a.position)
-    .map((role) => role.toString())
-    .slice(0, -1);
+  // let userFlags = member.user?.flags.toArray();
 
-  rolesNoob = roles.join(" `|` ");
-  if (member.roles.cache.size < 1) rolesNoob = `${language.NONE}`;
-  if (!member.roles.cache.size || member.roles.cache.size - 1 < 1)
-    roles = `\`${language.NONE}\``;
+  // if (member.roles.cache.size < 1) rolesNoob = `${language.NONE}`;
+  // if (!member.roles.cache.size || member.roles.cache.size - 1 < 1)
+  //   roles = `\`${language.NONE}\``;
 
   let embed = new MessageEmbed()
     .setAuthor(
@@ -75,20 +69,30 @@ module.exports.run = async (client, message, args, language) => {
     **• ${language.JOINEDDISCORD} :** \`${moment(member.user.createdAt).format(
     "MMMM Do YYYY, h:mm:ss a"
   )}\`
-    **• ${language.BADGES} [${userFlags.length}] :** ${
-    userFlags.map((flag) => flags[flag]).join(" ") || `\`${language.NONE}\``
-  }
+
 
   __**${language.MEMBERID}**__
     **• ${language.JOINEDSERVER} :** \`${moment(member.joinedAt).format(
     "MMMM Do YYYY, h:mm:ss a"
   )}\`
     **• ${language.ROLE} [${roles.length || "0"}] : ** ${
-    rolesNoob || `\`${language.NONE}\``
+    member.roles.size > 10
+      ? member.roles.cache
+          .map((r) => r)
+          .slice(0, 9)
+          .join(", ") +
+        " " +
+        ``
+      : member.roles.cache.size < 1
+      ? `"general/userinfo:NO_ROLE"`
+      : member.roles.cache.map((r) => r).join(" `|` ")
   }
 
   __**${language.PRESENCE}**__
     **• ${language.STATUS} :** ${statuses[member.user.presence.status]}
       `);
-  return message.channel.send({ embed });
+  return message.channel.send({ embeds: [embed] });
 };
+//  **• ${language.BADGES} [${userFlags.length}] :** ${
+//    userFlags.map((flag) => flags[flag]).join(" ") || `\`${language.NONE}\``
+//  }

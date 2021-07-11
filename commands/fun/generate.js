@@ -129,5 +129,5 @@ module.exports.run = async (client, message) => {
 
   const attachment = new MessageAttachment(canvas.toBuffer(), "es.png");
 
-  message.channel.send(attachment);
+  message.channel.send({ attachments: [attachment] });
 };

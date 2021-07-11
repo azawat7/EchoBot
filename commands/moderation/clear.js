@@ -47,7 +47,7 @@ module.exports.run = async (client, message, args, language) => {
     message.channel.bulkDelete(messages);
   });
 
-  const clearSuc = new MessageEmbed()
+  const embed = new MessageEmbed()
     .setColor("#f50041")
     .setDescription(
       `${client.emoji.check} **${replace(language.SUC, {
@@ -58,6 +58,6 @@ module.exports.run = async (client, message, args, language) => {
     .setFooter(message.author.username, message.author.avatarURL());
 
   message.channel
-    .send({ embed: clearSuc })
+    .send({ embeds: [embed] })
     .then((m) => m.delete({ timeout: 4000 }));
 };

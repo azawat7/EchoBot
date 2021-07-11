@@ -27,10 +27,16 @@
   "CAT": "Categories",
   "PERMISSION": "Permission(s)",
 
+  "MODROLE": "Moderator",
+  "ADMINROLE": "Admin",
+  "MMM": "This command can be used by users that have a mod-role.",
+  "AAA": "This command can be used by users that have an admin-role.",
+
   "ADMIN": "Administration",
   "FUN": "Fun",
   "IMAGE": "Image",
   "INFO": "Information",
   "MODERATION": "Moderation",
-  "UTILITY": "Utility"
+  "UTILITY": "Utility",
+  "LEVEL": "Level"
 }

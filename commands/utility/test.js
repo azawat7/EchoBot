@@ -1,7 +1,7 @@
 const { MessageEmbed, MessageAttachment } = require("discord.js");
-const { createAdvancedSlider } = require("discord-epagination");
 const { Guild } = require("../../models/index");
 const Captcha = require("@haileybot/captcha-generator");
+// const { createSimpleSlider } = require("discord-epagination");
 
 module.exports.help = {
   name: "test",
@@ -111,4 +111,7 @@ module.exports.run = async (client, message, args, language, settings) => {
     message.channel.send(embed2);
     message.channel.send(embed3);
   }
+  const embed1 = new MessageEmbed().setDescription("1");
+  const embed2 = new MessageEmbed().setDescription("2");
+  // createSimpleSlider(message.author.id, message.channel, [embed1, embed2]);
 };

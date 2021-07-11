@@ -17,24 +17,24 @@ module.exports.help = {
   emoji: "📔",
 };
 
-module.exports.run = async (client, message, args, language) => {
-  const giveaways = client.giveawaysManager.giveaways
+module.exports.run = async (client, message, args, language, settings) => {
+  const giveaways = settings.giveaways
     .filter((g) => g.guildID === message.guild.id && !g.ended)
     .map(
       (g) =>
-        `\`${g.messageID}\` -> \n>>> ● ${language.host} ${g.hostedBy}\n● ${language.prize} \`${g.prize}\``
+        `[${g.messageID}](https://discord.com/channels/${g.guildID}/${g.channelID}/${g.messageID})\n> 🎊 **${language.host}** <@${g.host}>\n> ${client.emoji.gift} **${language.prize}** \`${g.prize}\`\n> ⏱ **${language.endat}** <t:${g.endAt}:F>`
     );
   if (giveaways.length < 1) {
     const embed = new MessageEmbed()
       .setColor(client.colors.echo)
       .setDescription(`**${language.noGiveaway}**`);
 
-    message.channel.send({ embed });
+    message.channel.send({ embeds: [embed] });
   } else {
     const embed = new MessageEmbed()
       .setColor(client.colors.echo)
       .setDescription(`${giveaways.join("\n\n")}`);
 
-    message.channel.send({ embed });
+    message.channel.send({ embeds: [embed] });
   }
 };

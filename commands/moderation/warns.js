@@ -53,7 +53,7 @@ module.exports.run = async (client, message, args, language, settings) => {
         "{user}": member.user.tag,
       })
     );
-    message.channel.send({ embed });
+    message.channel.send({ embeds: [embed] });
   }
 
   if (!member) {
@@ -77,6 +77,6 @@ module.exports.run = async (client, message, args, language, settings) => {
       );
     });
     embed.setTitle(language.SERVERW);
-    message.channel.send(embed);
+    message.channel.send({ embeds: [embed] });
   }
 };

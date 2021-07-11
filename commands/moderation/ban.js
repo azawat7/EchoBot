@@ -34,7 +34,7 @@ module.exports.run = async (client, message, args, language) => {
 
   member.ban({ days: 7, reason: reason });
 
-  const sucess = new MessageEmbed()
+  const embed = new MessageEmbed()
     .setColor("#f50041")
     .setDescription(
       `${client.emoji.check} **${replace(language.SUC, {
@@ -46,5 +46,5 @@ module.exports.run = async (client, message, args, language) => {
     .setTimestamp()
     .setFooter(message.author.username, message.author.avatarURL());
 
-  message.channel.send({ embed: sucess });
+  message.channel.send({ embeds: [embed] });
 };

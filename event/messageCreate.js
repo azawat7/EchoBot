@@ -3,11 +3,13 @@ const { Collection, MessageEmbed } = require("discord.js");
 const { Guild, BlacklistServer } = require("../models/index");
 const { isInvite } = require("../util/anti-invite");
 const replace = require("replacer-js");
+const Chance = require("chance");
+var chance = new Chance();
 
 module.exports = async (client, message) => {
   if (message.channel.type === "dm") return;
   if (!message.guild.me.permissions.has(["SEND_MESSAGES"]))
-    if (message.author.bot) return;
+    if (message.author.bot === true) return;
 
   const mentionRegex = RegExp(`^<@!?${client.user.id}>$`);
   const embed = new MessageEmbed().setColor(client.colors.echo);
@@ -38,7 +40,7 @@ module.exports = async (client, message) => {
       `**${lan.MENTIONSUPPORT} :** [${lan.CLICKHERE}](https://discord.gg/5eaZdWygQf)`,
       `**${lan.MENTIONINVITE} :** [${lan.CLICKHERE}](https://discord.com/oauth2/authorize?client_id=838061935039610921&scope=bot&permissions=8589934591)`,
     ]);
-    message.channel.send({ embed });
+    message.channel.send({ embeds: [embed] });
     prefix = mentionRegex;
   }
 
@@ -46,19 +48,23 @@ module.exports = async (client, message) => {
   //            User Database              //
   ///////////////////////////////////////////
 
-  const position = settings.users.map((e) => e.id).indexOf(message.member.id);
+  const position = settings.users.map((e) => e.id).indexOf(message.author.id);
+  // console.log(position);
+  const userInfo = settings.users[position];
 
   // Creates a new user in the DB
   if (message.guild && position == -1) {
-    Guild.updateOne(
+    return Guild.updateOne(
       { guildID: message.guild.id },
       {
         $push: {
           users: {
-            id: message.member.id,
+            id: message.author.id,
             level: {
-              experience: 0,
-              level: 0,
+              experience: 100,
+              levels: 1,
+              color: "ffffff",
+              lastUpdated: new Date(),
             },
             money: {
               wallet: 0,
@@ -67,21 +73,20 @@ module.exports = async (client, message) => {
           },
         },
       }
-    ).then((d) => console.log(`New user !`));
+    ).then();
   }
 
   ///////////////////////////////////////////
-  //             Anti Invite               //
+  //                 Level                 //
   ///////////////////////////////////////////
 
-  // if (message.content.includes("discord.gg/")) {
-  //   const code = message.content.split("discord.gg/")[1];
-  //   const isOurInvite = await isInvite(message.guild, code);
-  //   if (!isOurInvite) {
-  //     message.delete();
-  //     return message.channel.sendErrorMessage("no advertising");
-  //   }
-  // }
+  if (message.guild?.id === "838062586615955466") {
+    const n = chance.d100();
+    if (n >= 50 && n <= 75) {
+      const xpToAdd = chance.d30();
+      client.addXp(message.author, message.guild, xpToAdd, userInfo);
+    }
+  }
 
   ///////////////////////////////////////////
   //         Command Requirements          //
@@ -324,7 +329,7 @@ module.exports = async (client, message) => {
   //            Run The Command            //
   ///////////////////////////////////////////
 
-  command.run(client, message, args, language, settings);
+  command.run(client, message, args, language, settings, userInfo);
 };
 
 const missingPerms = (member, perms) => {

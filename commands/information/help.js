@@ -1,5 +1,5 @@
 const { MessageEmbed } = require("discord.js");
-const { readdirSync } = require("fs");
+const { readdirSync, statSync } = require("fs");
 const replace = require("replacer-js");
 
 module.exports.help = {
@@ -35,6 +35,7 @@ module.exports.run = async (client, message, args, language, settings) => {
     "information",
     "moderation",
     "utility",
+    "level",
   ];
 
   ///////////////////////////////////////////
@@ -51,6 +52,7 @@ module.exports.run = async (client, message, args, language, settings) => {
       information: `${client.emoji.information} - ${language.INFO}`,
       utility: `${client.emoji.utility} - ${language.UTILITY}`,
       image: `${client.emoji.image} - ${language.IMAGE}`,
+      level: `${client.emoji.level} - ${language.LEVEL}`,
     };
 
     const ignoredCategories = ["owner"];
@@ -61,8 +63,11 @@ module.exports.run = async (client, message, args, language, settings) => {
 
       let data = new Object();
 
+      const path = `./commands/${dir}/`;
+      let cmdSize = getDirLenght(path);
+
       data = {
-        name: editedName,
+        name: `${editedName} [${cmdSize}]`,
         value: `\`${settings.prefix}help ${dir.toLowerCase()}\``,
         inline: true,
       };
@@ -84,7 +89,7 @@ module.exports.run = async (client, message, args, language, settings) => {
       .setTimestamp()
       .setFooter(message.author.username, message.author.avatarURL());
 
-    return message.channel.send({ embed });
+    return message.channel.send({ embeds: [embed] });
   }
 
   if (category.includes(args[0].toLowerCase())) {
@@ -138,7 +143,7 @@ module.exports.run = async (client, message, args, language, settings) => {
       .addFields(catwcmd)
       .setTimestamp();
 
-    return message.channel.send({ embed });
+    return message.channel.send({ embeds: [embed] });
   }
 
   ///////////////////////////////////////////
@@ -194,6 +199,10 @@ module.exports.run = async (client, message, args, language, settings) => {
       );
     if (command.help.nsfw)
       embed.addField(`🔞 ${language.NSFW}`, `\`${language.NSFW1}\``);
+    if (command.help.moderator)
+      embed.addField(`🔨 ${language.MODROLE}`, `\`${language.MMM}\``);
+    if (command.help.admin)
+      embed.addField(`👑 ${language.ADMINROLE}`, `\`${language.AAA}\``);
     if (command.help.ownerOnly)
       embed.addField(`❌ ${language.OWNERONLY}`, `\`${language.OWNERONLY1}\``);
     if (command.help.example === 1) {
@@ -245,6 +254,21 @@ module.exports.run = async (client, message, args, language, settings) => {
       );
     }
 
-    return message.channel.send({ embed });
+    return message.channel.send({ embeds: [embed] });
   }
 };
+
+function getDirLenght(dir) {
+  let files = readdirSync(dir);
+  let arrayOfFiles = [];
+
+  files.forEach(function (file) {
+    if (statSync(dir + "/" + file).isDirectory()) {
+      arrayOfFiles = getAllDirFiles(dir + "/" + file, arrayOfFiles);
+    } else {
+      arrayOfFiles.push(file);
+    }
+  });
+
+  return arrayOfFiles.length;
+}

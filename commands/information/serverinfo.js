@@ -15,9 +15,13 @@ module.exports.help = {
   cooldown: 3,
   example: 1,
   emoji: "📟",
+  enabled: false,
 };
+//
 
 module.exports.run = async (client, message, args, language) => {
+  const owner = message.guild.fetchOwner();
+  console.log(owner);
   const filterLevels = {
     DISABLED: language.OFF,
     MEMBERS_WITHOUT_ROLES: language.NOROLE,
@@ -85,17 +89,12 @@ module.exports.run = async (client, message, args, language) => {
       },
       {
         name: `👑 ${language.OWNER}`,
-        value: `>>> \`${message.guild.owner.user.username}#${message.guild.owner.user.discriminator}\``,
+        value: `>>> \`${owner.user.username}#${owner.user.discriminator}\``,
         inline: true,
       },
       {
         name: `✔️ ${language.VERIFLVL}`,
         value: `>>> \`${verificationLevels[message.guild.verificationLevel]}\``,
-        inline: true,
-      },
-      {
-        name: `🌎 ${language.REGION}`,
-        value: `>>> \`${client.capitalize(message.guild.region)}\``,
         inline: true,
       },
       {
@@ -120,55 +119,54 @@ module.exports.run = async (client, message, args, language) => {
       {
         name: `💨 ${language.VANITY}`,
         value: `>>> \`${vanityInvite}\``,
-        inline: true,
       }
     )
     .addField(
       `💫 ${language.EMOJIS}`,
-      [
-        `>>> 💬 ${language.TEXT} \`${
-          message.guild.channels.cache.filter(
-            (channel) => channel.type === "text"
-          ).size
-        }\``,
-        `🎤 ${language.VOICE} \`${
-          message.guild.channels.cache.filter(
-            (channel) => channel.type === "voice"
-          ).size
-        }\``,
-        `😗 ${language.EMOJI} \`${message.guild.emojis.cache.size}\``,
-        `👻 ${language.ANIME} \`${
-          message.guild.emojis.cache.filter((emoji) => emoji.animated).size
-        }\``,
-      ],
+      `
+        >>> 💬 ${language.TEXT} \`${
+        message.guild.channels.cache.filter(
+          (channel) => channel.type === "GUILD_TEXT"
+        ).size
+      }\`\n
+        🎤 ${language.VOICE} \`${
+        message.guild.channels.cache.filter(
+          (channel) => channel.type === "GUILD_VOICE"
+        ).size
+      }\`\n
+        😗 ${language.EMOJI} \`${message.guild.emojis.cache.size}\`
+        👻 ${language.ANIME} \`${
+        message.guild.emojis.cache.filter((emoji) => emoji.animated).size
+      }\`
+      `,
       true
     )
     .addField(
       `👨‍🎓 ${language.PRESENCE}`,
-      [
-        `>>> ${client.emoji.online} ${language.ONLINE} \`${
-          message.guild.members.cache.filter(
-            (member) => member.presence.status === "online"
-          ).size
-        }\``,
-        `${client.emoji.idle} ${language.IDLE} \`${
-          message.guild.members.cache.filter(
-            (member) => member.presence.status === "idle"
-          ).size
-        }\``,
-        `${client.emoji.dnd} ${language.DND} \`${
-          message.guild.members.cache.filter(
-            (member) => member.presence.status === "dnd"
-          ).size
-        }\``,
-        `${client.emoji.offline} ${language.OFFLINE} \`${
-          message.guild.members.cache.filter(
-            (member) => member.presence.status === "offline"
-          ).size
-        }\``,
-      ],
+      `
+        >>> ${client.emoji.online} ${language.ONLINE} \`${
+        message.guild.members.cache.filter(
+          (member) => member.presence?.status === "online"
+        ).size
+      }\`
+        ${client.emoji.idle} ${language.IDLE} \`${
+        message.guild.members.cache.filter(
+          (member) => member.presence?.status === "idle"
+        ).size
+      }\`
+        ${client.emoji.dnd} ${language.DND} \`${
+        message.guild.members.cache.filter(
+          (member) => member.presence?.status === "dnd"
+        ).size
+      }\`
+        ${client.emoji.offline} ${language.OFFLINE} \`${
+        message.guild.members.cache.filter(
+          (member) => member.presence?.status === "offline"
+        ).size
+      }\`
+      `,
       true
     );
 
-  message.channel.send({ embed: serverembed });
+  message.channel.send({ embeds: [serverembed] });
 };

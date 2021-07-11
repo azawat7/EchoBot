@@ -28,5 +28,5 @@ module.exports.run = async (client, message, args, language) => {
     .setColor(client.colors.echo)
     .setImage(data.message);
 
-  message.channel.send({ embed });
+  message.channel.send({ embeds: [embed] });
 };

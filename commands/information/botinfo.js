@@ -52,5 +52,5 @@ ${language.RAMUSAGE} -- ${client.formatBytes(process.memoryUsage().heapUsed)}\`\
     )
     .setTimestamp();
 
-  message.channel.send({ embed });
+  message.channel.send({ embeds: [embed] });
 };

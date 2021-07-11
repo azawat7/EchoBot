@@ -18,7 +18,7 @@ module.exports.help = {
 };
 
 module.exports.run = async (client, message, args, language, settings) => {
-  const config = new MessageEmbed()
+  const embed = new MessageEmbed()
     .setAuthor(message.guild.name, message.guild.iconURL({ dynamic: true }))
     .setColor(client.colors.echo)
     .addFields(
@@ -60,5 +60,5 @@ module.exports.run = async (client, message, args, language, settings) => {
       }
     );
 
-  message.channel.send({ embed: config });
+  message.channel.send({ embeds: [embed] });
 };

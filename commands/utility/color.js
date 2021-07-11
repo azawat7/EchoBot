@@ -30,12 +30,12 @@ module.exports.run = async (client, message, args, language) => {
   } catch (e) {
     embed.setDescription(`${client.emoji.cross} **${language.ERROR}**`);
     embed.setColor(client.colors.echo);
-    return message.channel.send({ embed: embed });
+    return message.channel.send({ embeds: [embed] });
   }
   if (json.description) {
     embed.setDescription(`${client.emoji.cross} **${language.INVALID}**`);
     embed.setColor(client.colors.echo);
-    return message.channel.send({ embed: embed });
+    return message.channel.send({ embeds: [embed] });
   }
 
   embed.setTitle(json.name);
@@ -45,5 +45,5 @@ module.exports.run = async (client, message, args, language) => {
   embed.setThumbnail(json.image);
   embed.setImage(json.image_gradient, true);
   embed.setColor(json.hex);
-  message.channel.send({ embed: embed });
+  message.channel.send({ embeds: [embed] });
 };

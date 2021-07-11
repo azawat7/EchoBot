@@ -25,5 +25,5 @@ module.exports.run = async (client, message, args, language) => {
       `>>> \`${msg.createdTimestamp - message.createdTimestamp}ms\``
     )
     .addField("**🔵 WS :**", `>>> \`${language.WS}\``);
-  msg.edit({ embed: embed });
+  msg.edit({ embeds: [embed] });
 };

@@ -42,6 +42,6 @@ module.exports.run = async (client, message, args, language) => {
       .setDescription(`${client.emoji.cross} **${language.NONVALID} !**`)
       .setTimestamp()
       .setFooter(message.author.username, message.author.avatarURL());
-    message.channel.send({ embed });
+    message.channel.send({ embeds: [embed] });
   }
 };

@@ -31,8 +31,8 @@ module.exports.run = async (client, message, args, language) => {
 
   // Locks the channel
 
-  channel
-    .updateOverwrite(
+  channel.permissionOverwrites
+    .edit(
       message.guild.roles.cache.find(
         (r) => r.name.toLowerCase().trim() == "@everyone"
       ),

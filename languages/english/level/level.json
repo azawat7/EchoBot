@@ -1,0 +1,6 @@
+{
+  "DESCRIPTION": "Display your level on the server.",
+  "EXAMPLE1": "`{cmd_name}`",
+  "EXAMPLE2": "`{cmd_name}` `@someone`",
+  "RE": ">>> If the xp/xp counter is bugged, simply gain XP again."
+}
