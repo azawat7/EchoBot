@@ -15,13 +15,11 @@ module.exports.help = {
   cooldown: 3,
   example: 1,
   emoji: "📟",
-  enabled: false,
 };
 //
 
 module.exports.run = async (client, message, args, language) => {
-  const owner = message.guild.fetchOwner();
-  console.log(owner);
+  const owner = await message.guild.fetchOwner();
   const filterLevels = {
     DISABLED: language.OFF,
     MEMBERS_WITHOUT_ROLES: language.NOROLE,
@@ -119,6 +117,14 @@ module.exports.run = async (client, message, args, language) => {
       {
         name: `💨 ${language.VANITY}`,
         value: `>>> \`${vanityInvite}\``,
+        inline: true,
+      },
+      {
+        name: `🖼 ${language.ICON}`,
+        value: `>>> [${language.HERE}](${message.guild.iconURL({
+          dynamic: true,
+        })})`,
+        inline: true,
       }
     )
     .addField(
@@ -128,12 +134,12 @@ module.exports.run = async (client, message, args, language) => {
         message.guild.channels.cache.filter(
           (channel) => channel.type === "GUILD_TEXT"
         ).size
-      }\`\n
+      }\`
         🎤 ${language.VOICE} \`${
         message.guild.channels.cache.filter(
           (channel) => channel.type === "GUILD_VOICE"
         ).size
-      }\`\n
+      }\`
         😗 ${language.EMOJI} \`${message.guild.emojis.cache.size}\`
         👻 ${language.ANIME} \`${
         message.guild.emojis.cache.filter((emoji) => emoji.animated).size

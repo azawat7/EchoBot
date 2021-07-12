@@ -18,8 +18,9 @@
   "STATUS": "Status",
   "ONLINE": "Online",
   "IDLE": "Idle",
-  "OFFLINE": "Offline",
+  "OFFLINE": "Offline / Invisible",
   "DND": "Do Not Disturb",
+  "NOPRESENCE": "Status Unaccessible",
 
   "DEVICEN": "Devices Logged In On"
 }

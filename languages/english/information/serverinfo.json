@@ -13,9 +13,11 @@
   "FILTER": "Explicit Filter",
   "VANITY": "Vanity Link",
   "OTHER": "Other Informations",
+  "ICON": "Guild Icon",
 
   "USER": "Users",
   "BOT": "Bots",
+  "HERE": "Here",
 
   "OFF": "Off",
   "NOROLE": "No Role",

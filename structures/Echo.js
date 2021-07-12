@@ -36,6 +36,7 @@ module.exports = class EchoClient extends Client {
         "GUILD_EMOJIS",
         "GUILD_MESSAGE_REACTIONS",
         "GUILD_MESSAGES",
+        "GUILD_PRESENCES",
       ],
     });
 

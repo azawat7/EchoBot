@@ -17,7 +17,6 @@ module.exports.help = {
   cooldown: 3,
   example: 2,
   emoji: "🧑",
-  enabled: false,
 };
 
 module.exports.run = async (client, message, args, language) => {
@@ -26,6 +25,7 @@ module.exports.run = async (client, message, args, language) => {
     online: `${client.emoji.online} \`${language.ONLINE}\``,
     idle: `${client.emoji.idle} \`${language.IDLE}\``,
     offline: `${client.emoji.offline} \`${language.OFFLINE}\``,
+    undefined: `${client.emoji.offline} \`${language.NOPRESENCE}\``,
   };
   const flags = {
     DISCORD_EMPLOYEE: client.emoji.employee,
@@ -43,56 +43,50 @@ module.exports.run = async (client, message, args, language) => {
   };
 
   let user = message.mentions.users.first() || message.author;
-  let member = message.guild.members.cache.get(user);
+  let member = message.guild.members.cache.get(user.id);
+  let userFlags = user.flags.toArray();
 
-  // let userFlags = member.user?.flags.toArray();
+  let rolesNoob;
+  let roles = member.roles.cache
+    .sort((a, b) => b.position - a.position)
+    .map((role) => role.toString())
+    .slice(0, -1);
 
-  // if (member.roles.cache.size < 1) rolesNoob = `${language.NONE}`;
-  // if (!member.roles.cache.size || member.roles.cache.size - 1 < 1)
-  //   roles = `\`${language.NONE}\``;
+  rolesNoob = roles.join(" `|` ");
+  if (member.roles.cache.size < 1) rolesNoob = `${language.NONE}`;
+  if (!member.roles.cache.size || member.roles.cache.size - 1 < 1)
+    roles = `\`${language.NONE}\``;
 
   let embed = new MessageEmbed()
     .setAuthor(
       `${d(language.TITLE, {
-        "{user}": member.user.username,
+        "{user}": user.username,
       })}`
     )
-    .setThumbnail(member.user.displayAvatarURL({ dynamic: true, size: 512 }))
+    .setThumbnail(user.displayAvatarURL({ dynamic: true, size: 512 }))
     .setColor("#f50041")
     .setTimestamp()
     .setFooter(member.id).setDescription(`
-    >>> __**${language.USERID}**__
-    **• ${language.USER} :** \`${member.user.username}\` | \`#${
-    member.user.discriminator
-  }\`
-    **• ID :** \`${member.id}\`
-    **• ${language.JOINEDDISCORD} :** \`${moment(member.user.createdAt).format(
+    __**${language.USERID}**__
+    > **• ${language.USER} :** \`${user.username}\` | \`#${user.discriminator}\`
+    > **• ID :** \`${member.id}\`
+    > **• ${language.JOINEDDISCORD} :** \`${moment(user.createdAt).format(
     "MMMM Do YYYY, h:mm:ss a"
   )}\`
-
+    > **• ${language.BADGES} [${userFlags.length}] :** ${
+    userFlags.map((flag) => flags[flag]).join(" ") || `\`${language.NONE}\``
+  }
 
   __**${language.MEMBERID}**__
-    **• ${language.JOINEDSERVER} :** \`${moment(member.joinedAt).format(
+    > **• ${language.JOINEDSERVER} :** \`${moment(member.joinedAt).format(
     "MMMM Do YYYY, h:mm:ss a"
   )}\`
-    **• ${language.ROLE} [${roles.length || "0"}] : ** ${
-    member.roles.size > 10
-      ? member.roles.cache
-          .map((r) => r)
-          .slice(0, 9)
-          .join(", ") +
-        " " +
-        ``
-      : member.roles.cache.size < 1
-      ? `"general/userinfo:NO_ROLE"`
-      : member.roles.cache.map((r) => r).join(" `|` ")
+    > **• ${language.ROLE} [${roles.length || "0"}] : ** ${
+    rolesNoob || `\`${language.NONE}\``
   }
 
   __**${language.PRESENCE}**__
-    **• ${language.STATUS} :** ${statuses[member.user.presence.status]}
+    > **• ${language.STATUS} :** ${statuses[member.presence?.status]}
       `);
   return message.channel.send({ embeds: [embed] });
 };
-//  **• ${language.BADGES} [${userFlags.length}] :** ${
-//    userFlags.map((flag) => flags[flag]).join(" ") || `\`${language.NONE}\``
-//  }
