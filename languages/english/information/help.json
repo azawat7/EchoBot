@@ -38,5 +38,8 @@
   "INFO": "Information",
   "MODERATION": "Moderation",
   "UTILITY": "Utility",
-  "LEVEL": "Level"
+  "LEVEL": "Level",
+
+  "SUPPORT": "Support",
+  "INVITE": "Invite"
 }
