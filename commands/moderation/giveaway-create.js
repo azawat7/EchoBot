@@ -19,7 +19,7 @@ module.exports.help = {
 };
 
 module.exports.run = async (client, message, args, language, settings) => {
-  const prize = args[2];
+  const prize = args.slice(2).join(" ");
   const winnerCount = args[1];
   const time = ms(args[0]);
 
@@ -99,7 +99,8 @@ module.exports.run = async (client, message, args, language, settings) => {
       return;
     }
     if (check === false) {
-      const data = await settings.giveaways.filter(
+      const newSettings = await client.getNewGuild(message.guild);
+      const data = await newSettings.giveaways.filter(
         (g) => g.messageID === msg.id
       );
       const winners = await choose(data[0].winners, data, data[0].host);
@@ -163,8 +164,7 @@ async function choose(winners, data, host) {
   for (let i = 0; i < winners; i++) {
     if (!data[0].clickers) return null;
 
-    const oneWinner =
-      data[0].clickers[Math.floor(Math.random() * data[0].clickers.length - 1)];
+    const oneWinner = data[0].clickers[Math.floor(Math.random() * 1)];
     if (oneWinner === host) return i - 1;
 
     if (!oneWinner) return null;

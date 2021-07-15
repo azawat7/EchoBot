@@ -33,6 +33,11 @@ module.exports = (client) => {
     if (data) return data;
     return client.config.DEFAULTSETTINGS;
   };
+  client.getNewGuild = async (guild) => {
+    const data = await Guild.findOne({ guildID: guild.id });
+
+    if (data) return data;
+  };
 
   client.updateGuild = async (guild, settings) => {
     let data = await client.getGuild(guild);
@@ -102,6 +107,10 @@ module.exports = (client) => {
       ),
       "users.$.level.lastUpdated": new Date(),
     });
+    return (
+      Math.floor(0.1 * Math.sqrt(info.level.experience < xp)) <
+      info.level.levels
+    );
   };
 
   client.getUserPosition = async (member, settings) => {
@@ -115,6 +124,21 @@ module.exports = (client) => {
     const position = sortedArray.findIndex((i) => i.id === member.id);
 
     return position + 1;
+  };
+
+  client.generateLevelLeaderboardArrayToMap = async (client, users) => {
+    const unsortedUserArray = [];
+    users.forEach((user) => {
+      unsortedUserArray.push({
+        id: user.id,
+        xp: user.level.experience,
+        level: user.level.levels,
+      });
+    });
+
+    const sortedUserArray = unsortedUserArray.sort((a, b) => b.xp - a.xp);
+
+    return sortedUserArray;
   };
 
   // const user = await levels.findOne({

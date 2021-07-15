@@ -22,6 +22,10 @@ const guildSchema = mongoose.Schema({
   users: [],
   commands: [],
   giveaways: [],
+  logs: {
+    levels: { type: String },
+    lvlena: { type: Boolean, required: true, default: false },
+  },
   premium: {
     isPremium: {
       type: Boolean,

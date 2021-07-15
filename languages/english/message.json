@@ -20,5 +20,8 @@
   "MENTIONLINK": "Usefull Links :",
   "MENTIONSUPPORT": "Support Server",
   "MENTIONINVITE": "Invite Link",
-  "CLICKHERE": "Click Here"
+  "CLICKHERE": "Click Here",
+
+  "LEVELEDUP": "GG {user}, you reached level {level} !",
+  "LEVELEDUPCC": "{user} has reached level {level} ! Keep it going !"
 }

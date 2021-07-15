@@ -4,7 +4,7 @@ const d = require("replacer-js");
 
 module.exports.help = {
   name: "level",
-  aliases: ["rank"],
+  aliases: ["rank", "lvl"],
   category: "level",
   expectedArgs: "`[@user]`",
   minArgs: 0,
@@ -36,13 +36,17 @@ module.exports.run = async (
     .setAvatar(
       message.author.displayAvatarURL({ format: "png", dynamic: true })
     )
-    .setCurrentXP(cleanXp)
-    .setRequiredXP(cleanNextLevelXp)
+    .setCurrentXP(cleanXp, `#${userInfo.level.color}`)
+    .setRequiredXP(cleanNextLevelXp, `#${userInfo.level.color}`)
     .setRank(position)
+    .renderEmojis(true)
     .setLevel(userInfo.level.levels)
     .setProgressBar(`#${userInfo.level.color}`, "COLOR")
-    .setUsername(message.author.username)
-    .setDiscriminator(message.author.discriminator);
+    .setLevelColor(`#${userInfo.level.color}`, `#${userInfo.level.color}`)
+    .setRankColor(`#${userInfo.level.color}`, `#${userInfo.level.color}`)
+    .setUsername(message.author.username, `#${userInfo.level.color}`)
+    .setDiscriminator(message.author.discriminator, `#${userInfo.level.color}`)
+    .setStatus("offline");
 
   rank.build().then((data) => {
     const attachment = new MessageAttachment(data, `rank.png`);

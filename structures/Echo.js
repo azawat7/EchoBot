@@ -5,7 +5,6 @@ const {
   TextChannel,
   Intents,
 } = require("discord.js");
-const GiveawayManagerWithOwnDatabase = require("../util/giveaways");
 const {
   loadCommands,
   loadEvents,
@@ -75,20 +74,6 @@ module.exports = class EchoClient extends Client {
 
     // Creates discordTogether client
     this.discordTogether = new DiscordTogether(this);
-    // Creates the giveaway manager
-    const manager = new GiveawayManagerWithOwnDatabase(this, {
-      updateCountdownEvery: 10000,
-      default: {
-        botsCanWin: false,
-        embedColor: `${this.colors.echo}`,
-        embedColorEnd: "#424242",
-        reaction: "🎉",
-      },
-    });
-    //////////////
-    // antiInvite(this);
-    //////////////
-    this.giveawaysManager = manager;
     //////////////
 
     loadCommands(this);
