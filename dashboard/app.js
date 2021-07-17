@@ -5,10 +5,37 @@ const path = require("path");
 const { Guild } = require("../models/index");
 
 module.exports = async (client) => {
+  const dataDir = path.resolve(`${process.cwd()}${path.sep}dashboard`);
+  const templateDir = path.resolve(`${dataDir}${path.sep}templates`);
+
+  app.set("view engine", "ejs");
+  app.use(express.static("dashboard/static"));
+
+  const renderTemplate = (res, req, template, data = {}) => {
+    const baseData = {
+      bot: client,
+      path: req.path,
+      url: res,
+      req: req,
+    };
+    res.render(
+      path.resolve(`${templateDir}${path.sep}${template}`),
+      Object.assign(baseData, data)
+    );
+  };
+
+  ////////////////////////////////////////
+  ////////////////////////////////////////
+  ////////////////////////////////////////
+
   app.get("/", (req, res) => {
     res.send("hellp");
   });
+  app.get("/privacy", (req, res) => {
+    renderTemplate(res, req, "privacy.ejs");
+  });
   app.get("/leaderboard", async (req, res) => {
+    // renderTemplate(res, req, "leaderboard.ejs");
     const guild = req.query.guild;
     if (!guild) {
       res.send("Please specify guild as a query !");

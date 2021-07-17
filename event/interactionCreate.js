@@ -243,7 +243,8 @@ module.exports = async (client, interaction) => {
       args.push(x.value);
     });
 
-    const language = require(`../languages/${settings.language}/information/help`);
+    const clientSideCommand = client.commands.get(interaction.commandName);
+    const language = require(`../languages/${settings.language}/${clientSideCommand.help.category}/${interaction.commandName}`);
 
     cmd.run(client, interaction, args, language, settings);
   }

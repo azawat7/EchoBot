@@ -1,0 +1,5 @@
+{
+  "DESCRIPTION": "Shows you and image and a fact of a axolotl.",
+  "EXAMPLE1": "`{cmd_name}`",
+  "FOOTER": "Facts are only in english for the moment."
+}

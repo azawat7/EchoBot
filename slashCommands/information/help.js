@@ -6,6 +6,14 @@ module.exports = {
   name: "help",
   description: "You need help !?",
   category: "information",
+  options: [
+    {
+      name: "category-command",
+      description: "Command/Category name.",
+      type: "STRING",
+      required: false,
+    },
+  ],
   run: async (client, interaction, args, language, settings) => {
     function jsondes(lan, cat, name) {
       const file = require(`../../languages/${lan}/${cat}/${name}`);
@@ -131,7 +139,7 @@ module.exports = {
 
       let embed = new MessageEmbed()
         .setColor(client.colors.echo)
-        .setFooter(interaction.author.username, interaction.author.avatarURL())
+        .setFooter(interaction.user.username, interaction.user.avatarURL())
         .setTitle(`${client.capitalize(args[0])} ${language.CMD} :`)
         .addFields(catwcmd)
         .setTimestamp();
@@ -155,7 +163,7 @@ module.exports = {
         .setColor(`#f50041`)
         .setDescription(`${client.emoji.cross} **${language.ERROR}**`);
 
-      if (!command) return interaction.reply(errembed);
+      if (!command) return interaction.reply({ embeds: [errembed] });
 
       const lang = require(`../../languages/${settings.language}/${command.help.category}/${command.help.name}`);
 
@@ -183,7 +191,7 @@ module.exports = {
           true
         )
         .setTimestamp()
-        .setFooter(interaction.author.username, interaction.author.avatarURL());
+        .setFooter(interaction.user.username, interaction.user.avatarURL());
 
       if (command.help.aliases.length > 0)
         embed.addField(
