@@ -17,10 +17,10 @@ module.exports = async (client, guild) => {
     .setColor(client.colors.green)
     .setTimestamp()
     .addField(`📟 Server`, `\`${guild.name}\` *(${guild.id})*`)
-    .addField(
-      `🆔 Owner`,
-      `\`${guild.owner.user.username}\` *(${guild.owner.id})*`
-    )
+    // .addField(
+    //   `🆔 Owner`,
+    //   `\`${guild.owner.user.username}\` *(${guild.owner.id})*`
+    // )
     .setFooter(`{echo} is now in ${client.guilds.cache.size} guilds`);
 
   webhookClient.send({

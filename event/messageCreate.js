@@ -37,10 +37,6 @@ module.exports = async (client, message) => {
         "{prefix1}": settings.prefix,
       })}`
     );
-    embed.addField(`📌 ${lan.MENTIONLINK}`, [
-      `**${lan.MENTIONSUPPORT} :** [${lan.CLICKHERE}](https://discord.gg/5eaZdWygQf)`,
-      `**${lan.MENTIONINVITE} :** [${lan.CLICKHERE}](https://discord.com/oauth2/authorize?client_id=838061935039610921&scope=bot&permissions=8589934591)`,
-    ]);
     message.channel.send({ embeds: [embed] });
     prefix = mentionRegex;
   }
