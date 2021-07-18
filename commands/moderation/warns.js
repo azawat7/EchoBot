@@ -40,11 +40,11 @@ module.exports.run = async (client, message, args, language, settings) => {
       i++;
       embed.addField(
         `${i}) \`${warn.id}\``,
-        [
-          `>>> **${language.REASON}** : ${warn.reason}`,
-          `**${language.MODERATOR}** : <@${warn.moderator}>`,
-          `**${language.DATE}** : ${warn.date}`,
-        ],
+        `
+          > **${language.REASON}** : ${warn.reason},
+          > **${language.MODERATOR}** : <@${warn.moderator}>,
+          > **${language.DATE}** : <t:${Math.floor(warn.date / 1000)}:F>,
+        `,
         true
       );
     });
@@ -67,12 +67,12 @@ module.exports.run = async (client, message, args, language, settings) => {
       i++;
       embed.addField(
         `${i}) \`${warn.id}\``,
-        [
-          `>>> **${language.MEMBER}** : <@${warn.target}>`,
-          `**${language.REASON}** : ${warn.reason}`,
-          `**${language.MODERATOR}** : <@${warn.moderator}>`,
-          `**${language.DATE}** : ${warn.date}`,
-        ],
+        `
+          > **${language.MEMBER}** : <@${warn.target}>,
+          > **${language.REASON}** : ${warn.reason},
+          > **${language.MODERATOR}** : <@${warn.moderator}>,
+          > **${language.DATE}** : <t:${Math.floor(warn.date / 1000)}:F>,
+        `,
         true
       );
     });
