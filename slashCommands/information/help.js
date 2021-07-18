@@ -1,4 +1,4 @@
-const { MessageEmbed } = require("discord.js");
+const { MessageEmbed, MessageButton, MessageActionRow } = require("discord.js");
 const { readdirSync, statSync } = require("fs");
 const replace = require("replacer-js");
 
@@ -38,6 +38,25 @@ module.exports = {
     ///////////////////////////////////////////
 
     if (!args[0]) {
+      const inviteButton = new MessageButton()
+        .setURL(
+          "https://discord.com/api/oauth2/authorize?client_id=838061935039610921&permissions=8&redirect_uri=http%3A%2F%2Flocalhost%3A8000%2Fcallback&scope=bot%20applications.commands"
+        )
+        .setLabel(language.INVITE)
+        .setStyle("LINK");
+      const supportButton = new MessageButton()
+        .setURL("https://discord.gg/cntv4En6tX")
+        .setLabel(language.SUPPORT)
+        .setStyle("LINK");
+      const githubButton = new MessageButton()
+        .setURL("https://github.com/im-a-panda-guy/EchoBot")
+        .setLabel("Github")
+        .setStyle("LINK");
+      const buttons = new MessageActionRow().addComponents([
+        inviteButton,
+        supportButton,
+        githubButton,
+      ]);
       let categories = [];
 
       const dirEmojis = {
@@ -47,6 +66,7 @@ module.exports = {
         information: `${client.emoji.information} - ${language.INFO}`,
         utility: `${client.emoji.utility} - ${language.UTILITY}`,
         image: `${client.emoji.image} - ${language.IMAGE}`,
+        level: `${client.emoji.level} - ${language.LEVEL}`,
       };
 
       const ignoredCategories = ["owner"];
@@ -86,7 +106,7 @@ module.exports = {
           interaction.member.user.avatarURL()
         );
 
-      return interaction.reply({ embeds: [embed] });
+      return interaction.reply({ embeds: [embed], components: [buttons] });
     }
 
     if (category.includes(args[0].toLowerCase())) {
