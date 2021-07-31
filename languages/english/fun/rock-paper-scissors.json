@@ -1,0 +1,30 @@
+{
+  "DESCRIPTION": "Play rock paper scissors with someone or vs me (AI) :O",
+  "EXAMPLE1": "`{cmd_name}`",
+  "EXAMPLE2": "`{cmd_name}` `@Azawat`",
+
+  "START": "Please pick one of the options below ⬇",
+
+  "REPLY": "**Game**  [↗]({gameid})",
+
+  "ai": {
+    "NOCHOICE": "You didn't pick lol, such a noob.",
+    "DRAW": "You drawed !",
+    "WIN": "You won !",
+    "LOSE": "You lost !",
+    "FOOTER": "Your pick : {userPick} - My pick : {aiPick}"
+  },
+  "user": {
+    "NOUSER": "Please mention a member !",
+    "AUTHOR": "You can't play vs yourself you dumbass.",
+    "ROCK": "You choosed rock.",
+    "PAPER": "You choosed paper.",
+    "SCISSORS": "You choosed scissors.",
+    "NOPICKS": "You both didn't pick lol.",
+    "NOPICK": "One of you didn't pick lol.",
+
+    "FOOTER": "{user} pick : {userPick} - {opponent} pick : {aiPick}",
+
+    "WIN": "{user} won ! "
+  }
+}

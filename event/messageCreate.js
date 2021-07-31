@@ -67,6 +67,13 @@ module.exports = async (client, message) => {
               wallet: 0,
               bank: 0,
             },
+            games: {
+              rps: {
+                wins: { ai: 0, user: 0 },
+                loses: { ai: 0, user: 0 },
+                draws: { ai: 0, user: 0 },
+              },
+            },
           },
         },
       }

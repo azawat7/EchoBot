@@ -1,6 +1,6 @@
 const { MessageEmbed, MessageAttachment } = require("discord.js");
 const { Guild } = require("../../models/index");
-const Captcha = require("@haileybot/captcha-generator");
+
 // const { createSimpleSlider } = require("discord-epagination");
 
 module.exports.help = {
@@ -20,6 +20,29 @@ module.exports.help = {
 };
 
 module.exports.run = async (client, message, args, language, settings) => {
+  if (args[0] === "users") {
+    const guilds = await Guild.find({});
+    if (args[1] === "rps") {
+      guilds.forEach(async (guild) => {
+        guild.users.forEach((user) => {
+          user.games.rps.wins.ai = 0;
+          user.games.rps.loses.ai = 0;
+          user.games.rps.draws.ai = 0;
+
+          user.games.rps.wins.user = 0;
+          user.games.rps.loses.user = 0;
+          user.games.rps.draws.user = 0;
+        });
+        await guild.save().catch(() => {});
+      });
+      return;
+    }
+
+    guilds.forEach(async (guild) => {
+      guild.users.splice(0, guild.users.length);
+      await guild.save().catch(() => {});
+    });
+  }
   message.delete();
 
   if (args[0] === "role") {
