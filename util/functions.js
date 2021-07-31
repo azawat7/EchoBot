@@ -351,4 +351,13 @@ module.exports = (client) => {
       return false;
     }
   };
+
+  client.getMember = async (message, id = client.user.id) => {
+    const member =
+      message.author ||
+      message.mentions.members.first() ||
+      message.guild.members.cache.get(id);
+
+    return member;
+  };
 };

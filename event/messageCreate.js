@@ -89,32 +89,34 @@ module.exports = async (client, message) => {
   //                 Level                 //
   ///////////////////////////////////////////
 
-  if (message.guild && !command) {
-    const n = chance.d100();
-    if (n >= 50 && n <= 75) {
-      const xpToAdd = chance.d30();
-      client.addXp(message.author, message.guild, xpToAdd, userInfo);
-      if (
-        userInfo.level.levels <
-        Math.floor(0.1 * Math.sqrt(userInfo.level.experience))
-      ) {
-        if (settings.logs.lvlena === false) {
-          embed.setDescription(
-            `📈 **${replace(lan.LEVELEDUP, {
-              "{user}": `<@${message.author.id}>`,
-              "{level}": userInfo.level.levels + 1,
-            })}**`
-          );
-          message.channel.send({ embeds: [embed] });
-        } else {
-          const channel = client.channels.cache.get(settings.logs.levels);
-          embed.setDescription(
-            `📈 **${replace(lan.LEVELEDUPCC, {
-              "{user}": `<@${message.author.id}>`,
-              "{level}": userInfo.level.levels + 1,
-            })}** `
-          );
-          channel.send({ embeds: [embed] });
+  if (settings.level.enabled === true) {
+    if (message.guild && !command) {
+      const n = chance.d100();
+      if (n >= 50 && n <= 75) {
+        const xpToAdd = chance.d30();
+        client.addXp(message.author, message.guild, xpToAdd, userInfo);
+        if (
+          userInfo.level.levels <
+          Math.floor(0.1 * Math.sqrt(userInfo.level.experience))
+        ) {
+          if (settings.logs.lvlena === false) {
+            embed.setDescription(
+              `📈 **${replace(lan.LEVELEDUP, {
+                "{user}": `<@${message.author.id}>`,
+                "{level}": userInfo.level.levels + 1,
+              })}**`
+            );
+            message.channel.send({ embeds: [embed] });
+          } else {
+            const channel = client.channels.cache.get(settings.logs.levels);
+            embed.setDescription(
+              `📈 **${replace(lan.LEVELEDUPCC, {
+                "{user}": `<@${message.author.id}>`,
+                "{level}": userInfo.level.levels + 1,
+              })}** `
+            );
+            channel.send({ embeds: [embed] });
+          }
         }
       }
     }

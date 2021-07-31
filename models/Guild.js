@@ -3,6 +3,11 @@ const { DEFAULTSETTINGS: defaults } = require("../config");
 
 const guildSchema = mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
+  level: {
+    enabled: {
+      type: Boolean,
+    },
+  },
   guildID: {
     type: String,
     required: true,
@@ -22,6 +27,7 @@ const guildSchema = mongoose.Schema({
   users: [],
   commands: [],
   giveaways: [],
+
   logs: {
     levels: { type: String },
     lvlena: { type: Boolean, required: true, default: false },

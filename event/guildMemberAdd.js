@@ -5,7 +5,7 @@ module.exports = async (client, member) => {
   const settings = await client.getGuild(member.guild);
   const language = require(`../languages/${settings.language}/events`);
 
-  if (settings.antiAlt.enabled === true) {
+  if (settings.antiAlt.enabled === true && settings.antiAlt.time) {
     const timeStamp = ms(`${settings.antiAlt.time} days`);
 
     const createdAt = new Date(member.user.createdAt).getTime();
@@ -22,7 +22,7 @@ module.exports = async (client, member) => {
     }
   }
 
-  if (settings.autoRole.enabled === true) {
+  if (settings.autoRole.enabled === true && settings.autoRole.role) {
     member.roles.add(settings.autoRole.role);
   }
 };

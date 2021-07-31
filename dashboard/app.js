@@ -29,7 +29,7 @@ module.exports = async (client) => {
   ////////////////////////////////////////
 
   app.get("/", (req, res) => {
-    res.send("hellp");
+    renderTemplate(res, req, "index.ejs");
   });
   app.get("/privacy", (req, res) => {
     renderTemplate(res, req, "privacy.ejs");
