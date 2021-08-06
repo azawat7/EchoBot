@@ -3,6 +3,25 @@ const { DEFAULTSETTINGS: defaults } = require("../config");
 
 const guildSchema = mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
+  modules: {
+    tickets: {
+      ticketCase: { type: Number, default: 0 },
+      ticketLimit: { type: Number, default: 1 },
+      embeds: {
+        panelEmbed: { title: String, description: String, footer: String },
+        welcomeEmbed: { title: String, description: String, footer: String },
+        closedEmbed: { title: String, description: String, footer: String },
+        reopenEmbed: { title: String, description: String, footer: String },
+        deleteEmbed: { title: String, description: String, footer: String },
+      },
+      buttons: {
+        panelButton: { label: String },
+        closeButton: { label: String },
+        reopenButton: { label: String },
+        deleteButton: { label: String },
+      },
+    },
+  },
   level: {
     enabled: {
       type: Boolean,

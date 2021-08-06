@@ -1,5 +1,6 @@
 const { MessageEmbed } = require("discord.js");
 const r = require("replacer-js");
+const { Guild } = require("../../models/index");
 
 module.exports.help = {
   name: "toggle-command",
