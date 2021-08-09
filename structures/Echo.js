@@ -10,7 +10,6 @@ const {
   loadEvents,
   loadSlashCommands,
 } = require("../util/loaders");
-const { DiscordTogether } = require("discord-together");
 const antiInvite = require("../util/anti-invite");
 
 module.exports = class EchoClient extends Client {
@@ -24,7 +23,7 @@ module.exports = class EchoClient extends Client {
       cacheEmojis: true,
       cachePresences: false,
       fetchAllMembers: true,
-      // allowedMentions: { parse: ['users', 'roles'], repliedUser: true},
+      // allowedMentions: { parse: ["users", "roles"], repliedUser: true },
       messageCacheMaxSize: 25,
       messageCacheLifetime: 10000,
       messageSweepInterval: 12000,
@@ -32,7 +31,6 @@ module.exports = class EchoClient extends Client {
         "GUILDS",
         "GUILD_MEMBERS",
         "GUILD_BANS",
-        "GUILD_EMOJIS",
         "GUILD_INTEGRATIONS",
         "GUILD_WEBHOOKS",
         "GUILD_INVITES",
@@ -72,8 +70,6 @@ module.exports = class EchoClient extends Client {
     // Creates functions
     require("../util/functions.js")(this);
 
-    // Creates discordTogether client
-    this.discordTogether = new DiscordTogether(this);
     //////////////
 
     loadCommands(this);

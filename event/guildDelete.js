@@ -1,8 +1,9 @@
 const { MessageEmbed, WebhookClient } = require("discord.js");
-const webhookClient = new WebhookClient(
-  process.env.WEBHOOKID,
-  process.env.WEBHOOKURL
-);
+const webhookClient = new WebhookClient({
+  id: process.env.WEBHOOKID,
+  token: process.env.WEBHOOKURL,
+  url: `https://discord.com/api/webhooks/${process.env.WEBHOOKID}/${process.env.WEBHOOKURL}`,
+});
 
 module.exports = async (client, guild) => {
   await client.deleteGuild(guild);

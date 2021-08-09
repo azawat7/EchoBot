@@ -19,30 +19,17 @@ module.exports.help = {
 };
 
 module.exports.run = async (client, message, args, language) => {
-  message.delete;
+  message.delete();
   const amount = args.join(" ");
+  console.log(amount);
 
-  const invAmount = new MessageEmbed()
-    .setColor("#f50041")
-    .setDescription(`${client.emoji.cross} **${language.NANNUMBER}**`);
+  if (isNaN(amount))
+    return message.channel.sendErrorMessage(language.NANNUMBER);
 
-  const thAmount = new MessageEmbed()
-    .setColor("#f50041")
-    .setDescription(`${client.emoji.cross} **${language.TH}**`);
+  if (amount > 100) return message.channel.sendErrorMessage(language.TH);
 
-  const tlAmount = new MessageEmbed()
-    .setColor("#f50041")
-    .setDescription(`${client.emoji.cross} **${language.TL}**`);
+  if (amount < 2) return message.channel.sendErrorMessage(language.TL);
 
-  // Condition
-
-  if (isNaN(amount)) return message.channel.send(invAmount);
-
-  if (amount > 100) return message.channel.send(thAmount);
-
-  if (amount < 1) return message.channel.send(tlAmount);
-
-  // Execute le clear
   await message.channel.messages.fetch({ limit: amount }).then((messages) => {
     message.channel.bulkDelete(messages);
   });
@@ -59,5 +46,5 @@ module.exports.run = async (client, message, args, language) => {
 
   message.channel
     .send({ embeds: [embed] })
-    .then((m) => m.delete({ timeout: 4000 }));
+    .then((m) => setTimeout(() => m.delete(), 5000));
 };
