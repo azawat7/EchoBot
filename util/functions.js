@@ -360,4 +360,30 @@ module.exports = (client) => {
 
     return member;
   };
+
+  client.categories = (language) => [
+    {
+      emoji: client.emoji.administration,
+      label: language.ADMIN,
+      value: "admin",
+    },
+    {
+      emoji: client.emoji.moderation,
+      label: language.MODERATION,
+      value: "moderation",
+    },
+    { emoji: client.emoji.fun, label: language.FUN, value: "fun" },
+    {
+      emoji: client.emoji.information,
+      label: language.INFO,
+      value: "information",
+    },
+    {
+      emoji: client.emoji.utility,
+      label: language.UTILITY,
+      value: "utility",
+    },
+    { emoji: client.emoji.image, label: language.IMAGE, value: "image" },
+    { emoji: client.emoji.level, label: language.LEVEL, value: "level" },
+  ];
 };

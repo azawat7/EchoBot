@@ -1,4 +1,9 @@
-const { MessageEmbed, MessageButton, MessageActionRow } = require("discord.js");
+const {
+  MessageEmbed,
+  MessageButton,
+  MessageActionRow,
+  MessageSelectMenu,
+} = require("discord.js");
 const { readdirSync, statSync } = require("fs");
 const replace = require("replacer-js");
 
@@ -43,57 +48,6 @@ module.exports.run = async (client, message, args, language, settings) => {
   ///////////////////////////////////////////
 
   if (!args[0]) {
-    const inviteButton = new MessageButton()
-      .setURL(
-        "https://discord.com/api/oauth2/authorize?client_id=838061935039610921&permissions=8&redirect_uri=http%3A%2F%2Flocalhost%3A8000%2Fcallback&scope=bot%20applications.commands"
-      )
-      .setLabel(language.INVITE)
-      .setStyle("LINK");
-    const supportButton = new MessageButton()
-      .setURL("https://discord.gg/cntv4En6tX")
-      .setLabel(language.SUPPORT)
-      .setStyle("LINK");
-    const githubButton = new MessageButton()
-      .setURL("https://github.com/im-a-panda-guy/EchoBot")
-      .setLabel("Github")
-      .setStyle("LINK");
-    const buttons = new MessageActionRow().addComponents([
-      inviteButton,
-      supportButton,
-      githubButton,
-    ]);
-    let categories = [];
-
-    const dirEmojis = {
-      admin: `${client.emoji.administration} - ${language.ADMIN}`,
-      moderation: `${client.emoji.moderation} - ${language.MODERATION}`,
-      fun: `${client.emoji.fun} - ${language.FUN}`,
-      information: `${client.emoji.information} - ${language.INFO}`,
-      utility: `${client.emoji.utility} - ${language.UTILITY}`,
-      image: `${client.emoji.image} - ${language.IMAGE}`,
-      level: `${client.emoji.level} - ${language.LEVEL}`,
-    };
-
-    const ignoredCategories = ["owner"];
-
-    readdirSync("./commands/").forEach((dir) => {
-      if (ignoredCategories.includes(dir)) return;
-      const editedName = `**${dirEmojis[dir]}**`;
-
-      let data = new Object();
-
-      const path = `./commands/${dir}/`;
-      let cmdSize = getDirLenght(path);
-
-      data = {
-        name: `${editedName} [${cmdSize}]`,
-        value: `\`${settings.prefix}help ${dir.toLowerCase()}\``,
-        inline: true,
-      };
-
-      categories.push(data);
-    });
-
     let embed = new MessageEmbed()
       .setAuthor(`📬 ${language.TITLE1}`)
       .setColor(client.colors.echo)
@@ -102,67 +56,31 @@ module.exports.run = async (client, message, args, language, settings) => {
           "{prefix}": settings.prefix,
         })}\n${replace(language.EDES3, {
           "{prefix}": settings.prefix,
-        })}\n\n __**${language.CAT}**__`
+        })}\n${language.EDES4}`
       )
-      .addFields(categories)
       .setTimestamp()
       .setFooter(message.author.username, message.author.avatarURL());
 
-    return message.channel.send({ embeds: [embed], components: [buttons] });
-  }
-
-  if (category.includes(args[0].toLowerCase())) {
-    // if (args[0].toLowerCase() == "nsfw" || !message.channel.nsfw) {
-    //   return message.channel.sendErrorMessage(`👀 ${language.NONSFW}`);
-    // }
-    let catwcmd = [];
-
-    readdirSync("./commands/").forEach((dir) => {
-      if (dir.toLowerCase() !== args[0].toLowerCase()) return;
-      const commands = readdirSync(`./commands/${dir}/`).filter((file) =>
-        file.endsWith(".js")
+    const menu = new MessageSelectMenu()
+      .setCustomId(`help-category-menu-${message.author.id}`)
+      .setPlaceholder(`${language.PLACEHOLDER}`)
+      .setMaxValues(1)
+      .addOptions(
+        client.categories(language).map((cat) => {
+          return {
+            emoji: cat.emoji,
+            label: cat.label,
+            value: cat.value,
+          };
+        })
       );
 
-      const cmds = commands.map((command) => {
-        let file = require(`../../commands/${dir}/${command}`);
+    const menus = new MessageActionRow().addComponents(menu);
 
-        if (file.help.hidden) return;
-
-        if (!file.help.name) return "No command name.";
-
-        let name = file.help.name.replace(".js", "");
-        let category = file.help.category;
-
-        let emo = file.help.emoji || "";
-
-        let obj = {
-          cname: `${emo ? `${emo} - \`${name}\`` : `\`${name}\``}`,
-          cdes: jsondes(settings.language, file.help.category, file.help.name),
-        };
-
-        return obj;
-      });
-
-      let dota = new Object();
-
-      cmds.map((co) => {
-        data = {
-          name: `${cmds.length === 0 ? "In progress." : co.cname}`,
-          value: `${co.cdes}`,
-          inline: true,
-        };
-        catwcmd.push(data);
-      });
+    return message.channel.send({
+      embeds: [embed],
+      components: [menus],
     });
-
-    let embed = new MessageEmbed()
-      .setColor(client.colors.echo)
-      .setFooter(message.author.username, message.author.avatarURL())
-      .setTitle(`${client.capitalize(args[0])} ${language.CMD} :`)
-      .addFields(catwcmd)
-      .setTimestamp();
-
-    return message.channel.send({ embeds: [embed] });
   }
 
   ///////////////////////////////////////////
@@ -177,11 +95,7 @@ module.exports.run = async (client, message, args, language, settings) => {
           command.help.aliases && command.help.aliases.includes(args[0])
       );
 
-    const errembed = new MessageEmbed()
-      .setColor(`#f50041`)
-      .setDescription(`${client.emoji.cross} **${language.ERROR}**`);
-
-    if (!command) return message.channel.send(errembed);
+    if (!command) return message.channel.sendErrorMessage(language.ERROR);
 
     const lang = require(`../../languages/${settings.language}/${command.help.category}/${command.help.name}`);
 
@@ -224,6 +138,7 @@ module.exports.run = async (client, message, args, language, settings) => {
       embed.addField(`👑 ${language.ADMINROLE}`, `\`${language.AAA}\``);
     if (command.help.ownerOnly)
       embed.addField(`❌ ${language.OWNERONLY}`, `\`${language.OWNERONLY1}\``);
+
     if (command.help.example === 1) {
       const example1 = replace(lang.EXAMPLE1, {
         "{cmd_name}": `${settings.prefix}${command.help.name}`,

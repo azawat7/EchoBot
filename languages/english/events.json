@@ -1,3 +1,15 @@
 {
-  "ANTIALTREASON": "Kicked because of Anti-Alt."
+  "ANTIALTREASON": "Kicked because of Anti-Alt.",
+
+  "NODES": "There is no description for this command.",
+  "PLACEHOLDER": "Please select one of the category in the menu.",
+
+  "ADMIN": "Administration",
+  "FUN": "Fun",
+  "IMAGE": "Image",
+  "INFO": "Information",
+  "MODERATION": "Moderation",
+  "UTILITY": "Utility",
+  "LEVEL": "Level",
+  "CMD": "Commands"
 }

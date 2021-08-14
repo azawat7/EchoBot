@@ -1,8 +1,14 @@
 const { Guild } = require("../models/index");
-const { MessageButton, MessageActionRow, MessageEmbed } = require("discord.js");
+const {
+  MessageButton,
+  MessageActionRow,
+  MessageEmbed,
+  MessageSelectMenu,
+} = require("discord.js");
 
 module.exports = async (client, interaction) => {
   const settings = await client.getGuild(interaction.guild);
+  const interactionLan = require(`../languages/${settings.language}/events`);
   if (!settings) return;
 
   ///////////////////////////////////////////
@@ -232,16 +238,70 @@ module.exports = async (client, interaction) => {
     }
   }
   ///////////////////////////////////////////
-  //            Slash Handling             //
+  //            Menu Handling              //
   ///////////////////////////////////////////
+  if (interaction.isSelectMenu()) {
+    function jsondes(lan, cat, name) {
+      const file = require(`../languages/${lan}/${cat}/${name}`);
+      if (file) {
+        const des = file.DESCRIPTION || interactionLan.NODES;
+        return des;
+      }
+    }
+    const [category] = interaction.values;
+    const commands = client.commands.filter(
+      (cmd) => cmd.help.category === category && !cmd.help.hidden
+    );
+
+    const embed = new MessageEmbed()
+      .addFields(
+        commands.map((cmd) => {
+          return {
+            name: `${cmd.help.emoji} - \`${cmd.help.name}\``,
+            value: jsondes(settings.language, cmd.help.category, cmd.help.name),
+            inline: true,
+          };
+        })
+      )
+      .setColor(client.colors.echo)
+      .setFooter(interaction.user.username, interaction.user.avatarURL())
+      .setTimestamp()
+      .setTitle(`${client.capitalize(category)} ${interactionLan.CMD} :`);
+
+    const menu = new MessageSelectMenu()
+      .setCustomId(`help-category-menu-${interaction.user.id}`)
+      .setPlaceholder(`${interactionLan.PLACEHOLDER}`)
+      .setMaxValues(1)
+      .addOptions(
+        client.categories(interactionLan).map((cat) => {
+          return {
+            emoji: cat.emoji,
+            label: cat.label,
+            value: cat.value,
+          };
+        })
+      );
+
+    const menus = new MessageActionRow().addComponents(menu);
+
+    interaction.update({ embeds: [embed], components: [menus] });
+  }
   if (interaction.isCommand()) {
+    ///////////////////////////////////////////
+    //            Slash Handling             //
+    ///////////////////////////////////////////
     const cmd = client.slashCommands.get(interaction.commandName);
     if (!cmd) return;
 
     const args = [];
-    interaction.options.array().map((x) => {
-      args.push(x.value);
-    });
+    for (let option of interaction.options.data) {
+      if (option.type === "SUB_COMMAND") {
+        if (option.name) args.push(option.name);
+        option.options?.forEach((x) => {
+          if (x.value) args.push(x.value);
+        });
+      } else if (option.value) args.push(option.value);
+    }
 
     const clientSideCommand = client.commands.get(interaction.commandName);
     const language = require(`../languages/${settings.language}/${clientSideCommand.help.category}/${interaction.commandName}`);

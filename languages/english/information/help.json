@@ -6,7 +6,8 @@
   "TITLE2": "Here are the {cmd} command information ",
   "EDES1": "● The prefix of the bot on this server is : `{prefix}`",
   "EDES2": "Information per command",
-  "EDES3": "● To get more information, type `{prefix}help [category/command name]`",
+  "EDES3": "● To get more information on a **command**, type `{prefix}help [command name]`",
+  "EDES4": "● To get more information on a **category**, select one in the dropdown menu below.",
   "DES": "Description",
   "COOLDOWN": "Cooldown",
   "SECOND": "second(s)",
@@ -22,9 +23,8 @@
   "OWNERONLY1": "This command is only available for the owner of this bot !",
   "REQUIRED": "<> required",
   "OPTIONAL": "[] optional",
-  "ERROR": "Please provide a valid category or command name !",
+  "ERROR": "Please provide a valid command name !",
   "CMD": "Commands",
-  "CAT": "Categories",
   "PERMISSION": "Permission(s)",
 
   "MODROLE": "Moderator",
@@ -41,5 +41,7 @@
   "LEVEL": "Level",
 
   "SUPPORT": "Support",
-  "INVITE": "Invite"
+  "INVITE": "Invite",
+
+  "PLACEHOLDER": "Please select one of the category in the menu."
 }
