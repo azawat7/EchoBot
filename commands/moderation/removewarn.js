@@ -12,7 +12,7 @@ module.exports.help = {
     "removewarns",
   ],
   category: "moderation",
-  expectedArgs: "`<id>`",
+  expectedArgs: "`<warn_id>`",
   minArgs: 1,
   maxArgs: 1,
   ownerOnly: true,

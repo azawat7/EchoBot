@@ -5,8 +5,8 @@ const { Guild } = require("../../models/index");
 module.exports.help = {
   name: "toggle-command",
   aliases: ["togglecommand", "toggle"],
-  category: "admin",
-  expectedArgs: "`<new_prefix>`",
+  category: "administration",
+  expectedArgs: "`<command_name>`",
   minArgs: 1,
   maxArgs: 1,
   ownerOnly: false,

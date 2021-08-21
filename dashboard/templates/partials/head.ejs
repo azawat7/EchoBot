@@ -1,163 +1,40 @@
-<header>
-  <a class="logo" href="/"
-    ><img src="http://45.77.63.91:3000/echo-logo.png" alt="logo" height="51px"
-  /></a>
-  <nav>
-    <ul class="nav__links">
-      <li><a href="/privacy">Privacy</a></li>
-      <li><a href="https://github.com/im-a-panda-guy/EchoBot">Github</a></li>
-    </ul>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="echo-logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <title><%= bot.user.username %></title>
+  </head>
+  <body>
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="/">
+        <img src="echo-logo.png" alt="logo" style="max-height: 36px;">
+      </a>
+      <a role="button" class="navbar-burger" id="burger">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div class="navbar-menu" id="nav-links">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://github.com/azawat7/EchoBot">Github</a>
+        <a class="navbar-item" href="/privacy">Privacy</a>
+        <a class="navbar-item" href="/commands">Commands</a>
+        <div class="buttons">
+          <% if (req.user === undefined) { %>
+          <a href="/login" class="button is-danger login">Log In</a>
+          <% } else { %>
+          <a href="/logout" class="button is-danger login">Log Out</a>
+          <% }; %>
+        </div>
+      </div>
+    </div>
   </nav>
-  <a class="login" href="/privacy">Login</a>
-  <p class="menu login">Menu</p>
-</header>
-<div class="overlay">
-  <a class="close">&times;</a>
-  <div class="overlay__content">
-    <a href="https://github.com/im-a-panda-guy/EchoBot">Github</a>
-    <a href="/privacy">Privacy</a>
-    <a href="/privacy">Login</a>
-  </div>
-</div>
-<script>
-  const doc = document;
-  const menuOpen = doc.querySelector(".menu");
-  const menuClose = doc.querySelector(".close");
-  const overlay = doc.querySelector(".overlay");
-
-  menuOpen.addEventListener("click", () => {
-    overlay.classList.add("overlay--active");
-  });
-
-  menuClose.addEventListener("click", () => {
-    overlay.classList.remove("overlay--active");
-  });
-</script>
-
-<style>
-  * {
-    box-sizing: border-box;
-  }
-
-  header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    background-color: rgb(29, 33, 41);
-  }
-
-  .logo {
-    cursor: pointer;
-  }
-
-  .nav__links a,
-  .login,
-  .overlay__content a {
-    font-family: "Montserrat", sans-serif;
-    font-weight: 500;
-    color: #ffffff;
-    text-decoration: none;
-  }
-
-  .nav__links {
-    list-style: none;
-    display: flex;
-  }
-
-  .nav__links li {
-    padding: 0px 20px;
-  }
-
-  .nav__links li a {
-    transition: color 0.3s ease 0s;
-  }
-
-  .nav__links li a:hover {
-    color: rgb(110, 0, 29);
-  }
-
-  .login {
-    padding: 9px 25px;
-    background-color: rgb(245, 0, 65);
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: background-color 0.3s ease 0s;
-  }
-
-  .login:hover {
-    background-color: rgb(110, 0, 29);
-  }
-
-  /* Mobile Nav */
-
-  .menu {
-    display: none;
-  }
-
-  .overlay {
-    height: 100%;
-    width: 0;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    background-color: rgb(29, 33, 41);
-    overflow-x: hidden;
-    transition: width 0.5s ease 0s;
-  }
-
-  .overlay--active {
-    width: 100%;
-  }
-
-  .overlay__content {
-    display: flex;
-    height: 100%;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .overlay a {
-    padding: 15px;
-    font-size: 36px;
-    display: block;
-    transition: color 0.3s ease 0s;
-  }
-
-  .overlay a:hover,
-  .overlay a:focus {
-    color: rgb(110, 0, 29);
-  }
-  .overlay .close {
-    position: absolute;
-    cursor: pointer;
-    top: 20px;
-    right: 45px;
-    font-size: 60px;
-    color: #ffffff;
-  }
-
-  @media screen and (max-height: 450px) {
-    .overlay a {
-      font-size: 20px;
-    }
-    .overlay .close {
-      font-size: 40px;
-      top: 15px;
-      right: 35px;
-    }
-  }
-
-  @media only screen and (max-width: 800px) {
-    .nav__links,
-    .login {
-      display: none;
-    }
-    .menu {
-      display: initial;
-    }
-  }
-</style>

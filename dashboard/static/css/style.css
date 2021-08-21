@@ -1,0 +1,281 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+}
+
+*::after {
+  box-sizing: inherit;
+}
+
+html,
+body {
+  overflow: auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(46, 52, 64);
+}
+
+.hero {
+  background-color: rgb(46, 52, 64);
+  padding-top: 90px;
+}
+
+.footer {
+  padding: 5px;
+  background-color: #222;
+  color: white;
+  margin-top: auto;
+}
+
+.footer p {
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+a {
+  color: crimson;
+}
+
+a:hover {
+  color: rgb(156, 15, 43);
+}
+
+strong {
+  color: white;
+}
+
+.navbar {
+  background: #222;
+}
+
+.navbar-item {
+  color: white;
+}
+.navbar-menu {
+  background-color: #222;
+}
+
+.navbar-menu.is-active {
+  background-color: #222;
+}
+
+.navbar-burger {
+  color: white;
+}
+
+.navbar-burger.is-active {
+  color: white;
+}
+
+.navbar a:hover {
+  color: #ff5e5e;
+  background-color: #222;
+}
+
+.title {
+  font-size: 13vw;
+  color: white;
+}
+
+.hero .subtitle {
+  padding-top: 14px;
+  font-size: 6vw;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .des-head {
+    display: none;
+  }
+}
+
+@media (max-width: 1023px) {
+  .navbar-brand {
+    border-bottom: 1px solid rgb(46, 52, 64);
+  }
+}
+
+.box {
+  background-color: rgb(72, 77, 88);
+}
+
+.menu .menu-label {
+  color: #fff;
+}
+
+.menu-list a {
+  color: rgb(204, 204, 204);
+}
+
+.menu-list a.is-active {
+  background-color: crimson;
+}
+
+.commands-header-container {
+  background-color: rgb(50, 53, 61);
+  border-radius: 5px;
+}
+
+.commands-header {
+  color: white;
+}
+
+.commands-footer {
+  color: white;
+}
+
+.commands-container {
+  margin-bottom: 30px;
+}
+
+.commands-body-line {
+  background-color: rgb(77, 81, 94);
+  border-radius: 5px;
+  border-bottom: 1px solid rgb(50, 53, 61);
+}
+
+.commands-body-line-part {
+  border-right: 1px solid rgb(50, 53, 61);
+  border-left: 1px solid rgb(50, 53, 61);
+}
+
+.commands-hero {
+  padding-bottom: 80px;
+  padding-top: 0px;
+}
+
+@media (min-width: 1024px) {
+  .hero .title {
+    font-size: 3.5vw;
+  }
+
+  .hero .subtitle {
+    font-size: 1.5vw;
+  }
+
+  .little-title {
+    font-size: 2vw;
+  }
+}
+
+abbr {
+  text-decoration: solid;
+}
+
+.login {
+  margin-right: 0.5em;
+  margin-left: 0.75rem;
+}
+
+.privacy-h4 {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.page-account .user .user-avatar img {
+  width: 128px;
+  height: 128px;
+  border-radius: 50%;
+  border: 2px solid crimson;
+  align-self: center;
+}
+
+.page-account .user {
+  text-align: left;
+  display: flex;
+  padding: 20px 0;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.page-account .user .user-details .user-name {
+  margin-left: 30px;
+}
+
+.page-account .dashboard-servers {
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  margin: -16px 0 0 -16px;
+  display: grid;
+}
+
+.dashboard-server-name {
+  border-width: 0;
+  color: #fff;
+  font-size: 100%;
+  font-weight: 500;
+  margin: 0;
+  outline: 0;
+  overflow: hidden;
+  padding: 0;
+  text-align: center;
+  text-overflow: ellipsis;
+  transition: color 0.125s;
+  vertical-align: baseline;
+  white-space: nowrap;
+}
+
+.dashboard-server-image {
+  -webkit-box-align: center;
+  -webkit-box-pack: center;
+  align-items: center;
+  background-size: cover;
+  border-radius: 8px;
+  border-width: 0;
+  box-sizing: border-box;
+  height: auto;
+  justify-content: center;
+  margin: 0 0 7px;
+  outline: 0;
+  padding: 0;
+  position: relative;
+  vertical-align: baseline;
+  width: 100%;
+}
+
+.dashboard-server-card {
+  border-width: 0;
+  box-sizing: border-box;
+  font-size: 100%;
+  margin: 0;
+  outline: 0;
+  padding: 10px;
+  vertical-align: baseline;
+}
+
+.dashboard-server-link {
+  background-color: #36393f;
+  border-radius: 8px;
+  border-width: 0;
+  cursor: pointer;
+  display: block;
+  font-size: 100%;
+  margin: 0;
+  outline: 0;
+  padding: 0;
+  position: relative;
+  text-decoration: none;
+  transition: background-color 0.125s, box-shadow 0.125s, transform 0.125s,
+    -webkit-box-shadow 0.125s, -webkit-transform 0.125s;
+}
+
+.bot-to-add {
+  background-color: #4e1212;
+}
+
+.dashboard-server {
+  -webkit-box-flex: 0;
+  border-width: 0;
+  flex: 0 0 auto;
+  font-size: 100%;
+  margin: 0;
+  outline: 0;
+  padding: 16px 0 0 16px;
+  vertical-align: baseline;
+}

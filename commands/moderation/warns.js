@@ -6,7 +6,7 @@ module.exports.help = {
   name: "warns",
   aliases: ["list-warn", "list-warns", "listwarn", "listwarns", "warnings"],
   category: "moderation",
-  expectedArgs: "`<id>`",
+  expectedArgs: "`[user_id]`",
   minArgs: 0,
   maxArgs: 1,
   ownerOnly: true,

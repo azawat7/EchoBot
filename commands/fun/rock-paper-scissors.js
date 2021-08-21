@@ -5,7 +5,7 @@ module.exports.help = {
   name: "rock-paper-scissors",
   aliases: ["rockpaperscissors", "rps"],
   category: "fun",
-  expectedArgs: "`[@Member]`",
+  expectedArgs: "`[@user]`",
   minArgs: 0,
   maxArgs: 1,
   ownerOnly: false,

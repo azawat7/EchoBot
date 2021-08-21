@@ -365,7 +365,7 @@ module.exports = (client) => {
     {
       emoji: client.emoji.administration,
       label: language.ADMIN,
-      value: "admin",
+      value: "administration",
     },
     {
       emoji: client.emoji.moderation,
@@ -386,4 +386,18 @@ module.exports = (client) => {
     { emoji: client.emoji.image, label: language.IMAGE, value: "image" },
     { emoji: client.emoji.level, label: language.LEVEL, value: "level" },
   ];
+
+  client.categoryArray = () => [
+    "administration",
+    "moderation",
+    "information",
+    "fun",
+    "utility",
+    "image",
+    "level",
+  ];
+
+  client.replaceAll = (string, search, replace) => {
+    return string.split(search).join(replace);
+  };
 };

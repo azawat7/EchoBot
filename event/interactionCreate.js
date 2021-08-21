@@ -308,6 +308,11 @@ module.exports = async (client, interaction) => {
 
     cmd.run(client, interaction, args, language, settings);
   }
+
+  if (interaction.isContextMenu()) {
+    const cmd = client.slashCommands.get(interaction.commandName);
+    if (cmd) cmd.run(client, interaction, settings, args);
+  }
 };
 
 async function choose(winners, data, host) {

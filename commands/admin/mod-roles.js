@@ -4,7 +4,7 @@ const r = require("replacer-js");
 module.exports.help = {
   name: "mod-role",
   aliases: ["modrole"],
-  category: "admin",
+  category: "administration",
   expectedArgs: "`<@role/role_id>`",
   minArgs: 0,
   maxArgs: 1,

@@ -4,8 +4,8 @@ const r = require("replacer-js");
 module.exports.help = {
   name: "module",
   aliases: ["modules"],
-  category: "admin",
-  expectedArgs: "`[module_name] [on/off]`",
+  category: "administration",
+  expectedArgs: "`[module_name] [on/off/edit] [value]`",
   minArgs: 0,
   maxArgs: 3,
   ownerOnly: false,

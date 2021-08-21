@@ -1,46 +1,47 @@
-<head>
-  <meta charset="UTF-8" />
-  <title>{echo} - Privacy</title>
-  <link
-    rel="icon"
-    href="http://45.77.63.91:3000/echo-logo.png"
-    type="image/x-icon"
-  />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-</head>
-<body>
-  <%- include("partials/head") %>
-  <h1>{echo} Privacy Policy</h1>
-  <div class="div">
-    <h3>What information is stored without your consentment ?</h3>
-    <ul>
-      <li>The guild ID where {echo} is on.</li>
-      <li>
-        The user ID of people who send a message in a guild where {echo} is on.
-      </li>
-    </ul>
+<%- include("partials/head") %>
 
-    <h3>What information is stored with your consentment ?</h3>
-    <ul>
-      <li>The role ID of the mod/admin role and the auto-role.</li>
-      <li>The channel ID of the level-logs channel.</li>
-    </ul>
-    <h3>Data Security</h3>
-    <ul>
-      <li>
-        Your information is in high security but we cannot guarantee that your
-        data is 100% safe.
-      </li>
-    </ul>
-    <h3>Questions / Disagreements / Data Removal</h3>
-    <ul>
-      <li>If any, you can contact im_a_panda_guy#5557 on Discord.</li>
-    </ul>
-    <h3>By using {echo}, you agree to the following privacy policy.</h3>
+<section class="hero">
+  <div class="hero-body commands-hero">
+    <div class="container has-text-centered">
+      <p class="title">
+        <a href="/privacy" class="little-title"
+          ><%= bot.user.username %> Privacy Policy</a
+        >
+      </p>
+    </div>
   </div>
-  <%- include("partials/footer") %>
-</body>
+  <div class="container">
+    <div class="box">
+      <h3>What information is stored without your consentment ?</h3>
+      <ul class="privacy-h4">
+        <li>The guild ID where {echo} is on.</li>
+        <li>
+          The user ID of people who send a message in a guild where {echo} is
+          on.
+        </li>
+      </ul>
+
+      <h3>What information is stored with your consentment ?</h3>
+      <ul class="privacy-h4">
+        <li>The role ID of the mod/admin role and the auto-role.</li>
+        <li>The channel ID of the level-logs channel.</li>
+      </ul>
+      <h3>Data Security</h3>
+      <ul class="privacy-h4">
+        <li>
+          Your information is in high security but we cannot guarantee that your
+          data is 100% safe.
+        </li>
+      </ul>
+      <h3>Questions / Disagreements / Data Removal</h3>
+      <ul class="privacy-h4">
+        <li>If any, you can contact im_a_panda_guy#5557 on Discord.</li>
+      </ul>
+      <h3>By using {echo}, you agree to the following privacy policy.</h3>
+    </div>
+  </div>
+</section>
+<%- include("partials/footer") %>
 
 <style>
   @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");

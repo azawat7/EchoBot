@@ -11,7 +11,7 @@ module.exports.help = {
   name: "help",
   aliases: [],
   category: "information",
-  expectedArgs: "`[command/category_name]`",
+  expectedArgs: "`[command]`",
   minArgs: 0,
   maxArgs: 1,
   ownerOnly: false,
@@ -34,7 +34,7 @@ module.exports.run = async (client, message, args, language, settings) => {
   }
 
   const category = [
-    "admin",
+    "administration",
     "fun",
     "image",
     "information",

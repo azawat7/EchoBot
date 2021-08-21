@@ -1,10 +1,4 @@
-const {
-  Client,
-  Collection,
-  MessageEmbed,
-  TextChannel,
-  Intents,
-} = require("discord.js");
+const { Client, Collection, MessageEmbed, TextChannel } = require("discord.js");
 const {
   loadCommands,
   loadEvents,
@@ -16,17 +10,17 @@ module.exports = class EchoClient extends Client {
   constructor(options = {}, sentry) {
     super({
       partials: ["MESSAGE", "CHANNEL", "REACTION", "GUILD_MEMBER", "USER"],
-      cacheGuilds: true,
-      cacheChannels: true,
-      cacheOverwrites: false,
-      cacheRoles: true,
-      cacheEmojis: true,
-      cachePresences: false,
-      fetchAllMembers: true,
-      // allowedMentions: { parse: ["users", "roles"], repliedUser: true },
-      messageCacheMaxSize: 25,
-      messageCacheLifetime: 10000,
-      messageSweepInterval: 12000,
+      // cacheGuilds: true,
+      // cacheChannels: true,
+      // cacheOverwrites: false,
+      // cacheRoles: true,
+      // cacheEmojis: true,
+      // cachePresences: true,
+      // fetchAllMembers: true,
+      allowedMentions: { parse: ["users", "roles"], repliedUser: true },
+      // messageCacheMaxSize: 25,
+      // messageCacheLifetime: 10000,
+      // messageSweepInterval: 12000,
       intents: [
         "GUILDS",
         "GUILD_MEMBERS",
@@ -43,6 +37,10 @@ module.exports = class EchoClient extends Client {
         "DIRECT_MESSAGE_REACTIONS",
         "DIRECT_MESSAGE_TYPING",
       ],
+      presence: {
+        status: "online",
+        activities: [{ name: "deving myself x)", type: "COMPETING" }],
+      },
     });
 
     this.mongoose = require("../util/mongo");

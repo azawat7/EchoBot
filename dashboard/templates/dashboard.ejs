@@ -1,0 +1,41 @@
+<%- include("./partials/head.ejs") %>
+<div class="container is-fluid">
+  <div class="page-account">
+    <div class="container">
+      <div class="user">
+        <div class="user-avatar" href="/">
+          <img
+            alt="avatar"
+            class="image is-128x128"
+            src="<%= bot.users.cache.get(`${user.id}`).displayAvatarURL({ dynamic: true }) %>"
+          />
+        </div>
+
+        <div class="user-details">
+          <h3 class="user-name title is-3" href="/">
+            azawat<span class="discriminator has-text-danger">#5557</span>
+          </h3>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="container dashboard-servers">
+        <% user.guilds.forEach((guild) => { const permsInGuild = new
+        perms(BigInt(guild.permissions)); if(!permsInGuild.has("MANAGE_GUILD"))
+        return; if(guild.icon) { iconurl = "https://cdn.discordapp.com/icons/" + guild.id + "/" + guild.icon + ".png??size=512"; } 
+        else { iconurl = "https://cdn.glitch.com/82fe990a-7942-42e3-9790-39807ccdb9f6%2Ficon-404-dark.png?v=1602427904949"; };
+        if (bot.guilds.cache.get(guild.id)) { h = ""; ref = `/dashboard/${guild.id}/` } else { h = "bot-to-add"; ref = inviteLink }; %>
+        <div class="dashboard-server" >
+          <a href="<%= ref %>" class="dashboard-server-link <%= h %>">
+            <div class="dashboard-server-card">
+              <img class="dashboard-server-image" src="<%= iconurl %>" height="128px" width="128px"></img>
+              <div class="dashboard-server-name"><%= guild.name %></div>
+            </div>
+          </a>
+        </div>
+        <% }) %>
+      </div>
+    </div>
+  </div>
+</div>
+<%- include("./partials/footer.ejs") %>
