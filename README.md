@@ -51,15 +51,18 @@ If you liked this repository, feel free to leave a star ⭐ and follow me, it ac
 1. First clone [this repository](https://github.com/im-a-panda-guy/EchoBot) `git clone https://github.com/im-a-panda-guy/Echo-Bot.git`
 2. Run `npm install` in your terminal to install all dependencies
 3. Fill the `config.js` with your informations (some info are refering to a .env file, continue reading).
-4. Rename the `.env.sample` file to `.env` (DON'T SHARE THIS FILE TO ANYONE)
+4. Create a `.env` file (DON'T SHARE THIS FILE TO ANYONE)
 5. In the `.env` file file set the values that are required (✅) and if you want optionals value (❌) refering to this board :
    | `.env` varriable | Description | Required |
    |---|---|---|
-   | TOKEN | The bot token`*` | ✅ |
-   | MONGOPATH | Your MongoDB URI`*` | ✅ |
-   | WEBHOOKID | Your Discord webhook ID`*` | ✅ |
-   | WEBHOOKURL | Your Discord webhook URL`*` | ✅ |
-   | PORT | The port that you want to use for the dashboard`**` | ✅/❌ |
+   | TOKEN | The bot token `*` | ✅ |
+   | MONGOPATH | Your MongoDB URI `*` | ✅ |
+   | CLIENTID | Your bot's oauth2 id `**` | ✅/❌
+   | CLIENTSECRET | Your bot's oauth2 secret `**` | ✅/❌ |
+   | CALLBACK | Your bot's call url `**` | ✅/❌ |
+   | WEBHOOKID | Your Discord webhook ID `*` | ✅ |
+   | WEBHOOKURL | Your Discord webhook URL `*` | ✅ |
+   | PORT | The port that you want to use for the dashboard `**` | ✅/❌ |
 
    > - `*` = Required to run the bot !
    > - `**` = Required to run the dashboard !
@@ -74,6 +77,6 @@ Released under the [Apache-2.0 License](http://www.apache.org/licenses/LICENSE-2
 
 ## Credits
 
-- **im-a-panda-guy** - _head developer_ - [github](https://github.com/im-a-panda-guy)
+- **azwat7** - _head developer_ - [github](https://github.com/azawat7)
 
 `Template for README taken from https://github.com/peterhanania/Pogy`
