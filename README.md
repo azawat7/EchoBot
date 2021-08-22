@@ -77,6 +77,6 @@ Released under the [Apache-2.0 License](http://www.apache.org/licenses/LICENSE-2
 
 ## Credits
 
-- **azwat7** - _head developer_ - [github](https://github.com/azawat7)
+- **azawat7** - _head developer_ - [github](https://github.com/azawat7)
 
 `Template for README taken from https://github.com/peterhanania/Pogy`

@@ -18,44 +18,37 @@ module.exports.help = {
 };
 
 module.exports.run = async (client, message, args, language, settings) => {
-  console.log(message.guild.iconURL({ dynamic: true }));
-  // const embeds = [];
-  // for (let i = 0; i < 10; i++) {
-  //   const embed = new MessageEmbed().setDescription(`Page ${i + 1}`);
-  //   embeds.push(embed);
-  // }
-  // createSlider({
-  //   message: message,
-  //   embeds: embeds,
-  //   replyMessages: {
-  //     back: "back",
-  //     foward: "foward",
-  //     first: "first",
-  //     last: "last",
-  //   },
-  //   otherButtons: {
-  //     firstButton: {
-  //       enabled: true,
-  //       position: 0,
-  //     },
-  //     lastButton: {
-  //       enabled: true,
-  //       position: 3,
-  //     },
-  //     deleteButton: {
-  //       enabled: true,
-  //       position: 2,
-  //     },
-  //   },
-  //   buttons: [
-  //     { name: "back", emoji: "◀", style: "PRIMARY" },
-  //     { name: "foward", emoji: "▶", style: "PRIMARY" },
-  //     { name: "first", emoji: "⏪", style: "SECONDARY" },
-  //     { name: "last", emoji: "⏩", style: "SECONDARY" },
-  //     { name: "delete", emoji: "❌", style: "DANGER" },
-  //   ],
-  //   time: 5000,
-  // });
+  const embeds = [];
+  for (let i = 0; i < 10; i++) {
+    const embed = new MessageEmbed().setDescription(`Page ${i + 1}`);
+    embeds.push(embed);
+  }
+  createSlider({
+    message: message,
+    embeds: embeds,
+    otherButtons: {
+      firstButton: {
+        enabled: true,
+        position: 0,
+      },
+      lastButton: {
+        enabled: true,
+        position: 3,
+      },
+      deleteButton: {
+        enabled: true,
+        position: 2,
+      },
+    },
+    buttons: [
+      { name: "back", emoji: "◀", style: "PRIMARY" },
+      { name: "foward", emoji: "▶", style: "PRIMARY" },
+      { name: "first", emoji: "⏪", style: "SECONDARY" },
+      { name: "last", emoji: "⏩", style: "SECONDARY" },
+      { name: "delete", emoji: "❌", style: "DANGER" },
+    ],
+    time: 5000,
+  });
   /** 
    * if (args[0] === "users") {
     const guilds = await Guild.find({});

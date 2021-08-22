@@ -30,6 +30,7 @@ module.exports = async (client) => {
       url: res,
       req: req,
       user: req.user || null,
+      domain: "http://45.77.63.91:3000",
       inviteLink:
         "https://discord.com/api/oauth2/authorize?client_id=838061935039610921&permissions=8&redirect_uri=http%3A%2F%2F45.77.63.91%3A3000%2Fapi%2Fauth%2Fdiscord%2Fredirect&scope=bot%20applications.commands",
     };
@@ -95,7 +96,7 @@ module.exports = async (client) => {
     if (!member.permissions.has("MANAGE_GUILD"))
       return res.redirect("/dashboard");
 
-    res.sendStatus(200);
+    renderTemplate(res, req, "guildDashboard/main.ejs");
   });
 
   app.get("/invite", (req, res) => {
