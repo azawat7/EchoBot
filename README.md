@@ -48,7 +48,7 @@ If you liked this repository, feel free to leave a star ⭐ and follow me, it ac
 
 ## Installation
 
-1. First clone [this repository](https://github.com/im-a-panda-guy/EchoBot) `git clone https://github.com/im-a-panda-guy/Echo-Bot.git`
+1. First clone [this repository](https://github.com/azawat7/EchoBot-OUTDATED) `git clone https://github.com/im-a-panda-guy/Echo-Bot.git`
 2. Run `npm install` in your terminal to install all dependencies
 3. Fill the `config.js` with your informations (some info are refering to a .env file, continue reading).
 4. Create a `.env` file (DON'T SHARE THIS FILE TO ANYONE)
