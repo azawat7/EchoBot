@@ -1,7 +1,0 @@
-{
-  "DESCRIPTION": "Encode and decode text into binary code.",
-  "EXAMPLE1": "`{cmd_name}` `<encode>` `<text_to_convert>`",
-  "EXAMPLE2": "`{cmd_name}` `<decode>` `<text_to_convert>`",
-  "ERROR": "An error occured",
-  "NONVALID": "That option isn't valid !"
-}

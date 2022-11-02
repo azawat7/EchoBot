@@ -1,4 +1,4 @@
 .vscode
-npm-debug.log
+.vs
 node_modules
 .env

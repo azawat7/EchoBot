@@ -1,6 +1,0 @@
-{
-  "DESCRIPTION": "Set a color that will be used in your rank card.",
-  "EXAMPLE1": "`{cmd_name}` `f50041",
-  "ERR": "Please type a valid hexadecimal code without the `#` (eg. f50041) !",
-  "SUCCESS": "Successfully changed your rank card color to #{hex} !"
-}

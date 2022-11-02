@@ -1,5 +1,0 @@
-{
-  "DESCRIPTION": "Nuke a channel.",
-  "EXAMPLE1": "`{cmd_name}`",
-  "NUKED": "This channel has been nuked !"
-}

@@ -1,9 +1,0 @@
-{
-  "DESCRIPTION": "Add/remove a guild premium status.",
-  "EXAMPLE1": "`{cmd_name}` `add` `838062586615955466`",
-  "EXAMPLE2": "`{cmd_name}` `remove` `838062586615955466`",
-  "SUCCESS": "Premium status was added to this guild !",
-  "SUCCESS1": "Premium status was removed from this guild !",
-  "ERROR": "This guild has already premium status !",
-  "ERROR1": "This guild already don't have premium status !"
-}

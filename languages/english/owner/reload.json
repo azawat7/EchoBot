@@ -1,5 +1,0 @@
-{
-  "DESCRIPTION": "Reload the bot or a command.",
-  "EXAMPLE1": "`{cmd_name}`",
-  "SUCCESS": "Successfully reloaded commands !"
-}

@@ -1,5 +1,0 @@
-{
-  "DESCRIPTION": "Evaluate a JS code.",
-  "EXAMPLE1": "`{cmd_name}` `process.env.TOKEN`",
-  "DANG": "You spelled a dangerous word !"
-}

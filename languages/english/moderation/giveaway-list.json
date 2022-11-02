@@ -1,8 +1,0 @@
-{
-  "DESCRIPTION": "Give you a list of all giveaways on your server.",
-  "EXAMPLE1": "`{cmd_name}`",
-  "noGiveaway": "No giveaway found on this server -_-",
-  "host": "Host :",
-  "prize": "Prize :",
-  "endat": "End Date :"
-}

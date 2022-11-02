@@ -1,33 +1,14 @@
 {
   "name": "lol_troll_build",
-  "version": "1.0.0",
-  "description": "es",
-  "main": "main.js",
+  "version": "2.0.0",
+  "description": "V2 Of {echo}",
+  "main": "src/main.js",
   "dependencies": {
-    "axios": "^0.21.1",
-    "canvacord": "^5.2.1",
-    "canvas": "^2.8.0",
-    "chance": "^1.1.7",
-    "connect-mongo": "^4.5.0",
-    "dayjs": "^1.10.5",
-    "discord.js": "^13.1.0",
-    "dotenv": "^10.0.0",
-    "ejs": "^3.1.6",
-    "express": "^4.17.1",
-    "express-session": "^1.17.2",
-    "figlet": "^1.5.0",
-    "moment": "^2.29.1",
-    "mongoose": "^5.12.14",
-    "ms": "^2.1.2",
-    "passport": "^0.4.1",
-    "passport-discord": "^0.1.4",
-    "path": "^0.12.7",
-    "replacer-js": "^1.0.0",
-    "sourcebin": "^4.2.5"
+    "discord.js": "^14.6.0"
   },
   "scripts": {
-    "start": "node shard.js"
+    "start": "node src/main.js"
   },
-  "author": "",
-  "license": "MIT"
+  "author": "azawat7 az4wat@gmail.com",
+  "license": "Apache-2.0"
 }

@@ -1,4 +1,0 @@
-{
-  "DESCRIPTION": "Convert text into ascii art.",
-  "EXAMPLE1": "`{cmd_name}` `<text_to_convert>`"
-}

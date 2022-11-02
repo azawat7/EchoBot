@@ -1,5 +1,0 @@
-{
-  "DESCRIPTION": "Displays information from the discord.js docs.",
-  "EXAMPLE1": "`{cmd_name}` `MessageEmbed`",
-  "ERROR": "Could not find that documentation"
-}

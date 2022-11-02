@@ -1,8 +1,0 @@
-{
-  "DESCRIPTION": "Convert JS code into a sourcebin link.",
-  "EXAMPLE1": "`{cmd_name}` `title` `js` `console.log('example')`",
-  "EXAMPLE2": "`{cmd_name}` `title` `html` `<header></header>`",
-  "EXAMPLE3": "`{cmd_name}` `title` `css` `.header {}`",
-  "ERROR": "Valid languages are",
-  "SUC": "Your code has been converted :"
-}
