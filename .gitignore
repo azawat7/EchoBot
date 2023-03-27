@@ -1,4 +1,8 @@
-.vscode
-.vs
-node_modules
-.env
+# WEBSITE
+website/node_modules
+website/.next/
+website/npm-debug.log*
+website/yarn-debug.log*
+website/yarn-error.log*
+website/.pnpm-debug.log*
+website/.env
